@@ -1,11 +1,3 @@
-* AGFilename remove!
-
-
-* bug-report at apple site on glTexSubImage issue 
-* fix shadows on mac (on shadow-extension ?)
-* check mingw on macosx
-* toggling fullscreen destroys animated meshes (and textures partly)
-
 * fix saving - problem occurs only if game is loaded ? (in editor, too)
 ** hljobs can't be saved right now
 

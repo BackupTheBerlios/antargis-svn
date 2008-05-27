@@ -1,6 +1,8 @@
 require 'jobs/ant_state_machine.rb'
 
 class AntNewHLJob<BaseMachine
+  include XMLSaver
+  
 	attr_reader :finished, :stopped
 	# some magic here
 	def initialize(hero,startState=nil)
@@ -12,9 +14,19 @@ class AntNewHLJob<BaseMachine
 
 		firstCall
 	end
+  
+  def xmlName
+    self.class.to_s
+  end
+  #def saveXML(n)
+  #  saveXMLNode(n)
+    #if hasState
+    #  sNode=n.addChild("state")
+    #  state.saveXMLNode(sNode)
+    #end
+  #end
 
 	def getTime
-		#puts "getTime"
 		@hero.getMap.getTime
 	end
 

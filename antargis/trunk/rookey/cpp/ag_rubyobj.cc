@@ -135,7 +135,9 @@ bool saveDelete(AGRubyObject *o)
     // in case we're quitting this the deletion order is not defined for ruby-objects !!
     if(mRubyObjects.find(o)==mRubyObjects.end())
       {
+#ifdef GC_DEBUG
         std::cerr<<"RubyObject "<<o<<" no longer existant - maybe we're quitting ?!"<<std::endl;
+#endif
         return false;
       }
 

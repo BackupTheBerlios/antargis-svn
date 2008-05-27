@@ -83,7 +83,7 @@ describe "AGScrollingWidget" do
       screenshot.getSubSurface(MyTestApp::SMALLRECT).should == @app.surface
     end
     it "shouldn't draw anything when the widget is scrolled to the right lower corner" do
-      @app.sWidget.setVector(MyTestApp::VECTOR*0.5)
+      @app.sWidget.setVector(MyTestApp::VECTOR*-0.5)
       @app.makeScreenshot
       @app.step
       s=@app.screenshot
