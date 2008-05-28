@@ -47,6 +47,9 @@ class AntBoss<AntRubyEntity
 				@createMen=node.get("men").to_i
 			end
 		end
+    @job=XMLLoader.loadXML(self,node)
+    
+    if false
 		node.getChildren("hljob").each{|n|
 			t=n.get("type")
 			case t
@@ -69,6 +72,7 @@ class AntBoss<AntRubyEntity
 			end
 			@job.loadXML(n)
 		}
+    end
 		setAggression(getAggression) # update aggression of men
 	end
 # for recruiting

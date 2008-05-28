@@ -266,3 +266,13 @@ void AGListBox::updateScroller()
       }
 
   }
+
+std::map<AGString,AGStringUtf8> AGListBox::getValues() const
+{
+  std::map<AGString,AGStringUtf8> m;
+  for(std::vector<AGListBoxItem>::const_iterator i=mItems.begin();i!=mItems.end();i++)
+    {
+      m.insert(std::make_pair(i->id,i->value));
+    }
+  return m;
+}

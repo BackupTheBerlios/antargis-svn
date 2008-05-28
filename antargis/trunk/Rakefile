@@ -1,11 +1,9 @@
 require File.join(File.split(__FILE__)[0],'rookey','tasks.rb')
-require 'spec/rake/spectask'
+
+$rspec=Rookey.checkedRequire('spec/rake/spectask')
 
 # basic version
 
-#inits=Dir["ext/*/init.cc"].grep(/AG_Init_/).map{|f|"AG_Init_libantargis"+f.split("/")[1]}
-#pp inits
-#exit
 inits=[
   "external",
   "basic",
@@ -37,11 +35,12 @@ def system(cmd)
   oldSystem(cmd)
 end
 
-
-# rspec
-Spec::Rake::SpecTask.new(:spec=>:default) do |t|
-  t.spec_files = FileList['ruby/**/spec_*.rb'].map{|f|File.expand_path(f)}
-  t.warning = true
-  t.rcov = true
-  t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
+if $rspec
+  # rspec
+  Spec::Rake::SpecTask.new(:spec=>:default) do |t|
+    t.spec_files = FileList['ruby/**/spec_*.rb'].map{|f|File.expand_path(f)}
+    t.warning = true
+    t.rcov = true
+    t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
+  end
 end

@@ -26,10 +26,10 @@
 #include "anim_mesh.h"
 
 AntEntity::AntEntity(AntMap *pMap):mMap(pMap),mPos(0,0,0)
-      {
-        assert(mMap);
-        init();
-      }
+  {
+    assert(mMap);
+    init();
+  }
 
 void AntEntity::init()
   {
@@ -117,8 +117,6 @@ void AntEntity::saveXML(Node &node) const
   Node &res=node.addChild("resource");
   resource.saveXML(res);
 
-
-
   if(mJob)
     {
       Node &j=node.addChild("job");
@@ -140,7 +138,12 @@ void AntEntity::loadXML(const Node &node)
     Node::const_iterator i=v.begin();
     for(;i!=v.end();i++)
       mPos.loadXML(**i);
-    mID=node.get("entityID").toInt();
+    
+    AGString entID=node.get("entityID");
+    if(entID.length()>0)
+      mID=entID.toInt();
+    else
+      mID=node.get("id").toInt();
     getMap()->useID(mID);
     if(node.get("morale")!="")
       mMorale=node.get("morale").toFloat();

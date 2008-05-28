@@ -2,6 +2,7 @@
 # 
 #
 require 'jobs/ant_state_machine.rb'
+require 'jobs/saving.rb'
 
 class Module
   def wrap(objectName,methodName,objectMethodName=nil)
@@ -16,68 +17,6 @@ end
 
 
 
-module XMLSaver
-  def saveXML(node)
-    XMLSaver.saveXML(self,node)
-    if false
-    instance_variables.each{|n|
-      if n!="@machine"
-        v=instance_variable_get(n)
-        
-        m=node.addChild("member")
-        m.set("name",n.to_s)
-        m.set("type",v.class.to_s)
-        unless XMLSaver.saveXML(v,m)
-          puts "unknown type #{n}:#{v}"
-        end
-        p "#{n}:#{v}"
-      end
-    }
-    pp instance_variables
-    end
-    #raise "not implemented"
-  end
-  
-  def XMLSaver.saveXML(what,node)
-    node.set("type",what.class.to_s)
-    case what
-      when Numeric,String,FalseClass,TrueClass,Symbol
-        node.set("value",what.to_s)
-      when AntEntity
-        node.set("value",what.uid.to_s)
-      when Hash
-        what.each{|k,v|
-          n=node.addChild("element")
-          saveXML(k,n.addChild("key"))
-          saveXML(v,n.addChild("value"))
-        }
-      when Array
-        what.each{|v|
-          n=node.addChild("element")
-          #n.set("type",v.class.to_s)
-          XMLSaver.saveXML(n,v)
-        }
-      when HLJob_BaseState, AntNewHLJob
-        what.instance_variables.each{|n|
-          if n!="@machine"
-            v=what.instance_variable_get(n)
-            
-            m=node.addChild("member")
-            m.set("name",n.to_s)
-            #m.set("type",v.class.to_s)
-            unless XMLSaver.saveXML(v,m)
-              puts "unknown type #{n}:#{v}"
-            end
-          end
-        }        
-      else
-        pp "UNKNOWN:",what.class.to_s
-        return false
-    end
-    true
-  end
-  
-end
 
 module HLJob_Additions
   attr_accessor :machine

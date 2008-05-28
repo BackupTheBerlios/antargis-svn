@@ -35,6 +35,7 @@ AGEXPORT bool saveFile(const AGString &pFilename,const AGString &pContent);
 AGEXPORT bool fileExists(const AGString &pName);
 
 AGEXPORT std::vector<AGString> getDirectory(const AGString &pDir);
+AGEXPORT std::vector<AGString> getLoadPaths();
 
 AGEXPORT AGString checkFileName(AGString s);
 AGEXPORT AGString getWriteDir();

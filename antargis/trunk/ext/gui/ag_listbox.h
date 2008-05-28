@@ -25,6 +25,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include "ag_widget.h"
 #include "ag_background.h"
 
@@ -66,6 +67,8 @@ class AGEXPORT AGListBox:public AGWidget
   void clearList();
 
   void updateScroller();
+  
+  std::map<AGString,AGStringUtf8> getValues() const;
 
  private:
 

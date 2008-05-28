@@ -164,4 +164,15 @@ module Rookey
     
     lib=Rookey::link_dll(name,targets+alllibs)
   end
+  
+  def Rookey.checkedRequire(name)
+    begin
+    require name
+    rescue LoadError => load_error
+      puts "Library #{name} not found!"
+      return false
+    end
+    return true
+  end
+  
 end

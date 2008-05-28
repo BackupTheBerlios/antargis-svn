@@ -32,19 +32,19 @@ require 'benchmark.rb'
 # These positions can be used for scripting. This way code and level-data is
 # devided (MVC)
 class TargetPos
-	attr_reader :pos, :name
-	def loadXML(n)
-		@pos=AGVector2.new(n.get("x").to_f,n.get("y").to_f)
-		@name=n.get("name")
-	end
-	def saveXML(n)
-		n.set("x",@pos.x.to_s)
-		n.set("y",@pos.y.to_s)
-		n.set("name",@name)
-	end
-	def xmlName
-		"target"
-	end
+  attr_reader :pos, :name
+  def loadXML(n)
+    @pos=AGVector2.new(n.get("x").to_f,n.get("y").to_f)
+    @name=n.get("name")
+  end
+  def saveXML(n)
+    n.set("x",@pos.x.to_s)
+    n.set("y",@pos.y.to_s)
+    n.set("name",@name)
+  end
+  def xmlName
+    "target"
+  end
 end
 
 
@@ -55,455 +55,455 @@ end
 # AntRubyEntity contains a pointer the current instance - this makes it possible that all entities can
 # access the map through getMap - FIXME
 class AntRubyMap<AntMap
-	attr_accessor :pause,:players
-	attr_reader :path
+  attr_accessor :pause,:players
+  attr_reader :path
 
-	def initialize(app,pScene,w,h,playerName="Rowen")
-# 		assert{app.is_a?(AGApplication)}
-# 		assert{pScene.is_a?(SceneBase)}
-		assert{w.is_a?(Numeric)}
-		assert{h.is_a?(Numeric)}
+  def initialize(app,pScene,w,h,playerName="Rowen")
+#     assert{app.is_a?(AGApplication)}
+#     assert{pScene.is_a?(SceneBase)}
+    assert{w.is_a?(Numeric)}
+    assert{h.is_a?(Numeric)}
 
     # TODO: remove that ???
-		#if pScene.nil?
-		#	require 'ant_mock.rb'
-		#end
+    #if pScene.nil?
+    #  require 'ant_mock.rb'
+    #end
 
-		super(pScene,w,h)
-		@pause=false # is game paused
-		@app=app
+    super(pScene,w,h)
+    @pause=false # is game paused
+    @app=app
     
     @classMapCache=nil
 
-		@@systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
-		@curTime=0.0      # curTime holds the current "date" of the world; the age of entities is measures by this
+    @@systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
+    @curTime=0.0      # curTime holds the current "date" of the world; the age of entities is measures by this
 
-		@playerName=playerName
-		@players=[]
-		@myPlayer=nil
+    @playerName=playerName
+    @players=[]
+    @myPlayer=nil
 
-		@triggers=[]			# triggers are being touched by heroes and are checked in each frame
+    @triggers=[]      # triggers are being touched by heroes and are checked in each frame
 
-		@heroes=[]				# all heroes in the world
+    @heroes=[]        # all heroes in the world
 
-		@started=false		# started holds information about the map was already started. this is used for level-scripting
+    @started=false    # started holds information about the map was already started. this is used for level-scripting
 
-		@targets={}
+    @targets={}
 
-		@filename="dummy"  # a dummy filename - used for level scripting
-		@uidstart=0
-	end
+    @filename="dummy"  # a dummy filename - used for level scripting
+    @uidstart=0
+  end
 
-	def disableScript
-		@script=nil
-	end
+  def disableScript
+    @script=nil
+  end
 
-	def AntRubyMap.getSystemTime
-		@@systemTime
-	end
+  def AntRubyMap.getSystemTime
+    @@systemTime
+  end
 
-	def getUniqueID
-		@uidstart+=1
-		@uidstart
-	end
-	def checkUID(i)
-		@uidstart=[i,@uidstart].max
-	end
-	def getByUID(id)
-		puts "WARNING: THIS function is slow!"
-		ents=getAllEntities
-		id=id.to_i
-		ents.each{|e|
-			r=e.get
-			if r.uid==id
-				return r
-			end
-		}
-		puts id
-		puts id.class
-		raise "UID not found #{id}"
-		nil
-	end
+  def getUniqueID
+    @uidstart+=1
+    @uidstart
+  end
+  def checkUID(i)
+    @uidstart=[i,@uidstart].max
+  end
+  def getByUID(id)
+    puts "WARNING: THIS function is slow!"
+    ents=getAllEntities
+    id=id.to_i
+    ents.each{|e|
+      r=e.get
+      if r.uid==id
+        return r
+      end
+    }
+    puts id
+    puts id.class
+    raise "UID not found #{id}"
+    nil
+  end
 
-	############################
-	# event handlers
-	############################
+  ############################
+  # event handlers
+  ############################
 
-	# some delegators for level-scripting - this should eventually be done somehow else
-	def eventHeroDied(ent)
-		@heroes.delete(ent)
-		if @script
-			@script.eventHeroDied(AntLevelHero.new(ent))
-		end
-		@app and @app.setupHeroDisplay
-	end
-	def eventOwnerChanged(ent)
-		if @script
-			@script.eventOwnerChanged(AntLevelHero.new(ent))
-		end
-		@app and @app.setupHeroDisplay
-	end
-	def eventHLJobFinished(hero,job)
-		if @script
-			@script.eventHLJobFinished(AntLevelHero.new(hero),AntLevelJob.new(job))
-		end
-	end
-	def eventHLDismissed(hero)
-		if @script
-			@script.eventDismissed(AntLevelHero.new(hero))
-		end
-	end
+  # some delegators for level-scripting - this should eventually be done somehow else
+  def eventHeroDied(ent)
+    @heroes.delete(ent)
+    if @script
+      @script.eventHeroDied(AntLevelHero.new(ent))
+    end
+    @app and @app.setupHeroDisplay
+  end
+  def eventOwnerChanged(ent)
+    if @script
+      @script.eventOwnerChanged(AntLevelHero.new(ent))
+    end
+    @app and @app.setupHeroDisplay
+  end
+  def eventHLJobFinished(hero,job)
+    if @script
+      @script.eventHLJobFinished(AntLevelHero.new(hero),AntLevelJob.new(job))
+    end
+  end
+  def eventHLDismissed(hero)
+    if @script
+      @script.eventDismissed(AntLevelHero.new(hero))
+    end
+  end
 
-	################################
-	# getting information
-	################################
+  ################################
+  # getting information
+  ################################
 
-	# get target-position which is stored unter "name" in the level-file
-	def getTarget(name)
-		@targets[name]
-	end
-	# get my player (the player-object of the player playing "this" client
-	def getPlayer
-		if @myPlayer.nil?
-			raise "no player defined in level!"
-		end
-		@myPlayer
-	end
-	# get current world time
-	def getTime
-		@curTime
-	end
-	
-	def getHousesOfVillage(name)
-		getAllEntities.collect{|e|e.get}.select{|e|e.is_a?(AntHouse)}.select{|e|e.village==name}
-	end
+  # get target-position which is stored unter "name" in the level-file
+  def getTarget(name)
+    @targets[name]
+  end
+  # get my player (the player-object of the player playing "this" client
+  def getPlayer
+    if @myPlayer.nil?
+      raise "no player defined in level!"
+    end
+    @myPlayer
+  end
+  # get current world time
+  def getTime
+    @curTime
+  end
+  
+  def getHousesOfVillage(name)
+    getAllEntities.collect{|e|e.get}.select{|e|e.is_a?(AntHouse)}.select{|e|e.village==name}
+  end
 
-	def getVillages
-		getBuildings.collect{|e|e.village}.sort.uniq
-	end
+  def getVillages
+    getBuildings.collect{|e|e.village}.sort.uniq
+  end
 
-	def getHeroes
-		getByType(AntHero)
-	end
-	def getBuildings
-		getByType(AntHouse)
-	end
-	def getByType(type)
-		getAllEntities.select{|e|e.is_a?(type)}
-	end
+  def getHeroes
+    getByType(AntHero)
+  end
+  def getBuildings
+    getByType(AntHouse)
+  end
+  def getByType(type)
+    getAllEntities.select{|e|e.is_a?(type)}
+  end
 
-	# returns AGSurfaces of the given hero for portraits
-	def getPortrait(hero)
-		f="data/gui/portraits/#{hero}.png"
-		if fileExists(f)
-			return AGSurface.load(f)
-		else
-			return AGSurface.load("data/gui/portraits/none.png")
-		end
-	end
+  # returns AGSurfaces of the given hero for portraits
+  def getPortrait(hero)
+    f="data/gui/portraits/#{hero}.png"
+    if fileExists(f)
+      return AGSurface.load(f)
+    else
+      return AGSurface.load("data/gui/portraits/none.png")
+    end
+  end
 
-	# take heroes from AntPlayer object
-	def getOwnHeroes()
-		getPlayer.getHeroes if getPlayer
-	end
+  # take heroes from AntPlayer object
+  def getOwnHeroes()
+    getPlayer.getHeroes if getPlayer
+  end
 
-	################################
-	# loading & saving
-	################################
-	
-	def processXMLNode(node)
-		nodeName=node.getName
-		nodeName.gsub!("New","")  # remove New out of old antNew.. Names
+  ################################
+  # loading & saving
+  ################################
+  
+  def processXMLNode(node)
+    nodeName=node.getName
+    nodeName.gsub!("New","")  # remove New out of old antNew.. Names
 
-		return if nodeName.length<1
+    return if nodeName.length<1
 
-		entTypeMap=xmlName2ClassMap
-		if entTypeMap.keys.member?(nodeName)
-			e=entTypeMap[nodeName].new(self)
-			@loadedEntsNum+=1
-			if e.is_a?(AntHero)
-				@heroes.push(e)
-			end
-		end
-		if e
-			e.preloadXML(node)
-			@loadedEntities<<[node,e]
-		end
-# 	end
+    entTypeMap=xmlName2ClassMap
+    if entTypeMap.keys.member?(nodeName)
+      e=entTypeMap[nodeName].new(self)
+      @loadedEntsNum+=1
+      if e.is_a?(AntHero)
+        @heroes.push(e)
+      end
+    end
+    if e
+      e.preloadXML(node)
+      @loadedEntities<<[node,e]
+    end
+#   end
 # 
-# 	def loadEntityFromXML(e,node)
-		if node.getName=="humanPlayer" then
-			player=AntHumanPlayer.new(self,"")
-			player.loadXML(node)
-			@players.push(player)
-			if not @myPlayer
-				@myPlayer=player
-			elsif player.getName==@playerName
-				@myPlayer=player
-			end
-		end
-		if node.getName=="target" then
-			t=TargetPos.new
-			t.loadXML(node)
-			@targets[t.name]=t
-		end
-		
-		# FIXME: deprecated - remove this list!
-		playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer,"newAI"=>AntAttackAI}
+#   def loadEntityFromXML(e,node)
+    if node.getName=="humanPlayer" then
+      player=AntHumanPlayer.new(self,"")
+      player.loadXML(node)
+      @players.push(player)
+      if not @myPlayer
+        @myPlayer=player
+      elsif player.getName==@playerName
+        @myPlayer=player
+      end
+    end
+    if node.getName=="target" then
+      t=TargetPos.new
+      t.loadXML(node)
+      @targets[t.name]=t
+    end
+    
+    # FIXME: deprecated - remove this list!
+    playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer,"newAI"=>AntAttackAI}
 
-		playerTypes.update(getPlayerTypeMap)
+    playerTypes.update(getPlayerTypeMap)
 
-		if playerTypes.keys.member?(node.getName) then
-			type=playerTypes[node.getName]
-			if type.ancestors.member?(AntPlayer)
-				player=playerTypes[node.getName].new(self,"")
-			else
-				player=AntAIPlayer.new(node.get("name"),self)
-				aiInterface=AIInterface.new(self,player)
-				ai=type.new(aiInterface)
-				player.ai=ai
-			end
-		
-			player.loadXML(node)
-			@players.push(player)
-		end
-		
-		if node.getName=="trigger" then
-			@triggers.push(Trigger.new(node))
-		end
-	end
-	
-	def loadXML(n)
-		puts "loadXML(n)"
-		@loadedEntsNum=1
-		@loadedEntities=[]
-		super(n)
-		puts "loadXML(n) -1 "
-		@loadedEntities.each{|pair|
-			node,entity=pair
-			insertEntity(entity)
-		}
+    if playerTypes.keys.member?(node.getName) then
+      type=playerTypes[node.getName]
+      if type.ancestors.member?(AntPlayer)
+        player=playerTypes[node.getName].new(self,"")
+      else
+        player=AntAIPlayer.new(node.get("name"),self)
+        aiInterface=AIInterface.new(self,player)
+        ai=type.new(aiInterface)
+        player.ai=ai
+      end
+    
+      player.loadXML(node)
+      @players.push(player)
+    end
+    
+    if node.getName=="trigger" then
+      @triggers.push(Trigger.new(node))
+    end
+  end
+  
+  def loadXML(n)
+    puts "loadXML(n)"
+    @loadedEntsNum=1
+    @loadedEntities=[]
+    super(n)
+    puts "loadXML(n) -1 "
+    @loadedEntities.each{|pair|
+      node,entity=pair
+      insertEntity(entity)
+    }
 
-		@loadedEntities.each{|pair|
-			node,entity=pair
-			entity.loadXML(node)
-			entity.eventMapChanged
-		}
-		
-		createPathfinder
+    @loadedEntities.each{|pair|
+      node,entity=pair
+      entity.loadXML(node)
+      entity.eventMapChanged
+    }
+    
+    createPathfinder
 
-		@players.each{|p|p.move(0)}
-		
-		if n.get("scriptfile").length>0 and n.get("scriptclass").length>0
-	
-			# FIXME: add some safetly level here!!!
+    @players.each{|p|p.move(0)}
+    
+    if n.get("scriptfile").length>0 and n.get("scriptclass").length>0
+  
+      # FIXME: add some safetly level here!!!
 
-			@scriptFile=n.get("scriptfile")
-			@scriptClass=n.get("scriptclass")
-			c=loadFile(n.get("scriptfile"))
-			@filename=@scriptFile.gsub(".rb",".antlvl")
-			levelName=getLevelName
-			c="module #{levelName}\n"+c+"\nend\n"
-			eval(c)
-			cl="#{levelName}::"+n.get("scriptclass")
-			pClass=eval(cl)
-			if pClass.ancestors.member?(AntLevelScript)
-				interface=AntLevelInterface.new(self,@app)
-				@script=pClass.new(interface)
-			end
-	
-		end
-		if @script
-			sd=n.getChildren("scriptdata")
-			sd.each{|c|
-				@script.loadXML(c)
-			}
-		end
-		if n.get("curTime")!=""
-			@curTime=n.get("curTime").to_f
-		end
+      @scriptFile=n.get("scriptfile")
+      @scriptClass=n.get("scriptclass")
+      c=loadFile(n.get("scriptfile"))
+      @filename=@scriptFile.gsub(".rb",".antlvl")
+      levelName=getLevelName
+      c="module #{levelName}\n"+c+"\nend\n"
+      eval(c)
+      cl="#{levelName}::"+n.get("scriptclass")
+      pClass=eval(cl)
+      if pClass.ancestors.member?(AntLevelScript)
+        interface=AntLevelInterface.new(self,@app)
+        @script=pClass.new(interface)
+      end
+  
+    end
+    if @script
+      sd=n.getChildren("scriptdata")
+      sd.each{|c|
+        @script.loadXML(c)
+      }
+    end
+    if n.get("curTime")!=""
+      @curTime=n.get("curTime").to_f
+    end
     return true
-	end
+  end
 
-	def loadMap(filename)
-		@filename=filename
-		super
-	end
+  def loadMap(filename)
+    @filename=filename
+    super
+  end
 
-	def saveXMLTRest(n)
-		puts self
-		pp n
-		super(n)
-		@players.each{|player|
-			c=n.addChild(player.xmlName)
-			player.saveXML(c)
-		}
-		@targets.each{|name,t|
-			c=n.addChild(t.xmlName)
-			t.saveXML(c)
-		}
-		@triggers.each{|t|
-			c=n.addChild(t.xmlName)
-			t.saveXML(c)
-		}
-		if @scriptClass
-			n.set("scriptclass",@scriptClass)
-		end
-		if @scriptFile
-			n.set("scriptfile",@scriptFile)
-		end
-		if @script
-			c=n.addChild("scriptdata")
-			@script.saveXML(c)
-		end
-	end
+  def saveXMLTRest(n)
+    puts self
+    pp n
+    super(n)
+    @players.each{|player|
+      c=n.addChild(player.xmlName)
+      player.saveXML(c)
+    }
+    @targets.each{|name,t|
+      c=n.addChild(t.xmlName)
+      t.saveXML(c)
+    }
+    @triggers.each{|t|
+      c=n.addChild(t.xmlName)
+      t.saveXML(c)
+    }
+    if @scriptClass
+      n.set("scriptclass",@scriptClass)
+    end
+    if @scriptFile
+      n.set("scriptfile",@scriptFile)
+    end
+    if @script
+      c=n.addChild("scriptdata")
+      @script.saveXML(c)
+    end
+  end
 
-	######################################
-	# modify the world
-	######################################
-	
-	# make a new player at pre-defined spawn-positions
-	# used positions shall not be used again, until player leaves
-	# returns a pair of player and hero objects.
-	def newPlayer(name)
-		# FIXME:get a free spawn point
-		#
-		@targets.each_key{|key|
-			if key=~/spawn/
-			end
-		}
-		pos=AGVector2.new(20,20)
-		player=AntHumanPlayer.new(name)
-		@players.push(player)
-		#new hero
-		hero=AntHero.new
-		hero.setName(name)
-		hero.setPlayer(player)
-		hero.setPos(pos)
-		insertEntity(hero)
-		return player,hero
-	end
+  ######################################
+  # modify the world
+  ######################################
+  
+  # make a new player at pre-defined spawn-positions
+  # used positions shall not be used again, until player leaves
+  # returns a pair of player and hero objects.
+  def newPlayer(name)
+    # FIXME:get a free spawn point
+    #
+    @targets.each_key{|key|
+      if key=~/spawn/
+      end
+    }
+    pos=AGVector2.new(20,20)
+    player=AntHumanPlayer.new(name)
+    @players.push(player)
+    #new hero
+    hero=AntHero.new
+    hero.setName(name)
+    hero.setPlayer(player)
+    hero.setPos(pos)
+    insertEntity(hero)
+    return player,hero
+  end
 
-	
-	######################################
-	# modify the world
-	######################################
+  
+  ######################################
+  # modify the world
+  ######################################
 
-	def getByName(name)
-		if name.class!=String
-			dputs name,name.class
-		end
-		super(name)
-	end
-	def endChange
-		mapChanged
-	end
+  def getByName(name)
+    if name.class!=String
+      dputs name,name.class
+    end
+    super(name)
+  end
+  def endChange
+    mapChanged
+  end
 
-	# this function will be used for displaying lights and including "fog of war"
-	def setLight(e)
-	end
+  # this function will be used for displaying lights and including "fog of war"
+  def setLight(e)
+  end
 
-	def move(time)
-		if @pause
-			return
-		end
-		#time*=@app.getSpeed # increase speed  # moved to app
-		@curTime+=time
-		@@systemTime+=time
-		super(time)
-		
-		checkTriggers
-		
-		@players.each{|player|
-			player.move(time)
-		}
-		
-		AntSound.ambientSound(time)
-		if not @started
-			@started=true
-			if @script
-				@script.eventLevelStarted
-			end
-		end
-	end
+  def move(time)
+    if @pause
+      return
+    end
+    #time*=@app.getSpeed # increase speed  # moved to app
+    @curTime+=time
+    @@systemTime+=time
+    super(time)
+    
+    checkTriggers
+    
+    @players.each{|player|
+      player.move(time)
+    }
+    
+    AntSound.ambientSound(time)
+    if not @started
+      @started=true
+      if @script
+        @script.eventLevelStarted
+      end
+    end
+  end
 
-	def trigger(hero,t)
-		done=false
-		if @script
-			if @script.eventTrigger(AntLevelHero.new(hero),t)
-				done=true
-			end
-		end
-		if not done
-			@players.each{|p|p.trigger(hero,t)}
-		end
-	end
+  def trigger(hero,t)
+    done=false
+    if @script
+      if @script.eventTrigger(AntLevelHero.new(hero),t)
+        done=true
+      end
+    end
+    if not done
+      @players.each{|p|p.trigger(hero,t)}
+    end
+  end
 
-	def mapChanged
-		super
-		@app.setupNames
-	end
+  def mapChanged
+    super
+    @app.setupNames
+  end
 
-	def getAllByType(type)
-		getAllEntities.select{|e|
-			e.is_a?(type)
-		}
-	end
+  def getAllByType(type)
+    getAllEntities.select{|e|
+      e.is_a?(type)
+    }
+  end
   
   def getApp
     @app
   end
 
-private	
-	def checkTriggers
-		@heroes.each{|h|
-			@triggers.each{|t|
-				t.check(h)
-			}
-		}
-	end
+private  
+  def checkTriggers
+    @heroes.each{|h|
+      @triggers.each{|t|
+        t.check(h)
+      }
+    }
+  end
 
-	def getLevelName
-		"L_"+@filename.gsub(".rb","").gsub(".","_").gsub("/","_")
-	end
-
-
-	def createPathfinder
-		puts "createPathfinder"
-		@path=CombinedPathFinder.new(self)
-		@path.scene=getScene
-		@path.displayPathfindingGraph(self,getScene)
-		puts "createPathfinder ready"
-	end
-
-	# returns a map of possible xmlNames to their classes like {"antMan"=>AntMan}
-	def xmlName2ClassMap
-		return @classMapCache if @classMapCache
-
-		# gather all entity types and map them to their xmlNames
-		entTypes=getDescendantsOfClass(AntRubyEntity)
-		entTypeMap={}
-		entTypes.each{|t|
-			entTypeMap[makeXmlName(t.to_s)]=t
-		}
-		@classMapCache=entTypeMap
-	end
-
-	def getPlayerTypeMap
-		return @playerTypeMap if @playerTypeMap
+  def getLevelName
+    "L_"+@filename.gsub(".rb","").gsub(".","_").gsub("/","_")
+  end
 
 
-		types=getDescendantsOfClass(AntBasicAI)
-		typeMap={}
-		types.each{|t|
-			typeMap[makeXmlName(t.to_s)]=t
-		}
-		@playerTypeMap = typeMap
-	end
-	def makeXmlName(str)
-		xml=str.to_s
-		xml[0..0].downcase+xml[1..-1]
-	end
+  def createPathfinder
+    puts "createPathfinder"
+    @path=CombinedPathFinder.new(self)
+    @path.scene=getScene
+    @path.displayPathfindingGraph(self,getScene)
+    puts "createPathfinder ready"
+  end
+
+  # returns a map of possible xmlNames to their classes like {"antMan"=>AntMan}
+  def xmlName2ClassMap
+    return @classMapCache if @classMapCache
+
+    # gather all entity types and map them to their xmlNames
+    entTypes=getDescendantsOfClass(AntRubyEntity)
+    entTypeMap={}
+    entTypes.each{|t|
+      entTypeMap[makeXmlName(t.to_s)]=t
+    }
+    @classMapCache=entTypeMap
+  end
+
+  def getPlayerTypeMap
+    return @playerTypeMap if @playerTypeMap
+
+
+    types=getDescendantsOfClass(AntBasicAI)
+    typeMap={}
+    types.each{|t|
+      typeMap[makeXmlName(t.to_s)]=t
+    }
+    @playerTypeMap = typeMap
+  end
+  def makeXmlName(str)
+    xml=str.to_s
+    xml[0..0].downcase+xml[1..-1]
+  end
 
 end
 

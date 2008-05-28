@@ -606,3 +606,11 @@ AGString getDirSep()
     return "/";
 #endif
   }
+
+std::vector<AGString> getLoadPaths()
+  {
+    std::vector<AGString> a;
+    std::copy(gFilesystemPathes.begin(),gFilesystemPathes.end(),std::back_inserter(a));
+    
+    return a;
+  }
