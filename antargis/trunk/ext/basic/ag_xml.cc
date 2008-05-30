@@ -21,9 +21,9 @@
 #include "ag_xml.h"
 #include "ag_fs.h"
 #include "ag_debug.h"
-#ifndef __WIN32__
-#include "ag_regex.h"
-#endif
+//#ifndef __WIN32__
+//#include "ag_regex.h"
+//#endif
 #include "ag_debug.h"
 #include "ag_profiler.h"
 

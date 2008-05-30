@@ -33,8 +33,6 @@
    after that rows and columns are fixed.
 
    Please call AGTable::arrange() whenever you changed extends and/or row/column-info.
-   
-   @todo children should be re-arranged whenever AGTable::arrange() is called!
 */
 
 class AGEXPORT AGTable:public AGWidget

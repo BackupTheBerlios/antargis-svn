@@ -88,7 +88,14 @@ class Observer
   def run
     method=@object.method(@methodName)
     this=self
-    @object.class.send(:define_method,@methodName) {|*s|this.ok=true;puts "MUH";method.call(*s)} 
+    object=@object
+    @object.class.send(:define_method,@methodName) {|*s|
+      if self==object
+        this.ok=true
+        puts "MUH"
+      end
+      method.call(*s)
+    } 
     yield
     @object.class.send(:define_method,@methodName,method)
     @ok
@@ -97,7 +104,7 @@ class Observer
      @ok==false
   end
   def isCalled
-     @ok
+    @ok==true
   end
 end  
 

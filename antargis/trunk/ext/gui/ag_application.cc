@@ -89,9 +89,7 @@ AGWidget *AGApplication::getMainWidget()
  * \brief the main-loop of each application
  *
  * Each program has one or more application-objects.
- * An application normally represents a single UI-screen. So it has (FIXME)
- * 
- * FIXME: redesign this!
+ * An application normally represents a single UI-screen.
  */
 
 bool AGApplication::run()
@@ -102,8 +100,6 @@ bool AGApplication::run()
     float t;
     mRunning=true;
 
-    //gApplication=this;
-
     flushEventQueue();
     last=now=SDL_GetTicks();
 
@@ -112,9 +108,6 @@ bool AGApplication::run()
     while (mRunning)
       {
         STACKTRACE;
-
-        //gApplication=this;
-
           {
             // event handling
             STACKTRACE;
@@ -175,8 +168,6 @@ bool AGApplication::run()
         loopCount++;
         //      dbout(2,"Running:"<<mRunning);
       }
-    //gApplication=0;
-
     return true;
   }
 

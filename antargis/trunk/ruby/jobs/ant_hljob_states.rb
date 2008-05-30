@@ -778,6 +778,7 @@ end
 #
 class HLJob_Recruit<HLJob_BaseState
   MAX_DIST=0.01
+  RECRUIT_DIST=1.0
   
   attr_reader :countRecruited
   
@@ -884,7 +885,7 @@ class HLJob_Recruit<HLJob_BaseState
     if target
       assert{countRecruited+countRecruiting<=howManyToRecruit}
       man.hlJobMode[:recruitTarget]=target
-      man.newMoveJob(0,target,1)
+      man.newMoveJob(0,target,RECRUIT_DIST)
       #@countRecruiting=@countRecruiting+1
       return true
     end

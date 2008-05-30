@@ -1,7 +1,6 @@
 
 require 'ruby/spec/level_testing.rb'
 
-
 class Store
   def initialize
     @store={}
@@ -13,6 +12,7 @@ class Store
     @store[name]=value
   end
 end
+
 
 describe "HL-MoveJob" do
   it "should format correctly"
@@ -75,9 +75,13 @@ describe "Recruit job - run through" do
     @store[:oldPos]=rowen.getPos2D
   end
   it "hero should only go fetch one man;go back and then stay at his position" do
+    rowen.getJob.stateName.should==:recruit
     rowen=hero("Rowen")
     man=rowen.getTarget
+    man.should be_a_kind_of(AntMan)
+    rowen.getJobName.should == "moveJob"
     runUntilLowLevelJobToFinish(rowen)
+    (rowen.getPos2D-man.getPos2D).length.should <= HLJob_Recruit::RECRUIT_DIST+HLJob_Recruit::MAX_DIST
     rowen.getJobName.should == "moveJob"
     rowen.getTarget.should be_nil
     trials=0
@@ -88,6 +92,7 @@ describe "Recruit job - run through" do
     end
     (rowen.getPos2D-@store[:oldPos]).length.should < 0.1
   end
+  
   it "all men should stand at the sitting-position when job is finished" do
     while rowen.getJob.stateName == :recruit
       advance
@@ -101,7 +106,6 @@ describe "Recruit job - run through" do
       (man.getPos2D-rowen.getFormation(man,rowen.getPos2D)).length.should < 0.1
     }
   end
-  
   
   def rowen
     hero("Rowen")
@@ -162,5 +166,4 @@ describe "Build job" do
   it "should let people rest enough when aggression is low"
   it "should let people rest at the correct position"
 end
-
 

@@ -1,3 +1,5 @@
+// WARNING: This file is for documentation purpose - it's a beginning of a rewrite of the messaging-module
+
 #ifndef AG_MESSAGE_H_
 #define AG_MESSAGE_H_
 
