@@ -282,10 +282,12 @@ AGSurface AGGLTexture::getSurface() const
 void AGGLTexture::initDMABuffer()
   {
     return;
+    /*
     if(!dmaBuffer)
       {
         size_t texbufsize=1024*1024*64;
         dmaBuffer=new char[texbufsize];
         glTextureRangeAPPLE(GL_TEXTURE_2D,texbufsize,dmaBuffer); 
       }
+      */
   }

@@ -1,7 +1,7 @@
 module Rookey
   class SwigConfig<Configurator
     provides :swig
-    VERSIONS=["1.3.33","1.3.34"]
+    VERSIONS=["1.3.33","1.3.34","1.3.35"]
     
     def run(config,firstrun=true)
       swigs=searchPrograms("swig").select{|swig|checkVersion(swig)}
