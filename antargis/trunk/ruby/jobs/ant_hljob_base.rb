@@ -12,7 +12,8 @@ class AntNewHLJob<BaseMachine
 
 		@finished=false
 
-		firstCall
+    # FIXME: is this to be moved somewhere else ?
+		#firstCall
 	end
   
   def xmlName
@@ -56,6 +57,7 @@ class AntNewHLJob<BaseMachine
 	end
 
 	def check(man)
+	  assert{self.started}
 		#raise 1
 		if @state.nil?
 			@finished=true

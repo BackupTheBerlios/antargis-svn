@@ -28,7 +28,7 @@ module XMLSaver
       when AntEntity
         node.set("value",what.uid.to_s)
       when Hash
-        what.keys.each{|k|
+        what.keys.sort{|a,b|a.to_s<=>b.to_s}.each{|k|
           v=what[k]
           n=node.addChild("element")
           saveXML(k,n.addChild("key"))
@@ -63,70 +63,92 @@ module XMLSaver
 end
 
 module XMLLoader
-  def XMLLoader.loadXML(entity,node,current=nil)
-    current||=entity
-    job=nil
-    case current
-      when AntEntity
-        node.getChildren("hljob").each{|n|
-          t=n.get("type")
-          case t
-            when "AntHeroMoveJob"
-              job=AntHeroMoveJob.new(entity,0,AGVector2.new(0,0),0)
-            when "AntHeroRestJob"
-              job=AntHeroRestJob.new(entity,10)
-            when "AntHeroRecruitJob"
-              target=n.getChildren.select{|c|c.get("name")=="@target"}[0]
-              if target
-                target=entity.getMap.getByUID(target.get("value"))
-              
-                job=AntHeroRecruitJob.new(entity,target)
-              else
-                raise "target missing in saved AntHeroRecruitJob"
-              end
+  def XMLLoader.loadXML(entity,node)
+    return if node.nil?
+    value=nil
+    case node.getName
+      when "hljob"
+        job=nil
+        case node.get("type")
+          when "AntHeroMoveJob"
+            job=AntHeroMoveJob.new(entity,0,AGVector2.new(0,0),0)
+          when "AntHeroRestJob"
+            job=AntHeroRestJob.new(entity,10)
+          when "AntHeroRecruitJob"
+            target=n.getChildren.select{|c|c.get("name")=="@target"}[0]
+            if target
+              target=entity.getMap.getByUID(target.get("value"))
+            
+              job=AntHeroRecruitJob.new(entity,target)
             else
-              # FIXME!!!
-              raise "unknown job: #{t}"
-          end
-          XMLLoader.loadXML(entity,n,job)
-          #job.loadXML(n)
-        }
-      else
-        node.getChildren.each{|c|
-          if c.getName=="member"
-            name=c.get("name")
-            type=c.get("type")
-            value=c.get("value")
-            if value!=""
-              value=case type
-                when "Integer","Fixnum"
-                  value.to_i
-                when "Float"
-                  value.to_f
-                when "String"
-                  value
-                when "Symbol"
-                  value.intern
-                when "FalseClass"
-                  false
-                when "TrueClass"
-                  true
-                when *getDescendantsOfClass(AntRubyEntity).map{|c|c.to_s}
-                  entity.getMap.getByUID(value.to_i)
-                else
-                  pp getDescendantsOfClass(AntRubyEntity).map{|c|c.to_s}
-                  raise "Unknnown type #{type}"
-              end
-              current.instance_variable_set(name,value)
-            else
-              case type
-                when Hash
-                when Array 
-              end
+              raise "target missing in saved AntHeroRecruitJob"
             end
+          else
+            # FIXME!!!
+            raise "unknown job: #{t}"
+        end
+        node.getChildren("member")
+        value=job
+        #XMLLoader.loadMembers(entity,node,job)
+        #return job
+      else
+        type=node.get("type")
+        value=node.get("value")
+        if value!=""
+          value=case type
+            when "Integer","Fixnum"
+              value.to_i
+            when "Float"
+              value.to_f
+            when "String"
+              value
+            when "Symbol"
+              value.intern
+            when "FalseClass"
+              false
+            when "TrueClass"
+              true
+            when *getDescendantsOfClass(AntRubyEntity).map{|c|c.to_s}
+              entity.getMap.getByUID(value.to_i)
+            else
+              pp getDescendantsOfClass(AntRubyEntity).map{|c|c.to_s}
+              raise "Unknnown type #{type}"
           end
-        }
+        else
+          value=case type
+            when "Hash"
+              h={}
+              node.getChildren("element").each{|child|
+                key=XMLLoader.loadXML(entity,child.getChildren("key")[0])
+                value=XMLLoader.loadXML(entity,child.getChildren("value")[0])
+                h[key]=value
+              }
+              h
+            when "Array"
+              h=[]
+              node.getChildren("element").each{|child|
+                value=XMLLoader.loadXML(entity,child.getChildren("value")[0])
+                h << value
+              }
+              h
+            when *getDescendantsOfClass(HLJob_BaseState).map{|c|c.to_s}
+              value=eval(type).new
+          end
+        end
     end
-    job
+    XMLLoader.loadMembers(entity,node,value)
+    return value
   end
+  def XMLLoader.loadMembers(entity,node,current=nil)
+    current||=entity  
+    node.getChildren("member").each{|mNode|
+      name=mNode.get("name")
+      current.instance_variable_set(name,XMLLoader.loadXML(entity,mNode))
+    }
+  end
+    
+    
+    
+    
+    
 end

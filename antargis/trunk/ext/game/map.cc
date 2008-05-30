@@ -221,15 +221,14 @@ std::vector<AntEntity*> AntMap::getEntities(const AGString &pName)
 
 std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,size_t atLeast)
   {
-    //  assert(mHeuristicFunction);
-
-    // FIXME: optimize this - use quadtree
+    // reachability is checked through heuristic
+    // optimization using quadtree is not possible, because heuristic cannot be used then
 
     std::multimap<float,AntEntity*> ents;
 
 
     EntityList::iterator i=mEntities.begin();
-    AGVector2 p=me->getPos2D(); // FIXME: check for reachability, too ??
+    AGVector2 p=me->getPos2D(); 
 
     for(;i!=mEntities.end();i++)
       {
@@ -237,9 +236,6 @@ std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,
           {
             if((*i)->provides(pType) && (*i)->resource.get(pType)>=atLeast)
               {
-                /*
-              AGVector2 p2=(*i)->getPos2D()-p;
-              float norm=p2.length2();*/
                 float norm;
                 if(mHeuristicFunction)
                   norm=(*mHeuristicFunction)(std::make_pair((*i)->getPos2D(),p));
@@ -253,7 +249,6 @@ std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,
     std::vector<AntEntity*> vec;
 
     // take one of the nearest, but no farer away than 30% of nearest
-    //  AntEntity *e=0;
     if(ents.size())
       {
         std::multimap<float,AntEntity*>::iterator j=ents.begin();
@@ -269,10 +264,9 @@ std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,
   }
 
 
+/// works like getNextList, but returns only one random entity on the list
 AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
   {
-    // FIXME: optimize this - use quadtree
-
     assert(me);
 
     std::multimap<float,AntEntity*> ents;

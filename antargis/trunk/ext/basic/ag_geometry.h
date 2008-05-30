@@ -257,6 +257,8 @@ public:
 
   void swapRows(size_t a,size_t b);
   void swapCols(size_t a,size_t b);
+  
+  bool operator==(const AGMatrix3&p) const;
 
 
 #ifdef SWIG

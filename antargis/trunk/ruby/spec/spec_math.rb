@@ -40,3 +40,32 @@ describe "Determinant" do
     result.should>0
   end
 end
+
+describe "AGMatrix3D(one with 0s on the main axis)" do
+  it "should be invertable" do
+    m=AGMatrix3.new
+    m.set(0,0,0)
+    m.set(1,0,1)
+    m.set(2,0,0)
+    m.set(0,1,0)
+    m.set(1,1,0)
+    m.set(2,1,1)
+    m.set(0,2,1)
+    m.set(1,2,0)
+    m.set(2,2,0)
+    (m.inverted*m).should == singleMatrix 
+  end
+  def singleMatrix
+    m=AGMatrix3.new
+    m.set(0,0,1)
+    m.set(1,0,0)
+    m.set(2,0,0)
+    m.set(0,1,0)
+    m.set(1,1,1)
+    m.set(2,1,0)
+    m.set(0,2,0)
+    m.set(1,2,0)
+    m.set(2,2,1)
+    m 
+  end
+end

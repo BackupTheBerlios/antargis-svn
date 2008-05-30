@@ -19,8 +19,8 @@ describe "Saving and loading of" do
       load(SAVEGAME)
       newText=save(SAVEGAME2)
       puts newText
-      #newText.should == saveText
-      exit
+      (newText==saveText).should be_true
+      #exit
       #advance
     end
   end
@@ -52,7 +52,7 @@ describe "Saving and loading of" do
 	    filename=files.getValues.keys.select{|f|f=~/#{file}/}[0]
 	    files.selectItem(filename)
 	    click(dialog.getChild("ok").getScreenRect.getMiddle)
-    }.should_not cross(AntNewHLJob,:check)
+    }.should_not cross(AntEntity,:newMoveJob) #AntNewHLJob,:check)
     checkRowenRest
   end
   

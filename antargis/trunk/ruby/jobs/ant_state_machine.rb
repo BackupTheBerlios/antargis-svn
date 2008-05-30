@@ -1,9 +1,11 @@
 class BaseState
+  attr_reader :started
 	@@states={}
 	@@edges={}
 	@@endstates={}
 	@@startstate={}
 	def BaseState.state(p)
+	  @started=false
 		s=@@states[self]
 		s||={}
 		p.each{|k,v|s[k]=v}
@@ -60,6 +62,7 @@ class BaseState
 	end
 
 	def firstCall
+	  @started=true
 		enterRecursive
 	end
 

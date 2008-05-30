@@ -1,6 +1,3 @@
-* fix saving - problem occurs only if game is loaded ? (in editor, too)
-** hljobs can't be saved right now
-
 * move build/*.rb files to build/unused_tools/* if they're not used
 * issue with mingw: 
 ** google for "/tmp/cciSLVG5.s:932678: Warning: .stabs: description field '1c216' too big, try a different debug format"

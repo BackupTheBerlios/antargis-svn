@@ -131,13 +131,6 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
     arrange();
   }
 
-void AGWindow::addChild(AGWidget *w)
-  {
-    // FIXME: change this somehow?
-    AGWidget::addChild(w);
-    //  mClient->addChild(w);
-  }
-
 AGWidget *AGWindow::getClient()
   {
     return mClient;

@@ -47,7 +47,9 @@ class AntBoss<AntRubyEntity
 				@createMen=node.get("men").to_i
 			end
 		end
-    @job=XMLLoader.loadXML(self,node)
+    node.getChildren("hljob").each{|hlnode|
+      @job=XMLLoader.loadXML(self,hlnode)
+    }
     
     if false
 		node.getChildren("hljob").each{|n|
@@ -144,11 +146,12 @@ class AntBoss<AntRubyEntity
 		if not @men.member?(man) then	
 			@men.push(man)
 			man.setAggression(getAggression)
-			if @job.is_a?(AntHeroRestJob)
-				newHLRestJob(1)
-			elsif @job
-				@job.check(man)
-			end
+      # FIXME: is this to be moved somewhere else ???
+#			if @job.is_a?(AntHeroRestJob)
+#				newHLRestJob(1)
+#			elsif @job
+#				@job.check(man)
+#			end
 		end
 		resourceChanged
 	end
@@ -225,6 +228,8 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def assignJob2All
+	  assert{@job}
+    @job.firstCall
 		if getMap
 			getMap.eventNewJobAssignedToBoss(self) if getMap.respond_to?(:eventNewJobAssignedToBoss)
 		end

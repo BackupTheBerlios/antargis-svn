@@ -145,7 +145,7 @@ void AGThemeV2::parseFonts(const Node &pNode)
         if(c.getName()=="font")
           {
             AGString name=c.get("name");
-            //FIXME: add checks (?)
+            //TODO: add checks (?)
 
             AGFont f(c.get("file"),c.get("size").toInt());
             f.setColor(AGColor(c.get("color")));
