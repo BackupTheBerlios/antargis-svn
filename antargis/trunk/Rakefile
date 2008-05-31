@@ -41,8 +41,14 @@ if $rspec
     t.spec_files = FileList['ruby/**/spec_*.rb'].map{|f|File.expand_path(f)}
     t.warning = true
     t.rcov = true
-    t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
+    path="spec_output.html"
+    if ENV['CC_BUILD_ARTIFACTS']
+      path=File.join(ENV['CC_BUILD_ARTIFACTS'],path)
+    end
+    t.spec_opts=["--format html:"+File.expand_path(path)]
   end
 end
 
+task :cruise => :spec do
+end
 
