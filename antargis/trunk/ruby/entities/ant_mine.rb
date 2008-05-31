@@ -20,27 +20,27 @@
 
 
 class AntMine<AntRubyEntity
-	def initialize(map)
-		super
-		setProvide("coal",true)
-		setProvide("ore",true)
-		@angle=getRand*360
-		
-		setMinimapColor(AGColor.new(0,0,0))
-	
-		resource.set("ore",500)
-		resource.set("coal",500)
-		setupMesh
-	end
-	def resourceChanged
-		setupMesh
-		super
-	end
-	
-	private
-	def setupMesh
-		setMesh
-		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/mine2.ant2",0.2,"data/textures/models/mine.png"),AGVector4.new(0,0,0),-40))
-	end
+  def initialize(map)
+    super
+    setProvide("coal",true)
+    setProvide("ore",true)
+    @angle=getRand*360
+    
+    setMinimapColor(AGColor.new(0,0,0))
+  
+    resource.set("ore",500)
+    resource.set("coal",500)
+    setupMesh
+  end
+  def resourceChanged
+    setupMesh
+    super
+  end
+  
+  private
+  def setupMesh
+    setMesh
+    #setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/mine2.ant2",0.2,"data/textures/models/mine.png"),AGVector4.new(0,0,0),-40))
+  end
 end
 

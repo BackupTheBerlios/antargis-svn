@@ -291,13 +291,13 @@ class DragBox<AGHoverWidget
     if sRect.contains(e.getRelMousePosition)
       
       getDragGrid.select(self) if getDragGrid
-	    if sRect.shrink(BORDER_WIDTH).contains(e.getRelMousePosition)
-	      startDragging
+      if sRect.shrink(BORDER_WIDTH).contains(e.getRelMousePosition)
+        startDragging
         return true
-	    elsif @lastCell
-	      startLine(e)
+      elsif @lastCell
+        startLine(e)
         return true
-	    end
+      end
     end
     r
   end
@@ -323,18 +323,18 @@ class DragBox<AGHoverWidget
         assignCell(cell)
       elsif @lastCell
         assignCell(@lastCell)
-	    else
-	      hide
-	    end
+      else
+        hide
+      end
     elsif @lastCell
       assignCell(@lastCell)
     else
-	    hide
+      hide
     end
     
     if cell.is_a?(DragTrash)
-	    pp cell
-	    del 
+      pp cell
+      del 
     end
     @dragging=false
     true
@@ -393,9 +393,9 @@ class DragLine<AGWidget
     #endP=getPos(@endObject) if @endObject
     
     if @endObject and @startObject
-	    if @moving==false and (@endObject.visible==false or @startObject.visible==false)
-	      hide
-	    end
+      if @moving==false and (@endObject.visible==false or @startObject.visible==false)
+        hide
+      end
     end
     white=AGColor.new(0xFF,0xFF,0xFF)
     white=AGColor.new(0xFF,0xFF,0x88) if @hovered
@@ -438,8 +438,8 @@ class DragLine<AGWidget
   def eventMouseButtonDown(e)
     r=super
     if @endObject.nil?
-	    @moving=true
-	    @pos=e.getMousePosition+(getRect.getV0-getScreenRect.getV0)
+      @moving=true
+      @pos=e.getMousePosition+(getRect.getV0-getScreenRect.getV0)
     else
       if @hovered
         @endObject=nil
@@ -451,15 +451,15 @@ class DragLine<AGWidget
   def eventMouseButtonUp(e)
     r=super
     if @moving
-	    @moving=false
-	    ts=getDragEnvironment.getAllDescendants.select{|w|w.is_a?(DragBox)}.select{|cell|
-	      cell.getScreenRect.contains(e.getMousePosition)
-	    }
-	    if ts.length==0
-	      hide
-	    else
-	      @endObject=ts[0]
-	    end
+      @moving=false
+      ts=getDragEnvironment.getAllDescendants.select{|w|w.is_a?(DragBox)}.select{|cell|
+        cell.getScreenRect.contains(e.getMousePosition)
+      }
+      if ts.length==0
+        hide
+      else
+        @endObject=ts[0]
+      end
     end
     
     r
@@ -697,10 +697,10 @@ class CampaignEditorApp<AGApplication
     setMainWidget(layout)
     layout.setApp(self)
     if layout.getChild("bigTable")
-	    layout.getChild("bigTable").modifyRow(1,10)
-	    env=layout.getChild("dragEnvironment")
-	    @grid=layout.getChild("dragGrid")
-	    addHandler(env,:sigClick,:eventDeselect)
+      layout.getChild("bigTable").modifyRow(1,10)
+      env=layout.getChild("dragEnvironment")
+      @grid=layout.getChild("dragGrid")
+      addHandler(env,:sigClick,:eventDeselect)
     end
     
     

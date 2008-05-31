@@ -19,77 +19,77 @@
 #
 
 class AntEntListWidget<AGWidget
-	attr_reader :entType
-	def initialize(p,r)
-		super(p,r)
-		@entType=nil
-		@classes=getDescendantsOfClass(AntRubyEntity)
-		@wptrs={}
+  attr_reader :entType
+  def initialize(p,r)
+    super(p,r)
+    @entType=nil
+    @classes=getDescendantsOfClass(AntRubyEntity)
+    @wptrs={}
 
-		group=AGRadioGroup.new(self,getRect.origin)
-		group.setName("EntListGroup")
-		addChild(group)
-		cells=(Math::sqrt(@classes.length)+1).to_i
-		table=AGTable.new(group,getRect.origin)
-		@table=table
-		(1..cells).each{|n|
-			table.addColumn(1)
-			table.addRow(1)
-		}
+    group=AGRadioGroup.new(self,getRect.origin)
+    group.setName("EntListGroup")
+    addChild(group)
+    cells=(Math::sqrt(@classes.length)+1).to_i
+    table=AGTable.new(group,getRect.origin)
+    @table=table
+    (1..cells).each{|n|
+      table.addColumn(1)
+      table.addRow(1)
+    }
 
-		i=0
-		@classes.each{|c|
-			x=i%cells
-			y=i/cells
-			n=c.to_s
-			puts "#{i} #{x} #{y} #{n}"
-			w=AGRadio.new(table,AGRect2.new(0,0,40,40))
-			@wptrs[c]=w
-			w.setName(n)
-			w.setTooltip(_(n))
-			addHandler(w,:sigClick,:eventSelected)
-		
-			fn="data/gui/editor/entities/#{n}.png"
-			if File.exists?(fn)
-				w.setSurface(AGSurface.load(fn))
-			else
-				w.setEnabled(false)
-			end
+    i=0
+    @classes.each{|c|
+      x=i%cells
+      y=i/cells
+      n=c.to_s
+      puts "#{i} #{x} #{y} #{n}"
+      w=AGRadio.new(table,AGRect2.new(0,0,40,40))
+      @wptrs[c]=w
+      w.setName(n)
+      w.setTooltip(_(n))
+      addHandler(w,:sigClick,:eventSelected)
+    
+      fn="data/gui/editor/entities/#{n}.png"
+      if File.exists?(fn)
+        w.setSurface(AGSurface.load(fn))
+      else
+        w.setEnabled(false)
+      end
 
-			table.addChild(x,y,w)
-			i+=1
-		}
-		table.arrange
-		group.addChild(table)
+      table.addChild(x,y,w)
+      i+=1
+    }
+    table.arrange
+    group.addChild(table)
 
-		setCaching(true)
-		addSignal("sigSelected")
-	end
-	def eventSelected(e)
-		c=eval(e.getCaller.getName)
-		@entType=c
-		@selWidget=e.getCaller
-		sigSelected(e)
-		return true
-	end
-	def entType=(c)
-		@wptrs[c].setChecked(true)
-		@entType=c
-	end
-	def deselect
-		if @selWidget
-			@selWidget.deselect
-		end
-	end
+    setCaching(true)
+    addSignal("sigSelected")
+  end
+  def eventSelected(e)
+    c=eval(e.getCaller.getName)
+    @entType=c
+    @selWidget=e.getCaller
+    sigSelected(e)
+    return true
+  end
+  def entType=(c)
+    @wptrs[c].setChecked(true)
+    @entType=c
+  end
+  def deselect
+    if @selWidget
+      @selWidget.deselect
+    end
+  end
 end
 
 class AntEntListCreator<AGLayoutCreator
-	def create(parent,rect,node)
-		e=AntEntListWidget.new(parent,rect)
-		e.setName(node.get("name"))
-		puts node.get("name")
-		setResult e
-	end
+  def create(parent,rect,node)
+    e=AntEntListWidget.new(parent,rect)
+    e.setName(node.get("name"))
+    puts node.get("name")
+    setResult e
+  end
 end
 getLayoutFactory.addCreator("antEntList",AntEntListCreator.new)
 

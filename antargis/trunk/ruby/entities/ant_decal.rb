@@ -19,22 +19,22 @@
 #
 
 class AntDecal<AntRubyEntity
-	def initialize(map)
-		super(map)
-		@typeID=(getRand()*2).to_i
-		setProvide("decal",true)
-		setMesh(:floor_gravel)
-	end
-	def setTreeType(t)
-		@typeID=t
-	end
-	def saveXML(node)
-		super(node)
-		node.set("typeID",@typeID.to_s)
-	end
-	def loadXML(node)
-		super(node)
-		@typeID=node.get("typeID").to_i
-	end
+  def initialize(map)
+    super(map)
+    @typeID=(getRand()*2).to_i
+    setProvide("decal",true)
+    setMesh(:floor_gravel)
+  end
+  def setTreeType(t)
+    @typeID=t
+  end
+  def saveXML(node)
+    super(node)
+    node.set("typeID",@typeID.to_s)
+  end
+  def loadXML(node)
+    super(node)
+    @typeID=node.get("typeID").to_i
+  end
 end
 

@@ -19,70 +19,70 @@
 #
 
 class AntDeco<AntRubyEntity
-	def initialize(map,decoType=nil)
-		super(map)
-		@decoType=decoType
-		if @decoType==nil
-			a=["flower1a","flower2a","twig","gravel","small_bush","hole","grass4","grass4a","grass4b","gravel_big","gravel_big2","rock1"]
-			r=(getRand()*a.size).to_i
-			@decoType=a[r]
-		else
-			b={"coach"=>["coach2"],
-					"flower"=>["flower1a","flower2a"],
-					"gravel"=>["gravel","gravel_big","gravel_big2"],
-					"hole"=>["hole"],
-					"twig"=>["twig"],
-					"rock"=>["rock1"],
-					"grassLight"=>["grass4a","grass4b","grass4"],
-					"floor"=>["floor2"],
-					"path"=>["path"],
-					"block"=>["block2"],
-					"grassGreen"=>["grass3"]}
-			a=b[@decoType]
-			r=(getRand()*a.size).to_i
-			@decoType=a[r]
-		end
-		setProvide("deco",true)
-		setMesh(:floor_deco)
-		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png",false),AGVector4.new(0,0,0,0),0))
-	end
-	def setDecoType(t)
-		@typeID=t
-	end
-	def saveXML(node)
-		super(node)
-		node.set("decoType",@decoType)
-	end
-	def loadXML(node)
-		super(node)
-		@decoType=node.get("decoType")
-		#@typeID=node.get("typeID").to_i
-	end
+  def initialize(map,decoType=nil)
+    super(map)
+    @decoType=decoType
+    if @decoType==nil
+      a=["flower1a","flower2a","twig","gravel","small_bush","hole","grass4","grass4a","grass4b","gravel_big","gravel_big2","rock1"]
+      r=(getRand()*a.size).to_i
+      @decoType=a[r]
+    else
+      b={"coach"=>["coach2"],
+          "flower"=>["flower1a","flower2a"],
+          "gravel"=>["gravel","gravel_big","gravel_big2"],
+          "hole"=>["hole"],
+          "twig"=>["twig"],
+          "rock"=>["rock1"],
+          "grassLight"=>["grass4a","grass4b","grass4"],
+          "floor"=>["floor2"],
+          "path"=>["path"],
+          "block"=>["block2"],
+          "grassGreen"=>["grass3"]}
+      a=b[@decoType]
+      r=(getRand()*a.size).to_i
+      @decoType=a[r]
+    end
+    setProvide("deco",true)
+    setMesh(:floor_deco)
+    #setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png",false),AGVector4.new(0,0,0,0),0))
+  end
+  def setDecoType(t)
+    @typeID=t
+  end
+  def saveXML(node)
+    super(node)
+    node.set("decoType",@decoType)
+  end
+  def loadXML(node)
+    super(node)
+    @decoType=node.get("decoType")
+    #@typeID=node.get("typeID").to_i
+  end
 end
 
 class AntTwig<AntRubyEntity
-	def initialize(map)
-		super
-		@typeID=(getRand()*2).to_i
-		#setType("twig")
-		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),getRand*360))
-		mesh=setMesh
-		mesh.setRotation(getRand*360)
-	end
+  def initialize(map)
+    super
+    @typeID=(getRand()*2).to_i
+    #setType("twig")
+    #setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),getRand*360))
+    mesh=setMesh
+    mesh.setRotation(getRand*360)
+  end
 end
 
 class AntDecoMesh<AntRubyEntity
-	def initialize(map,name="coach")
-		super(map)
-		@name=name
-		setMesh
-		#setMesh(AntModels.createModel(self,:coach))
-	end
-	def saveXML(node)
-		super
-		node.set("meshName",@name)
-	end
-	def loadXML(node)
-		super
-	end
+  def initialize(map,name="coach")
+    super(map)
+    @name=name
+    setMesh
+    #setMesh(AntModels.createModel(self,:coach))
+  end
+  def saveXML(node)
+    super
+    node.set("meshName",@name)
+  end
+  def loadXML(node)
+    super
+  end
 end

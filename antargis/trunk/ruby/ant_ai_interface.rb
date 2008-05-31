@@ -52,298 +52,298 @@
 # REWRITE
 
 class AIInterface
-	def initialize(map,player)
-		@map=map
-		@player=player
-	end
-	def myPlayer
-# 		puts "myPlayer:"
-# 		puts @player,"--"
-# 		puts @map.players
-# 		puts "_-"
-# 		puts @player.getHeroes
-# 		puts @player.getBuildings
-# 		raise 1
-		AIMyPlayer.new(@player)
-	end
-	def enemyPlayers
-		@map.players.select{|p|p!=@player}.collect{|p|AIEnemyPlayer.new(p)}
-	end
+  def initialize(map,player)
+    @map=map
+    @player=player
+  end
+  def myPlayer
+#     puts "myPlayer:"
+#     puts @player,"--"
+#     puts @map.players
+#     puts "_-"
+#     puts @player.getHeroes
+#     puts @player.getBuildings
+#     raise 1
+    AIMyPlayer.new(@player)
+  end
+  def enemyPlayers
+    @map.players.select{|p|p!=@player}.collect{|p|AIEnemyPlayer.new(p)}
+  end
 end
 
 class AIMyPlayer
-	def initialize(player)
-		@player=player
-	end
-	def getHeroes
-		@player.getHeroes.map{|p|AIMyHero.new(p,@player,@player.getMap)}
-	end
-	def getBuildings
-		@player.getBuildings.map{|p|AIMyBuilding.new(p,@player,@player.getMap)}
-	end
-	def getBosses
-		getBuildings+getHeroes
-	end
-	def getName
-		@player.getName
-	end
+  def initialize(player)
+    @player=player
+  end
+  def getHeroes
+    @player.getHeroes.map{|p|AIMyHero.new(p,@player,@player.getMap)}
+  end
+  def getBuildings
+    @player.getBuildings.map{|p|AIMyBuilding.new(p,@player,@player.getMap)}
+  end
+  def getBosses
+    getBuildings+getHeroes
+  end
+  def getName
+    @player.getName
+  end
 end
 
 class AIMyEntity
-	def initialize(ent,player,map)
-		@ent=ent
-		@player=player
-		@map=map
-	end
-	def resources(name=nil)
-		return unless name.is_a?(String) or name.nil?
-		if valid
-			if name.nil?
-				return @ent.resource.getAll
-			else
-				return @ent.resource.get(name)
-			end
-		else
-			return {}
-		end
-	end
-	def ==(other)
-		@ent==getRef(other)
-	end
+  def initialize(ent,player,map)
+    @ent=ent
+    @player=player
+    @map=map
+  end
+  def resources(name=nil)
+    return unless name.is_a?(String) or name.nil?
+    if valid
+      if name.nil?
+        return @ent.resource.getAll
+      else
+        return @ent.resource.get(name)
+      end
+    else
+      return {}
+    end
+  end
+  def ==(other)
+    @ent==getRef(other)
+  end
 
-	def uid
-		@ent.uid
-	end
-	def valid
-		@ent.getPlayer==@player
-	end
-	def getName
-		@ent.getName
-	end
-	def getPos
-		@ent.getPos2D
-	end
-	def getMap
-		@map
-	end
-	private
-	def getRef(t)
-		@map.getByUID(t.uid)
-	end
-	def getSource(hero,what,atleast,tries=5)
-		while tries>0
-			puts "search from #{hero} #{what} #{atleast}"
-			e=getMap.getNext(hero,what,atleast)
-			if e.nil?
-				puts "NO SOURCE"
-				#return nil
-			elsif e.getPlayer and e.getPlayer==@player
-				if e.is_a?(AntHouse)
-					return AIMyBuilding.new(e,@player,@map)
-				elsif e.is_a?(AntHero)
-					return AIMyHero.new(e,@player,@map)
-				end
-# 			else
-# 				puts "#{e.getPlayer} #{@player}"
-# 				raise 1
-			end
-			tries-=1
-		end
-		puts "OUT OF TRIES"
-		return nil
-	end
+  def uid
+    @ent.uid
+  end
+  def valid
+    @ent.getPlayer==@player
+  end
+  def getName
+    @ent.getName
+  end
+  def getPos
+    @ent.getPos2D
+  end
+  def getMap
+    @map
+  end
+  private
+  def getRef(t)
+    @map.getByUID(t.uid)
+  end
+  def getSource(hero,what,atleast,tries=5)
+    while tries>0
+      puts "search from #{hero} #{what} #{atleast}"
+      e=getMap.getNext(hero,what,atleast)
+      if e.nil?
+        puts "NO SOURCE"
+        #return nil
+      elsif e.getPlayer and e.getPlayer==@player
+        if e.is_a?(AntHouse)
+          return AIMyBuilding.new(e,@player,@map)
+        elsif e.is_a?(AntHero)
+          return AIMyHero.new(e,@player,@map)
+        end
+#       else
+#         puts "#{e.getPlayer} #{@player}"
+#         raise 1
+      end
+      tries-=1
+    end
+    puts "OUT OF TRIES"
+    return nil
+  end
 end
 
 class AIMyBuilding<AIMyEntity
-	def menCount
-		@ent.getMen.length
-	end
-	def isBuildingType(type)
-		@ent.class.ancestors.select{|c|c.to_s==type}.length>0
-	end
+  def menCount
+    @ent.getMen.length
+  end
+  def isBuildingType(type)
+    @ent.class.ancestors.select{|c|c.to_s==type}.length>0
+  end
 
 end
 
 class AIMyHero<AIMyEntity
-	# get the current count of troopers
-	def menCount
-		@ent.getMen.length
-	end
+  # get the current count of troopers
+  def menCount
+    @ent.getMen.length
+  end
 
-	def findNearResource(resourceName,far=10)
-		return unless resourceName.is_a?(String) and far.is_a?(Numeric)
-		atLeast=3
-		atLeast=0
-		if valid
-			return getSource(@ent,resourceName,atLeast)
-		end
-		return nil
-	end
+  def findNearResource(resourceName,far=10)
+    return unless resourceName.is_a?(String) and far.is_a?(Numeric)
+    atLeast=3
+    atLeast=0
+    if valid
+      return getSource(@ent,resourceName,atLeast)
+    end
+    return nil
+  end
 
 
-	# set the aggression level (0,1,2)
-	def setAggression(level)
-		return unless [0,1,2].member?(level)
-		if valid
-			@ent.setAggression(level)
-		end
-	end
+  # set the aggression level (0,1,2)
+  def setAggression(level)
+    return unless [0,1,2].member?(level)
+    if valid
+      @ent.setAggression(level)
+    end
+  end
 
-	# move my hero to place
-	def moveTo(place)
-		return unless place.is_a?(AGVector2)
-		if valid
-			@ent.newHLMoveJob(0,place,0)
-		end
-	end
+  # move my hero to place
+  def moveTo(place)
+    return unless place.is_a?(AGVector2)
+    if valid
+      @ent.newHLMoveJob(0,place,0)
+    end
+  end
 
-	# attack enemy target
-	def attack(target)
-		return unless target.is_a?(AIEnemy)
-		if valid and target.valid
-			r=getRef(target)
-			if r
-				@ent.newHLFightJob(r)
-			end
-		end
-	end
-	
-	# recruit from target
-	def recruit(target)
-		puts "RECRUITING from #{target} #{target.class}"
-		assert{getRef(target)!=@ent}
-		return unless target.is_a?(AIMyBuilding) or target.is_a?(AIMyHero)
-		if valid and target.valid
-			r=getRef(target)
-			puts "ref:#{r}"
-			@ent.newHLRecruitJob(r) if r
-		else
-			raise "sth invalid"
-		end
-	end
+  # attack enemy target
+  def attack(target)
+    return unless target.is_a?(AIEnemy)
+    if valid and target.valid
+      r=getRef(target)
+      if r
+        @ent.newHLFightJob(r)
+      end
+    end
+  end
+  
+  # recruit from target
+  def recruit(target)
+    puts "RECRUITING from #{target} #{target.class}"
+    assert{getRef(target)!=@ent}
+    return unless target.is_a?(AIMyBuilding) or target.is_a?(AIMyHero)
+    if valid and target.valid
+      r=getRef(target)
+      puts "ref:#{r}"
+      @ent.newHLRecruitJob(r) if r
+    else
+      raise "sth invalid"
+    end
+  end
 
-	def construct(target)
-		puts "construct: #{target}"
-		return unless target.is_a?(AIMyBuilding)
-		if valid and target.valid
-			r=getRef(target)
-			@ent.newHLConstructJob(r) if r
-		end
-	end
+  def construct(target)
+    puts "construct: #{target}"
+    return unless target.is_a?(AIMyBuilding)
+    if valid and target.valid
+      r=getRef(target)
+      @ent.newHLConstructJob(r) if r
+    end
+  end
 
-	def takeFood(target)
-		puts "takeFood: #{target}"
-		return unless target.is_a?(AIMyBuilding)
-		if valid and target.valid
-			r=getRef(target)
-			@ent.newHLTakeFoodJob(r) if r
-		end
-	end
+  def takeFood(target)
+    puts "takeFood: #{target}"
+    return unless target.is_a?(AIMyBuilding)
+    if valid and target.valid
+      r=getRef(target)
+      @ent.newHLTakeFoodJob(r) if r
+    end
+  end
 
-	def takeWeapon(target)
-		return unless target.is_a?(AIMyBuilding)
-		if valid and target.valid
-			r=getRef(target)
-			if r
-				@ent.newHLTakeWeaponJob(r)
-			end
-		end
-	end
+  def takeWeapon(target)
+    return unless target.is_a?(AIMyBuilding)
+    if valid and target.valid
+      r=getRef(target)
+      if r
+        @ent.newHLTakeWeaponJob(r)
+      end
+    end
+  end
 
-	def attackAnimal(target)
-		return unless target.is_a?(AIAnimal)
-		if valid
-			r=getRef(target)
-			if r
-				@ent.newHLFightAnimalJob(r)
-			end
-		end
-	end
+  def attackAnimal(target)
+    return unless target.is_a?(AIAnimal)
+    if valid
+      r=getRef(target)
+      if r
+        @ent.newHLFightAnimalJob(r)
+      end
+    end
+  end
 
-	def build(place,type)
-		return unless place.is_a?(AGVector2) and type.is_a?(String)
-		if valid
-			ds=getDescendantsOfClass(AntHouse)
-			@map={}
-			ds.each{|d|
-				c=getChild(d.to_s)
-				if c
-					addHandler(c,:sigClick,:eventBuild)
-					@map[d.to_s]=d
-				end
-			}
-			type=@map[type]
-			if type
-				@ent.newHLBuildJob(place,type)
-			end
-		end
-	end
+  def build(place,type)
+    return unless place.is_a?(AGVector2) and type.is_a?(String)
+    if valid
+      ds=getDescendantsOfClass(AntHouse)
+      @map={}
+      ds.each{|d|
+        c=getChild(d.to_s)
+        if c
+          addHandler(c,:sigClick,:eventBuild)
+          @map[d.to_s]=d
+        end
+      }
+      type=@map[type]
+      if type
+        @ent.newHLBuildJob(place,type)
+      end
+    end
+  end
 
-	def rest(time)
-		return unless time.is_a?(Numeric)
-		if valid and time>0
-			@ent.newHLRestJob(time)
-		end
-	end
+  def rest(time)
+    return unless time.is_a?(Numeric)
+    if valid and time>0
+      @ent.newHLRestJob(time)
+    end
+  end
 
-	def getMorale
-		@ent.getMorale
-	end
+  def getMorale
+    @ent.getMorale
+  end
 
-	def getEnergy
-		@ent.getEnergy
-	end
-	def getFood
-		@ent.getFood
-	end
+  def getEnergy
+    @ent.getEnergy
+  end
+  def getFood
+    @ent.getFood
+  end
 end
 
 class AIEnemyPlayer
-	def initialize(player)
-		@player=player
-	end
-	def getHeroes
-		@player.getHeroes.map{|p|AIEnemyHero.new(p,@player)}
-	end
-	def getBuildings
-		@player.getBuildings.map{|p|AIEnemyBuilding.new(p,@player)}
-	end
-	def getName
-		@player.getName
-	end
+  def initialize(player)
+    @player=player
+  end
+  def getHeroes
+    @player.getHeroes.map{|p|AIEnemyHero.new(p,@player)}
+  end
+  def getBuildings
+    @player.getBuildings.map{|p|AIEnemyBuilding.new(p,@player)}
+  end
+  def getName
+    @player.getName
+  end
 end
 
 
 class AIEnemyEntity
-	def initialize(ent,player)
-		@ent=ent
-		@player=player
-	end
-	def getName
-		@ent.getName
-	end
-	def getPos
-		@ent.getPos2D
-	end
-	def uid
-		@ent.uid
-	end
-	def valid
-		@ent.getPlayer==@player
-	end
+  def initialize(ent,player)
+    @ent=ent
+    @player=player
+  end
+  def getName
+    @ent.getName
+  end
+  def getPos
+    @ent.getPos2D
+  end
+  def uid
+    @ent.uid
+  end
+  def valid
+    @ent.getPlayer==@player
+  end
 end
 
 class AIEnemy<AIEnemyEntity
 end
 
 class AIEnemyHero<AIEnemy
-	def menCount
-		@ent.getMen.length
-	end
+  def menCount
+    @ent.getMen.length
+  end
 end
 
 class AIEnemyBuilding<AIEnemy
-	def menCount
-		@ent.getMen.length
-	end
+  def menCount
+    @ent.getMen.length
+  end
 end

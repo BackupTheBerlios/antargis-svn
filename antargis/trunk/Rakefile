@@ -35,7 +35,7 @@ def system(cmd)
   oldSystem(cmd)
 end
 
-if $rspec
+if $rspec 
   # rspec
   Spec::Rake::SpecTask.new(:spec=>:default) do |t|
     t.spec_files = FileList['ruby/**/spec_*.rb'].map{|f|File.expand_path(f)}
@@ -49,6 +49,35 @@ if $rspec
   end
 end
 
-task :cruise => :spec do
+desc "Task for cruisecontrol.rb"
+  task :cruise => :spec do
 end
 
+
+namespace :spec do
+  spec_cmd = (RUBY_PLATFORM =~ /java/) ? "jruby -S spec" : "./starter /usr/bin/spec"
+  task :showall do
+    puts Dir["ruby/**/spec_*.rb"].select{|f|not f=~/spec_helper.rb/}.join("\n")
+  end
+  rule /^spec:/ do |t|
+    arguments = t.name.split(':')
+    
+    file_name = arguments[1]
+    spec_name = arguments[2..-1]
+
+    spec_filename = "spec_#{file_name}.rb"
+    specs = Dir["ruby/**/#{spec_filename}"]
+    pp specs
+    
+    if path = specs.detect { |f| spec_filename == File.basename(f) }
+      run_file_name = path
+    else
+      puts "No specs found for #{t.name.inspect}"
+      exit
+    end
+
+    example = " -e '#{spec_name}'" unless spec_name.empty?
+    
+    sh "#{spec_cmd} #{run_file_name} --format html:spec_output.html --colour #{example}"
+  end
+end

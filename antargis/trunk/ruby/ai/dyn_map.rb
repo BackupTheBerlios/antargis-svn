@@ -1,4 +1,7 @@
 module AI
+# FIXME: this file is outdated or at least not used ATM 
+  if false
+    
 # This file contains a dynamic and simplified representation of the gaming world.
 # This is needed for computing the max/min-tree within the AI.
 #
@@ -21,42 +24,44 @@ module AI
 # * check if trees can be combined to forests as an object ?
 #
 #
-	class DynPlayer
-		attr_accessor :player
-		attr_reader :realPlayer
-		def initialize(player)
-			@realPlayer=player
-		end
-	end
+  class DynPlayer
+    attr_accessor :player
+    attr_reader :realPlayer
+    def initialize(player)
+      @realPlayer=player
+    end
+  end
 
-	class DynHero
-		def initialize(hero)
-			@realHero=hero
-			@pos=hero.getPos2D
-			allResources=hero.getMen.map{|man|man.resource.getAll}
+  class DynHero
+    def initialize(hero)
+      @realHero=hero
+      @pos=hero.getPos2D
+      allResources=hero.getMen.map{|man|man.resource.getAll}
 
-			@resource=allResources.inject({})
-			{|a,new|
-				new.each{|k,v|
-					a[k]||=0
-					a[k]+=v
-				}
-				a
-			}
-			@health=hero.getStrength
-			@men=hero.getMen.length
-		end
-	end
+      @resource=allResources.inject({})
+# FIXME: this was a syntax error
+#      {|a,new|
+#         new.each{|k,v|
+#           a[k]||=0
+#          a[k]+=v
+#        }
+#        a
+#      }
+      @health=hero.getStrength
+      @men=hero.getMen.length
+    end
+  end
 
-	class DynMap
-		def initialize(map)
-			@players=map.getPlayers.map{|p|DynPlayer.new(p)}
-			@heroes=map.getHeroes.map{|h|DynHero.new(h)}
-			@buildings=map.getBuildings.map{|b|DynBuilding(b)}
-			@myplayer=@players.select{|p|p.realPlayer==map.getPlayer}[0]
-			assert{@myplayer}
-			@sources=[AntTree,AntFir,AntStone,AntMine].map{|type|map.getByType(type)}.flatten.uniq.map{|e|DynSource.new(e)}
-		end
-	end
+  class DynMap
+    def initialize(map)
+      @players=map.getPlayers.map{|p|DynPlayer.new(p)}
+      @heroes=map.getHeroes.map{|h|DynHero.new(h)}
+      @buildings=map.getBuildings.map{|b|DynBuilding(b)}
+      @myplayer=@players.select{|p|p.realPlayer==map.getPlayer}[0]
+      assert{@myplayer}
+      @sources=[AntTree,AntFir,AntStone,AntMine].map{|type|map.getByType(type)}.flatten.uniq.map{|e|DynSource.new(e)}
+    end
+  end
+  end
 end
 

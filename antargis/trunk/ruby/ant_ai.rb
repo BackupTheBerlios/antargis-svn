@@ -32,83 +32,83 @@ require 'ant_ai_player.rb'
 require 'ruby/ai/rules.rb'
 
 class AntBasicAI
-	attr_reader :interface
+  attr_reader :interface
 
-	# initialize any information for your AI here, but beware that this is called on reload, too.
-	# FIXME: loading and saving of AI-members!
-	def initialize(interface)
-		@interface=interface
-	end
-	# This an initializing event - this called only on new creation within a level - so it won't be
-	# called when loading a level. You can savely initialize your values here.
-	def eventInit
-	end
-	# the given hero has no job currently 
-	def eventHeroWithoutJob(hero)
-	end
-	# the given hero is attacked by the given enemy
-	def eventHeroAttacked(hero,enemy)
-	end
-	# your hero has hit a trigger - this SHOULDN'T really BE USED, because triggers are only
-	# reasonable within level-scripting (?) 
-	def eventTriggerHit(hero,triggerName)
-	end
-	# in each frame this function is called with the time that's passed. Don't use this function if you
-	# don't need to, because this hits performance rather badly!
-	def eventFrame(time)
-	end
+  # initialize any information for your AI here, but beware that this is called on reload, too.
+  # FIXME: loading and saving of AI-members!
+  def initialize(interface)
+    @interface=interface
+  end
+  # This an initializing event - this called only on new creation within a level - so it won't be
+  # called when loading a level. You can savely initialize your values here.
+  def eventInit
+  end
+  # the given hero has no job currently 
+  def eventHeroWithoutJob(hero)
+  end
+  # the given hero is attacked by the given enemy
+  def eventHeroAttacked(hero,enemy)
+  end
+  # your hero has hit a trigger - this SHOULDN'T really BE USED, because triggers are only
+  # reasonable within level-scripting (?) 
+  def eventTriggerHit(hero,triggerName)
+  end
+  # in each frame this function is called with the time that's passed. Don't use this function if you
+  # don't need to, because this hits performance rather badly!
+  def eventFrame(time)
+  end
 end
 
 class AntAttackAI<AntBasicAI
-	def initialize(interface)
-		super
-		# add rules
-		@rules=[]
-		@rules.push(AIRule.new(AIEveryNthCondition.new(2),AIRestAction.new,interface))
-		@rules.push(AIRule.new(AIConditionFoodLow.new,AIGatherFoodAction.new,interface))
-		@rules.push(AIRule.new(AIEveryNthCondition.new(2),AIAttackAction.new,interface))
-		@rules.push(AIRule.new(AICondition.new,AIRestAction.new,interface)) # dummy rule - always rest
-	end
+  def initialize(interface)
+    super
+    # add rules
+    @rules=[]
+    @rules.push(AIRule.new(AIEveryNthCondition.new(2),AIRestAction.new,interface))
+    @rules.push(AIRule.new(AIConditionFoodLow.new,AIGatherFoodAction.new,interface))
+    @rules.push(AIRule.new(AIEveryNthCondition.new(2),AIAttackAction.new,interface))
+    @rules.push(AIRule.new(AICondition.new,AIRestAction.new,interface)) # dummy rule - always rest
+  end
 
-	def eventHeroWithoutJob(hero)
-		@rules.each{|r|
-			if r.value(hero)>0
-				puts "GO"
-				r.execute(hero)
-				return
-			end
-		}
-	end
+  def eventHeroWithoutJob(hero)
+    @rules.each{|r|
+      if r.value(hero)>0
+        puts "GO"
+        r.execute(hero)
+        return
+      end
+    }
+  end
 end
 
 class AntFuzzyAI<AntBasicAI
-	def initialize(interface)
-		super
+  def initialize(interface)
+    super
 
-		classes=[
-			[AI::Rule::AttackHero,1.5],
-			[AI::Rule::GetFood,1],
-			[AI::Rule::Rest,1],
-			[AI::Rule::RecruitFromBuilding,1],
-			[AI::Rule::Construct,1],
-			[AI::Rule::GetWeapon,1],
-		]
-		@rules=classes.map{|pair|[pair[0].new(interface),pair[1]]}
-	end
+    classes=[
+      [AI::Rule::AttackHero,1.5],
+      [AI::Rule::GetFood,1],
+      [AI::Rule::Rest,1],
+      [AI::Rule::RecruitFromBuilding,1],
+      [AI::Rule::Construct,1],
+      [AI::Rule::GetWeapon,1],
+    ]
+    @rules=classes.map{|pair|[pair[0].new(interface),pair[1]]}
+  end
 
-	def eventHeroWithoutJob(hero)
-		puts "eventHeroWithoutJob(hero) #{hero.getName}"
-		process(hero)
-	end
+  def eventHeroWithoutJob(hero)
+    puts "eventHeroWithoutJob(hero) #{hero.getName}"
+    process(hero)
+  end
 
-	private
-	def process(hero)
-		bestRules=@rules.map{|r|[r,r[0].value(hero)*r[1]]}
-		puts "-------"
-		bestRules.each{|r|puts "RULE #{r[0]} - value:#{r[1]}"}
-		puts "-------"
-		bestRule=bestRules.max{|a,b|a[1]<=>b[1]}[0]
-		bestRule[0].start(hero)
-	end
+  private
+  def process(hero)
+    bestRules=@rules.map{|r|[r,r[0].value(hero)*r[1]]}
+    puts "-------"
+    bestRules.each{|r|puts "RULE #{r[0]} - value:#{r[1]}"}
+    puts "-------"
+    bestRule=bestRules.max{|a,b|a[1]<=>b[1]}[0]
+    bestRule[0].start(hero)
+  end
 end
 

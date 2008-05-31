@@ -19,80 +19,80 @@
 #
 
 def getFishMeshData
-	getMeshData("data/models/fish.ant2",0.02,"data/textures/models/fish.png")
+  getMeshData("data/models/fish.ant2",0.02,"data/textures/models/fish.png")
 end
 
 class AntFish<AntAnimal
-	def initialize(map)
-		super
-		setProvide("fish",true)
-		setSpeed 0.6
-		@foodAdd=0
+  def initialize(map)
+    super
+    setProvide("fish",true)
+    setSpeed 0.6
+    @foodAdd=0
 
-		setOnGround(false)
-		setPos(AGVector3.new(0,0,-0.3))
+    setOnGround(false)
+    setPos(AGVector3.new(0,0,-0.3))
 
-		setMesh
+    setMesh
 
-		resource.set("food",1)
-	end
-	def saveXML(node)
-		super(node)
-	end
-	def loadXML(node)
-		super(node)
-	end
-	def eventNoJob
-		eventJobFinished
-	end
-	def eventJobFinished
-		super
+    resource.set("food",1)
+  end
+  def saveXML(node)
+    super(node)
+  end
+  def loadXML(node)
+    super(node)
+  end
+  def eventNoJob
+    eventJobFinished
+  end
+  def eventJobFinished
+    super
 
-		if @dead
-			newRestJob(30)
-			if @alreadyDead
-				getMap.removeEntity(self)
-			end
-			@alreadyDead=true
-	
-			return
-		end
+    if @dead
+      newRestJob(30)
+      if @alreadyDead
+        getMap.removeEntity(self)
+      end
+      @alreadyDead=true
+  
+      return
+    end
 
-		if (not giveBirth)
-			setPos(AGVector3.new(getPos2D,-0.3))
-			newMoveJob(0,getTargetPos,0)
-			setMeshState("go")
-		end
+    if (not giveBirth)
+      setPos(AGVector3.new(getPos2D,-0.3))
+      newMoveJob(0,getTargetPos,0)
+      setMeshState("go")
+    end
 
-		@foodAdd+=1
-		#puts "FOOOOOD #{@foodAdd}"
-		if @foodAdd>3 and resource.get("food")<10
-			resource.add("food",1)
-			@foodAdd=0
-		end
+    @foodAdd+=1
+    #puts "FOOOOOD #{@foodAdd}"
+    if @foodAdd>3 and resource.get("food")<10
+      resource.add("food",1)
+      @foodAdd=0
+    end
 
-	end
-	
-	def getTargetPos
-		p=getPos2D
-		tries=10
-		# assure that sheep doesn't walk into water
-		while tries>0 do
-			d=AGVector2.new(getRand-0.5,getRand-0.5).normalized*2
-			t=p+d
-			t=getMap.truncPos(t)
-			tries-=1
-			if getMap.getHeight(t.x,t.y)<0
-				return t
-			end
-		end 
-		return p
-	end
-	def setMeshState(s)
-		#getFirstMesh.setAnimation(s)
-	end
-	def getName
-		"Fish"
-	end
+  end
+  
+  def getTargetPos
+    p=getPos2D
+    tries=10
+    # assure that sheep doesn't walk into water
+    while tries>0 do
+      d=AGVector2.new(getRand-0.5,getRand-0.5).normalized*2
+      t=p+d
+      t=getMap.truncPos(t)
+      tries-=1
+      if getMap.getHeight(t.x,t.y)<0
+        return t
+      end
+    end 
+    return p
+  end
+  def setMeshState(s)
+    #getFirstMesh.setAnimation(s)
+  end
+  def getName
+    "Fish"
+  end
 private
 end

@@ -7,22 +7,22 @@ require 'ant_models.rb'
 # TODO: Find a better name for AntAnimal
 #
 class AntSack<AntAnimal
-	def initialize(map)
-		super
-		setMesh
-		@enabled=true
-		@storeGood=["food","tool","corn","stone","wood"]
-	end
-	# is called by a finished KillAnimal-hl-job
-	def eventDie
-		getMap.removeEntity(self)
-	end
-	
-	# TODO: move this function to a module, which is included by AntHouse,AntTree and such, too.
-	def resourceChanged
-		@storeGood.each{|r|
-			setProvide(r,resource.get(r)>0)
-		}
-		super
-	end
+  def initialize(map)
+    super
+    setMesh
+    @enabled=true
+    @storeGood=["food","tool","corn","stone","wood"]
+  end
+  # is called by a finished KillAnimal-hl-job
+  def eventDie
+    getMap.removeEntity(self)
+  end
+  
+  # TODO: move this function to a module, which is included by AntHouse,AntTree and such, too.
+  def resourceChanged
+    @storeGood.each{|r|
+      setProvide(r,resource.get(r)>0)
+    }
+    super
+  end
 end

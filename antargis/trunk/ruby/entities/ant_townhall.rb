@@ -22,34 +22,34 @@
 #    - farming (wheat)
 
 class AntTownHall<AntHouse
-	def initialize(map)
-		super
-		@type=3
-		@defeated=[]
-		@atHome=[]
-		setDirection(-10)
-	
-		@storeGood=["food","tool","corn"]
-	end
-	
-	def setupMesh
-		setMesh
-	end
+  def initialize(map)
+    super
+    @type=3
+    @defeated=[]
+    @atHome=[]
+    setDirection(-10)
+  
+    @storeGood=["food","tool","corn"]
+  end
+  
+  def setupMesh
+    setMesh
+  end
 
-	def resourceChanged
-		@storeGood.each{|r|
-			setProvide(r,resource.get(r)>0)
-		}
-		super
-	end
+  def resourceChanged
+    @storeGood.each{|r|
+      setProvide(r,resource.get(r)>0)
+    }
+    super
+  end
 
-	def neededStock
-		s={}
-		@storeGood.each{|r|s[r]=15}
-		s
-	end
+  def neededStock
+    s={}
+    @storeGood.each{|r|s[r]=15}
+    s
+  end
 
-	def houseType
-		"townhall"
-	end
+  def houseType
+    "townhall"
+  end
 end

@@ -19,28 +19,28 @@
 #
 
 class AntStone<AntRubyEntity
-	def initialize(map)
-		super
-		@typeID=(getRand*2).to_i
-		setProvide("stone",true)
-		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/big_stone.ant2",0.7,"data/textures/models/big_stone.png"),AGVector4.new(0,0,0,0),getRand*360))
-		mesh=setMesh
-		mesh.setRotation(getRand*360)
-		resource.set("stone",500)
-	end
-	def setTreeType(t)
-		@typeID=t
-	end
-	def getTexture
-		return "deco"+@typeID.to_s+".png"
-	end
-	def saveXML(node)
-		super(node)
-		node.set("typeID",@typeID.to_s)
-	end
-	def loadXML(node)
-		super(node)
-		@typeID=node.get("typeID").to_i
-	end
+  def initialize(map)
+    super
+    @typeID=(getRand*2).to_i
+    setProvide("stone",true)
+    #setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/big_stone.ant2",0.7,"data/textures/models/big_stone.png"),AGVector4.new(0,0,0,0),getRand*360))
+    mesh=setMesh
+    mesh.setRotation(getRand*360)
+    resource.set("stone",500)
+  end
+  def setTreeType(t)
+    @typeID=t
+  end
+  def getTexture
+    return "deco"+@typeID.to_s+".png"
+  end
+  def saveXML(node)
+    super(node)
+    node.set("typeID",@typeID.to_s)
+  end
+  def loadXML(node)
+    super(node)
+    @typeID=node.get("typeID").to_i
+  end
 end
 
