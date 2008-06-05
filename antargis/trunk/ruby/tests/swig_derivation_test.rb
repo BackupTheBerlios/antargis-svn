@@ -12,29 +12,29 @@ l=s.getCurrentNodes
 puts "C:"
 puts l,l.object_id,l.class
 l.each{|i|
-	puts i,i.object_id,i.class
+  puts i,i.object_id,i.class
 }
 
 l=s.getCurrentNodes
 
 l.each{|i|
-	puts i,i.object_id
+  puts i,i.object_id
 }
 
 l.each{|i|
-	puts i,i.object_id
+  puts i,i.object_id
 }
 
 l.each{|i|
-	puts i,i.object_id
+  puts i,i.object_id
 }
 
 l.each{|i|
-	puts i,i.object_id
+  puts i,i.object_id
 }
 
 l=s.getCurrentNodes
 
 l.each{|i|
-	puts i,i.object_id
+  puts i,i.object_id
 }

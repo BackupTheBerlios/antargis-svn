@@ -19,9 +19,9 @@ h=16
 heightMap=HeightMap.new(nil,w,h)
 
 (0..w).each{|x|
-	(0..h).each{|y|
-		heightMap.set(x,y,rand)
-	}
+  (0..h).each{|y|
+    heightMap.set(x,y,rand)
+  }
 }
 
 
@@ -59,41 +59,41 @@ fsize=4
 image=AGSurface.new(w*fsize,h*fsize)
 
 def getColor(i)
-	j=i%8
-	j+=1
-	AGColor.new((j % 2)*255, ((j /2)%2)*255, (j / 4).to_i*255) #*(255.0-(i*2)/255.0)
+  j=i%8
+  j+=1
+  AGColor.new((j % 2)*255, ((j /2)%2)*255, (j / 4).to_i*255) #*(255.0-(i*2)/255.0)
 end
 
 
 def displayFieldAssign(fieldCollection,image,w,h,fsize)
-	puts "DISPLAYING DATA"
-	(0..(w-1)).each{|x|
-		(0..(h-1)).each{|y|
-			fieldnum=fieldCollection.getFieldId(AGVector2.new(x,y))
-			if fieldnum<20000
-				color=getColor(fieldnum)
-				(0..(fsize-1)).each{|dx|
-					(0..(fsize-1)).each{|dy|
-						image.putPixel(x*fsize+dx,y*fsize+dy,color)
-					}
-				}
-			end
-		}
-	}
+  puts "DISPLAYING DATA"
+  (0..(w-1)).each{|x|
+    (0..(h-1)).each{|y|
+      fieldnum=fieldCollection.getFieldId(AGVector2.new(x,y))
+      if fieldnum<20000
+        color=getColor(fieldnum)
+        (0..(fsize-1)).each{|dx|
+          (0..(fsize-1)).each{|dy|
+            image.putPixel(x*fsize+dx,y*fsize+dy,color)
+          }
+        }
+      end
+    }
+  }
 end
 
 def displayDistanceData(field,image)
-	m=field.getMiddle
-	field.getVectors.each{|v|
-		
-		image.putPixel(v.x.to_i,v.y.to_i,AGColor.new(0xFF,0xFF,0xFF)*(1-(v-m).length*0.3))
-	}
+  m=field.getMiddle
+  field.getVectors.each{|v|
+    
+    image.putPixel(v.x.to_i,v.y.to_i,AGColor.new(0xFF,0xFF,0xFF)*(1-(v-m).length*0.3))
+  }
 end
 
 def displayNeighbors(field,image)
-	field.getNeighbors.each{|v|
-		image.putPixel(v.x.to_i,v.y.to_i,AGColor.new(0xFF,0,0))
-	}
+  field.getNeighbors.each{|v|
+    image.putPixel(v.x.to_i,v.y.to_i,AGColor.new(0xFF,0,0))
+  }
 end
 puts "COMPUTE  DISTACNES:"
 fieldCollection.computeDistances(distComputer)
@@ -101,10 +101,10 @@ puts "\n\n\nok"
 
 #displayFieldAssign(fieldCollection,image,w,h,fsize)
 (0..(fieldCollection.getFieldCount-1)).each{|num|
-	field=fieldCollection.getField(num)
-	#field.init
-	displayDistanceData(field,image)
-	#displayNeighbors(field,image)
+  field=fieldCollection.getField(num)
+  #field.init
+  displayDistanceData(field,image)
+  #displayNeighbors(field,image)
 }
 
 

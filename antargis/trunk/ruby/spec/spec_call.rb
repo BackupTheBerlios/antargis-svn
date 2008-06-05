@@ -17,26 +17,26 @@ describe "Call-predicate in spec-helper" do
       end
     end
     a=A.new
-		a.y.should == "hi"
+    a.y.should == "hi"
     lambda{a.y.should be_nil}.should cross(a,:y)
-		a.y.should == "hi"
+    a.y.should == "hi"
   end
-	it "should work with should_not" do
-		lambda{}.should_not cross(:globalTestFunction)
-	end
+  it "should work with should_not" do
+    lambda{}.should_not cross(:globalTestFunction)
+  end
 
-	it "should work with new method" do
-		class A
-			attr_reader :a
-			def initialize
-				@a=10
-			end
-		end
-		
-		lambda{A.new}.should cross(A,:initialize)
-		lambda{}.should_not cross(A,:initialize)
-		lambda{a=A.new}.should cross(A,:initialize)
-	end
+  it "should work with new method" do
+    class A
+      attr_reader :a
+      def initialize
+        @a=10
+      end
+    end
+    
+    lambda{A.new}.should cross(A,:initialize)
+    lambda{}.should_not cross(A,:initialize)
+    lambda{a=A.new}.should cross(A,:initialize)
+  end
 
 end
 
@@ -72,7 +72,7 @@ describe "Cross" do
   
   it "should work for class-methods" do
     lambda{Test.test2}.should cross(Test,:test2)
-		Test.test2.should equal(:test_2)
+    Test.test2.should equal(:test_2)
   end
   
   it "should work for object-methods" do
@@ -86,12 +86,12 @@ describe "Cross" do
     lambda{Test.new}.should cross(Test,:initialize)
   end
 
-	it "failure measure" do
-		Cross.new("A","B").failure_message.should =~/expected .* to call A.B.*/
-	end
-	it "negative failure measure" do
-		Cross.new("A","B").negative_failure_message.should =~/expected .* not to call A.B.*/
-	end
+  it "failure measure" do
+    Cross.new("A","B").failure_message.should =~/expected .* to call A.B.*/
+  end
+  it "negative failure measure" do
+    Cross.new("A","B").negative_failure_message.should =~/expected .* not to call A.B.*/
+  end
   
   it "should work with local classes" do
     class A

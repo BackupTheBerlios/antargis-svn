@@ -14,26 +14,26 @@ app=AGApplication.new
 
 
 class MWidget<AGGLWidget
-	def initialize(p,r)
-		super
-		@scene=Scene.new(r.width.to_i,r.height.to_i)
+  def initialize(p,r)
+    super
+    @scene=Scene.new(r.width.to_i,r.height.to_i)
 
-		wireframe=Boa3dWireframe.new(@scene)
+    wireframe=Boa3dWireframe.new(@scene)
 
-		a=AGVector3.new(0,0,0)
-		b=AGVector3.new(10,0,0)
-		white=AGVector4.new(1,1,1,1)
+    a=AGVector3.new(0,0,0)
+    b=AGVector3.new(10,0,0)
+    white=AGVector4.new(1,1,1,1)
 
-		wireframe.addLine(a,b,white)
+    wireframe.addLine(a,b,white)
 
-		@scene.addNode(wireframe)
+    @scene.addNode(wireframe)
 
-	end
-	def drawGL
-		@scene.draw
-	end
+  end
+  def drawGL
+    @scene.draw
+  end
 
-	
+  
 end
 
 widget=MWidget.new(nil,AGRect2.new(0,0,640,480))

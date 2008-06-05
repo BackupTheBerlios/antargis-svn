@@ -1,17 +1,3 @@
-* move build/*.rb files to build/unused_tools/* if they're not used
-* issue with mingw: 
-** google for "/tmp/cciSLVG5.s:932678: Warning: .stabs: description field '1c216' too big, try a different debug format"
-
-* check how many times AG_NewPointer is called !!!! - not so often - could be replaced by traceobjects from swig
-** check if it's any good to switch over to standard-swig ??? seems so.
-
-!!! AGTexture - not wrapped correctly in bliTri etc ???
-
-
-* moveto doesn't really work with "near" (hljob)
-* heroes don't die in reasonable fashion - starving men too
-* add seasons
-
 * Spreading should be done only for men who need it!
 
 * why is the story-telling dialog taking so much time ??
@@ -20,7 +6,6 @@
 * check level-editor
 ** make wish-list
 
-* check dep-handling with swig
 * move single entities with path-finder, too?
 
 * docs

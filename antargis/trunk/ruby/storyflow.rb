@@ -27,51 +27,51 @@
 #   * themselves are spoken by a person
 #
 # a simple example on how to create a story-flow:
-#			start=StoryFlow.new("recruit")
-#			start.push("Tutorial","Ok, you have recruited some men.")
-#			start.push("Tutorial","If you want to recruit all men select the button with the three swords. ....")
-#			start.push("Tutorial","When you're done with this go north and defeat your enemies. You .......")
-#			tellStory(start)
+#      start=StoryFlow.new("recruit")
+#      start.push("Tutorial","Ok, you have recruited some men.")
+#      start.push("Tutorial","If you want to recruit all men select the button with the three swords. ....")
+#      start.push("Tutorial","When you're done with this go north and defeat your enemies. You .......")
+#      tellStory(start)
 #
 class StoryFlow
-	attr_reader :name, :s
+  attr_reader :name, :s
 
-	# create a story-flow with identification "name"
-	def initialize(name)
-		@s=[]
-		@pos=0
-		@name=name
-	end
+  # create a story-flow with identification "name"
+  def initialize(name)
+    @s=[]
+    @pos=0
+    @name=name
+  end
 
-	# push a text with title "name" into the story-flow
-	def push(name,text)
-		@s.push([name,text])
-	end
+  # push a text with title "name" into the story-flow
+  def push(name,text)
+    @s.push([name,text])
+  end
 
-	# return current text
-	def getCurrent
-		return nil if @s.length<=@pos
-		c=@s[@pos]
-		return c
-	end
-		
+  # return current text
+  def getCurrent
+    return nil if @s.length<=@pos
+    c=@s[@pos]
+    return c
+  end
+    
 
-	# you won't need this unless you're implementing within the actual application-object
-	def get
-		return nil if @s.length<=@pos
-		c=@s[@pos]
-		@pos+=1
-		return c
-	end
-	# you won't need this unless you're implementing within the actual application-object
-	def append(flow)
-		@s+=flow.s
-		@name=flow.name
-	end
-	# you won't need this unless you're implementing within the actual application-object
-	def back
-		if @pos>0
-			@pos-=1
-		end
-	end	
+  # you won't need this unless you're implementing within the actual application-object
+  def get
+    return nil if @s.length<=@pos
+    c=@s[@pos]
+    @pos+=1
+    return c
+  end
+  # you won't need this unless you're implementing within the actual application-object
+  def append(flow)
+    @s+=flow.s
+    @name=flow.name
+  end
+  # you won't need this unless you're implementing within the actual application-object
+  def back
+    if @pos>0
+      @pos-=1
+    end
+  end  
 end

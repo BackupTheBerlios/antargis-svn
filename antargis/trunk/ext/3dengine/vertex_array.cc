@@ -38,7 +38,7 @@ VertexArray::VertexArray(bool pDynamic):mDynamic(pDynamic),bbox(AGVector3(),AGVe
   mArrays=GLEE_EXT_vertex_array && useVertexArrays();
 
   if(videoInited())
-    assert(GLEE_EXT_vertex_array || GLEE_VERSION_1_2); //FIXME: check if this really version 1.2
+    assert(GLEE_EXT_vertex_array || GLEE_VERSION_1_2); // vertex-arrays were introduced in GL 1.1, but glee has no flag for  that
 
   displayListInited=false;
 

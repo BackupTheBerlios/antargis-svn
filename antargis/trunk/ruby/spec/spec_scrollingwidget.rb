@@ -36,16 +36,16 @@ class MyTestApp<AGApplication
   end
   
   def makeScreenshot
-  	@makeScreenshot=true
+    @makeScreenshot=true
   end
   
   protected
   def grabScreenshot(e)
-  	if @makeScreenshot
-  	  @screenshot=getScreen.screenshotSurface(false)
-	  @makeScreenshot=nil
-  	end
-  	true
+    if @makeScreenshot
+      @screenshot=getScreen.screenshotSurface(false)
+    @makeScreenshot=nil
+    end
+    true
   end
   
   private

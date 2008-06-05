@@ -27,6 +27,7 @@
 #include <ag_sdlsurface.h>
 #include <ag_texture.h>
 #include <math.h>
+#include <ag_geometry.h>
 
 #include <stdexcept>
 
@@ -38,30 +39,30 @@
 
 
 AGPaintProjection::AGPaintProjection(const AGRect2 &pClip):clip(pClip)
-{
-  a.set(0,0,1);
-  a.set(0,1,0);
-  a.set(0,2,0);
-  a.set(1,0,0);
-  a.set(1,1,1);
-  a.set(1,2,0);
-  a.set(2,0,0);
-  a.set(2,1,0);
-  a.set(2,2,0);
-}
+  {
+    a.set(0,0,1);
+    a.set(0,1,0);
+    a.set(0,2,0);
+    a.set(1,0,0);
+    a.set(1,1,1);
+    a.set(1,2,0);
+    a.set(2,0,0);
+    a.set(2,1,0);
+    a.set(2,2,0);
+  }
 
 AGPaintProjection::AGPaintProjection(const AGClipping &pClip):advancedClipping(pClip)
-{
-  a.set(0,0,1);
-  a.set(0,1,0);
-  a.set(0,2,0);
-  a.set(1,0,0);
-  a.set(1,1,1);
-  a.set(1,2,0);
-  a.set(2,0,0);
-  a.set(2,1,0);
-  a.set(2,2,0);
-}
+  {
+    a.set(0,0,1);
+    a.set(0,1,0);
+    a.set(0,2,0);
+    a.set(1,0,0);
+    a.set(1,1,1);
+    a.set(1,2,0);
+    a.set(2,0,0);
+    a.set(2,1,0);
+    a.set(2,2,0);
+  }
 
 
 AGVector2 AGPaintProjection::project(const AGVector2 &p) const
@@ -217,19 +218,19 @@ AGLine2 AGPaintProjection::clipLine(AGLine2 l) const
 /////////////////////////////////////////////////////////////////////////////////
 
 AGPainter::AGPainter():mCurrent(getScreen().getRect()),mTarget(&getScreen())
-{
-  mTarget->beginPaint();
-}
+  {
+    mTarget->beginPaint();
+  }
 
 AGPainter::AGPainter(const AGPainter &p):ps(p.ps),mCurrent(p.mCurrent),mTarget(p.mTarget)
-{
-  mTarget->beginPaint();
-}
+  {
+    mTarget->beginPaint();
+  }
 
 AGPainter::AGPainter(AGPaintTarget &pTarget):mCurrent(pTarget.getRect()),mTarget(&pTarget)
-{
-  mTarget->beginPaint();
-}
+  {
+    mTarget->beginPaint();
+  }
 
 
 AGPainter::~AGPainter()
@@ -476,22 +477,22 @@ void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
 void AGPainter::fillPoly(const std::vector<AGVector2> &pPoly,const AGColor &c)
   {
     //FIXME: add clipping for none-GL (?) - for performance ?
-    
+
     std::vector<AGVector2> projected;
     for(std::vector<AGVector2>::const_iterator i=pPoly.begin();i!=pPoly.end();i++)
       projected.push_back(mCurrent.project(*i));
-     
+
     mTarget->fillPoly(projected,c);
   }
 
 void AGPainter::drawPoly(const std::vector<AGVector2> &pPoly,const AGColor &c)
   {
     //FIXME: add clipping for none-GL (?) - for performance ?
-    
+
     std::vector<AGVector2> projected;
     for(std::vector<AGVector2>::const_iterator i=pPoly.begin();i!=pPoly.end();i++)
       projected.push_back(mCurrent.project(*i));
-     
+
     mTarget->drawPoly(projected,c);
   }
 
@@ -626,3 +627,9 @@ AGPaintTarget *AGPainter::getTarget()
     return mTarget.getPtr();
   }
 
+
+void AGPainter::debugOutput()
+  {
+    cdebug(mCurrent.a);
+    cdebug(mCurrent.clip);
+  }

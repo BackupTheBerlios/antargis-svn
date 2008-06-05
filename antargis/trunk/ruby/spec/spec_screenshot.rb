@@ -18,9 +18,9 @@ describe "Screenshots" do
     checkSurface(surface, @red).should be_true
   end
   it "should be possible to grab back-buffer screenshot with readpixels" do
-	  fill(@blue)
-	  flip
-	  fill(@red)
+    fill(@blue)
+    flip
+    fill(@red)
     surface=@s.screenshotSurface(false)
     checkSurface(surface, @red).should be_true
   end

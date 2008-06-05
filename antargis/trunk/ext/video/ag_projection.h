@@ -13,12 +13,12 @@ public:
   AGProjection2D();
   AGProjection2D(const AGProjection2D &p);
   AGProjection2D(const AGRect2 &from, const AGRect2 &to);
-  AGProjection2D(const AGMatrix3 &pMatrix);
+  AGProjection2D(const AGMatrix3 &pMatrix) throw (GeometryException);
 
   AGRect2 project(const AGRect2 &r) const;
   AGVector2 project(const AGVector2 &p) const;
   
-  AGProjection2D inverse() const;
+  AGProjection2D inverse() const throw (GeometryException);
 
   void pushProjection(const AGProjection2D &p);
   

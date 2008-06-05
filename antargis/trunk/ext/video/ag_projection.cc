@@ -7,10 +7,15 @@ AGProjection2D::AGProjection2D() :
   {
   }
 
-AGProjection2D::AGProjection2D(const AGMatrix3 &pMatrix) :
+AGProjection2D::AGProjection2D(const AGMatrix3 &pMatrix) throw (GeometryException) :
   mInited(true), m(pMatrix)
   {
-    assert(isInvertable(m));
+    bool invertable=isInvertable(m);
+    if(!invertable)
+      {
+        throw GeometryException(AGString("Matrix ")+m.toString()+" is not invertible");
+      }
+    assert(invertable);
   }
 
 AGProjection2D::AGProjection2D(const AGProjection2D &p) :
@@ -30,20 +35,20 @@ AGProjection2D::AGProjection2D(const AGRect2 &from, const AGRect2 &to) :
     AGMatrix3 m3(to.getV0());
 
     m=m3*m2*m1;
-    
+
     assert(isInvertable(m));
   }
 
 AGRect2 AGProjection2D::project(const AGRect2 &r) const
-  {
-    assert(mInited);
-    return AGRect2((m*r.getV0()).dim2(), (m*r.getV1()).dim2());
-  }
+{
+  assert(mInited);
+  return AGRect2((m*r.getV0()).dim2(), (m*r.getV1()).dim2());
+}
 AGVector2 AGProjection2D::project(const AGVector2 &p) const
-  {
-    assert(mInited);
-    return (m*p).dim2();
-  }
+{
+  assert(mInited);
+  return (m*p).dim2();
+}
 
 void AGProjection2D::pushProjection(const AGProjection2D &p)
   {
@@ -51,15 +56,20 @@ void AGProjection2D::pushProjection(const AGProjection2D &p)
     m*=p.m;
   }
 
-AGProjection2D AGProjection2D::inverse() const
+AGProjection2D AGProjection2D::inverse() const throw (GeometryException)
   {
     CTRACE;
-    assert(isInvertable(m));
-    cdebug("1");
-    return AGProjection2D(m.inverted());
+    bool invertable=isInvertable(m);
+    if(!invertable)
+      {
+        cdebug("Matrix:"<<m);
+        throw GeometryException(AGString("Matrix ")+m.toString()+" is not invertible");
+      }
+    AGMatrix3 inv=m.inverted();
+    return AGProjection2D(inv);
   }
 
 AGMatrix3 AGProjection2D::getMatrix() const
-  {
-    return m;
-  }
+{
+  return m;
+}

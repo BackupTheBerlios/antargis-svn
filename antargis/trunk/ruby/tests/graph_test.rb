@@ -3,10 +3,10 @@
 require 'ruby/antargislib.rb'
 
 #@mweighter=MapPathWeighter.new(self)
-#		@sgraph=makeGraph(self,@mweighter,4)
-#		@dgraph=DecimatedGraph.new(@sgraph)
-#		@dgraph.decimate(0.2,@mweighter)
-#		@heuristic=computeHeuristic(@dgraph)
+#    @sgraph=makeGraph(self,@mweighter,4)
+#    @dgraph=DecimatedGraph.new(@sgraph)
+#    @dgraph.decimate(0.2,@mweighter)
+#    @heuristic=computeHeuristic(@dgraph)
 
 
 

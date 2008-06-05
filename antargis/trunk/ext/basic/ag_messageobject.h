@@ -85,7 +85,12 @@ class AGEXPORT AGEvent
 
   void setVector(const AGVector2 &v);
   AGVector2 getVector() const;
+  
+  bool isClipped() const;
+  void setClipped(bool f);
 
+  bool isMouseEvent() const;
+  
  private:
   AGListener *mCaller;
   AGString mName;
@@ -95,6 +100,8 @@ class AGEXPORT AGEvent
   AGVector2 mVector;
   AGVector2 *mMousePosition;
   AGVector2 *mRelMousePosition;
+  
+  bool mClipped;
 
  protected:
   static SDL_Event NullEvent;
@@ -166,8 +173,6 @@ class AGMessageObject;
 class AGEXPORT AGSignal
 {
  public:
-  //AGSignal();
-  //AGSignal(AGMessageObject *pCaller);
   AGSignal(AGMessageObject *pCaller,const AGString &pName);
 
   virtual ~AGSignal();

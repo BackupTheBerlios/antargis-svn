@@ -34,6 +34,8 @@
 #include "ag_config.h"
 #include "ag_clip.h"
 #include "ag_painter.h"
+#include "ag_algebra.h" // FIXME: remove this ASAP
+
 
 #define FOCUS_BY_SORT
 
@@ -166,7 +168,9 @@ void AGWidget::drawAll(AGPainter &p)
       {
         p.pushMatrix();
 
-        p.transform(getRect());
+        p.clip(getRect());
+        //p.transform(getRect());
+        p.transform(innerToOuter().getMatrix());
 
         if(!mChildrenDrawFirst)
           draw(p);
@@ -187,7 +191,7 @@ void AGWidget::drawAll(AGPainter &p)
   }
 
 void AGWidget::drawChild(AGPainter &p,AGWidget *pWidget)
-  {
+  {/*
     if(mUseClientRect)
       {
         p.pushMatrix();
@@ -195,8 +199,8 @@ void AGWidget::drawChild(AGPainter &p,AGWidget *pWidget)
         pWidget->drawAll(p);
         p.popMatrix();
       }
-    else
-      pWidget->drawAll(p);
+    else*/
+    pWidget->drawAll(p);
   }
 
 AGProjection2D AGWidget::getClientProjection() const
@@ -226,6 +230,7 @@ void AGWidget::setClient(const AGRect2 &pWorld,const AGProjection2D &pProjection
   {
     mClientWorld=pWorld;
     mClientProj=pProjection;
+    assert(isInvertable(mClientProj.getMatrix()));
     mUseClientRect=true;
   }
 
@@ -265,14 +270,21 @@ bool AGWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
   {
     bool retValue;
     AGVector2 old=event->getRelMousePosition();
-    AGVector2 newP;
+    AGVector2 newP=outerToInner().project(old);
+    /*
     if(mUseClientRect)
-      newP=mClientProj.inverse().project(old);
+      newP=mClientProj.inverse().project(old-mRect.getV0()); //FIXME - mRect must influence this, too (????)
     else
       newP=old-getRect().getV0();
+     */
     event->setRelMousePosition(newP);
+    bool wasClipped=event->isClipped();
+    
+    event->setClipped(wasClipped || (!getRect().contains(old)));
 
     retValue=pChild->processEvent(event);
+    
+    event->setClipped(wasClipped);
     event->setRelMousePosition(old);
 
     return retValue;
@@ -321,7 +333,8 @@ bool AGWidget::eventMouseMotion(AGEvent *e)
 
     if(e->isSDLEvent())
       {
-        if(getRect().contains(e->getRelMousePosition()))
+        //cdebug(e->isFocusTaken()<<"::"<<getName());
+        if(getRect().contains(e->getRelMousePosition()) && !e->isClipped())
           {
             if(!mMouseIn)
               {
@@ -639,21 +652,57 @@ AGVector2 AGWidget::getScreenPosition() const
   return getScreenRect().getV0();
 }
 
-
+/**
+ * returns the extends of this widget wrt. to the screen-coordinates
+ */
 AGRect2 AGWidget::getScreenRect() const
 {
+  //return toScreen(getRect());
   AGRect2 r=getRect();
   if(mParent)
-    r+=mParent->getScreenPosition();
+    {
+      return mParent->toScreen(getRect());
+    }
   return r;
 }
 
+AGRect2 AGWidget::toScreen(const AGRect2&p) const
+{
+  AGRect2 r=innerToOuter(p);
+  if(mParent)
+    r=mParent->toScreen(r);
+  return r;
+}
+
+AGVector2 AGWidget::toScreen(const AGVector2&p) const
+{
+  AGVector2 r=innerToOuter(p);
+  if(mParent)
+    r=mParent->toScreen(r);
+  return r;
+}
+
+
+AGRect2 AGWidget::fromScreen(const AGRect2 &p) const
+{
+  AGRect2 r=outerToInner(p);
+  if(mParent)
+    r=mParent->toScreen(r);
+  return r;
+}
+
+
+
 AGVector2 AGWidget::fromScreen(const AGVector2 &p) const
 {
-  if(!mParent)
+  AGVector2 r=outerToInner(p);
+  if(mParent)
+    r=mParent->toScreen(r);
+  return r;
+  /*  if(!mParent)
     return p;
   AGRect2 r(mParent->getScreenRect());
-  return p-r[0];
+  return p-r[0];*/
 }
 
 bool AGWidget::canFocus() const
@@ -1201,3 +1250,51 @@ void AGWidget::setButtonDown(bool value,const AGVector2 &startVector)
     mOldMousePos=startVector;
     mButtonDown=value;
   }
+
+AGProjection2D AGWidget::innerToOuter() const
+{
+  AGRect2 u(0,0,1,1);
+  return AGProjection2D(u,innerToOuter(u));
+}
+AGProjection2D AGWidget::outerToInner() const
+{
+  AGRect2 u(0,0,1,1);
+  return AGProjection2D(u,outerToInner(u));
+}
+
+AGRect2 AGWidget::innerToOuter(const AGRect2 &p) const
+{
+  AGRect2 m=p;
+
+  if(mUseClientRect)
+    m=mClientProj.project(m);
+  return m+getRect().getV0();
+}
+AGVector2 AGWidget::innerToOuter(const AGVector2 &p) const
+{
+  AGVector2 m=p;
+
+  if(mUseClientRect)
+    m=mClientProj.project(m);
+  return m+getRect().getV0();
+}
+AGRect2 AGWidget::outerToInner(const AGRect2 &p) const
+{
+  AGRect2 m=p;
+
+  if(mUseClientRect)
+    {
+      cdebug(mClientProj.getMatrix());
+      m=mClientProj.inverse().project(m);
+    }
+  return m-getRect().getV0();
+}
+AGVector2 AGWidget::outerToInner(const AGVector2 &p) const
+{
+  AGVector2 m=p;
+
+  if(mUseClientRect)
+    m=mClientProj.inverse().project(m);
+  return m-getRect().getV0();
+}
+

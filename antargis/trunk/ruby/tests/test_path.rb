@@ -35,7 +35,7 @@ dg.printInfo
 heuristic=computeHeuristic(dg)
 
 # class MyHeu<HeuristicFunction
-# 	def distance(
+#   def distance(
 # end
 # 
 # heuristic
@@ -53,25 +53,25 @@ $app=AGApplication.new
 
 $i=0
 class MDebug<PathDebugging
-	def debugPath(p,h)
-		$i+=1
-		#ms=AGSurface.new(800,600)
-		t=getScreen
-		$dg.paintNode(t.getRect,t,$startVec,AGColor.new(0xFF,0,0xFF))
-		$dg.paintNode(t.getRect,t,$endVec,AGColor.new(0,0,0xFF))
-		$dg.paint(t.getRect,t,$heuristic)
-		p.paint(t.getRect,t,$dg.width)
-		
-		#t=AGTexture.new(ms)
-		#getScreen.blit(t,ms.getRect,ms.getRect)
-		p=AGPainter.new(getScreen)
-		p.renderText(h.to_s,AGVector2.new(80,0),AGFont.new)
-		p=nil
+  def debugPath(p,h)
+    $i+=1
+    #ms=AGSurface.new(800,600)
+    t=getScreen
+    $dg.paintNode(t.getRect,t,$startVec,AGColor.new(0xFF,0,0xFF))
+    $dg.paintNode(t.getRect,t,$endVec,AGColor.new(0,0,0xFF))
+    $dg.paint(t.getRect,t,$heuristic)
+    p.paint(t.getRect,t,$dg.width)
+    
+    #t=AGTexture.new(ms)
+    #getScreen.blit(t,ms.getRect,ms.getRect)
+    p=AGPainter.new(getScreen)
+    p.renderText(h.to_s,AGVector2.new(80,0),AGFont.new)
+    p=nil
 
 
-		getScreen.flip
-		$app.delay(500)
-	end
+    getScreen.flip
+    $app.delay(500)
+  end
 end
 
 d=MDebug.new

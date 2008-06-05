@@ -180,15 +180,31 @@ public:
   // to prevent this, use this function to "use" them in each frame
   virtual void useTextures(); // when caching
   void useTexturesRecursive(); // when caching
+  
+  
+  
+  
+  // geometry calculation
+  AGRect2 innerToOuter(const AGRect2 &pRect) const;
+  AGVector2 innerToOuter(const AGVector2 &pRect) const;
+  AGRect2 outerToInner(const AGRect2 &pRect) const;
+  AGVector2 outerToInner(const AGVector2 &pRect) const;
 
 
   // clear children
   void clear();
 
   AGRect2 getScreenRect() const;
+  AGRect2 toScreen(const AGRect2&p) const;
+  AGVector2 toScreen(const AGVector2&p) const;
+  AGRect2 fromScreen(const AGRect2 &p) const;
+  AGVector2 fromScreen(const AGVector2 &p) const;
+
+  AGProjection2D innerToOuter() const;
+  AGProjection2D outerToInner() const;
+  
   AGVector2 getScreenPosition() const;
   
-  AGVector2 fromScreen(const AGVector2 &p) const;
 
   // focus
 
@@ -237,6 +253,8 @@ public:
   virtual bool eventMouseMotionClipped(AGEvent *pEvent,const AGVector2 &pPosition);
 
   void addChildRef(AGWidget *pWidget);
+ 
+  
 protected:
   virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
 

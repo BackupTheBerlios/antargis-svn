@@ -29,6 +29,7 @@ SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &e):mCaller(pCaller),mName(pName),mEvent(e),
   mMousePosition(0),mRelMousePosition(0)
   {
+    mClipped=false;
   }
 AGEvent::~AGEvent()
   {
@@ -37,6 +38,22 @@ AGEvent::~AGEvent()
     if(mRelMousePosition)
       delete mRelMousePosition;
   }
+
+bool AGEvent::isMouseEvent() const
+{
+  return (mEvent.type==SDL_MOUSEMOTION||mEvent.type==SDL_MOUSEBUTTONUP||mEvent.type==SDL_MOUSEBUTTONDOWN);
+}
+
+
+bool AGEvent::isClipped() const
+{
+  return mClipped; 
+}
+void AGEvent::setClipped(bool f)
+  {
+    mClipped=f;
+  }
+
 
 
 void AGEvent::setVector(const AGVector2 &v)

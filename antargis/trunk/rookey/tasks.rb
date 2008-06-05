@@ -110,7 +110,7 @@ module Rookey
     linker=Rookey::Compiler.new(config)
     
     target=linker.dllName(name)
-    
+    #pp target
     desc "Link DLL #{name}"
     task target=>files do |t|
       linker.linkDLL(t)

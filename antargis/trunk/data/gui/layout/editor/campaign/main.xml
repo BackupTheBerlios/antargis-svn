@@ -5,7 +5,7 @@
   <rowsize row="0" fixed="50"/>
   
   <cell col="0" row="0">
-    <toolBar>
+    <toolBar name="toolbar">
          <toolButton text="Save" name="save" caption="muh" caption-image="gui/save.png"/>
          <toolButton text="Load" name="load" caption="muh" caption-image="gui/load.png"/>
     </toolBar>
@@ -59,8 +59,8 @@
   </table>
   </cell>
   </table>
-  
+  <!--
   <appearEffect name="showEdit" table="bigTable" row="1" size="40" duration="0.2"/>
-  
+-->  
 </dragEnvironment>
 </layout>

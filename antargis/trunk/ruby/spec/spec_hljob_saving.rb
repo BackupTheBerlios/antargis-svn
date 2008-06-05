@@ -46,12 +46,12 @@ describe "Saving and loading of" do
     checkRowenRest
     #advance
     lambda {
-	    @app.load
-	    dialog=widget("LoadDialog")
-	    files=dialog.getChild("Files")
-	    filename=files.getValues.keys.select{|f|f=~/#{file}/}[0]
-	    files.selectItem(filename)
-	    click(dialog.getChild("ok").getScreenRect.getMiddle)
+      @app.load
+      dialog=widget("LoadDialog")
+      files=dialog.getChild("Files")
+      filename=files.getValues.keys.select{|f|f=~/#{file}/}[0]
+      files.selectItem(filename)
+      click(dialog.getChild("ok").getScreenRect.getMiddle)
     }.should_not cross(AntEntity,:newMoveJob) #AntNewHLJob,:check)
     checkRowenRest
   end

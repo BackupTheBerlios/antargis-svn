@@ -63,7 +63,7 @@ char *AGGLTexture::dmaBuffer=0;
 
 AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(false),mRectTex(false),mTarget(GL_TEXTURE_2D)
   {
-    cdebug("HUPE");
+    //cdebug("HUPE");
     initDMABuffer();
     assertGL;
     getSurfaceManager()->registerMe(this);
@@ -73,10 +73,10 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
     bool inited=false;
     mTarget=GL_TEXTURE_2D;
 
-    cdebug(w<<":"<<h);
+    //cdebug(w<<":"<<h);
     if(!(isPowerOf2(w) && isPowerOf2(h)))
       {
-        cdebug("not power of 2");
+        //cdebug("not power of 2");
         if(GLEE_ARB_texture_rectangle && false)
           {
             mTarget=GL_TEXTURE_RECTANGLE_ARB;
@@ -86,9 +86,9 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
             h=w=nextPowerOf2(std::max(w,h));
           }
       }
-    cdebug("1");
+    //cdebug("1");
     glEnable(mTarget);
-    cdebug("2");
+    //cdebug("2");
     glBindTexture( mTarget,mID);
     assertGL;
 
@@ -104,6 +104,7 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
     cdebug("3");
     if(buffer)
       memset(buffer,0,bufSize);
+    /*
     cdebug("5");
     cdebug(mTarget);
     cdebug(format);
@@ -114,17 +115,18 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
     cdebug("w:"<<w<<" h:"<<h);
     cdebug("texmem:"<<gUsedTexMemory);
     cdebug((void*)buffer);
+    */
     assertGL;
     glTexImage2D(mTarget, 0, format, w, h, 0, GL_RGBA,
         GL_UNSIGNED_BYTE, buffer);
     assertGL;
-    cdebug("6");
+    //cdebug("6");
 
     if(buffer)
       delete [] buffer;
 
-    cdebug("7");
-    cdebug("W:"<<w<<" h:"<<h);
+    //cdebug("7");
+    //cdebug("W:"<<w<<" h:"<<h);
     assertGL;
     gUsedTexMemory+=w*h*4;
 

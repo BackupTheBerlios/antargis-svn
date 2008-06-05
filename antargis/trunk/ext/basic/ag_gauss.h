@@ -23,6 +23,7 @@ bool gauss(TMatrix &a,TMatrix &b,int size)
             for(k=1;k+c<size;k++)
               if(fabs(b.get(c,c+k))>0)
                 {
+                  //cdebug("SWAP:"<<c<<" and "<<c+k);
                   // swap rows
                   b.swapRows(c,c+k);
                   a.swapRows(c,c+k);
@@ -39,6 +40,7 @@ bool gauss(TMatrix &a,TMatrix &b,int size)
                 float f=-b.get(c,c)/b.get(c,r);
                 for(int i=0;i<size;i++)
                   {
+                    //cdebug("modrows:("<<r<<")=("<<c<<")+("<<r<<")*"<<f);
                     // modify row
                     a.set(i,r,a.get(i,c)+a.get(i,r)*f);
                     b.set(i,r,b.get(i,c)+b.get(i,r)*f);
@@ -49,28 +51,41 @@ bool gauss(TMatrix &a,TMatrix &b,int size)
               }
           }
       }
-    // cdebug("A:\n"<<a.toString());
-    // cdebug("B:\n"<<b.toString());
+    //cdebug("A:\n"<<a.toString());
+    //cdebug("B:\n"<<b.toString());
 
     // upper-right triangle
     for(int c=size-1;c>0;c--) // cols
       {
         for(int r=0;r<c;r++) // rows
           {
+            // (c,r) is to be set to zero
             if(fabs(b.get(c,r))>0.0001)
               {
-                float f=-b.get(c,r+1)/b.get(c,r);
+                // search a line >r, that is !=0
+                int r2;
+                for(r2=r+1;r2<size;r2++)
+                  if(b.get(c,r2)>0.0001)
+                    break;
+                if(r2>=size)
+                  throw GeometryException("Matrix is not invertable - no cell!=0 found in upper-right triangle.");
+                
+                float f=-b.get(c,r2)/b.get(c,r);
+                if(f==0)
+                  throw GeometryException("Matrix is not invertable - f=0");
+
+                //cdebug("modifyrow:("<<r<<")=("<<r+1<<")+("<<r<<")*"<<f);
                 for(int i=0;i<size;i++)
                   {
                     // modify row
-                    a.set(i,r,a.get(i,r+1)+a.get(i,r)*f);
-                    b.set(i,r,b.get(i,r+1)+b.get(i,r)*f);
+                    a.set(i,r,a.get(i,r2)+a.get(i,r)*f);
+                    b.set(i,r,b.get(i,r2)+b.get(i,r)*f);
                   }
               }
           }
       }
-    // cdebug("A:\n"<<a.toString());
-    // cdebug("B:\n"<<b.toString());
+    //cdebug("A:\n"<<a.toString());
+    //cdebug("B:\n"<<b.toString());
 
     // norming
 
@@ -84,8 +99,8 @@ bool gauss(TMatrix &a,TMatrix &b,int size)
               b.set(c,r,b.get(c,r)/v);
             }
       }
-    // cdebug("A:\n"<<a.toString());
-    // cdebug("B:\n"<<b.toString());
+    //cdebug("A:\n"<<a.toString());
+    //cdebug("B:\n"<<b.toString());
     return true; // everythin ok
   }
 

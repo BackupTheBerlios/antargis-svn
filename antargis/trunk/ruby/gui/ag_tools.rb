@@ -36,140 +36,140 @@ AGRect=AGRect2
 # and also include this module into each class in which you want to use this :-)
 # this is not needed if you're using an AGWidget or AGApplication object
 module AGHandler
-	# clear all handlers
-	def clearHandlers
-		@handlers={}
-	end
-	# add Event Handler - this function should go into AGRubyApp
-	def addHandler(object,event,func)
-		if not defined? @handlers then
-			@handlers={}
-		end
-		if object.nil? then
-			raise "AGHandler.addHandler: object does not exist!"
-		else
-			object.send(event).connect(self)
-			hname=makeHandlerName(object,event)
-			#hname=object.getName+":"+event.to_s
-			@handlers[hname]||=[]
-			@handlers[hname].push(func)
-		end
-	end
-	# event dispatcher
-	def signal(e)
-		@handlers||={}
-		mcaller=e.getCaller
-		evName=makeHandlerName(mcaller,e.getName)
-		#callerName=e.getCaller.getName
-		#evName=callerName+":"+e.getName
-		#puts "#{callerName} #{evName}"
-		if @handlers.has_key?(evName) then
-			value=false
-			@handlers[evName].each{|handler|
-				m=method(handler)
-				if m.arity==1 || m.arity==-1
-					# ok
-					if self.send(handler,e)
-						value=true
-					end
-				elsif m.arity==0
-					if self.send(handler)
-						value=true
-					end
-				else
-					puts "AR:",m.arity
-					raise "SLOT is invalid! event:"+evName+" slotname:"+handler.to_s+" in class:"+(self.class).to_s
-				end
-			}
-			return value
-		end
-		return super(e)
-	end
+  # clear all handlers
+  def clearHandlers
+    @handlers={}
+  end
+  # add Event Handler - this function should go into AGRubyApp
+  def addHandler(object,event,func)
+    if not defined? @handlers then
+      @handlers={}
+    end
+    if object.nil? then
+      raise "AGHandler.addHandler: object does not exist!"
+    else
+      object.send(event).connect(self)
+      hname=makeHandlerName(object,event)
+      #hname=object.getName+":"+event.to_s
+      @handlers[hname]||=[]
+      @handlers[hname].push(func)
+    end
+  end
+  # event dispatcher
+  def signal(e)
+    @handlers||={}
+    mcaller=e.getCaller
+    evName=makeHandlerName(mcaller,e.getName)
+    #callerName=e.getCaller.getName
+    #evName=callerName+":"+e.getName
+    #puts "#{callerName} #{evName}"
+    if @handlers.has_key?(evName) then
+      value=false
+      @handlers[evName].each{|handler|
+        m=method(handler)
+        if m.arity==1 || m.arity==-1
+          # ok
+          if self.send(handler,e)
+            value=true
+          end
+        elsif m.arity==0
+          if self.send(handler)
+            value=true
+          end
+        else
+          puts "AR:",m.arity
+          raise "SLOT is invalid! event:"+evName+" slotname:"+handler.to_s+" in class:"+(self.class).to_s
+        end
+      }
+      return value
+    end
+    return super(e)
+  end
 
-	private
-	def makeHandlerName(object,event)
-		#if object.respond_to?(:getName)
-		#	return object.getName+":"+event.to_s
-		#else
-			return object.object_id.to_s+":"+event.to_s
-		#end
-	end
+  private
+  def makeHandlerName(object,event)
+    #if object.respond_to?(:getName)
+    #  return object.getName+":"+event.to_s
+    #else
+      return object.object_id.to_s+":"+event.to_s
+    #end
+  end
 end
 
 # this function adds a signal to the current object
 # you can call this with signalName(e) afterwards
 def addSignal(name)
-	eval <<EOT
+  eval <<EOT
 class #{self.class}
-	def #{name}(e=nil)
-		if e
-			e.setCaller(self)
-			return @#{name}.signal(e)
-		else
-			return @#{name}
-		end
-	end
+  def #{name}(e=nil)
+    if e
+      e.setCaller(self)
+      return @#{name}.signal(e)
+    else
+      return @#{name}
+    end
+  end
 end
 EOT
-	eval("@#{name}=AGSignal.new(self,'#{name}')\n")
+  eval("@#{name}=AGSignal.new(self,'#{name}')\n")
 end
 
 module Antargis
-	class AGApplication
-		include AGHandler
-	end
-	class AGWidget
-		include AGHandler
-	end
+  class AGApplication
+    include AGHandler
+  end
+  class AGWidget
+    include AGHandler
+  end
 end
 
 class Array
-	# extend Array-class with a shuffle function
-	def shuffle
-		sort{0.5 <=> rand}
-	end
+  # extend Array-class with a shuffle function
+  def shuffle
+    sort{0.5 <=> rand}
+  end
 end
 # just in case it isn't defined
 class AGString
 end
 # class String
-# 	alias oldadd +
-# 	def +(p)
-# 		#puts "puh"
-# 		if p.is_a?(AGString)
-# 			p=p.to_s
-# 		end
-# 		oldadd(p)
-# 	end
+#   alias oldadd +
+#   def +(p)
+#     #puts "puh"
+#     if p.is_a?(AGString)
+#       p=p.to_s
+#     end
+#     oldadd(p)
+#   end
 # end
 
 module Antargis
-	class AGVector3
-		def x=(p)
-			setX(p)
-		end
-		def y=(p)
-			setY(p)
-		end
-		def z=(p)
-			setZ(p)
-		end
-	end
-	class AGVector2
-		def x=(p)
-			setX(p)
-		end
-		def y=(p)
-			setY(p)
-		end
-		def _dump(depth)
-			[x,y].pack("gg")
-		end
-		def AGVector2._load(s)
-			a,b=s.unpack("gg")
-			AGVector2.new(a,b)
-		end
-	end
+  class AGVector3
+    def x=(p)
+      setX(p)
+    end
+    def y=(p)
+      setY(p)
+    end
+    def z=(p)
+      setZ(p)
+    end
+  end
+  class AGVector2
+    def x=(p)
+      setX(p)
+    end
+    def y=(p)
+      setY(p)
+    end
+    def _dump(depth)
+      [x,y].pack("gg")
+    end
+    def AGVector2._load(s)
+      a,b=s.unpack("gg")
+      AGVector2.new(a,b)
+    end
+  end
   class AGRubyMessageObject<AGMessageObject
     def initialize()
       super

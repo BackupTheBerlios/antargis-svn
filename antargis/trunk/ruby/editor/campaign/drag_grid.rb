@@ -101,6 +101,7 @@ module Antargis
       getChildren.map{|child|[child]+child.getAllDescendants}.flatten
     end
     def moveToContext(to)
+      
       o=getScreenRect
       p=getParent
       p.removeChild(self)

@@ -13,13 +13,13 @@ b=AGVector2.new(1,1)
 c=AGVector2.new(2,2)
 
 values=[
-	[a,b,3],
-	[b,c,4],
-	[c,a,5]
+  [a,b,3],
+  [b,c,4],
+  [c,a,5]
 ]
 
 values.each{|a|
-	f.store(a[0],a[1],a[2])
+  f.store(a[0],a[1],a[2])
 }
 
 stream=BinaryStringOut.new
@@ -32,7 +32,7 @@ stream=BinaryStringIn.new(str)
 f2=StoredHeuristicFunction.new(stream)
 
 values.each{|a|
-	raise "error within #{a}" unless f2.get(a[0],a[1])==a[2] 
+  raise "error within #{a}" unless f2.get(a[0],a[1])==a[2] 
 }
 
 puts "ok"
