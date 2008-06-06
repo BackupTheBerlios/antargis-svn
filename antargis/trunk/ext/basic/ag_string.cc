@@ -223,3 +223,8 @@ bool AGString::matches(const std::string &regex) const
 {
   return rubyMatchRegex(*this,regex);
 }
+
+AGString AGString::last(size_t n) const
+{
+  
+}

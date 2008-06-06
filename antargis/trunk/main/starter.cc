@@ -3,20 +3,70 @@
 #include <ruby.h>
 #include <iostream>
 
-//extern "C" void Init_antargis();
+#include <ag_rtools.h>
+#include <ag_string.h>
 
-int main(int argc,char*argv[])
+std::string toLower(const std::string &s)
+  {
+    std::string a;
+    for(size_t i=0;i<s.length();i++)
+      {
+        if(s[i]>='A' && s[i]<='Z')
+          a+=s[i]-'A'+'a';
+        else
+          a+=s[i];
+      }
+    return a;
+  }
+
+bool isWindows(const std::string &str)
+  {
+    int s=std::max((int)str.length()-5,0);
+    int l=std::max((int)str.length()-s,0);
+    std::string e=str.substr(s,l);
+
+    return(toLower(e)==".exe");
+  }
+
+std::string truncReverseUntil(const std::string &object,const std::string &search)
+  {
+    size_t r=object.rfind(search);
+    if(r==object.npos)
+      return "";
+
+    return object.substr(0,r);
+  }
+
+int main(int _argc,char*_argv[])
   {
     ruby_init();
-    //rb_load_file("antargis");
-    std::cout<<"Init_antargis out of starter..."<<std::endl;
-    //Init_antargis();
-    std::cout<<"Init_antargis out of starter-ready"<<std::endl;
-    std::cout<<"Init_antargis out of starter-ready"<<std::endl;
+
+
+    int argc=_argc;
+    char**argv=_argv;
+
+    if(argc==1)
+      {
+        argv=new char*[2];
+        argv[0]=_argv[0];
+
+        std::string s=argv[0],sep;
+
+        if(isWindows(s))
+          sep="\\";
+        else
+          sep="/";
+        s=truncReverseUntil(s,sep);
+
+        argv[1]=new char[s.length()+100];
+        strcpy(argv[1],(s+sep+"antargis").c_str());
+        argc=2;
+      }
+
+
     ruby_options(argc,argv);
-    std::cout<<"AAA"<<std::endl;
-    //ruby_script("sdl_starter");
-    std::cout<<"BBB"<<std::endl;
+    rb_gv_set("antargisStarterLoaded",Qtrue);
+
     ruby_run();
     std::cout<<"CCC"<<std::endl;
     return 0;

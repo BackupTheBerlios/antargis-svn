@@ -108,3 +108,30 @@ describe "AGScrollingWidget" do
     end
   end
 end
+
+describe "Clipping of AGWidget" do
+  include GuiTest
+  before(:each) do
+    @app=makeTestAppClass(AGApplication).new
+    @m=AGWidget.new(nil,AGRect2.new(10,10,20,20))
+    @app.setMainWidget(@m)
+    @c=AGWidget.new(@m,AGRect2.new(-10,-10,20,20))
+    @m.addChild(@c)
+  end    
+  def self.checkHovering(pos,boolM,boolC)
+    s0=(boolM ? "" : "not ")
+    s1=(boolC ? "" : "not ")
+    it "should #{s0}hover m at #{pos}" do
+      mouseMotion(pos)
+      @m.hovered.should == boolM
+    end
+    it "should #{s0}hover c at #{pos}" do
+      mouseMotion(pos)
+      @c.hovered.should == boolC
+    end
+  end
+  checkHovering(AGVector2.new(5,5),false,false)
+  checkHovering(AGVector2.new(10,10),true,true)
+  checkHovering(AGVector2.new(15,15),true,true)
+  checkHovering(AGVector2.new(30,30),true,false)
+end

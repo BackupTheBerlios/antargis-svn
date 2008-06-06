@@ -39,6 +39,9 @@ std::string rubyHashOld(const std::string &p)
 }
 
 
+
+
+
 bool rubyMatchRegex(const std::string &p,const std::string &pregex)
   {
     VALUE rp=rb_str_new(p.c_str(),p.length());

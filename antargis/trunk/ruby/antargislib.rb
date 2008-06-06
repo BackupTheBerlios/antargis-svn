@@ -80,6 +80,17 @@ module AntMyEventHandler
 end
 
 begin
+  if $antargisStarterLoaded!=true
+    puts "Please run wih ./starter antargis" 
+    exit
+  end
+rescue
+  puts "Please run wih ./starter antargis"
+  exit
+end
+
+
+begin
   include Antargis
   puts "Antargis-module included"
 rescue

@@ -39,6 +39,8 @@ public:
   std::vector<AGString> split(const AGString &p) const;
 
   AGString replace(const AGString &what, const AGString &by) const;
+  
+  AGString last(size_t n) const;
 
   AGString operator+(const AGString &s) const;
   AGString operator+(const char *s) const;
