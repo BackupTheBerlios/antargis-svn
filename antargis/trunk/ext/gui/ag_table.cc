@@ -23,7 +23,7 @@
 
 AGTable::AGTable(AGWidget *pWidget,const AGRect2 &pRect):
   AGWidget(pWidget,pRect),
-  w(0),h(0),xw(0),yw(0),mInserted(false)
+  w(0),h(0),xw(0),yw(0),mInserted(false),mRoundPositions(true)
   {
   }
 

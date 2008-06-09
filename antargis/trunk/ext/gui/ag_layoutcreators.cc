@@ -325,6 +325,14 @@ public:
       AGSurface s(0,0);
       if(filename.length())
         s=AGSurface::load(filename);
+      else if(pNode.get("color").length()>0)
+        {
+          AGSurface f(1,1);
+          f.putPixel(0,0,AGColor(pNode.get("color")));
+          s=f;
+        }
+      
+      
 
       AGRect2 r=pRect;
       if(pNode.get("x").length())
@@ -335,12 +343,15 @@ public:
 #warning "add subsurfaces"
 
 
-      AGWidget *w;
+      AGImage *w;
+      
 
       if(pNode.get("tile")=="true")
         w=new AGImage(pParent,r,s,true);
       else
         w=new AGImage(pParent,r,s,false);
+      
+      w->setScale(pNode.get("scale")=="true");
 
       setResult(w);
     }
@@ -359,12 +370,16 @@ public:
       CTRACE;
       AGString border=pNode.get("border");
       size_t width=pNode.get("width").toInt();
+      
+      size_t height=0;
+      if(pNode.get("height").length()>0)
+        height=pNode.get("height").toInt();
 
       AGFrame *w;
       if(border.length())
         w=new AGFrame(pParent,pRect,AGBorder(border));
       else
-        w=new AGFrame(pParent,pRect,width);
+        w=new AGFrame(pParent,pRect,width,height);
 
       setResult(w);
       if(pNode.get("background").length())

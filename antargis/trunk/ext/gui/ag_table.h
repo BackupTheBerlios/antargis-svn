@@ -70,6 +70,7 @@ class AGEXPORT AGTable:public AGWidget
   std::vector<AGWidget*> children;
 
   bool mInserted;
+  bool mRoundPositions;
 };
 
 #endif

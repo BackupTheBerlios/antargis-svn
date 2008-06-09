@@ -3,25 +3,6 @@
 * why is the story-telling dialog taking so much time ??
 * why is the story-telling dialog eating up clicks ?
 * improve settings-dialog!
-* check level-editor
-** make wish-list
-
-* move single entities with path-finder, too?
-
-* docs
-* configure
-* "contrib"
- * autopackage
- * debian
- * antargis.iss
-
-
-* check if reachable before fetching !!! (in house) - or even better use heuristic for estimating distance in getNear(...)
-* fix jobs some more
-* what's wrong with pathfinding-test ???
-
-
-==========
 
 
 
@@ -39,7 +20,6 @@ ARTS
 [Arts - Graphics - 3D]
 ------------------------------------------------------
 [H] modify bakery a little (http://antargis.berlios.de/phpBB2/viewtopic.php?p=359#359)
-[H] do bow animation
 
 [H] oil tower
 [M] team color
@@ -192,7 +172,6 @@ None known.
 
 [Editor]
 ------------------------------------------------------
-[H] loading doesn't remove old entities
 [H] remove load script when in editor
 [H] add painting by dragging
 [H] plain other terrain type
@@ -207,9 +186,3 @@ None known.
 [L] installer for linux. maybe some autopackage or .debs?
 
 
-DOCUMENTATION
-======================================================
-[H] Architecture
-[H] comments in ruby-scripts
-[H] comments in game-engine
-[H] comments in 3d-engine

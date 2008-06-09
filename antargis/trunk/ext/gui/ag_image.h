@@ -41,10 +41,12 @@ class AGEXPORT AGImage:public AGWidget
   void useTextures();
 
   void setCenter(bool c);
+  void setScale(bool s);
 
  private:
   AGTexture mTexture;
   bool mTile;
+  bool mScale;
   bool mCenter;
 };
 

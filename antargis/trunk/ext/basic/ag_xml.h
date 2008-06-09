@@ -32,6 +32,12 @@
 
 #include "ag_debug.h"
 
+struct XMLParseError
+  {
+    XMLParseError(const std::string &p):problem(p){}
+    std::string problem;
+  };
+
 class AGEXPORT Node
   {
   public:
@@ -136,12 +142,12 @@ class AGEXPORT Parser
 
     bool first(const AGString &p) const;
     AGString getFirst(size_t i) const;
-    void eat(size_t i);
+    void eat(size_t i) throw (XMLParseError);
     void push();
     void pop();
     void discard();
     AGString getTil(const AGString &p) const;
-    void eatBlanks();
+    void eatBlanks() throw (XMLParseError);
   };
 
   struct NodeStartInfo

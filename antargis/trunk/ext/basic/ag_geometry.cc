@@ -995,31 +995,12 @@ std::vector<AGLine2> AGTriangle2::getLines() const
 bool AGTriangle2::contains(const AGVector2 &pp) const
 {
   std::vector<AGVector2> l=getNormals(); // BEWARE: dont' change the order in getNormals!!!
-  cdebug(pp);
-  cdebug(l[0]);
-  cdebug(l[1]);
-  cdebug(l[2]);
-
-  cdebug(p[0]);
-  cdebug(p[1]);
-  cdebug(p[2]);
-
-  cdebug((pp-p[2])*l[0]);
-  cdebug((pp-p[0])*l[1]);
-  cdebug((pp-p[1])*l[2]);
 
 
   if(AGsign((pp-p[0])*l[0])==AGsign((p[2]-p[0])*l[0]))
     if(AGsign((pp-p[0])*l[1])==AGsign((p[1]-p[0])*l[1]))
       if(AGsign((pp-p[1])*l[2])==AGsign((p[0]-p[1])*l[2]))
         return true;
-
-  /*
-  if(AGsign((pp-p[2])*l[0])==AGsign((p[2]-p[2])*l[0]))
-    if(AGsign((pp-p[0])*l[1])==AGsign((p[0]-p[0])*l[1]))
-      if(AGsign((pp-p[1])*l[2])==AGsign((p[1]-p[1])*l[2]))
-        return true;
-   */
   return false;
 }
 
@@ -1432,6 +1413,13 @@ AGRect2 AGRect2::shrink(float f) const
   AGVector2 d(f,f);
   return AGRect2(v0+d,v1-d);
 }
+
+AGRect2 AGRect2::shrink(float w,float h) const
+{
+  AGVector2 d(w,h);
+  return AGRect2(v0+d,v1-d);
+}
+
 
 AGRect2 AGRect2::shrinkToTopLeft(float w,float h) const
 {

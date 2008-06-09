@@ -33,7 +33,6 @@ bool isPowerOf2(size_t value)
   {
     while(value!=0)
       {
-        cdebug(value);
         if(value&1)
           {
             if((value^1))

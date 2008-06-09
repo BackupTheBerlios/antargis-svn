@@ -118,7 +118,7 @@ class Effect<AGWidget
     @registered=false
     @running=false
     @duration=node["duration"].to_f
-    run
+    #run
   end
   def draw(p)
     if @registered==false
@@ -165,6 +165,20 @@ class AppearEffect<Effect
   end
 end
 
+class HideEffect<Effect
+  def initialize(p,r,node)
+    super
+    @name=node["name"]
+    @target=node["table"]
+    @row=node["row"].to_i
+    @size=50
+    
+  end
+  def step(amount)
+    table=getApp.getMainWidget.getChild(@target)
+    table.modifyRow(@row,(1-amount)*@size)
+  end
+end
 
 class AGHoverWidget<AGWidget
   attr_accessor :hoverBorder
@@ -228,7 +242,9 @@ class DragTrash<DragTarget
 end
 
 module DragObject
-  
+  def canFocus
+    false
+  end
 end
 
 class DragBox<AGHoverWidget
@@ -267,7 +283,6 @@ class DragBox<AGHoverWidget
   end
   def eventDragBy(e,v)
     super
-    p "DRAGGIGN #{v}"
     if @dragging
       setRect(getRect+v)
       return true
@@ -369,6 +384,9 @@ end
 
 class DragLine<AGWidget
   include Arrows
+  
+  attr_accessor :selected, :text
+  
   def initialize(p,r,startObject)
     super(p,r)
     @startObject=startObject
@@ -377,6 +395,7 @@ class DragLine<AGWidget
     @@font||=AGFont.new("FreeSans.ttf",14)
     @@font.setColor(AGColor.new(0,0,0))
     @hovered=false
+    @text=AGStringUtf8.new("none")
   end
     
   def getPos(obj)
@@ -390,9 +409,7 @@ class DragLine<AGWidget
     else
       endP=@pos
     end
-    #endP=@pos unless @endObject
-    #endP=getPos(@endObject) if @endObject
-    
+   
     if @endObject and @startObject
       if @moving==false and (@endObject.visible==false or @startObject.visible==false)
         hide
@@ -402,11 +419,10 @@ class DragLine<AGWidget
     white=AGColor.new(0xFF,0xFF,0x88) if @hovered
     black=AGColor.new(0,0,0)
     p.setLineWidth(1)
-    p "---",startP,endP,"_--"
     p.drawArrow(startP,endP,5,white,black)
     middle=(endP+startP)*0.5
     
-    p.renderText(AGStringUtf8.new("MUH"),middle,@@font)
+    p.renderText(AGStringUtf8.new(@text),middle,@@font)
   end
   
   def eventDragBy(e,v)
@@ -438,6 +454,7 @@ class DragLine<AGWidget
   end
   def eventMouseButtonDown(e)
     r=super
+    
     if @endObject.nil?
       @moving=true
       @pos=e.getMousePosition+(getRect.getV0-getScreenRect.getV0)
@@ -445,8 +462,10 @@ class DragLine<AGWidget
       if @hovered
         @endObject=nil
         @moving=true
+        r=true
       end
     end    
+    getDragGrid.select(self) if getDragGrid
     r
   end
   def eventMouseButtonUp(e)
@@ -562,6 +581,10 @@ class DragGrid<AGWidgetWithConfig
       @selected.selected=true
       checkEdit    
       @edit.setText(@selected.text)
+      @edit.gainFocus
+      getApp.getEffect("showEdit").run
+    else
+      getApp.getEffect("hideEdit").run
     end
   end
 
@@ -572,6 +595,10 @@ class DragGrid<AGWidgetWithConfig
   def draw(p)
     p.fillRect(getRect,@bgColor)
     @lines.each{|l|p.drawLine(l.getV0,l.getV1,@borderColor)}
+  end
+  
+  def eventMouseButtonDown(e)
+    return super
   end
       
 private
@@ -636,8 +663,6 @@ class DragSource<AGHoverWidget
       o.setName("DRAG")
       o.setButtonDown(true,e.getMousePosition)
       o.startDragging
-      #letChildProcess(o,e)
-      #o.eventMouseButtonDown(e)
       return true
     end
     
@@ -659,7 +684,7 @@ class DragSource<AGHoverWidget
 end
 
 
-[DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,AppearEffect].each{|c|standardLayoutCreator(c)}
+[DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,AppearEffect,HideEffect].each{|c|standardLayoutCreator(c)}
 
 class RubySignal
   def initialize(name)
@@ -703,8 +728,6 @@ class CampaignEditorApp<AGApplication
       @grid=layout.getChild("dragGrid")
       addHandler(env,:sigClick,:eventDeselect)
     end
-    
-    
   end
   def eventDeselect
     @grid.select(nil) if @grid
@@ -713,6 +736,8 @@ class CampaignEditorApp<AGApplication
     sigFrame(t)
     super
   end
-  
+  def getEffect(name)
+    @layout.getChild(name)
+  end
 end
 

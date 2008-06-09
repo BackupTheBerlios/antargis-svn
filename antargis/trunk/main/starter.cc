@@ -59,7 +59,7 @@ int main(int _argc,char*_argv[])
         s=truncReverseUntil(s,sep);
 
         argv[1]=new char[s.length()+100];
-        strcpy(argv[1],(s+sep+"antargis").c_str());
+        strcpy(argv[1],(s+sep+"antargisStarter.rb").c_str());
         argc=2;
       }
 

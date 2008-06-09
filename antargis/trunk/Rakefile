@@ -17,7 +17,7 @@ inits=[
 lib=Rookey::ruby_ext("antargis",Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]+Dir["ext/*/*.h"]+Dir["ext/*/templates.i"],inits)
 
 ts=Rookey::compile(Dir["main/starter.cc"])
-main=Rookey::link_exe("starter",ts)
+main=Rookey::link_exe("antargis",ts)
 
 
 task :default=>[lib,main] do
@@ -29,7 +29,7 @@ alias :oldSystem :system
 def system(cmd)
   #puts Dir.pwd
   if cmd=~/ruby .*/
-    cmd=cmd.gsub(/^ruby/,"./starter")
+    cmd=cmd.gsub(/^ruby/,"./antargis")
   end
   #puts cmd
   oldSystem(cmd)
@@ -55,7 +55,7 @@ end
 
 
 namespace :spec do
-  spec_cmd = (RUBY_PLATFORM =~ /java/) ? "jruby -S spec" : "./starter /usr/bin/spec"
+  spec_cmd = (RUBY_PLATFORM =~ /java/) ? "jruby -S spec" : "./antargis /usr/bin/spec"
   task :showall do
     puts Dir["ruby/**/spec_*.rb"].select{|f|not f=~/spec_helper.rb/}.join("\n")
   end

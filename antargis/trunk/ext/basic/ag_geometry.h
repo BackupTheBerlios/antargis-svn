@@ -467,6 +467,7 @@ class AGEXPORT AGRect2
     AGVector2 getMiddle() const;
 
     AGRect2 shrink(float f) const;
+    AGRect2 shrink(float w,float h) const;
     AGRect2 shrinkToTopLeft(float w,float h) const;
     AGRect2 grow(float f) const;
 

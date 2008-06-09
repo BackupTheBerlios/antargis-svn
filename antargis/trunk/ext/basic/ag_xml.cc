@@ -451,11 +451,13 @@ AGString Parser::Data::getFirst(size_t i) const
   return os.str();
 }
 
-void Parser::Data::eat(size_t i)
+void Parser::Data::eat(size_t i) throw (XMLParseError)
   {
     STACKTRACE;
     if(pos+i>s.length())
-      throw int();
+      {
+        throw XMLParseError("in Parse::Data::eat - no data left");
+      }
     for(size_t j=0;j<i;j++)
       if(s[pos+j]=='\n')
         line++;
@@ -484,13 +486,19 @@ void Parser::Data::discard()
     linestack.pop_back();
   }
 
-void Parser::Data::eatBlanks()
+void Parser::Data::eatBlanks() throw (XMLParseError)
   {
     AGString f=getFirst(1);
 
     while(f==" " || f=="\t" || f=="\n")
       {
-        eat(1);
+        try{
+          eat(1);
+        }
+        catch(XMLParseError)
+          {
+            throw XMLParseError("Tried to eat blanks, but data was left.");
+          }
         f=getFirst(1);
       }
 

@@ -51,7 +51,7 @@
           <edit name="textEdit"/>
         </cell>
         <cell col="1" row="0">
-          <button name="weiter"/>
+          <button name="weiter" caption-image="data/gui/options.png"/>
         </cell>
       </table>
     </cell>
@@ -59,8 +59,36 @@
   </table>
   </cell>
   </table>
-  <!--
   <appearEffect name="showEdit" table="bigTable" row="1" size="40" duration="0.2"/>
--->  
+  <hideEffect name="hideEdit" table="bigTable" row="1" size="40" duration="0.2"/>
 </dragEnvironment>
+   <image filename="" tile="true" color="#00000099"/>
+
+  <frame width="150" height="70">
+    <frame border="button.border.normal">
+      <image filename="" tile="true" color="#000000FF"/>
+      <table rows="2" cols="1">
+        <rowsize row="0" relative="3"/>
+        <cell col="0" row="0">
+          <frame width="20">
+            <image filename="data/gui/map1.png" scale="true"/>
+          </frame>
+        </cell>
+        <cell col="0" row="1">
+          <table rows="1" cols="3">
+            <colsize col="1" relative="8"/>
+            <cell col="1" row="0">
+              <edit text="caption"/>
+            </cell>
+            <cell col="0" row="0">
+              <button caption="Back"/>
+            </cell>
+            <cell col="2" row="0">
+              <button caption="Next"/>
+            </cell>
+          </table>
+        </cell>
+      </table>
+    
+  </frame>
 </layout>

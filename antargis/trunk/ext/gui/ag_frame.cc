@@ -2,15 +2,15 @@
 #include "ag_screen.h"
 #include "ag_debug.h"
 
-AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t pWidth):AGWidget(pParent,pRect),
-mWidth(pWidth),mBorder(0),mTexture((int)width(),(int)height())
+AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t pWidth,size_t pWidthH):AGWidget(pParent,pRect),
+mWidth(pWidth),mBorder(0),mWidthH(pWidthH==0?pWidth:pWidthH),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;
   mUseTexture=true;
   mBg=0;
 }
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,const AGBorder &pBorder):AGWidget(pParent,pRect),
-mWidth(pBorder.getWidth()),mBorder(new AGBorder(pBorder)),mTexture((int)width(),(int)height())
+mWidth(pBorder.getWidth()),mWidthH(pBorder.getWidth()),mBorder(new AGBorder(pBorder)),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;
   mUseTexture=true;
@@ -25,7 +25,7 @@ AGFrame::~AGFrame()
 
 AGRect2 AGFrame::getClientRect() const
 {
-  return getRect().origin().shrink(mWidth);
+  return getRect().origin().shrink(mWidth,mWidthH);
 }
 
 void AGFrame::prepareDraw()

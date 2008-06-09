@@ -10,7 +10,7 @@
 class AGEXPORT AGFrame:public AGWidget
 {
  public:
-  AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t width); // transparent frame
+  AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t width,size_t widthH=0); // transparent frame
   AGFrame(AGWidget *pParent,const AGRect2 &pRect,const AGBorder &pBorder);
   ~AGFrame();
 
@@ -20,9 +20,10 @@ class AGEXPORT AGFrame:public AGWidget
 
   void draw(AGPainter &p);
   void prepareDraw();
-
+  
  private:
   size_t mWidth;
+  size_t mWidthH;
   AGBorder *mBorder;
   AGBackground *mBg;
   AGTexture mTexture;

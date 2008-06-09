@@ -1283,10 +1283,7 @@ AGRect2 AGWidget::outerToInner(const AGRect2 &p) const
   AGRect2 m=p;
 
   if(mUseClientRect)
-    {
-      cdebug(mClientProj.getMatrix());
       m=mClientProj.inverse().project(m);
-    }
   return m-getRect().getV0();
 }
 AGVector2 AGWidget::outerToInner(const AGVector2 &p) const
