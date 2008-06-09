@@ -109,6 +109,7 @@ EOT
     end
     def getEnvPath
       p=ENV["PATH"]
+      pp p
       if File.join("a","b")=~/\\/
         p.split(";")
       else
