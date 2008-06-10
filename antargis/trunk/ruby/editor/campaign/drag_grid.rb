@@ -686,6 +686,8 @@ end
 
 [DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,AppearEffect,HideEffect].each{|c|standardLayoutCreator(c)}
 
+require File.join(File.split(__FILE__)[0],'image_list.rb')
+
 class RubySignal
   def initialize(name)
     @name=name

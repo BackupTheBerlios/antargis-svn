@@ -67,7 +67,7 @@ namespace :spec do
 
     spec_filename = "spec_#{file_name}.rb"
     specs = Dir["ruby/**/#{spec_filename}"]
-    pp specs
+    #pp specs
     
     if path = specs.detect { |f| spec_filename == File.basename(f) }
       run_file_name = path

@@ -50,6 +50,7 @@ namespace AGGLPainter
   void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c,float pWidth);
 
   void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
+  void blit3dTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle3 &pDest);
 
   void putPixel(int x,int y,const AGColor &pc);
 }

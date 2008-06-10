@@ -1,94 +1,104 @@
 <?xml version="1.0"?>
 <layout name="CampaignEditorLayout">
-<dragEnvironment name="dragEnvironment">
-<table cols="1" rows="2">
-  <rowsize row="0" fixed="50"/>
+
+  <dragEnvironment name="dragEnvironment">
+    <table cols="1" rows="2">
+      <rowsize row="0" fixed="50"/>
   
-  <cell col="0" row="0">
-    <toolBar name="toolbar">
-         <toolButton text="Save" name="save" caption="muh" caption-image="gui/save.png"/>
-         <toolButton text="Load" name="load" caption="muh" caption-image="gui/load.png"/>
-    </toolBar>
-  </cell>
+      <cell col="0" row="0">
+        <toolBar name="toolbar">
+          <toolButton text="Save" name="save" caption="muh" caption-image="gui/save.png"/>
+          <toolButton text="Load" name="load" caption="muh" caption-image="gui/load.png"/>
+        </toolBar>
+      </cell>
   
-  <cell col="0" row="1">
-  <table cols="2" rows="2" name="bigTable">
-    <colsize col="0" fixed="100"/>
-    <rowsize row="1" fixed="50"/>
+      <cell col="0" row="1">
+        <table cols="2" rows="2" name="bigTable">
+          <colsize col="0" fixed="100"/>
+          <rowsize row="1" fixed="50"/>
     
-    <cell col="0" row="0">
-      <table cols="1" rows="4">
-        <rowsize row="0" fixed="100"/>
-        <rowsize row="1" fixed="100"/>
-        <rowsize row="2" fixed="100"/>
-        <cell col="0" row="0">
-          <dragSource name="levelSource" class="DragBox" text="Level"/>
-        </cell>
+          <cell col="0" row="0">
+            <table cols="1" rows="4">
+              <rowsize row="0" fixed="100"/>
+              <rowsize row="1" fixed="100"/>
+              <rowsize row="2" fixed="100"/>
+              <cell col="0" row="0">
+                <dragSource name="levelSource" class="DragBox" text="Level"/>
+              </cell>
         
-        <cell col="0" row="1">
-          <dragSource name ="storySource" class="DragBoxStory" text="Story"/>
-        </cell>
-        <cell col="0" row="2">
-          <dragTrash/>
-        </cell>
+              <cell col="0" row="1">
+                <dragSource name ="storySource" class="DragBoxStory" text="Story"/>
+              </cell>
+              <cell col="0" row="2">
+                <dragTrash/>
+              </cell>
         
-      </table>
-    </cell>
+            </table>
+          </cell>
     
     
-    <cell col="1" row="0">
-      <scrollingWidget clientRect="(0,0,1600,1024)">
-        <dragGrid name="dragGrid" cellWidth="100" hoverColor='#9999FF' edit="textEdit"/>
-      </scrollingWidget>
-    </cell>
+          <cell col="1" row="0">
+            <scrollingWidget clientRect="(0,0,1600,1024)">
+              <dragGrid name="dragGrid" cellWidth="100" hoverColor='#9999FF' edit="textEdit"/>
+            </scrollingWidget>
+          </cell>
     
     
     
-    <cell col="1" row="1" name="a">
-      <table cols="2" rows="1" name="b">
-        <colsize col="1" fixed="50"/>
-        <cell col="0" row="0">
-          <edit name="textEdit"/>
-        </cell>
-        <cell col="1" row="0">
-          <button name="weiter" caption-image="data/gui/options.png"/>
-        </cell>
-      </table>
-    </cell>
+          <cell col="1" row="1" name="a">
+            <table cols="2" rows="1" name="b">
+              <colsize col="1" fixed="50"/>
+              <cell col="0" row="0">
+                <edit name="textEdit"/>
+              </cell>
+              <cell col="1" row="0">
+                <button name="weiter" caption-image="data/gui/options.png"/>
+              </cell>
+            </table>
+          </cell>
     
-  </table>
-  </cell>
-  </table>
-  <appearEffect name="showEdit" table="bigTable" row="1" size="40" duration="0.2"/>
-  <hideEffect name="hideEdit" table="bigTable" row="1" size="40" duration="0.2"/>
-</dragEnvironment>
-   <image filename="" tile="true" color="#00000099"/>
+        </table>
+      </cell>
+    </table>
+    <appearEffect name="showEdit" table="bigTable" row="1" size="40" duration="0.2"/>
+    <hideEffect name="hideEdit" table="bigTable" row="1" size="40" duration="0.2"/>
+  </dragEnvironment>
+
 
   <frame width="150" height="70">
-    <frame border="button.border.normal">
-      <image filename="" tile="true" color="#000000FF"/>
-      <table rows="2" cols="1">
-        <rowsize row="0" relative="3"/>
+    <window>
+      <table rows="3" cols="1">
+        <rowsize row="0" relative="0.7"/>
+        <rowsize row="1" relative="3"/>
         <cell col="0" row="0">
+          <imageList/>
+        </cell>
+        <cell col="0" row="1">
           <frame width="20">
             <image filename="data/gui/map1.png" scale="true"/>
           </frame>
         </cell>
-        <cell col="0" row="1">
+        <cell col="0" row="2">
           <table rows="1" cols="3">
             <colsize col="1" relative="8"/>
             <cell col="1" row="0">
-              <edit text="caption"/>
+              <frame width="5">
+                <edit text="caption" multi="true"/>
+              </frame>
             </cell>
             <cell col="0" row="0">
-              <button caption="Back"/>
+              <frame width="10" height="40">
+                <button caption-image="data/gui/arrow_left.png"/>
+              </frame>
             </cell>
             <cell col="2" row="0">
-              <button caption="Next"/>
+              <frame width="10" height="40">
+                <button caption-image="data/gui/arrow_right.png"/>
+              </frame>
             </cell>
           </table>
         </cell>
       </table>
-    
+    </window>
   </frame>
 </layout>

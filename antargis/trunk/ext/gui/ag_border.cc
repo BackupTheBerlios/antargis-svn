@@ -81,25 +81,7 @@ void AGBorder::draw(const AGRect2 &pd,AGPainter &p)
 
     float x2=d.x1();
     float y2=d.y1();
-    /*
-  // corners
-  p.blit(*mTexture,AGRect2(0,0,w,w),AGRect2(0,0,w,w));
 
-  p.blit(*mTexture,AGRect2(0,y2-w,w,w),AGRect2(0,w2,w,w));
-
-  p.blit(*mTexture,AGRect2(x2-w,0,w,w),AGRect2(w2,0,w,w));
-
-  p.blit(*mTexture,AGRect2(x2-w,y2-w,w,w),AGRect2(w2,w2,w,w));
-
-  // borders
-
-  // hor
-  p.tile(*mTexture,AGRect2(w,0,d.w()-w2,w),AGRect2(w,0,w,w));
-  p.tile(*mTexture,AGRect2(w,y2-w,d.w()-w2,w),AGRect2(w,w2,w,w));
-  // ver
-  p.tile(*mTexture,AGRect2(0,w,w,d.h()-w2),AGRect2(0,w,w,w));
-  p.tile(*mTexture,AGRect2(x2-w,w,w,d.h()-w2),AGRect2(w2,w,w,w));
-     */
     // skip interior
 
 

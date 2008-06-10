@@ -116,8 +116,8 @@ class AGEXPORT AGSurface:public AGPaintTarget
 
   void save(const std::string &pName) const;
 
-  static AGSurface load(const std::string &pName);
-  static AGSurface loadDRM(const std::string &pName);
+  static AGSurface load(const std::string &pName) throw(FileNotFound);
+  static AGSurface loadDRM(const std::string &pName) throw(FileNotFound);
 
   AGInternalSurface *surface() const;
 

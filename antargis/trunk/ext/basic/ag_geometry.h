@@ -504,6 +504,7 @@ class AGEXPORT AGRect2
 
     //result=this-r
     std::vector<AGRect2> difference(const AGRect2 &r) const;
+    std::vector<AGRect2> tile(size_t x,size_t y) const;
 
     SDL_Rect sdl() const;
 

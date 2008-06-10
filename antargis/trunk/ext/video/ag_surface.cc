@@ -132,26 +132,26 @@ AGInternalSurface::~AGInternalSurface()
 ///////////////////////////////////////////////////////////////////////
 
 AGSurface::AGSurface(AGInternalSurface *i):s(i)
-    {
-      getSurfaceManager()->registerMe(this);
-    }
+      {
+        getSurfaceManager()->registerMe(this);
+      }
 
 
 AGSurface::AGSurface():
   s(0)
-      {
-        getSurfaceManager()->registerMe(this);
-      }
+        {
+          getSurfaceManager()->registerMe(this);
+        }
 AGSurface::AGSurface(int w,int h):
   s(AGCreate32BitSurface(w,h))
-      {
-        getSurfaceManager()->registerMe(this);
-      }
+        {
+          getSurfaceManager()->registerMe(this);
+        }
 AGSurface::AGSurface(const AGSurface &p):
   s(p.s)
-      {
-        getSurfaceManager()->registerMe(this);
-      }
+        {
+          getSurfaceManager()->registerMe(this);
+        }
 
 bool AGSurface::valid() const
 {
@@ -350,13 +350,16 @@ AGInternalSurface *AGSurface::surface() const
   return s;
 }
 
-AGSurface AGSurface::load(const std::string &pFilename)
+AGSurface AGSurface::load(const std::string &pFilename) throw (FileNotFound)
   {
     AGSurface n;
     n.s=new AGInternalSurface;
     std::string file=loadFile(pFilename);
     if(file.length()==0)
-      cdebug("File "<<pFilename<<" is empty!");
+      {
+        cdebug("File "<<pFilename<<" is empty!");
+        throw FileNotFound(pFilename);
+      }
 
     SDL_RWops* rw=SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length());
 
@@ -373,7 +376,7 @@ AGSurface AGSurface::load(const std::string &pFilename)
     return n;
   }
 
-AGSurface AGSurface::loadDRM(const std::string &pName)
+AGSurface AGSurface::loadDRM(const std::string &pName) throw(FileNotFound)
   {
     assert(mDecryptor);
 
@@ -383,6 +386,8 @@ AGSurface AGSurface::loadDRM(const std::string &pName)
 
     n.s=new AGInternalSurface;
     std::string file=loadFile(pName);
+    if(file.length()==0)
+      throw FileNotFound(pName);
 
     file=mDecryptor->decrypt(file,pName);
     gDRM=true;

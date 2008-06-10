@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #ifndef __GUI_GLSURFACE_H
 #define __GUI_GLSURFACE_H
 
@@ -70,6 +72,8 @@ class AGEXPORT AGGLScreen:public AGScreen
   virtual void fillPoly(const std::vector<AGVector2> &pPoly,const AGColor &pColor);
   virtual void drawPoly(const std::vector<AGVector2> &pPoly,const AGColor &pColor);
   virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
+
+  void blit3dTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle3 &pDest);
 
   virtual AGRect2 getRect() const;
 

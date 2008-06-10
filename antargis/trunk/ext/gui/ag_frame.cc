@@ -3,7 +3,7 @@
 #include "ag_debug.h"
 
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t pWidth,size_t pWidthH):AGWidget(pParent,pRect),
-mWidth(pWidth),mBorder(0),mWidthH(pWidthH==0?pWidth:pWidthH),mTexture((int)width(),(int)height())
+mWidth(pWidth),mBorder(0),mWidthH(pWidthH<0?pWidth:pWidthH),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;
   mUseTexture=true;

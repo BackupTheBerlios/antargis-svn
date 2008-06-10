@@ -1443,6 +1443,25 @@ bool AGRect2::operator!=(const AGRect2 &r) const
   return v0!=r.v0 || v1!=r.v1;
 }
 
+std::vector<AGRect2> AGRect2::tile(size_t x,size_t y) const
+{
+  std::vector<AGRect2> l;
+  
+  if(x==0 || y==0)
+  return l;
+  
+  float w=width()/x;
+  float h=height()/y;
+  
+  for(size_t i=0;i<x;i++)
+    for(size_t j=0;j<y;j++)
+      {
+        l.push_back(AGRect2(x0()+w*i,y0()+h*j,w,h));
+      }
+  
+  return l;
+}
+
 
 
 SDL_Rect AGRect2::sdl() const

@@ -29,15 +29,15 @@
     @param pColor an rgba-color. so you can use transparent backgrounds,too.
  */
 AGBackground::AGBackground(const AGColor &pColor):mTexture(0)
-{
-  //  CTRACE;
-  mColor=true;
-  mColors[0]=pColor;
-  mColors[1]=pColor;
-  mColors[2]=pColor;
-  mColors[3]=pColor;
-  mBorder=0;
-}
+  {
+    //  CTRACE;
+    mColor=true;
+    mColors[0]=pColor;
+    mColors[1]=pColor;
+    mColors[2]=pColor;
+    mColors[3]=pColor;
+    mBorder=0;
+  }
 
 
 /**
@@ -58,29 +58,37 @@ AGBackground::AGBackground(const AGColor &pColor):mTexture(0)
  */
 
 AGBackground::AGBackground(const AGString &pThemeName):mTexture(0)
-{
-  //  CTRACE;
+  {
+    //  CTRACE;
 
-  AGTheme *theme=getTheme();
-  mColor=false;
-  if(theme->hasSurface(pThemeName+".image"))
-    {
-      //      CTRACE;
-      cdebug(pThemeName+".image");
-      mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(pThemeName+".image"));
-      //mTexture=new AGTexture(theme->getSurface(pThemeName+".image"));
-    }
-  else if(theme->hasColor(pThemeName+"."+"gradientColor1"))
-    {
-      mColor=true;
-      mColors[0]=theme->getColor(pThemeName+"."+"gradientColor1");
-      mColors[1]=theme->getColor(pThemeName+"."+"gradientColor2");
-      mColors[2]=theme->getColor(pThemeName+"."+"gradientColor3");
-      mColors[3]=theme->getColor(pThemeName+"."+"gradientColor4");
-    }
+    AGTheme *theme=getTheme();
+    mColor=false;
+    if(theme->hasSurface(pThemeName+".image"))
+      {
+        //      CTRACE;
+        cdebug(pThemeName+".image");
+        mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(pThemeName+".image"));
+        //mTexture=new AGTexture(theme->getSurface(pThemeName+".image"));
+      }
+    else if(theme->hasColor(pThemeName+"."+"gradientColor1"))
+      {
+        mColor=true;
+        mColors[0]=theme->getColor(pThemeName+"."+"gradientColor1");
+        mColors[1]=theme->getColor(pThemeName+"."+"gradientColor2");
+        mColors[2]=theme->getColor(pThemeName+"."+"gradientColor3");
+        mColors[3]=theme->getColor(pThemeName+"."+"gradientColor4");
+      }
+    else if(theme->hasColor(pThemeName+"."+"color"))
+      {
+        mColor=true;
+        mColors[0]=theme->getColor(pThemeName+"."+"color");
+        mColors[1]=theme->getColor(pThemeName+"."+"color");
+        mColors[2]=theme->getColor(pThemeName+"."+"color");
+        mColors[3]=theme->getColor(pThemeName+"."+"color");
+      }
 
-  mBorder=theme->getInt(pThemeName+"."+"border");
-}
+    mBorder=theme->getInt(pThemeName+"."+"border");
+  }
 
 /// draws the background on painter in the given rectangle
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)

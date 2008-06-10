@@ -183,13 +183,15 @@
 	
 	<edit>
 		<background>
-					<color name='gradientColor1' color='#54555b'/>
+      <color name="color" color='#11111144'/>
+<!-- 					<color name='gradientColor1' color='#54555b'/>
 					<color name='gradientColor2' color='#3c3d41'/>
 					<color name='gradientColor3' color='#3c3d41'/>
-					<color name='gradientColor4' color='#12141c'/>
-<!--			<image name="image" file="bg_tile2.png"/>-->
+					<color name='gradientColor4' color='#12141c'/> -->
+			<!--  <image name="image" file="data/gui/bg_tile2.png"/>-->
 		</background>
-		<font name="font" file="FreeSans.ttf" size="14" color="#000000"/>
+    <!-- <font name="font" file="FreeSans.ttf" size="14" color="#000000"/> -->
+    <font name="font" file="FreeSans.ttf" size="14" color="#E7E7FF"/>
 	</edit>
 <!--
 	<screen>

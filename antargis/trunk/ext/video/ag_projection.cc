@@ -50,6 +50,24 @@ AGVector2 AGProjection2D::project(const AGVector2 &p) const
   return (m*p).dim2();
 }
 
+/// leaves 3rd dimension untouched
+AGVector3 AGProjection2D::project(const AGVector3 &p) const
+{
+  assert(mInited);
+  return AGVector3((m*p.dim2()).dim2(),p[2]);
+}
+
+AGTriangle2 AGProjection2D::project(const AGTriangle2 &t) const
+{
+  return AGTriangle2(project(t.get(0)),project(t.get(1)),project(t.get(2)));
+}
+// leaves 3rd dimension untouched
+AGTriangle3 AGProjection2D::project(const AGTriangle3 &t) const
+{
+  return AGTriangle3(project(t[0]),project(t[1]),project(t[2]));
+}
+
+
 void AGProjection2D::pushProjection(const AGProjection2D &p)
   {
     assert(mInited);

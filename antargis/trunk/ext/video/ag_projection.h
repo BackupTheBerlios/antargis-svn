@@ -17,6 +17,9 @@ public:
 
   AGRect2 project(const AGRect2 &r) const;
   AGVector2 project(const AGVector2 &p) const;
+  AGVector3 project(const AGVector3 &p) const;
+  AGTriangle2 project(const AGTriangle2 &t) const;
+  AGTriangle3 project(const AGTriangle3 &t) const;
   
   AGProjection2D inverse() const throw (GeometryException);
 

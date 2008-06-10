@@ -28,6 +28,12 @@
 
 #include <ag_base.h>
 
+struct FileNotFound
+  {
+    FileNotFound(const std::string &f):filename(f){}
+    std::string filename;
+  };
+
 AGEXPORT void initFS(const char *argv0);
 AGEXPORT AGString loadFile(const AGString &pFilename);
 AGEXPORT bool saveFile(const AGString &pFilename,const AGString &pContent);
