@@ -43,42 +43,57 @@ void AGTheme::setFont(const AGString &pName,AGFont pFont)
   }
 void AGTheme::setColor(const AGString &pName,AGColor pColor)
   {
-    //  cdebug(pName);
     mColors[pName]=pColor;
-    //  cout<<"setting:"<<pName<<":"<<pColor.toString()<<endl;
   }
 
 
-AGFont AGTheme::getFont(const AGString &pName)
-  {
-    //  cdebug(pName<<":"<<mFonts[pName].toString());
-    if(mFonts.find(pName)==mFonts.end())
-      return mFonts[trunk(pName)];
-    return mFonts[pName];
-  }
-AGColor AGTheme::getColor(const AGString &pName)
-  {
-    //  cdebug(pName);
-    if(mColors.find(pName)==mColors.end())
-      return mColors[trunk(pName)];
-    return mColors[pName];
-  }
+AGFont AGTheme::getFont(const AGString &pName) const
+{
+  std::map<AGString,AGFont>::const_iterator i=mFonts.find(pName);
 
-AGString AGTheme::trunk(AGString s)
+  if(i==mFonts.end())
+    {
+      i=mFonts.find(trunc(pName));
+      if(i==mFonts.end())
+        return AGFont();
+    }
+  return i->second;
+}
+AGColor AGTheme::getColor(const AGString &pName) const
+{
+  std::map<AGString,AGColor>::const_iterator i=mColors.find(pName);
+
+  if(i==mColors.end())
+    {
+      AGString n=trunc(pName);
+      i=mColors.find(n);
+      if(i==mColors.end())
+        return AGColor();
+    }
+  return i->second;
+}
+
+AGString AGTheme::trunc(AGString s) const
   {
-    //  cdebug(s);
     size_t i=s.find(".");
     if(i!=s.npos)
       s=s.substr(0,i);
     return s;
   }
 
-int AGTheme::getInt(const AGString &pName)
-  {
-    if(mInts.find(pName)==mInts.end())
-      return mInts[trunk(pName)];
-    return mInts[pName];
-  }
+int AGTheme::getInt(const AGString &pName) const
+{
+  std::map<AGString,int>::const_iterator i=mInts.find(pName);
+
+  if(i==mInts.end())
+    {
+      AGString n=trunc(pName);
+      i=mInts.find(n);
+      if(i==mInts.end())
+        return 0;
+    }
+  return i->second;
+}
 void AGTheme::setInt(const AGString &pName,int i)
   {
     mInts[pName]=i;
@@ -110,21 +125,36 @@ AGTheme *getTheme()
 
 bool AGTheme::hasSurface(const AGString &pName) const
 {
-  //  cdebug(pName);
   return(mSurfaces.find(pName)!=mSurfaces.end());
+}
+bool AGTheme::hasSurfaceName(const AGString &pName) const
+{
+  return(mSurfaceNames.find(pName)!=mSurfaceNames.end());
+}
+bool AGTheme::hasInt(const AGString &pName) const
+{
+  return(mInts.find(pName)!=mInts.end());
 }
 bool AGTheme::hasColor(const AGString &pName) const
 {
-  //  cdebug(pName);
   return(mColors.find(pName)!=mColors.end());
+}
+bool AGTheme::hasFont(const AGString &pName) const
+{
+  return(mFonts.find(pName)!=mFonts.end());
 }
 
 
-AGSurface AGTheme::getSurface(const AGString &pName)
+AGSurface AGTheme::getSurface(const AGString &pName) const
   {
-    if(mSurfaces.find(pName)==mSurfaces.end())
-      return mSurfaces[trunk(pName)];
-    return mSurfaces[pName];
+    std::map<AGString,AGSurface>::const_iterator i=mSurfaces.find(pName);
+    if(i==mSurfaces.end())
+      {
+        i=mSurfaces.find(trunc(pName));
+        if(i==mSurfaces.end())
+          return AGSurface();
+      }
+    return i->second;
   }
 void AGTheme::setSurface(const AGString &pName,const AGSurface &pSurface)
   {
@@ -133,16 +163,99 @@ void AGTheme::setSurface(const AGString &pName,const AGSurface &pSurface)
     assert(mSurfaces[pName].valid());
   }
 
-std::string AGTheme::getSurfaceName(const AGString &pName)
+std::string AGTheme::getSurfaceName(const AGString &pName) const
   {
-    if(mSurfaceNames.find(pName)==mSurfaceNames.end())
-      return mSurfaceNames[trunk(pName)];
-    return mSurfaceNames[pName];
+    std::map<AGString,std::string>::const_iterator i=mSurfaceNames.find(pName);
+    if(i==mSurfaceNames.end())
+      {
+        i=mSurfaceNames.find(trunc(pName));
+        if(i==mSurfaceNames.end())
+          return "";
+      }
+    return i->second;
   }
 void AGTheme::setSurfaceName(const AGString &pName,const std::string &pSurface)
   {
     mSurfaceNames[pName]=pSurface;
   }
+
+AGLocalTheme AGTheme::getTheme(const AGString &pTheme) const
+{
+  return AGLocalTheme(pTheme);
+}
+
+
+
+AGLocalTheme::AGLocalTheme(const AGString &pTheme):mTheme(pTheme)
+      {
+      }
+
+AGFont AGLocalTheme::getFont(const AGString &pName) const
+  {
+    AGString t=mTheme+"."+pName;
+    if(getTheme()->hasFont(t))
+      return getTheme()->getFont(t);
+    return getTheme()->getFont(pName);
+  }
+AGColor AGLocalTheme::getColor(const AGString &pName) const
+  {
+    AGString t=mTheme+"."+pName;
+    if(getTheme()->hasColor(t))
+      return getTheme()->getColor(t);
+    return getTheme()->getColor(pName);
+  }
+
+int AGLocalTheme::getInt(const AGString &pName) const
+  {
+    AGString t=mTheme+"."+pName;
+    if(getTheme()->hasInt(t))
+      return getTheme()->getInt(t);
+    return getTheme()->getInt(pName);
+  }
+
+AGSurface AGLocalTheme::getSurface(const AGString &pName) const
+{
+  AGString t=mTheme+"."+pName;
+  if(getTheme()->hasSurface(t))
+    return getTheme()->getSurface(t);
+  return getTheme()->getSurface(pName);
+}
+
+std::string AGLocalTheme::getSurfaceName(const AGString &pName) const
+{
+  AGString t=mTheme+"."+pName;
+  if(getTheme()->hasSurfaceName(t))
+    return getTheme()->getSurfaceName(t);
+  return getTheme()->getSurfaceName(pName);
+}
+
+bool AGLocalTheme::hasFont(const AGString &pName) const
+{
+  return getTheme()->hasFont(mTheme+"."+pName);
+}
+bool AGLocalTheme::hasColor(const AGString &pName) const
+{
+  return getTheme()->hasColor(mTheme+"."+pName);  
+}
+bool AGLocalTheme::hasInt(const AGString &pName) const
+{
+  return getTheme()->hasInt(mTheme+"."+pName);
+}
+bool AGLocalTheme::hasSurface(const AGString &pName) const
+{
+  return getTheme()->hasSurface(mTheme+"."+pName);
+}
+bool AGLocalTheme::hasSurfaceName(const AGString &pName) const
+{
+  return getTheme()->hasSurfaceName(mTheme+"."+pName);
+}
+
+
+
+
+
+
+
 
 
 void loadTheme(const Node&node,AGTheme &t,AGString name)

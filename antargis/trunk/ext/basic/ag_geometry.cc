@@ -841,6 +841,13 @@ AGTriangle2::AGTriangle2(const AGVector2 &v0,const AGVector2 &v1,const AGVector2
     p[2]=v2;
   }
 
+void AGTriangle2::flip()
+  {
+    AGVector2 tmp=p[2];
+    p[2]=p[1];
+    p[1]=tmp;
+  }
+
 AGRect2 AGTriangle2::getBBox() const
 {
   float minx=std::min(p[0].getX(),std::min(p[1].getX(),p[2].getX()));
@@ -1199,6 +1206,12 @@ AGVector4 AGTriangle3::collide(const AGLine3 &pLine) const
   return AGVector4(ip,1);
 }
 
+void AGTriangle3::flip()
+  {
+    AGVector3 tmp=p[2];
+    p[2]=p[1];
+    p[1]=tmp;
+  }
 
 AGString AGTriangle3::toString() const
 {

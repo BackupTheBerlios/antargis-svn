@@ -253,6 +253,10 @@ public:
   virtual bool eventMouseMotionClipped(AGEvent *pEvent,const AGVector2 &pPosition);
 
   void addChildRef(AGWidget *pWidget);
+  
+  void initEvents(); 
+  
+  virtual void eventInitEvents();
  
   
 protected:
@@ -309,6 +313,8 @@ private:
   AGTooltip *mTooltipWidget;
 
   std::set<AGWidget*> mRefChildren;
+  
+  bool mEventsInited;
   
 protected:
   std::list<AGWidget*> mChildren;

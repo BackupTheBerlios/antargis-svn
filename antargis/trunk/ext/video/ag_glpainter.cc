@@ -374,15 +374,17 @@ namespace AGGLPainter
         AGRenderContext context;
         context.setCulling(false);
         context.setTexture(const_cast<AGTexture&>(pSource).glTexture());
-        context.setDepthTest(false);
+        context.setDepthTest(true);
+        context.setColor(AGColor(0xFF,0xFF,0xFF,0xFF));
         context.begin();
         
-        AGProjection2D p(pSource.getRect(),AGRect2(0,0,1,1));
+        AGProjection2D p(const_cast<AGTexture&>(pSource).glTexture()->getRect(),AGRect2(0,0,1,1));
 
         glBegin(GL_TRIANGLES);
         for(size_t i=0;i<3;i++)
           {
             glTexCoord2fv(p.project(pSrc.get(i)));
+            //glVertex2f(pDest[i][0],pDest[i][1]);
             glVertex3fv(pDest[i]);
           }
 

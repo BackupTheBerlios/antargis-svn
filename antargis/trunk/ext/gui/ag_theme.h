@@ -29,33 +29,59 @@
 
 #include <map>
 
+class AGEXPORT AGLocalTheme
+  {
+  public:
+    AGLocalTheme(const AGString &pTheme);
+    
+    AGFont getFont(const AGString &pName) const;
+    AGColor getColor(const AGString &pName) const;
+    int getInt(const AGString &pName) const;
+    AGSurface getSurface(const AGString &pName) const;
+    std::string getSurfaceName(const AGString &pName) const;
+    
+    bool hasFont(const AGString &pName) const;
+    bool hasColor(const AGString &pName) const;
+    bool hasInt(const AGString &pName) const;
+    bool hasSurface(const AGString &pName) const;
+    bool hasSurfaceName(const AGString &pName) const;
+    
+  private:
+    AGString mTheme;
+  };
+
 class AGEXPORT AGTheme
 {
  public:
   AGTheme();
   virtual ~AGTheme();
 
-  AGFont getFont(const AGString &pName);
-  AGColor getColor(const AGString &pName);
-
+  AGFont getFont(const AGString &pName) const;
+  bool hasFont(const AGString &pName) const;
   void setFont(const AGString &pName,AGFont pFont);
+  
   void setColor(const AGString &pName,AGColor pColor);
+  AGColor getColor(const AGString &pName) const;
+  bool hasColor(const AGString &pName) const;
 
-  int getInt(const AGString &pName);
+  int getInt(const AGString &pName) const;
+  bool hasInt(const AGString &pName) const;
   void setInt(const AGString &pName,int i);
 
-  AGSurface getSurface(const AGString &pName);
+  AGSurface getSurface(const AGString &pName) const;
+  bool hasSurface(const AGString &pName) const;
   void setSurface(const AGString &pName,const AGSurface &pSurface);
 
-  std::string getSurfaceName(const AGString &pName);
+  std::string getSurfaceName(const AGString &pName) const;
+  bool hasSurfaceName(const AGString &pName) const;
   void setSurfaceName(const AGString &pName,const std::string &pSurface);
 
-  bool hasSurface(const AGString &pName) const;
-  bool hasColor(const AGString &pName) const;
+  
+  AGLocalTheme getTheme(const AGString &pTheme) const;
 
  private:
 
-  AGString trunk(AGString s);
+  AGString trunc(AGString s) const;
 
   std::map<AGString,AGFont> mFonts;
   std::map<AGString,AGColor> mColors;

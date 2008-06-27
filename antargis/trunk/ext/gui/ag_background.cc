@@ -59,36 +59,43 @@ AGBackground::AGBackground(const AGColor &pColor):mTexture(0)
 
 AGBackground::AGBackground(const AGString &pThemeName):mTexture(0)
   {
-    //  CTRACE;
-
     AGTheme *theme=getTheme();
+loadFromTheme(theme->getTheme(""),pThemeName);
+  }
+
+AGBackground::AGBackground(const AGLocalTheme &pTheme,const AGString &pThemeName)
+  {
+    loadFromTheme(pTheme,pThemeName);
+  }
+void AGBackground::loadFromTheme(const AGLocalTheme &pTheme,const AGString &pThemeName)
+  {
     mColor=false;
-    if(theme->hasSurface(pThemeName+".image"))
+    
+    if(pTheme.hasSurface(pThemeName+".image"))
       {
-        //      CTRACE;
         cdebug(pThemeName+".image");
-        mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(pThemeName+".image"));
-        //mTexture=new AGTexture(theme->getSurface(pThemeName+".image"));
+        mTexture=&getTextureCache()->get(pTheme.getSurfaceName(pThemeName+".image"));
       }
-    else if(theme->hasColor(pThemeName+"."+"gradientColor1"))
+    else if(pTheme.hasColor(pThemeName+"."+"gradientColor1"))
       {
         mColor=true;
-        mColors[0]=theme->getColor(pThemeName+"."+"gradientColor1");
-        mColors[1]=theme->getColor(pThemeName+"."+"gradientColor2");
-        mColors[2]=theme->getColor(pThemeName+"."+"gradientColor3");
-        mColors[3]=theme->getColor(pThemeName+"."+"gradientColor4");
+        mColors[0]=pTheme.getColor(pThemeName+"."+"gradientColor1");
+        mColors[1]=pTheme.getColor(pThemeName+"."+"gradientColor2");
+        mColors[2]=pTheme.getColor(pThemeName+"."+"gradientColor3");
+        mColors[3]=pTheme.getColor(pThemeName+"."+"gradientColor4");
       }
-    else if(theme->hasColor(pThemeName+"."+"color"))
+    else if(pTheme.hasColor(pThemeName+"."+"color"))
       {
         mColor=true;
-        mColors[0]=theme->getColor(pThemeName+"."+"color");
-        mColors[1]=theme->getColor(pThemeName+"."+"color");
-        mColors[2]=theme->getColor(pThemeName+"."+"color");
-        mColors[3]=theme->getColor(pThemeName+"."+"color");
+        mColors[0]=pTheme.getColor(pThemeName+"."+"color");
+        mColors[1]=pTheme.getColor(pThemeName+"."+"color");
+        mColors[2]=pTheme.getColor(pThemeName+"."+"color");
+        mColors[3]=pTheme.getColor(pThemeName+"."+"color");
       }
 
-    mBorder=theme->getInt(pThemeName+"."+"border");
+    mBorder=pTheme.getInt(pThemeName+"."+"border");    
   }
+
 
 /// draws the background on painter in the given rectangle
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)

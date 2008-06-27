@@ -390,6 +390,8 @@ class AGEXPORT AGTriangle2
     AGLine2 nearestLine(const AGVector2 &v) const;
 
     std::vector<AGLine2> getLines() const;
+    
+    void flip();
 #ifdef SWIG
     %rename(to_s) toString() const;
 #endif
@@ -424,10 +426,15 @@ class AGEXPORT AGTriangle3
     // (x,y,z,0) for no collision 
     // (x,y,z,1) for collision in point (x,y,z)
     AGVector4 collide(const AGLine3 &pLine) const;
+#ifdef SWIG
+    %rename(to_s) toString() const;
+#endif
 
     AGString toString() const;
 
     AGVector3 operator[](int index) const;
+    
+    void flip();
   };
 
 class AGEXPORT AGRect2

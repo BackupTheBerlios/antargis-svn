@@ -85,7 +85,7 @@ module AGHandler
     end
     return super(e)
   end
-
+  
   private
   def makeHandlerName(object,event)
     #if object.respond_to?(:getName)

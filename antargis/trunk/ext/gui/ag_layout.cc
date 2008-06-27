@@ -86,6 +86,7 @@ void AGLayout::loadXML(const std::string &pXMLData)
       }
     getLayoutFactory()->popLayout();
     mTempWidgets.clear();
+    initEvents();
   }
 
 bool AGLayout::eventKeyDown(AGEvent *m)

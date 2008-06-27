@@ -55,6 +55,8 @@ public:
   {
     return mTarget;
   }
+  
+  AGRect2 getRect() const;
 
 private:
 

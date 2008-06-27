@@ -89,12 +89,9 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
       videoFlags|=SDL_DOUBLEBUF;
 
 
-    cdebug("SDL_Init...");
     // set video mode
     //  SDL_Init(SDL_INIT_VIDEO);
-    cdebug("SDL_SetVideoMode...");
     SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
-    cdebug("ms:"<<ms);
     if(!ms)
       {
         std::cerr<<"Initing video mode failed!"<<std::endl;
@@ -121,8 +118,6 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
     lastVWidth=vw;
     lastVHeight=vh;
 
-    cdebug("gl:"<<gl);
-
     if(gl)
       {
         AGGLScreen *ms=new AGGLScreen(w,h,vw,vh);
@@ -132,8 +127,6 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
       }
     else
       setScreen(mScreen=new AGSDLScreen(ms));
-
-    cdebug("mscreen:"<<mScreen);
 
     SDL_WM_SetCaption("Antargis","Antargis");
 

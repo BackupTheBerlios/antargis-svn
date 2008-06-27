@@ -63,42 +63,6 @@
     <appearEffect name="showEdit" table="bigTable" row="1" size="40" duration="0.2"/>
     <hideEffect name="hideEdit" table="bigTable" row="1" size="40" duration="0.2"/>
   </dragEnvironment>
+  <storyEditor name="storyEditor"/>
 
-
-  <frame width="150" height="70">
-    <window>
-      <table rows="3" cols="1">
-        <rowsize row="0" relative="0.7"/>
-        <rowsize row="1" relative="3"/>
-        <cell col="0" row="0">
-          <imageList/>
-        </cell>
-        <cell col="0" row="1">
-          <frame width="20">
-            <image filename="data/gui/map1.png" scale="true"/>
-          </frame>
-        </cell>
-        <cell col="0" row="2">
-          <table rows="1" cols="3">
-            <colsize col="1" relative="8"/>
-            <cell col="1" row="0">
-              <frame width="5">
-                <edit text="caption" multi="true"/>
-              </frame>
-            </cell>
-            <cell col="0" row="0">
-              <frame width="10" height="40">
-                <button caption-image="data/gui/arrow_left.png"/>
-              </frame>
-            </cell>
-            <cell col="2" row="0">
-              <frame width="10" height="40">
-                <button caption-image="data/gui/arrow_right.png"/>
-              </frame>
-            </cell>
-          </table>
-        </cell>
-      </table>
-    </window>
-  </frame>
 </layout>

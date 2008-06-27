@@ -27,6 +27,7 @@
 #include "ag_geometry.h"
 #include "ag_texture.h"
 #include "ag_color.h"
+#include "ag_theme.h"
 
 class AGPainter;
 
@@ -35,20 +36,24 @@ class AGPainter;
     It is themable.
  */
 class AGEXPORT AGBackground
-{
- public:
-  AGBackground(const AGString &pThemeName="");
-  AGBackground(const AGColor &pColor);
+  {
+  public:
+    AGBackground(const AGString &pThemeName="");
+    AGBackground(const AGLocalTheme &pTheme,const AGString &pThemeName="");
+    AGBackground(const AGColor &pColor);
 
-  void draw(const AGRect2 &r,AGPainter &p);
+    void draw(const AGRect2 &r,AGPainter &p);
 
-  void useTextures();
- private:
-  const AGTexture *mTexture;
-  AGColor mColors[4];
+    void useTextures();
+  private:
+    
+    void loadFromTheme(const AGLocalTheme &pTheme,const AGString &pThemeName="");
+    
+    const AGTexture *mTexture;
+    AGColor mColors[4];
 
-  bool mColor;
-  int mBorder;
-};
+    bool mColor;
+    int mBorder;
+  };
 
 #endif

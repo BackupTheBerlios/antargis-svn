@@ -255,6 +255,12 @@ size_t AGGLTexture::depth() const
   return d;
 }
 
+AGRect2 AGGLTexture::getRect() const
+{
+  return AGRect2(0,0,w,h);
+}
+
+
 AGSurface AGGLTexture::getSurface() const
 {
   AGSurface s(w,h*d);

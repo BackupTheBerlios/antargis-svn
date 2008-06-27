@@ -66,6 +66,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mHasFocus(false),mFocus(0)
 
     {
+      mEventsInited=false;
       CTRACE;
       if(mParent)
         mParent->addChildRef(this);
@@ -1295,3 +1296,16 @@ AGVector2 AGWidget::outerToInner(const AGVector2 &p) const
   return m-getRect().getV0();
 }
 
+
+void AGWidget::initEvents()
+  {
+    if(!mEventsInited)
+      eventInitEvents();
+    for(Children::iterator i=mChildren.begin();i!=mChildren.end();i++)
+      (*i)->initEvents();
+  }
+
+void AGWidget::eventInitEvents()
+  {
+    
+  }

@@ -35,18 +35,15 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
 
   {
     CTRACE;
+    
+    AGLocalTheme theme=getTheme()->getTheme(pTheme);
 
-    AGString tstr="window.border.image";
-    if(pTheme!="")
-      tstr=pTheme+"."+tstr;
+    AGString borderImage="window.border.image";
 
-
-    cdebug("image:"<<tstr);
-    AGSurface s=getTheme()->getSurface(tstr);
+    AGSurface s=theme.getSurface(borderImage);
     float bw=s.getRect().w()/3;
     int titBarHeight=20;
 
-    //  cdebug("window_border:"<<s.width()<<"/"<<s.height());
     AGTable *t=0;
 
 
@@ -58,7 +55,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
         {
           AGRect2 r(x*bw,y*bw,bw,bw);
 
-          textures.push_back(&getTextureCache()->get(getTheme()->getSurfaceName(tstr),r));
+          textures.push_back(&getTextureCache()->get(theme.getSurfaceName(borderImage),r));
         }
 
 
@@ -82,7 +79,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
 
         AGImage *i1,*i2;
 
-        AGTable::addChild(0,1,i1=new AGImage(this,AGRect2(0,0,bw,titBarHeight),*textures[3],true));//,AGRect2(0,bw,bw,bw)));
+        AGTable::addChild(0,1,i1=new AGImage(this,AGRect2(0,0,bw,titBarHeight),*textures[3],true));
         // title
         t=dynamic_cast<AGTable*>(getTitleBar((int)(width()-2*bw),titBarHeight));
 
@@ -101,7 +98,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
         AGTable::addChild(1,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[7],true));
         AGTable::addChild(2,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[8],true));
 
-        AGTable::addChild(1,2,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
+        AGTable::addChild(1,2,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",theme.getFont("window.title.font"),AGBackground(theme,"window.background")));
 
       }
     else
@@ -125,7 +122,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
         AGTable::addChild(1,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[7],true));
         AGTable::addChild(2,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[8],true));
 
-        AGTable::addChild(1,1,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
+        AGTable::addChild(1,1,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",theme.getFont("window.title.font"),AGBackground(theme,"window.background")));
       }
 
     arrange();

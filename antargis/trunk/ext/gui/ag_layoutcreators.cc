@@ -371,7 +371,7 @@ public:
       AGString border=pNode.get("border");
       size_t width=pNode.get("width").toInt();
       
-      size_t height=0;
+      int height=-1;
       if(pNode.get("height").length()>0)
         height=pNode.get("height").toInt();
 

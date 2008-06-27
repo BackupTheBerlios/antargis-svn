@@ -10,7 +10,7 @@
 class AGEXPORT AGFrame:public AGWidget
 {
  public:
-  AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t width,size_t widthH=-1); // transparent frame
+  AGFrame(AGWidget *pParent,const AGRect2 &pRect,int width,int widthH=-1); // transparent frame
   AGFrame(AGWidget *pParent,const AGRect2 &pRect,const AGBorder &pBorder);
   ~AGFrame();
 
