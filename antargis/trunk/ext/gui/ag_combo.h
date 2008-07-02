@@ -45,9 +45,14 @@ class AGEXPORT AGComboBox:public AGWidget
   void setSelected(const AGString &pID);
 
   void clear();
+  
+  virtual void setWidth(float w);
+  virtual void setHeight(float w);
+  void setRect(const AGRect2 &r);
 
  private:
   void update();
+  void updateClientRects();
 
   AGEdit *mEdit;
   AGButton *mButton;

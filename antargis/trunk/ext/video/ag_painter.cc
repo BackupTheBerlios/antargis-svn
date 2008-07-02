@@ -39,30 +39,30 @@
 
 
 AGPaintProjection::AGPaintProjection(const AGRect2 &pClip):clip(pClip)
-  {
-    a.set(0,0,1);
-    a.set(0,1,0);
-    a.set(0,2,0);
-    a.set(1,0,0);
-    a.set(1,1,1);
-    a.set(1,2,0);
-    a.set(2,0,0);
-    a.set(2,1,0);
-    a.set(2,2,0);
-  }
+    {
+      a.set(0,0,1);
+      a.set(0,1,0);
+      a.set(0,2,0);
+      a.set(1,0,0);
+      a.set(1,1,1);
+      a.set(1,2,0);
+      a.set(2,0,0);
+      a.set(2,1,0);
+      a.set(2,2,0);
+    }
 
 AGPaintProjection::AGPaintProjection(const AGClipping &pClip):advancedClipping(pClip)
-  {
-    a.set(0,0,1);
-    a.set(0,1,0);
-    a.set(0,2,0);
-    a.set(1,0,0);
-    a.set(1,1,1);
-    a.set(1,2,0);
-    a.set(2,0,0);
-    a.set(2,1,0);
-    a.set(2,2,0);
-  }
+    {
+      a.set(0,0,1);
+      a.set(0,1,0);
+      a.set(0,2,0);
+      a.set(1,0,0);
+      a.set(1,1,1);
+      a.set(1,2,0);
+      a.set(2,0,0);
+      a.set(2,1,0);
+      a.set(2,2,0);
+    }
 
 
 AGVector2 AGPaintProjection::project(const AGVector2 &p) const
@@ -218,23 +218,27 @@ AGLine2 AGPaintProjection::clipLine(AGLine2 l) const
 /////////////////////////////////////////////////////////////////////////////////
 
 AGPainter::AGPainter():mCurrent(getScreen().getRect()),mTarget(&getScreen())
-  {
-    mTarget->beginPaint();
-  }
+    {
+      CTRACE;
+      mTarget->beginPaint();
+    }
 
 AGPainter::AGPainter(const AGPainter &p):ps(p.ps),mCurrent(p.mCurrent),mTarget(p.mTarget)
-  {
-    mTarget->beginPaint();
-  }
+    {
+      CTRACE;
+      mTarget->beginPaint();
+    }
 
 AGPainter::AGPainter(AGPaintTarget &pTarget):mCurrent(pTarget.getRect()),mTarget(&pTarget)
-  {
-    mTarget->beginPaint();
-  }
+    {
+      CTRACE;
+      mTarget->beginPaint();
+    }
 
 
 AGPainter::~AGPainter()
   {
+    CTRACE;
     if(mTarget.valid())
       {
         mTarget->unclip();
@@ -320,7 +324,9 @@ void AGPainter::tile(const AGTexture &pSource)
   }
 void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest)
   {
-    tile(pSource,pDest,pSource.getRect());
+    AGRect2 sourceRect=pSource.getRect();
+
+    tile(pSource,pDest,sourceRect);
   }
 void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
   {

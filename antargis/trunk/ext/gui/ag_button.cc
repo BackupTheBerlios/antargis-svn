@@ -63,6 +63,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,i
 
     if(opengl())
       setCaching(true);
+      
   }
 
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
@@ -141,6 +142,7 @@ void AGButton::draw(AGPainter &p)
       p.drawBorder(mr,borderWidth,bc1,bc2);
     else 
       p.drawBorder(mr,borderWidth,bc2,bc1);
+      
   }
 
 
@@ -222,6 +224,7 @@ bool AGButton::eventMouseButtonUp(AGEvent *e)
     return AGWidget::eventMouseButtonUp(e);
   }
 
+
 void AGButton::setRect(const AGRect2 &r)
   {
     AGWidget::setRect(r);
@@ -245,7 +248,7 @@ void AGButton::updateClientRects()
   {
     std::list<AGWidget*>::iterator i=mChildren.begin();
     for(;i!=mChildren.end();i++)
-      (*i)->setRect(getRect().shrink(borderWidth));
+      (*i)->setRect(getRect().origin().shrink(borderWidth));
   }
 
 

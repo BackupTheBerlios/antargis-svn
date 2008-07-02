@@ -36,14 +36,16 @@ class AGEXPORT AGLayoutCreator:public AGSingleton
   //  virtual ~AGLayoutCreator();
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
   void setResult(AGWidget *pWidget);
+  void setClient(AGWidget *pWidget);
   AGWidget *getResult();
+  AGWidget *getClient();
 
   void clearResult();
 
   void mark();
  private:
    
-  AGWidget *mWidget;
+  AGWidget *mWidget,*mClient;
   
 
 };
@@ -59,7 +61,7 @@ class AGEXPORT AGLayoutFactory
   void addCreator(const AGString &pName,AGLayoutCreator *creator);
   void removeCreator(const AGString &pName,AGLayoutCreator *creator);
 
-  AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
+  std::pair<AGWidget*,AGWidget*> create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
   
   friend AGLayoutFactory *getLayoutFactory();
   

@@ -192,14 +192,14 @@ AGLocalTheme::AGLocalTheme(const AGString &pTheme):mTheme(pTheme)
 
 AGFont AGLocalTheme::getFont(const AGString &pName) const
   {
-    AGString t=mTheme+"."+pName;
+    AGString t=getName(pName);
     if(getTheme()->hasFont(t))
       return getTheme()->getFont(t);
     return getTheme()->getFont(pName);
   }
 AGColor AGLocalTheme::getColor(const AGString &pName) const
   {
-    AGString t=mTheme+"."+pName;
+    AGString t=getName(pName);
     if(getTheme()->hasColor(t))
       return getTheme()->getColor(t);
     return getTheme()->getColor(pName);
@@ -207,7 +207,7 @@ AGColor AGLocalTheme::getColor(const AGString &pName) const
 
 int AGLocalTheme::getInt(const AGString &pName) const
   {
-    AGString t=mTheme+"."+pName;
+    AGString t=getName(pName);
     if(getTheme()->hasInt(t))
       return getTheme()->getInt(t);
     return getTheme()->getInt(pName);
@@ -215,7 +215,7 @@ int AGLocalTheme::getInt(const AGString &pName) const
 
 AGSurface AGLocalTheme::getSurface(const AGString &pName) const
 {
-  AGString t=mTheme+"."+pName;
+  AGString t=getName(pName);
   if(getTheme()->hasSurface(t))
     return getTheme()->getSurface(t);
   return getTheme()->getSurface(pName);
@@ -223,7 +223,7 @@ AGSurface AGLocalTheme::getSurface(const AGString &pName) const
 
 std::string AGLocalTheme::getSurfaceName(const AGString &pName) const
 {
-  AGString t=mTheme+"."+pName;
+  AGString t=getName(pName);
   if(getTheme()->hasSurfaceName(t))
     return getTheme()->getSurfaceName(t);
   return getTheme()->getSurfaceName(pName);
@@ -231,25 +231,32 @@ std::string AGLocalTheme::getSurfaceName(const AGString &pName) const
 
 bool AGLocalTheme::hasFont(const AGString &pName) const
 {
-  return getTheme()->hasFont(mTheme+"."+pName);
+  return getTheme()->hasFont(getName(pName));
 }
 bool AGLocalTheme::hasColor(const AGString &pName) const
 {
-  return getTheme()->hasColor(mTheme+"."+pName);  
+  return getTheme()->hasColor(getName(pName));  
 }
 bool AGLocalTheme::hasInt(const AGString &pName) const
 {
-  return getTheme()->hasInt(mTheme+"."+pName);
+  return getTheme()->hasInt(getName(pName));
 }
 bool AGLocalTheme::hasSurface(const AGString &pName) const
 {
-  return getTheme()->hasSurface(mTheme+"."+pName);
+  return getTheme()->hasSurface(getName(pName));
 }
 bool AGLocalTheme::hasSurfaceName(const AGString &pName) const
 {
-  return getTheme()->hasSurfaceName(mTheme+"."+pName);
+  return getTheme()->hasSurfaceName(getName(pName));
 }
 
+AGString AGLocalTheme::getName(const AGString &pName) const
+{
+  if(mTheme.length()>0)
+    return mTheme+"."+pName;
+  else
+    return pName;
+}
 
 
 

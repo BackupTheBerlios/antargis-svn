@@ -24,31 +24,16 @@
 AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
   AGWidget(pParent,r),
   mTexture(pSurface),mTile(pTile),mScale(false)
-      {
-        mCenter=true;
-        //  CTRACE;
-        /*  if(pRect!=pSurface.getRect() && pRect.w()!=0 && pRect.h()!=0)
     {
-      //      mSrcRect=pRect;
+      mCenter=true;
+    }
 
-      setHeight(pRect.h());
-      setWidth(pRect.w());
-      }*/
-      }
 AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile):
   AGWidget(pParent,r),
   mTexture(pTexture),mTile(pTile)
-      {
-        mCenter=true;
-        //  CTRACE;
-        /*  if(pRect!=pTexture.getRect() && pRect.w()!=0 && pRect.h()!=0)
-    {
-      mSrcRect=pRect;
-
-      setHeight(pRect.h());
-      setWidth(pRect.w());
-      }*/
-      }
+  {
+    mCenter=true;
+  }
 
 
 
@@ -64,7 +49,7 @@ void AGImage::draw(AGPainter &p)
 
     if(mTile)
       {
-        p.tile(mTexture,getRect().origin());//,mSrcRect);
+        p.tile(mTexture,getRect().origin());
       }
     else if(center)
       {
@@ -72,12 +57,6 @@ void AGImage::draw(AGPainter &p)
         AGRect2 mr=getRect().origin();
         AGRect2 fr=mTexture.getRect();
 
-        /*     if(mScale) // disables centering
-          {
-            fr=
-          }
-        else 
-         */         
         if(mCenter && !mScale)
           mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);
 

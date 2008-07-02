@@ -192,15 +192,7 @@ void AGWidget::drawAll(AGPainter &p)
   }
 
 void AGWidget::drawChild(AGPainter &p,AGWidget *pWidget)
-  {/*
-    if(mUseClientRect)
-      {
-        p.pushMatrix();
-        p.transform(mClientProj.getMatrix());
-        pWidget->drawAll(p);
-        p.popMatrix();
-      }
-    else*/
+  {
     pWidget->drawAll(p);
   }
 
@@ -385,23 +377,21 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
 
     if(e->isSDLEvent())
       {
-        //        cdebug(e->getRelMousePosition()<<"::"<<getRect());
         if(getRect().contains(e->getRelMousePosition()))
           {
             if(was)
               {
-                //                cdebug("click");
                 e->setName("sigClick");
                 AGApplication *app=getApp();
                 assert(app);
                 if(app)
                   {
                     AGWidget *overlay=getApp()->getOverlay();
-                    //if(overlay)
+
                     if(!isParent(overlay))
                       app->setOverlay(0);
                   }
-                if(!isParent(getApp()->getOverlay())) //FIXME: crashes here
+                if(!isParent(getApp()->getOverlay()))
                   getApp()->setOverlay(0);
 
                 if(canFocus())
@@ -510,11 +500,17 @@ void AGWidget::regChange()
 
 void AGWidget::setRect(const AGRect2 &pRect)
   {
+    //queryRedraw();
+
+    if(mCache)
+      setCaching(true);
+    
     regChange();
     mRect=pRect;
     regChange();
     if(mParent)
       mParent->redraw();
+    
   }
 
 float AGWidget::minWidth() const
@@ -563,6 +559,8 @@ bool AGWidget::fixedHeight() const
 
 void AGWidget::setWidth(float w)
   {
+    if(mCache)
+      setCaching(true);
     regChange();
     mRect.setWidth(w);
     regChange();
@@ -570,6 +568,8 @@ void AGWidget::setWidth(float w)
   }
 void AGWidget::setHeight(float h)
   {
+    if(mCache)
+      setCaching(true);
     regChange();
     mRect.setHeight(h);
     regChange();
@@ -728,10 +728,14 @@ bool AGWidget::eventGotFocus()
 
 bool AGWidget::eventLostFocus()
   {
+    CTRACE;
     if(mFocus)
       mFocus->eventLostFocus();
     mHasFocus=false;
     mFocus=0;
+    
+    if(mChildren.size()>0)
+      (*mChildren.begin())->eventLostFocus();
 
     return false;
   }
@@ -743,14 +747,12 @@ void AGWidget::gainCompleteFocus(AGWidget *pWidget)
       mParent->gainCompleteFocus(this);
     if(pWidget)
       {
-        //      dbout(5000,mChildren.size());
         std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
         if(i!=mChildren.end())
           {
             mChildren.erase(i);
             mChildren.push_front(pWidget);
           }
-        //      dbout(5000,mChildren.size());
       }
 #endif
   }
@@ -760,7 +762,6 @@ void AGWidget::gainFocus(AGWidget *pWidget)
 #ifdef FOCUS_BY_SORT
     if(pWidget)
       {
-        //      dbout(5000,mChildren.size());
         std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
         if(i!=mChildren.end())
           {
@@ -773,7 +774,6 @@ void AGWidget::gainFocus(AGWidget *pWidget)
             pWidget->eventGotFocus();
 
           }
-        //      dbout(5000,mChildren.size());
       }
     else if(mParent)
       {
@@ -1055,6 +1055,8 @@ void AGWidget::setCaching(bool pEnable)
       {
         mCache=new AGTexture((int)width(),(int)height());
 
+        cdebug(width()<<"::"<<height());
+        
         mCacheTouched=true;
       }
   }

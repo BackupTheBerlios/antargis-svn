@@ -7,15 +7,20 @@
   
       <cell col="0" row="0">
         <toolBar name="toolbar">
-          <toolButton text="Save" name="save" caption="muh" caption-image="gui/save.png"/>
-          <toolButton text="Load" name="load" caption="muh" caption-image="gui/load.png"/>
+          <toolButton text="New" name="new" caption="muh" caption-image="gui/folder.png"/>
+          <toolButton text="Save" name="save" caption="muh" caption-image="gui/save.png" visible="true"/>
+          <toolButton text="Load" name="load" caption="muh" caption-image="gui/load.png" visible="true"/>
+          <!--<toolButton text="LoadOk" name="loadok" caption="muh" caption-image="gui/images/basic/haken.png" visible="true"/>-->
+          <toolEdit name="campaignName" text="noname" width="3" maxwidth="5"/>
+          <toolEdit name="campaignDescription" text="none" width="3" maxwidth="6" height="7"/>
+          <!--<toolCombo name="campaignFile"/>-->
         </toolBar>
       </cell>
   
       <cell col="0" row="1">
         <table cols="2" rows="2" name="bigTable">
           <colsize col="0" fixed="100"/>
-          <rowsize row="1" fixed="50"/>
+          <rowsize row="1" fixed="0"/>
     
           <cell col="0" row="0">
             <table cols="1" rows="4">
@@ -23,7 +28,7 @@
               <rowsize row="1" fixed="100"/>
               <rowsize row="2" fixed="100"/>
               <cell col="0" row="0">
-                <dragSource name="levelSource" class="DragBox" text="Level"/>
+                <dragSource name="levelSource" class="DragBoxLevel" text="Level"/>
               </cell>
         
               <cell col="0" row="1">
@@ -52,7 +57,7 @@
                 <edit name="textEdit"/>
               </cell>
               <cell col="1" row="0">
-                <button name="weiter" caption-image="data/gui/options.png"/>
+                <button name="edit" caption-image="data/gui/options.png"/>
               </cell>
             </table>
           </cell>
@@ -63,6 +68,6 @@
     <appearEffect name="showEdit" table="bigTable" row="1" size="40" duration="0.2"/>
     <hideEffect name="hideEdit" table="bigTable" row="1" size="40" duration="0.2"/>
   </dragEnvironment>
-  <storyEditor name="storyEditor"/>
+<!--  <storyEditor name="storyEditor" visible="false"/>-->
 
 </layout>

@@ -49,6 +49,9 @@ class AGEXPORT AGTable:public AGWidget
   
   void modifyColumn(size_t index,float w);
   void modifyRow(size_t index,float w);
+  
+  float getColumn(size_t c) const;
+  float getRow(size_t c) const;
 
   void addChild(int x,int y,AGWidget *pWidget);
   AGRect2 getClientRect(int x,int y) const;

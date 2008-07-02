@@ -60,10 +60,10 @@ AGBackground::AGBackground(const AGColor &pColor):mTexture(0)
 AGBackground::AGBackground(const AGString &pThemeName):mTexture(0)
   {
     AGTheme *theme=getTheme();
-loadFromTheme(theme->getTheme(""),pThemeName);
+    loadFromTheme(theme->getTheme(""),pThemeName);
   }
 
-AGBackground::AGBackground(const AGLocalTheme &pTheme,const AGString &pThemeName)
+AGBackground::AGBackground(const AGLocalTheme &pTheme,const AGString &pThemeName):mTexture(0)
   {
     loadFromTheme(pTheme,pThemeName);
   }
@@ -100,9 +100,15 @@ void AGBackground::loadFromTheme(const AGLocalTheme &pTheme,const AGString &pThe
 /// draws the background on painter in the given rectangle
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)
   {
+    assert(&p);
+    assert(&r);
     if(mTexture)
       {
-        p.tile(*mTexture,r.shrink(mBorder));
+        cdebug("painter:"<<&p);
+        cdebug(mTexture);
+        AGRect2 s=r.shrink(mBorder);
+        const AGTexture &t=*mTexture;
+        p.tile(t,s);//*mTexture,r.shrink(mBorder));
       }
     else if(mColor)
       p.drawGradient(r.shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);

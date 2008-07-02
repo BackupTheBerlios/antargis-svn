@@ -538,6 +538,10 @@ bool AGEdit::processKey(SDLKey k,Uint16 unicode)
       }
     else if(k==SDLK_ESCAPE)
       {}
+    else if(k==SDLK_DOWN)
+      {}
+    else if(k==SDLK_UP)
+      {}
     else if((unicode&0xFFF8)!=0 || (k>=SDLK_0 && k<=SDLK_9) || (k>=SDLK_a && k<=SDLK_z))
       {
         ins=AGStringUtf8(unicode2Utf8(unicode));

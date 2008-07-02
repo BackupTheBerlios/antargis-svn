@@ -1,6 +1,11 @@
 require 'ruby/antargislib.rb'
 require 'pp'
 
+require File.join(File.split(__FILE__)[0],"dialogs.rb")
+require File.join(File.split(__FILE__)[0],"toolbar.rb")
+
+#setDebugLevel(0)
+
 # TODO:
 # * put all draggable-objects within context of DragEnvironemt
 
@@ -28,11 +33,11 @@ module Arrows
       ]
   end
   def getArrowTriangles(from,to,width)
-    puts "gettin tris"
+    #puts "gettin tris"
     ps=createArrowPolies(from,to,width)
     ts=[ps[0][0..2],ps[0][1..3],ps[1]]
     r=ts.map{|t|AGTriangle2.new(t[0],t[1],t[2])}
-    puts "gettin tris!"
+    #puts "gettin tris!"
     r
   end
 end
@@ -171,12 +176,16 @@ class HideEffect<Effect
     @name=node["name"]
     @target=node["table"]
     @row=node["row"].to_i
-    @size=50
+    #@size=50
+    @size=nil
     
   end
   def step(amount)
-    table=getApp.getMainWidget.getChild(@target)
+    @size||=table.getRow(@row)
     table.modifyRow(@row,(1-amount)*@size)
+  end
+  def table
+    getApp.getMainWidget.getChild(@target)
   end
 end
 
@@ -375,6 +384,9 @@ class DragBox<AGHoverWidget
   end
 end
 
+class DragBoxLevel<DragBox
+end
+
 class DragBoxStory<DragBox
   def initialize(p,r,text)
     super
@@ -493,68 +505,6 @@ class DragLine<AGWidget
 end
 
 
-class AGWidgetWithConfig<AGWidget
-  def initialize(p,r,ops)
-    @options=ops
-    super(p,r)
-  end
-  def getColor(name,default)
-    v=@options[name]
-    c=AGColor.new(v) if v=~/#[0-9A-Fa-f]{6}/
-    c||=AGColor.new(default)
-    c
-  end
-end
-
-class ToolBar<AGWidgetWithConfig
-  attr_reader :borderWidth
-  def initialize(p,r,ops)
-    super
-    @ul=getColor("ul","#CCCCCC")
-    @ur=getColor("ur","#CCCCCC")
-    @ll=getColor("ll","#999999")
-    @lr=getColor("lr","#999999")
-    @borderWidth=ops["borderWidth"].to_i
-    @count=0
-  end
-  def draw(p)
-    p.drawGradient(getRect.origin,@ul,@ur,@ll,@lr)
-  end
-  def getNextChildRect
-    cCount=getChildren.length
-    #cCount=@count
-    #@count+=1
-    #p getChildRects,cCount
-    #exit
-    getChildRects[cCount].shrink(3)
-  end
-  
-  def getChildRects
-    rectSize=[width,height].min
-    rects=[]
-    0.upto(width/rectSize-1){|x|
-      0.upto(height/rectSize-1){|y|
-        rects<<AGRect.new(x*rectSize,y*rectSize,rectSize,rectSize)
-      }
-    }
-    rects
-  end
-end
-
-class ToolButton<AGButton
-  def initialize(p,r,ops)
-    puts "MUH1"
-    puts self.object_id
-    text=AGStringUtf8.new("HUP")
-    super(p,r,text)
-    setCaching(false)
-    puts "MUH2"
-    setRect(p.getNextChildRect)
-    setCaption(text)
-    setSurface(AGSurface::load(ops["caption-image"])) if ops["caption-image"]
-    setName(ops["name"])
-  end
-end
 
 
 class DragGrid<AGWidgetWithConfig
@@ -684,7 +634,7 @@ class DragSource<AGHoverWidget
 end
 
 
-[DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,AppearEffect,HideEffect].each{|c|standardLayoutCreator(c)}
+[DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,ToolEdit,ToolCombo,AppearEffect,HideEffect].each{|c|standardLayoutCreator(c)}
 
 require File.join(File.split(__FILE__)[0],'story_editor.rb')
 
@@ -714,6 +664,9 @@ def createSignal(x)
   }
 end
 
+require File.join(File.split(__FILE__)[0],"campaign_data.rb")
+
+
 class CampaignEditorApp<AGApplication
   def initialize()
     super
@@ -725,11 +678,14 @@ class CampaignEditorApp<AGApplication
     setMainWidget(layout)
     layout.setApp(self)
     if layout.getChild("bigTable")
-      layout.getChild("bigTable").modifyRow(1,10)
       env=layout.getChild("dragEnvironment")
       @grid=layout.getChild("dragGrid")
       addHandler(env,:sigClick,:eventDeselect)
     end
+    
+    addHandler(layout.getChild("edit"),:sigClick,:eventEdit)
+    
+    initSavingLoading
   end
   def eventDeselect
     @grid.select(nil) if @grid
@@ -741,5 +697,39 @@ class CampaignEditorApp<AGApplication
   def getEffect(name)
     @layout.getChild(name)
   end
+  def eventEdit
+    widget=nil
+    case @grid.selected
+      when DragBoxStory
+        widget=StoryEditor.new(@layout,@layout.getRect,{})
+      when DragBoxLevel
+        # FIXME
+    end
+    
+    @layout.addChild(widget) if widget
+    true
+  end
+  
+  def initSavingLoading
+    addHandler(@layout.getChild("load"),:sigClick,:eventLoad)    
+    addHandler(@layout.getChild("save"),:sigClick,:eventSave)    
+ #   pp Campaign.getAll
+ #   exit
+  end
+  
+  def eventLoad
+    
+    true
+  end
+  def eventSave
+    d=CampaignEditor::SaveDialog.new(@layout)
+    #d.loadXML(loadFile("data/gui/layout/editor/campaign/save_dialog.xml"))
+    #@layout.addChild(d)
+    #l=AGLayout.new(@layout)
+    #l.loadXML(loadFile())
+    #@layout.addChild(l)
+    true
+  end
+  
 end
 

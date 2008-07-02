@@ -246,6 +246,30 @@
       </background>
     </window>
   </black>
+  <blue>
+    <window>
+      <border>
+        <image name="image" file="data/gui/buttontest3.png"/>
+      </border>
+      <title>
+        <font name="font" file="FreeSans.ttf" size="16" color='#FFFFFF'/>
+        <background>
+          <value name="border" value="0"/>
+          <color name='gradientColor1' color='#54555b'/>
+          <color name='gradientColor2' color='#3c3d41'/>
+          <color name='gradientColor3' color='#3c3d41'/>
+          <color name='gradientColor4' color='#12141c'/>
+        </background>
+      </title>
+      <buttons>
+        <image name="close" file="data/gui/close_button.png"/>
+      </buttons>
+      <background>
+        <value name="border" value="0"/>
+        <color name="color" color='#000088'/>
+      </background>
+    </window>
+  </bluek>
 	
 	
 	<yellowButton>

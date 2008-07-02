@@ -1,7 +1,6 @@
 require File.join(File.split(__FILE__)[0],'image_list.rb')
 require File.join(File.split(__FILE__)[0],'image_list_2d.rb')
 
-StoryScreen=Struct.new(:imageFilename,:text)
 
 class StoryEditor<AGWidget
   def initialize(p,r,options)
@@ -17,6 +16,8 @@ class StoryEditor<AGWidget
     @next=getChild("next")
     @prev=getChild("prev")
     @edit=getChild("edit")
+    @ok=getChild("ok")
+    @cancel=getChild("cancel")
     
     @prev.setEnabled(false)
     @story=[makeNewScreen]
@@ -24,7 +25,19 @@ class StoryEditor<AGWidget
     addHandler(@next,:sigClick,:eventNext)
     addHandler(@prev,:sigClick,:eventPrev)
     addHandler(@edit,:sigModified,:eventText)
+    
+    addHandler(@cancel,:sigClick,:eventCancel)
+    addHandler(@ok,:sigClick,:eventOk)
     @cursor=0
+  end
+  
+  def eventCancel
+    close
+    true
+  end
+  def eventOk
+    close
+    true
   end
   
   def eventText(e)

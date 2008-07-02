@@ -47,6 +47,9 @@ class AGEXPORT AGLocalTheme
     bool hasSurfaceName(const AGString &pName) const;
     
   private:
+    
+    AGString getName(const AGString &pName) const;
+    
     AGString mTheme;
   };
 

@@ -146,41 +146,43 @@ AGWidget *parseNode(AGWidget *pParent,const Node &pNode)
 
     AGRect2 geom=getLayoutGeometry(pParent,pNode);
 
-    AGWidget *w=0;
+    std::pair<AGWidget*,AGWidget*> result;
 
     //  cdebug("n:"<<n);
 
-    w=getLayoutFactory()->create(pParent,geom,pNode);
+    result=getLayoutFactory()->create(pParent,geom,pNode);
+    AGWidget *outer=result.first;
+    AGWidget *inner=result.second;
 
-    if(w!=0 && pNode.get("name").length())
-      w->setName(pNode.get("name"));
+    if(outer!=0 && pNode.get("name").length())
+      outer->setName(pNode.get("name"));
 
-    if(w!=0 && pNode.get("visible")=="false")
-      w->hide();
+    if(outer!=0 && pNode.get("visible")=="false")
+      outer->hide();
 
-    if(w!=0 && pNode.get("tooltip").length())
-      w->setTooltip(_(pNode.get("tooltip")));
+    if(outer!=0 && pNode.get("tooltip").length())
+      outer->setTooltip(_(pNode.get("tooltip")));
 
-    if(w!=0 && pNode.get("tabindex").length())
+    if(outer!=0 && pNode.get("tabindex").length())
       {
         AGLayout *l=getLayout(pParent);
         if(l)
           {
-            l->addTabIndex(pNode.get("tabindex").toInt(),w);
+            l->addTabIndex(pNode.get("tabindex").toInt(),outer);
           }
         else
           cdebug("ERROR in parseNode(.):tabindex given but not embedded in layout???");
       }
 
-    if(w!=0 && pNode.get("cache")=="true")
-      w->setCaching(true);
+    if(outer!=0 && pNode.get("cache")=="true")
+      outer->setCaching(true);
 
-    parseChildren(w,pNode);
+    parseChildren(inner,pNode);
 
-    if(w)
-      w->initHandlers();
+    if(outer)
+      outer->initHandlers();
 
-    return w;
+    return outer;
   }
 
 AGRect2 getLayoutGeometry(AGWidget *pParent,const Node &pNode)

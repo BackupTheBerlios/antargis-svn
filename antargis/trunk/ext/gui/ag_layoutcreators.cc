@@ -112,19 +112,19 @@ public:
 
       for(int k=0;k<w;k++)
         {
-          if(cols[k].first==0.0f) // not inited
-            t->addColumn(1.0f);
-          else if(cols[k].second)
+          if(cols[k].second)
             t->addFixedColumn(cols[k].first);
+          else if(cols[k].first==0.0f) // not inited
+            t->addColumn(1.0f);
           else
             t->addColumn(cols[k].first);
         }
       for(int k=0;k<h;k++)
         {
-          if(rows[k].first==0.0f) // not inited
-            t->addRow(1.0f);
-          else if(rows[k].second)
+          if(rows[k].second)
             t->addFixedRow(rows[k].first);
+          else if(rows[k].first==0.0f) // not inited
+            t->addRow(1.0f);
           else
             t->addRow(rows[k].first);
         }
@@ -397,7 +397,17 @@ public:
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
     {
-      setResult(new AGCell(pParent,pRect));
+      AGCell *cell=new AGCell(pParent,pRect);
+      if(pNode.get("padding")!="")
+        {
+          int padx=pNode.get("padding").toInt();
+          int pady=pNode.get("padding").toInt();
+          AGFrame *frame=new AGFrame(cell,cell->getRect().origin(),padx,pady);
+          cell->addChild(frame);
+          setClient(frame);
+        }
+      
+      setResult(cell);
     }
 };
 IMPLEMENT_COMPONENT_FACTORY(Cell);

@@ -22,7 +22,7 @@
 #include "ag_debug.h"
 #include "ag_kill.h"
 
-AGLayoutCreator::AGLayoutCreator():mWidget(0)
+AGLayoutCreator::AGLayoutCreator():mWidget(0),mClient(0)
 {
 }
 
@@ -36,14 +36,27 @@ void AGLayoutCreator::setResult(AGWidget *pWidget)
     if(mWidget)
       getLayoutFactory()->getCurrentLayout()->addChildRef(mWidget);
   }
+
+void AGLayoutCreator::setClient(AGWidget *pWidget)
+  {
+    mClient=pWidget;
+    if(pWidget)
+      getLayoutFactory()->getCurrentLayout()->addChildRef(pWidget);
+  }
+
 AGWidget *AGLayoutCreator::getResult()
   {
     return mWidget;
+  }
+AGWidget *AGLayoutCreator::getClient()
+  {
+    return mClient;
   }
 
 void AGLayoutCreator::clearResult()
   {
     mWidget=0;
+    mClient=0;
   }
 
 void AGLayoutCreator::mark()
@@ -76,25 +89,32 @@ void AGLayoutFactory::removeCreator(const AGString &pName,AGLayoutCreator *creat
   }
 
 
-AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
+/**
+ *  \returns a pair of 2 widgets. The first one is the outer widget, which shoudl be inserted. The second one is the widget,
+ * in which all children should be inserted.
+*/
+std::pair<AGWidget *,AGWidget*> AGLayoutFactory::create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     AGLayoutCreator *creator=mCreators[pNode.getName()];
 
     if(creator)
       {
-        AGWidget *w;
+        AGWidget *outer,*inner;
         creator->create(pParent,pRect,pNode);
-        w=creator->getResult();
+        outer=creator->getResult();
+        inner=creator->getClient();
         creator->clearResult();
+        if(inner==0)
+          inner=outer;
 
-        return w;
+        return std::make_pair(outer,inner);
       }
     std::string name;
     if(name!="" && name!="colsize" && name!="rowsize")
       {
         cdebug("no creation at:"<<name);
       }
-    return 0;
+    return std::make_pair((AGWidget*)0,(AGWidget*)0);
   }
 
 void AGLayoutFactory::pushLayout(AGLayout *pLayout)

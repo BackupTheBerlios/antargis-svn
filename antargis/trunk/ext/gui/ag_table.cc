@@ -332,6 +332,17 @@ size_t AGTable::getColumns() const
   return cols.size();
 }
 
+float AGTable::getColumn(size_t c) const
+{
+  assert(c<cols.size());
+  return cols[c].first;
+}
+float AGTable::getRow(size_t c) const
+{
+  assert(c<rows.size());
+  return rows[c].first;
+}
+
 
 void AGTable::modifyColumn(size_t index,float w)
   {

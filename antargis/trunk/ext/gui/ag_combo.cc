@@ -127,3 +127,31 @@ void AGComboBox::clear()
     mID="";
     update();
   }
+
+
+
+void AGComboBox::setRect(const AGRect2 &r)
+  {
+    AGWidget::setRect(r);
+    updateClientRects();
+  }
+
+void AGComboBox::setWidth(float w)
+  {
+    assert(w>=0);
+    AGWidget::setWidth(w);
+    updateClientRects();
+  }
+
+void AGComboBox::setHeight(float h)
+  {
+    assert(h>=0);
+    AGWidget::setHeight(h);
+    updateClientRects();
+  }
+
+void AGComboBox::updateClientRects()
+  {
+    mEdit->setRect(AGRect2(0,0,width()-height(),height()));
+    mButton->setRect(AGRect2(width()-height(),0,height(),height()));
+  }

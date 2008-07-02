@@ -23,14 +23,24 @@
               </frame>
             </cell>
             <cell col="0" row="0">
-              <frame width="10" height="40">
-                <button name="prev" caption-image="data/gui/arrow_left.png"/>
-              </frame>
+              <table cols="1" rows="2">
+                <frame col="0" row="0" width="5">
+                  <button name="prev" caption-image="data/gui/arrow_left.png"/>
+                </frame>
+                <frame col="0" row="1" width="5">
+                  <button name="cancel" caption-image="data/gui/images/basic/cross.png"/>
+                </frame>
+              </table>
             </cell>
             <cell col="2" row="0">
-              <frame width="10" height="40">
-                <button name="next" caption-image="data/gui/arrow_right.png"/>
-              </frame>
+              <table cols="1" rows="2">
+                <frame col="0" row="0" width="5">
+                  <button name="next" caption-image="data/gui/arrow_right.png"/>
+                </frame>
+                <frame col="0" row="1" width="5">
+                  <button name="ok" caption-image="data/gui/images/basic/checkmark.png"/>
+                </frame>
+              </table>
             </cell>
             <cell col="1" row="1">
               <text name="info"/>
