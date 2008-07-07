@@ -58,6 +58,7 @@ require 'ruby/antargislib.rb'
     def negative_failure_message
       bt=""
       bt=@@backtrace[@callName].join("\n") if @@backtrace[@callName] 
+      printStacktrace
       "expected #{@proc.inspect} not to call #{@expected} BT:#{bt}"
     end
     def Cross.symCall(name)

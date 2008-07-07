@@ -16,14 +16,27 @@ Level=Struct.new(:filename,:x,:y)
 Edge=Struct.new(:from,:to,:name)
 
 class Campaign
+  CampaignDir="data/campaigns"
+  
   def self.getAllFilenames
-    dir="data/campaigns"
-    getDirectory(dir).uniq.select{|f|f=~/\.xml/}    
+    getDirectory(CampaignDir).uniq.select{|f|f=~/\.xml/}    
   end
   
   def self.getAll
-    getAllFilenames.map{|file|self.new(dir+"/"+file)}
+    getAllFilenames.map{|file|self.new(CampaignDir+"/"+file)}
   end
+  
+  def self.loadCampaign(filename)
+    filename+=".xml" unless filename=~/\.xml/
+    getAllFilenames.each{|f|
+      if f==filename
+        return self.new(CampaignDir+"/"+filename)
+      end
+    }
+    nil
+  end
+  
+  attr_reader :nodes, :edges
   
   def initialize(filename)
     c=loadFile(filename)
@@ -37,7 +50,6 @@ class Campaign
     varNames.each{|n|@vars[n]=d.root.get(n)}
     
     d.root.getChildren.each{|child|
-      #pp child.getName
       node=nil
       case child.getName
         when "cutscene"
@@ -65,10 +77,10 @@ class Campaign
         end
       #raise "FIXME: read position"
       
-	      nodename=child.get("name")
-	      
-	      nodename="node#{@nodes.length}" if nodename==""
-	      @nodes[nodename]=node
+        nodename=child.get("name")
+        
+        nodename="node#{@nodes.length}" if nodename==""
+        @nodes[nodename]=node
         unless hasEdges
           @edges<<Edge.new("node#{@nodes.length-2}",nodename,"") if @nodes.length>1
         end

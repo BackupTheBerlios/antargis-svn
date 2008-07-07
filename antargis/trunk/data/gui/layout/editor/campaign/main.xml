@@ -13,6 +13,7 @@
           <!--<toolButton text="LoadOk" name="loadok" caption="muh" caption-image="gui/images/basic/haken.png" visible="true"/>-->
           <toolEdit name="campaignName" text="noname" width="3" maxwidth="5"/>
           <toolEdit name="campaignDescription" text="none" width="3" maxwidth="6" height="7"/>
+          <toolButton text="Quit" name="quit" caption-image="gui/door.png"/>
           <!--<toolCombo name="campaignFile"/>-->
         </toolBar>
       </cell>

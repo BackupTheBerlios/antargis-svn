@@ -70,9 +70,12 @@ class AGEXPORT AGListBox:public AGWidget
   
   std::map<AGString,AGStringUtf8> getValues() const;
 
+  void setTheme(const AGString &pTheme);
+
  private:
 
-  void arrange();
+   void rearrange();
+   void arrange();
 
   int mY;
   std::vector<AGListBoxItem> mItems;

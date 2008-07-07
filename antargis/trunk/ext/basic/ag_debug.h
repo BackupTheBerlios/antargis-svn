@@ -115,6 +115,7 @@ AGEXPORT void agRaise(const std::string &s);
 #endif
 
 void setRubyRaising(bool flag);
+void printStacktrace();
 
 
 #endif

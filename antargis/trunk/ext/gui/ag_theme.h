@@ -27,7 +27,12 @@
 #include "ag_font.h"
 #include "ag_surface.h"
 
+#include "ag_border.h"
+#include "ag_gradient.h"
+#include "ag_background.h"
+
 #include <map>
+
 
 class AGEXPORT AGLocalTheme
   {
@@ -81,6 +86,15 @@ class AGEXPORT AGTheme
 
   
   AGLocalTheme getTheme(const AGString &pTheme) const;
+  
+  
+  
+  // advanced functions
+  
+  AGGradient getGradient(const AGString &pName) const;
+  AGBackground getBackground(const AGString &pName) const;
+  AGBorder getBorder(const AGString &pName) const;
+  
 
  private:
 
@@ -91,6 +105,12 @@ class AGEXPORT AGTheme
   std::map<AGString,AGSurface> mSurfaces;
   std::map<AGString,std::string> mSurfaceNames;
   std::map<AGString,int> mInts;
+  
+  
+  std::map<AGString,AGGradient> mGradients;
+  std::map<AGString,AGBackground> mBackgrounds;
+  std::map<AGString,AGBorder> mBorders;
+  
 };
 
 AGEXPORT AGTheme *getTheme();

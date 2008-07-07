@@ -261,7 +261,10 @@ public:
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
     {
-      setResult(new AGListBox(pParent,pRect));
+      AGListBox *l=new AGListBox(pParent,pRect);
+      if(pNode.get("theme").length()>0)
+        l->setTheme(pNode.get("theme"));
+      setResult(l);
     }
 };
 IMPLEMENT_COMPONENT_FACTORY(ListBox);
@@ -519,7 +522,6 @@ IMPLEMENT_COMPONENT_FACTORY(ScreenWidget);
 
 
 
-// AGListBox creator
 class AGScrollingWidgetCreator:public AGLayoutCreator
 {
 public:

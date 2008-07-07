@@ -53,6 +53,8 @@ bool getNewClippingTechnique()
     return gNewClippingTechnique;
   }
 
+std::set<AGWidget*> AGWidget::allWidgets;
+
 
 AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
@@ -65,24 +67,28 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
   mHasFocus(false),mFocus(0)
 
-    {
-      mEventsInited=false;
-      CTRACE;
-      if(mParent)
-        mParent->addChildRef(this);
+  {
+    allWidgets.insert(this);
 
-      mChangeRect=AGRect2(0,0,0,0);
-      mCache=0;
-      mCacheTouched=false;
-      mTooltipWidget=0;
-      mModal=false;
+    mEventsInited=false;
+    CTRACE;
+    if(mParent)
+      mParent->addChildRef(this);
 
-      getMain()->getCollector()->insertGlobal(this);
-    }
+    mChangeRect=AGRect2(0,0,0,0);
+    mCache=0;
+    mCacheTouched=false;
+    mTooltipWidget=0;
+    mModal=false;
+
+    getMain()->getCollector()->insertGlobal(this);
+  }
 
 AGWidget::~AGWidget()
   {
+    allWidgets.erase(this);
     CTRACE;
+    cdebug(getName());
 
     if(hasMain())
       getMain()->getCollector()->removeGlobal(this);
@@ -90,11 +96,40 @@ AGWidget::~AGWidget()
     std::list<AGWidget*>::iterator i=mChildren.begin();
     for(;i!=mChildren.end();i++)
       {
-        (*i)->setParent(0);
+        if(valid(*i))
+          {
+            cdebug("notify child:"<<*i);
+            (*i)->setParent(0);
+            cdebug("notify ok");
+          }
       }
+    for(std::set<AGWidget*>::iterator i=mRefChildren.begin();i!=mRefChildren.end();i++)
+      {
+        if(valid(*i))
+          {
+            cdebug("notify child:"<<*i);
+            (*i)->setParent(0);
+            cdebug("notify ok");
+          }
+      }
+
+    cdebug(mParent);
     if(getParent())
-      getParent()->eventChildrenDeleted(this);
+      {
+        if(valid(getParent()))
+          {
+            cdebug("notify parent:"<<getParent());
+            getParent()->eventChildrenDeleted(this);
+          }
+      }
   }
+
+bool AGWidget::valid(AGWidget *pWidget)
+  {
+    return (allWidgets.find(pWidget)!=allWidgets.end());
+
+  }
+
 
 std::list<AGWidget*> AGWidget::getChildren()
   {
@@ -121,7 +156,7 @@ void AGWidget::eventChildrenDeleted(AGWidget *pWidget)
         if(*i==pWidget)
           {
             mChildren.erase(i);
-            break;
+            //break; // do not break, beacuse a list could have this child more than once ???
           }
       }
     i=mToClear.begin();
@@ -130,9 +165,10 @@ void AGWidget::eventChildrenDeleted(AGWidget *pWidget)
         if(*i==pWidget)
           {
             mToClear.erase(i);
-            break;
+            // break; // same as above
           }
       }
+    mRefChildren.erase(pWidget);
   }
 
 
@@ -148,6 +184,7 @@ void AGWidget::delObjects()
         std::list<AGWidget*>::iterator i=mToClear.begin();
         for(;i!=mToClear.end();i++)
           {
+            (*i)->setParent(0); // lets play it safe 
             saveDelete(*i);
           }
         mToClear.clear();
@@ -272,11 +309,11 @@ bool AGWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
      */
     event->setRelMousePosition(newP);
     bool wasClipped=event->isClipped();
-    
+
     event->setClipped(wasClipped || (!getRect().contains(old)));
 
     retValue=pChild->processEvent(event);
-    
+
     event->setClipped(wasClipped);
     event->setRelMousePosition(old);
 
@@ -448,6 +485,8 @@ void AGWidget::addChildRef(AGWidget *pWidget)
 
 void AGWidget::addChild(AGWidget *w)
   {
+    if(w->getParent())
+      w->getParent()->mRefChildren.erase(w);
     mRefChildren.erase(w);
 
     mChildren.push_front(w); // set on top
@@ -480,8 +519,30 @@ void AGWidget::erase(AGWidget *w)
 
 void AGWidget::addChildBack(AGWidget *w)
   {
+    if(w->getParent())
+      w->getParent()->mRefChildren.erase(w);
+    mRefChildren.erase(w);
+
+    // check if children already exists
+    Children::iterator i;
+    do
+      {
+        i=std::find(mChildren.begin(),mChildren.end(),w);
+        if(i!=mChildren.end())
+          mChildren.erase(i);
+      }while(i!=mChildren.end());
+    
+    
     mChildren.push_back(w); // set on top
-  }
+
+    if(mHasFocus && w->canFocus())
+      {
+        gainFocus(w);
+      }
+    if(!w->getParent())
+      w->setParent(this);
+    queryRedraw();
+}
 
 void AGWidget::regChange()
   {
@@ -500,17 +561,15 @@ void AGWidget::regChange()
 
 void AGWidget::setRect(const AGRect2 &pRect)
   {
-    //queryRedraw();
-
-    if(mCache)
+    if(mCache&&(width()!=pRect.width()||height()!=pRect.height()))
       setCaching(true);
-    
+
     regChange();
     mRect=pRect;
     regChange();
     if(mParent)
       mParent->redraw();
-    
+
   }
 
 float AGWidget::minWidth() const
@@ -559,7 +618,7 @@ bool AGWidget::fixedHeight() const
 
 void AGWidget::setWidth(float w)
   {
-    if(mCache)
+    if(mCache && width()!=w)
       setCaching(true);
     regChange();
     mRect.setWidth(w);
@@ -568,7 +627,7 @@ void AGWidget::setWidth(float w)
   }
 void AGWidget::setHeight(float h)
   {
-    if(mCache)
+    if(mCache && height()!=h)
       setCaching(true);
     regChange();
     mRect.setHeight(h);
@@ -631,10 +690,17 @@ void AGWidget::setVisible(bool v)
 
 void AGWidget::setParent(AGWidget *pParent)
   {
+    CTRACE;
     //mOldMousePos.setX(-20000); // set oldmousepos invalid -- see eventMouseMotion 
+
 
     if(!mParent)
       {
+        AGWidget *old=mParent;
+        mParent=pParent;
+        cdebug(old);
+        if(mParent==0 && old!=0)
+          old->eventChildrenDeleted(this);
         if(hasMain())
           getMain()->getCollector()->removeGlobal(this);
       }
@@ -658,11 +724,13 @@ AGVector2 AGWidget::getScreenPosition() const
  */
 AGRect2 AGWidget::getScreenRect() const
 {
-  //return toScreen(getRect());
+  CTRACE;
   AGRect2 r=getRect();
   if(mParent)
     {
-      return mParent->toScreen(getRect());
+      AGRect2 result=mParent->toScreen(getRect());
+      cdebug(getRect()<<"::"<<result);
+      return result;
     }
   return r;
 }
@@ -733,7 +801,7 @@ bool AGWidget::eventLostFocus()
       mFocus->eventLostFocus();
     mHasFocus=false;
     mFocus=0;
-    
+
     if(mChildren.size()>0)
       (*mChildren.begin())->eventLostFocus();
 
@@ -1042,6 +1110,7 @@ void AGWidget::prepareDraw()
  */
 void AGWidget::setCaching(bool pEnable)
   {
+
     if(getConfig()->get("widgetTextureCache")=="false")
       return;
     getConfig()->set("widgetTextureCache","true");
@@ -1055,8 +1124,6 @@ void AGWidget::setCaching(bool pEnable)
       {
         mCache=new AGTexture((int)width(),(int)height());
 
-        cdebug(width()<<"::"<<height());
-        
         mCacheTouched=true;
       }
   }
@@ -1156,6 +1223,7 @@ void AGWidget::sigTick(float pTime)
 
 void AGWidget::close()
   {
+    CTRACE;
     if(mParent)
       {
         mParent->removeChild(this);
@@ -1286,7 +1354,7 @@ AGRect2 AGWidget::outerToInner(const AGRect2 &p) const
   AGRect2 m=p;
 
   if(mUseClientRect)
-      m=mClientProj.inverse().project(m);
+    m=mClientProj.inverse().project(m);
   return m-getRect().getV0();
 }
 AGVector2 AGWidget::outerToInner(const AGVector2 &p) const
@@ -1309,5 +1377,5 @@ void AGWidget::initEvents()
 
 void AGWidget::eventInitEvents()
   {
-    
+
   }

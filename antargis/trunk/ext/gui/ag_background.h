@@ -27,9 +27,9 @@
 #include "ag_geometry.h"
 #include "ag_texture.h"
 #include "ag_color.h"
-#include "ag_theme.h"
 
 class AGPainter;
+class AGLocalTheme;
 
 /** AGBackground is a helper class for widget-drawing
     It is used to draw gradients and tiled backgrounds of widgets.

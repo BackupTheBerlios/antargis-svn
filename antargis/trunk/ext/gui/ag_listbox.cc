@@ -34,20 +34,15 @@ AGListBoxItem::AGListBoxItem(AGString pID,AGStringUtf8 pValue)
   }
 
 AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pRect),
-sigSelect(this,"sigSelect"),
-sigDoubleClick(this,"sigDoubleClick")
+  sigSelect(this,"sigSelect"),
+  sigDoubleClick(this,"sigDoubleClick")
 {
-  mBackground=AGBackground("listbox.background");
-  mHilight=AGBackground("listbox.selected");
   // insert AGEdits
   int y=0;
   int count=0;
   mItemHeight=getTheme()->getInt("listbox.item.height");
   if(mItemHeight<5)
     mItemHeight=25;
-
-  AGFont f=getTheme()->getFont("listbox.font");
-
 
   mScroller=new AGScroller(this,AGRect2(width()-mItemHeight,0,mItemHeight,height()),false);
   addChild(mScroller);
@@ -57,11 +52,10 @@ sigDoubleClick(this,"sigDoubleClick")
   for(;y<pRect.h();y+=mItemHeight,count++)
     {
       AGRect2 r(0,y,pRect.w()-mItemHeight,mItemHeight);
-      //      cdebug(r);
       AGEdit *e=new AGEdit(this,r);
       e->setMutable(false);
       e->setBackground(false);
-      e->setFont(f);
+      //e->setFont(f);
       AGStringStream os;
       os<<"ListBoxItem"<<count;
       e->setName(os.str());
@@ -72,7 +66,45 @@ sigDoubleClick(this,"sigDoubleClick")
   mHeight=count;
   mY=0;
   mSelected=-1;
+  
+  setTheme("");
 }
+
+void AGListBox::setTheme(const AGString &pTheme)
+  {
+    AGString themeName=pTheme;
+    if(themeName.length()==0)
+      themeName="listbox";
+    else
+      themeName+="listbox";
+    
+    AGLocalTheme theme=getTheme()->getTheme(themeName);
+    mBackground=AGBackground(theme,"background");
+    mHilight=AGBackground(theme,"selected");
+
+    AGFont f=theme.getFont("font");
+
+    // change fonts for edits
+    for(std::vector<AGEdit*>::iterator i=mEdits.begin();i!=mEdits.end();i++)
+      (*i)->setFont(f);
+
+    rearrange();
+    
+    
+  }
+
+void AGListBox::rearrange()
+  {
+    mItemHeight=getTheme()->getInt("listbox.item.height");
+    if(mItemHeight<5)
+      mItemHeight=25;
+
+    mScroller->setRect(AGRect2(width()-mItemHeight,0,mItemHeight,height()));
+
+    int count=0;
+    for(int y=0;y<height();y+=mItemHeight,count++)
+        mEdits[count]->setRect(AGRect2(0,y,width()-mItemHeight,mItemHeight));
+  }
 
 void AGListBox::insertItem(AGString pID,AGStringUtf8 pValue)
   {

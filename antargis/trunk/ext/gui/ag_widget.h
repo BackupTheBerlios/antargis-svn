@@ -97,7 +97,7 @@ public:
   virtual AGRect2 getClientRect() const;
   virtual void setRect(const AGRect2 &pRect);
 
-  void setParent(AGWidget *pParent);
+  virtual void setParent(AGWidget *pParent);
   AGWidget *getParent();
   bool isParent(AGWidget *pParent);
 
@@ -281,6 +281,8 @@ private:
   void gainFocusDown(AGWidget *pWidget);
 
   void checkFocus();
+  
+  static bool valid(AGWidget *pWidget);
 
   std::list<AGWidget*> mToClear;
 
@@ -318,11 +320,15 @@ private:
   
 protected:
   std::list<AGWidget*> mChildren;
+  
+private:
+  static std::set<AGWidget*> allWidgets;
 
 };
 
 AGEXPORT void setNewClippingTechnique(bool f);
 AGEXPORT bool getNewClippingTechnique();
+AGEXPORT void printStacktrace();
 
 
 #endif

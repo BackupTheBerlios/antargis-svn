@@ -184,22 +184,10 @@
 	<edit>
 		<background>
       <color name="color" color='#11111144'/>
-<!-- 					<color name='gradientColor1' color='#54555b'/>
-					<color name='gradientColor2' color='#3c3d41'/>
-					<color name='gradientColor3' color='#3c3d41'/>
-					<color name='gradientColor4' color='#12141c'/> -->
-			<!--  <image name="image" file="data/gui/bg_tile2.png"/>-->
 		</background>
-    <!-- <font name="font" file="FreeSans.ttf" size="14" color="#000000"/> -->
     <font name="font" file="FreeSans.ttf" size="14" color="#E7E7FF"/>
 	</edit>
-<!--
-	<screen>
-		<background>
-			<image name="image" file="data/gui/bigbg_tile.png"/>
-		</background>
-	</screen>
-	-->
+
 	<window>
 		<border>
 			<image name="image" file="data/gui/buttontest3.png" file2="win_border.png"/>
@@ -269,7 +257,7 @@
         <color name="color" color='#000088'/>
       </background>
     </window>
-  </bluek>
+  </blue>
 	
 	
 	<yellowButton>
@@ -377,18 +365,9 @@
 			<color name='gradientColor2' color='#ee9900'/>
 			<color name='gradientColor3' color='#dd8800'/>
 			<color name='gradientColor4' color='#aa6600'/>
-<!--			<color name='gradientColor1' color='#f3ac0e'/>
-			<color name='gradientColor2' color='#ffd272'/>
-			<color name='gradientColor3' color='#f3ac0e'/>
-			<color name='gradientColor4' color='#c18c1a'/>-->
 		</selected>
 		<font name="font" file="FreeSans.ttf" size="22" color="#000000"/>
 	</listbox>
-	<!--<button>
-		<text>
-			<font name="font" file="FreeSans.ttf" size="16" color='#FFFFFF'/>
-		</text>
-	</button>-->
 
 	<menuButton>
 		<button>

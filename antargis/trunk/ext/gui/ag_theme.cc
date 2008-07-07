@@ -184,6 +184,43 @@ AGLocalTheme AGTheme::getTheme(const AGString &pTheme) const
   return AGLocalTheme(pTheme);
 }
 
+AGGradient AGTheme::getGradient(const AGString &pName) const
+{
+  std::map<AGString,AGGradient>::const_iterator i=mGradients.find(pName);
+  if(i==mGradients.end())
+    {
+      i=mGradients.find(trunc(pName));
+      if(i==mGradients.end())
+        return AGGradient();
+    }
+  return i->second;
+}
+ 
+AGBackground AGTheme::getBackground(const AGString &pName) const
+{
+  std::map<AGString,AGBackground>::const_iterator i=mBackgrounds.find(pName);
+  if(i==mBackgrounds.end())
+    {
+      i=mBackgrounds.find(trunc(pName));
+      if(i==mBackgrounds.end())
+        return AGBackground();
+    }
+  return i->second;
+}
+
+AGBorder AGTheme::getBorder(const AGString &pName) const
+{
+  std::map<AGString,AGBorder>::const_iterator i=mBorders.find(pName);
+  if(i==mBorders.end())
+    {
+      i=mBorders.find(trunc(pName));
+      if(i==mBorders.end())
+        return AGBorder();
+    }
+  return i->second;
+}
+
+
 
 
 AGLocalTheme::AGLocalTheme(const AGString &pTheme):mTheme(pTheme)

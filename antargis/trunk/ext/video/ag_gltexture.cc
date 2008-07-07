@@ -100,43 +100,25 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
 
         assert(buffer);
       }
-    cdebug("3");
     if(buffer)
       memset(buffer,0,bufSize);
-    /*
-    cdebug("5");
-    cdebug(mTarget);
-    cdebug(format);
-    cdebug("rect:"<<(mTarget==GL_TEXTURE_RECTANGLE_ARB));
-    cdebug("2d:"<<(mTarget==GL_TEXTURE_2D));
-    cdebug("3d:"<<(mTarget==GL_TEXTURE_3D));
-    cdebug("GL_RGBA:"<<(format==GL_RGBA));
-    cdebug("w:"<<w<<" h:"<<h);
-    cdebug("texmem:"<<gUsedTexMemory);
-    cdebug((void*)buffer);
-    */
     assertGL;
     glTexImage2D(mTarget, 0, format, w, h, 0, GL_RGBA,
         GL_UNSIGNED_BYTE, buffer);
     assertGL;
-    //cdebug("6");
 
     if(buffer)
       delete [] buffer;
 
-    //cdebug("7");
-    //cdebug("W:"<<w<<" h:"<<h);
     assertGL;
     gUsedTexMemory+=w*h*4;
 
-    cdebug("8");
     dbout(4,"used memory:"<<gUsedTexMemory);
 
     glTexParameteri(mTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     assertGL;
     glTexParameteri(mTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     assertGL;
-    cdebug("9");
   }
 AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D),m3d(true),mRectTex(false),mTarget(GL_TEXTURE_3D)
   {

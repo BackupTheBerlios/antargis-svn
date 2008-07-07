@@ -30,7 +30,7 @@ AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTil
 
 AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile):
   AGWidget(pParent,r),
-  mTexture(pTexture),mTile(pTile)
+  mTexture(pTexture),mTile(pTile),mScale(false)
   {
     mCenter=true;
   }

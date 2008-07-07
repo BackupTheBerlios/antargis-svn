@@ -4,6 +4,11 @@ require 'pp'
 require File.join(File.split(__FILE__)[0],"dialogs.rb")
 require File.join(File.split(__FILE__)[0],"toolbar.rb")
 
+require File.join(File.split(__FILE__)[0],'ruby_tools.rb')
+require File.join(File.split(__FILE__)[0],'story_editor.rb')
+requireRelative('ruby_signals.rb',__FILE__)
+require File.join(File.split(__FILE__)[0],"campaign_data.rb")
+
 #setDebugLevel(0)
 
 # TODO:
@@ -106,88 +111,19 @@ module Antargis
       getChildren.map{|child|[child]+child.getAllDescendants}.flatten
     end
     def moveToContext(to)
-      
+      pp "moveToContext"
       o=getScreenRect
       p=getParent
       p.removeChild(self)
       to.addChild(self)
-      #setParent(to)
       setRect(o+(-to.getScreenRect.getV0))
     end
-  end
-end
-
-class Effect<AGWidget
-  def initialize(p,r,node)
-    super(p,r)
-    @registered=false
-    @running=false
-    @duration=node["duration"].to_f
-    #run
-  end
-  def draw(p)
-    if @registered==false
-      registerEffect
-    end
-  end
-  def run
-    @running=true
-    @time=0
-  end
-  def eventFrame(t)
-    if @running
-      @time+=t
-      @running=false if @time>=@duration
-      @time=@duration if @time>@duration 
-      step(@time/@duration)
-    end
-  end
-  def step(per)
-    pp per
-    exit
-  end
-  private
-  def registerEffect
-    if getApp
-      getApp.sigFrame.connect(self,:eventFrame)
-      @registered=true
+    def getChildByType(type)
+      getAllDescendants.select{|c|c.is_a?(type)}[0]
     end
   end
 end
 
-class AppearEffect<Effect
-  def initialize(p,r,node)
-    super
-    @name=node["name"]
-    @target=node["table"]
-    @row=node["row"].to_i
-    @size=50
-    
-  end
-  def step(amount)
-    table=getApp.getMainWidget.getChild(@target)
-    table.modifyRow(@row,amount*@size)
-  end
-end
-
-class HideEffect<Effect
-  def initialize(p,r,node)
-    super
-    @name=node["name"]
-    @target=node["table"]
-    @row=node["row"].to_i
-    #@size=50
-    @size=nil
-    
-  end
-  def step(amount)
-    @size||=table.getRow(@row)
-    table.modifyRow(@row,(1-amount)*@size)
-  end
-  def table
-    getApp.getMainWidget.getChild(@target)
-  end
-end
 
 class AGHoverWidget<AGWidget
   attr_accessor :hoverBorder
@@ -197,24 +133,6 @@ class AGHoverWidget<AGWidget
   end
 end
 
-class GenericLayoutCreator<AGLayoutCreator
-  def initialize(c)
-    super()
-    @c=c
-  end
-  def create(p,r,node)
-    options=node.getAttributes
-    pp @c
-    setResult @c.new(p,r,options)
-  end
-end
-
-def standardLayoutCreator(pClass)
-  name=pClass.to_s
-  name=name[0..0].downcase+name[1..-1]
-  creator=GenericLayoutCreator.new(pClass)
-  getLayoutFactory.addCreator(name,creator)
-end
 
 class DragEnvironment<AGWidget
   def initialize(p,r,options)
@@ -263,10 +181,11 @@ class DragBox<AGHoverWidget
   
   attr_accessor :text, :grid
   attr_accessor :selected
+
   
-  def initialize(p,r,text)
+  def initialize(p,r,text,dragging=true)
     super(p,r)
-    @dragging=true
+    @dragging=dragging
     @text=AGStringUtf8.new(text)
     @textPos=AGVector2.new(10,10)
     @lastCell=nil
@@ -275,6 +194,9 @@ class DragBox<AGHoverWidget
     self.hoverBorder=BORDER_WIDTH
     @@font||=AGFont.new("FreeSans.ttf",14)
   end
+  
+  
+  
   def draw(p)
     r=getRect.origin.shrink(2)
     r2=r.shrink(BORDER_WIDTH)
@@ -308,6 +230,7 @@ class DragBox<AGHoverWidget
   def startDragging
     @dragging=true
     moveToContext(getDragEnvironment)
+    setRect(getRect.shrink(5))
   end
   
   def eventMouseButtonDown(e)
@@ -339,9 +262,15 @@ class DragBox<AGHoverWidget
   def eventMouseButtonUp(e)
     return super unless @dragging
     #moveToContext()
-    cells=getDragEnvironment.getDragTargets
-    scells=cells.select{|c|c.getScreenRect.shrink(10).contains(getMiddle)}
-    cell=scells[0]
+
+    if false
+      cells=getDragEnvironment.getDragTargets
+      scells=cells.select{|c|c.getScreenRect.shrink(10).contains(getMiddle)}
+      cell=scells[0]
+    else
+      env=getDragEnvironment.getChildByType(DragGrid)
+      cell=env.cells.select{|c|c.screenRect.shrink(10).contains(getMiddle)}[0]
+    end
     
     if cell
       if cell.free
@@ -371,8 +300,10 @@ class DragBox<AGHoverWidget
   end
   def assignCell(cell)
     @lastCell=cell
-    moveToContext(@lastCell)
-    centerObject
+    
+    moveToContext(getDragGrid)
+    pp cell
+    setRect(cell.rect.shrink(5))
   end
   def centerObject
     setRect(getRect+(getParent.getRect.origin.getMiddle-getRect.getMiddle))
@@ -385,10 +316,12 @@ class DragBox<AGHoverWidget
 end
 
 class DragBoxLevel<DragBox
+  attr_accessor :filename
 end
 
 class DragBoxStory<DragBox
-  def initialize(p,r,text)
+  attr_accessor :story
+  def initialize(p,r,text,dragging=true)
     super
     @color=AGColor.new(0xFF,0xAA,0)
   end
@@ -398,6 +331,7 @@ class DragLine<AGWidget
   include Arrows
   
   attr_accessor :selected, :text
+  attr_writer :endObject
   
   def initialize(p,r,startObject)
     super(p,r)
@@ -431,6 +365,7 @@ class DragLine<AGWidget
     white=AGColor.new(0xFF,0xFF,0x88) if @hovered
     black=AGColor.new(0,0,0)
     p.setLineWidth(1)
+    assert{endP}
     p.drawArrow(startP,endP,5,white,black)
     middle=(endP+startP)*0.5
     
@@ -452,10 +387,14 @@ class DragLine<AGWidget
   
   def eventMouseMotion(e)
     r=super
-    p=@pos
-    p=getPos(@endObject) if @endObject
+    if @endObject
+      p=getPos(@endObject)
+    else 
+      p=@pos
+    end
     mp=e.getMousePosition-getScreenRect.getV0
     if getArrowTriangles(getPos(@startObject),p,10).select{|t|t.contains(mp)}.length>0
+      puts p,@pos,getPos(@startObject),mp
       puts "HOVER"
       @hovered=true
       return true
@@ -474,6 +413,7 @@ class DragLine<AGWidget
       if @hovered
         @endObject=nil
         @moving=true
+        @pos=e.getMousePosition+(getRect.getV0-getScreenRect.getV0)
         r=true
       end
     end    
@@ -504,7 +444,12 @@ class DragLine<AGWidget
   end
 end
 
-
+Cell=Struct.new(:screenRect,:rect,:node)
+class Cell
+  def free
+    @node.nil?
+  end
+end
 
 
 class DragGrid<AGWidgetWithConfig
@@ -550,6 +495,14 @@ class DragGrid<AGWidgetWithConfig
   def eventMouseButtonDown(e)
     return super
   end
+  
+  def addChild(c)
+    super
+    getChildren.sort{|b,a|a.is_a?(DragLine)<=>b.is_a?(DragLine)}.each{|child|
+      addChildBack(child)
+    }    
+    
+  end
       
 private
   def cellCountX
@@ -559,6 +512,7 @@ private
     height/@cellWidth
   end
   def genCells()
+    @cells=[]
     w=cellWidth
     (0..cellCountX).map{|x|
       (0..cellCountY).map{|y|
@@ -567,7 +521,8 @@ private
     }.flatten.each{|c|newDragTarget(c)}
   end
   def newDragTarget(c)
-    addChild(DragTarget.new(nil,c,@options,self))
+    #addChild(DragTarget.new(nil,c,@options,self))
+    @cells << Cell.new(toScreen(c),c,nil)
   end
   def checkEdit
     
@@ -636,35 +591,7 @@ end
 
 [DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,ToolEdit,ToolCombo,AppearEffect,HideEffect].each{|c|standardLayoutCreator(c)}
 
-require File.join(File.split(__FILE__)[0],'story_editor.rb')
 
-class RubySignal
-  def initialize(name)
-    @name=name
-    @receivers=[]
-  end
-  def connect(object,method)
-    @receivers<<[object,method]
-  end
-  def call(*s)
-    @receivers.each{|p|
-      object,method=p
-      object.send(method,*s)
-    }
-  end  
-end
-def createSignal(x)
-  signal=RubySignal.new(x)
-  self.define_cmethod(x) {|*s|
-    if s.length==0
-      signal
-    else
-      signal.call(*s)
-    end
-  }
-end
-
-require File.join(File.split(__FILE__)[0],"campaign_data.rb")
 
 
 class CampaignEditorApp<AGApplication
@@ -684,8 +611,12 @@ class CampaignEditorApp<AGApplication
     end
     
     addHandler(layout.getChild("edit"),:sigClick,:eventEdit)
+    addHandler(layout.getChild("quit"),:sigClick,:eventQuit)
     
     initSavingLoading
+  end
+  def eventQuit
+    tryQuit
   end
   def eventDeselect
     @grid.select(nil) if @grid
@@ -713,23 +644,66 @@ class CampaignEditorApp<AGApplication
   def initSavingLoading
     addHandler(@layout.getChild("load"),:sigClick,:eventLoad)    
     addHandler(@layout.getChild("save"),:sigClick,:eventSave)    
- #   pp Campaign.getAll
- #   exit
   end
   
   def eventLoad
+    CampaignEditor::LoadDialog.new(@layout) {|filename|
+      campaign=Campaign::loadCampaign(filename)
+      viewData(campaign)
+    }
     
     true
   end
   def eventSave
-    d=CampaignEditor::SaveDialog.new(@layout)
-    #d.loadXML(loadFile("data/gui/layout/editor/campaign/save_dialog.xml"))
-    #@layout.addChild(d)
-    #l=AGLayout.new(@layout)
-    #l.loadXML(loadFile())
-    #@layout.addChild(l)
+    CampaignEditor::SaveDialog.new(@layout) {|filename|
+      puts filename
+      exit
+    }
     true
   end
   
+  
+  private
+  def viewData(campaign)
+    @grid.clear
+    
+    boxes={}
+    
+    campaign.nodes.each{|name,node|
+      x=node.x
+      y=node.y
+      c=getCell(x,y)
+      box=nil
+      case node
+        when Level
+          box=DragBoxLevel.new(@grid,c.rect.shrink(5),name,false)
+          box.filename=node.filename
+          @grid.addChild(box)
+        when Story
+          box=DragBoxStory.new(@grid,c.rect.shrink(5),name,false)
+          box.story=node.screens
+          @grid.addChild(box)
+      end
+      boxes[name]=box
+    }
+    
+    campaign.edges.each{|edge|
+      pp edge.from,edge.to
+      puts boxes[edge.from].getRect,boxes[edge.to].getRect
+      line=DragLine.new(@grid,@grid.getRect,boxes[edge.from])
+      line.endObject=boxes[edge.to]
+      @grid.addChild(line)
+    }
+    
+  end
+  
+  def getCell(x,y)
+    r=@grid.cells[0].rect
+    x+=0.5
+    y+=0.5
+    x*=r.width
+    y*=r.height
+    @grid.cells.select{|cell|cell.rect.contains(AGVector2.new(x,y))}[0]
+  end
 end
 

@@ -10,9 +10,25 @@ describe "Campaign editor" do
   it "should be possible to place levels on the grid" do
     drag(getSourceMiddle("levelSource"),getGridPos(1,1),10)
     grid.getAllDescendants.select{|c|c.is_a?(DragBox)}.length.should == 1
+    level=grid.getChildren[0]
+    level.should be_a_kind_of(DragBoxLevel)
+    level.getParent.should_not be_nil
   end
   
   it "should be possible to move the grid" do
+    level=grid.getChildren[0]
+    level.getParent.should_not be_nil
+    oldPos=level.getScreenRect.getMiddle
+    delta=AGVector2.new(0,200)
+    scrollWidget=widget("dragGrid").getParent
+    ov=scrollWidget.getVector
+    middle=widget("dragGrid").getScreenRect.getMiddle
+    level.getParent.should_not be_nil
+    drag(middle,middle-delta,5) 
+    nv=scrollWidget.getVector
+    newPos=level.getScreenRect.getMiddle
+    level.getParent.should_not be_nil
+    oldPos.should == newPos+delta 
   end
   
   it "should not use widgets for DragTargets anymore" do
@@ -31,17 +47,20 @@ describe "Campaign editor" do
   it "should be possible to name arrows"
   
   private
-  def drag(from,to,frames)
+  def drag(from,to,frames,&block)
     p from,to
     #exit
     @app.setCursor(getTextureCache.get("blue_cursor.png"))
     
     mouseDown(from)
+    block.call(:mouseDown) if block
     1.upto(frames) {|f|
       mouseMotion(from+(to-from)*f/frames)
       @app.step
+      block.call(:mouseMotion) if block
     }
     mouseUp(to)
+    block.call(:mouseUp) if block
     #@app.step while true
   end
   

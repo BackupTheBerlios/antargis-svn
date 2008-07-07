@@ -24,28 +24,11 @@
 
 AGScrollingWidget::AGScrollingWidget(AGWidget *pParent, const AGRect2& pRect):
   AGWidget(pParent,pRect),
-  //mClient(pRect.origin()),
-  //mVector(0,0),
   mDragging(false)
     {
       AGRect2 r=getRect().origin();
       setClient(r,AGProjection2D(r,r));
     }
-/*
-bool AGScrollingWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
-  {
-    bool retValue;
-    AGVector2 old=event->getMousePosition();
-    
-    event->setMousePosition(old+mVector);
-    
-    retValue=pChild->processEvent(event);
-    
-    event->setMousePosition(old);
-    
-    return retValue;
-  }
-*/
 
 void AGScrollingWidget::setClientRect(const AGRect2 &pRect)
   {
