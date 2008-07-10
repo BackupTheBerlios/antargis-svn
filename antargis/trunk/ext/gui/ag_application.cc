@@ -436,7 +436,7 @@ bool AGApplication::eventKeyDown(AGEvent *m)
             eventChangedRes();
             redraw();
           }
-        else if (k==SDLK_F10)
+        else if (k==SDLK_F10||toString(&m->get())=="SDL_KEYDOWN:0:1:12:113:1024:113") // APPLE+Q
           tryQuit();
       }
     return false;

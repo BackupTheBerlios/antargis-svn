@@ -49,9 +49,9 @@ module CampaignEditor
     def getFilename
       getChild("filename").getText.to_s
     end
-	end
-	
-	class LoadDialog<Dialog
+  end
+  
+  class LoadDialog<Dialog
     def initialize(p,&block)
       super
       p.addChild(self)
@@ -72,6 +72,6 @@ module CampaignEditor
     def getFilename
       getChild("listBox").getSelectedValue.to_s
     end
-	  
-	end
+    
+  end
 end

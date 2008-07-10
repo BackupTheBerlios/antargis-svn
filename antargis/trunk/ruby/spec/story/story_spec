@@ -1,0 +1,18 @@
+Story: transfer to cash account
+  As a savings account holder
+  I want to transfer money from my savings account
+  So that I can get cash easily from an ATM
+
+  Scenario: savings account is in credit
+    Given my savings account balance is 100
+    And my cash account balance is 10
+    When I transfer 20
+    Then my savings account balance should be 80
+    And my cash account balance should be 30
+
+  Scenario: savings account is overdrawn
+    Given my savings account balance is -20
+    And my cash account balance is 10
+    When I transfer 20
+    Then my savings account balance should be -20
+    And my cash account balance should be 10

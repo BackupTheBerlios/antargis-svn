@@ -217,6 +217,7 @@ public:
 
   bool getFocus() const;
   bool hasFocus(const AGWidget *pWidget=0);
+  AGWidget *getFocusedWidget ();
 
   AGLayout *getLayout();
 

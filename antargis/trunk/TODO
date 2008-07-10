@@ -181,8 +181,5 @@ None known.
 [L] cleanup gui - remove unused elements
 [L] fix selecting group. When you switch the "tabs", the selected action should be changed, too
 
-[Packaging / Building]
-------------------------------------------------------
-[L] installer for linux. maybe some autopackage or .debs?
 
 

@@ -67,28 +67,27 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
   mHasFocus(false),mFocus(0)
 
-  {
-    allWidgets.insert(this);
+    {
+      allWidgets.insert(this);
 
-    mEventsInited=false;
-    CTRACE;
-    if(mParent)
-      mParent->addChildRef(this);
+      mEventsInited=false;
+      CTRACE;
+      if(mParent)
+        mParent->addChildRef(this);
 
-    mChangeRect=AGRect2(0,0,0,0);
-    mCache=0;
-    mCacheTouched=false;
-    mTooltipWidget=0;
-    mModal=false;
+      mChangeRect=AGRect2(0,0,0,0);
+      mCache=0;
+      mCacheTouched=false;
+      mTooltipWidget=0;
+      mModal=false;
 
-    getMain()->getCollector()->insertGlobal(this);
-  }
+      getMain()->getCollector()->insertGlobal(this);
+    }
 
 AGWidget::~AGWidget()
   {
     allWidgets.erase(this);
     CTRACE;
-    cdebug(getName());
 
     if(hasMain())
       getMain()->getCollector()->removeGlobal(this);
@@ -98,27 +97,21 @@ AGWidget::~AGWidget()
       {
         if(valid(*i))
           {
-            cdebug("notify child:"<<*i);
             (*i)->setParent(0);
-            cdebug("notify ok");
           }
       }
     for(std::set<AGWidget*>::iterator i=mRefChildren.begin();i!=mRefChildren.end();i++)
       {
         if(valid(*i))
           {
-            cdebug("notify child:"<<*i);
             (*i)->setParent(0);
-            cdebug("notify ok");
           }
       }
 
-    cdebug(mParent);
     if(getParent())
       {
         if(valid(getParent()))
           {
-            cdebug("notify parent:"<<getParent());
             getParent()->eventChildrenDeleted(this);
           }
       }
@@ -401,6 +394,7 @@ bool AGWidget::eventMouseButtonDown(AGEvent *e)
             cdebug(getName());
             mButtonDown=true;
             mOldMousePos=e->getMousePosition();
+            return false;
           }
       }
     return false;
@@ -531,8 +525,8 @@ void AGWidget::addChildBack(AGWidget *w)
         if(i!=mChildren.end())
           mChildren.erase(i);
       }while(i!=mChildren.end());
-    
-    
+
+
     mChildren.push_back(w); // set on top
 
     if(mHasFocus && w->canFocus())
@@ -542,7 +536,7 @@ void AGWidget::addChildBack(AGWidget *w)
     if(!w->getParent())
       w->setParent(this);
     queryRedraw();
-}
+  }
 
 void AGWidget::regChange()
   {
@@ -691,14 +685,11 @@ void AGWidget::setVisible(bool v)
 void AGWidget::setParent(AGWidget *pParent)
   {
     CTRACE;
-    //mOldMousePos.setX(-20000); // set oldmousepos invalid -- see eventMouseMotion 
-
 
     if(!mParent)
       {
         AGWidget *old=mParent;
         mParent=pParent;
-        cdebug(old);
         if(mParent==0 && old!=0)
           old->eventChildrenDeleted(this);
         if(hasMain())
@@ -724,12 +715,10 @@ AGVector2 AGWidget::getScreenPosition() const
  */
 AGRect2 AGWidget::getScreenRect() const
 {
-  CTRACE;
   AGRect2 r=getRect();
   if(mParent)
     {
       AGRect2 result=mParent->toScreen(getRect());
-      cdebug(getRect()<<"::"<<result);
       return result;
     }
   return r;
@@ -1378,4 +1367,15 @@ void AGWidget::initEvents()
 void AGWidget::eventInitEvents()
   {
 
+  }
+AGWidget *AGWidget::getFocusedWidget()
+  {
+    AGWidget *found=0;
+    for(Children::reverse_iterator i=mChildren.rbegin();i!=mChildren.rend();i++)
+      {
+        found=(*i)->getFocusedWidget();
+        if(found)
+          return found;
+      }
+    return canFocus()?this:0;
   }

@@ -35,9 +35,6 @@
               <cell col="0" row="1">
                 <dragSource name ="storySource" class="DragBoxStory" text="Story"/>
               </cell>
-              <cell col="0" row="2">
-                <dragTrash/>
-              </cell>
         
             </table>
           </cell>
@@ -52,12 +49,16 @@
     
     
           <cell col="1" row="1" name="a">
-            <table cols="2" rows="1" name="b">
-              <colsize col="1" fixed="50"/>
+            <table cols="3" rows="1" name="b">
+              <colsize col="0" fixed="50"/>
+              <colsize col="2" fixed="50"/>
               <cell col="0" row="0">
-                <edit name="textEdit"/>
+                <button name="trash" caption-image="data/gui/images/basic/cross.png"/>
               </cell>
               <cell col="1" row="0">
+                <edit name="textEdit"/>
+              </cell>
+              <cell col="2" row="0">
                 <button name="edit" caption-image="data/gui/options.png"/>
               </cell>
             </table>

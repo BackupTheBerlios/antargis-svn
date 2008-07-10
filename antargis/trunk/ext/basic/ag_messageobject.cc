@@ -22,15 +22,16 @@
 #include "ag_debug.h"
 #include "ag_main.h"
 #include "ag_stringstream.h"
+#include "ag_widget.h"
 
 SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 
 // AGEvent
 AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &e):mCaller(pCaller),mName(pName),mEvent(e),
-  mMousePosition(0),mRelMousePosition(0)
-  {
-    mClipped=false;
-  }
+mMousePosition(0),mRelMousePosition(0)
+      {
+        mClipped=false;
+      }
 AGEvent::~AGEvent()
   {
     if(mMousePosition)
@@ -125,7 +126,7 @@ AGVector2 AGEvent::getMousePosition() const
 {
   if(mMousePosition)
     return *mMousePosition;
-  
+
   assert(eventOk(mEvent));
   AGVector2 p;
   switch(mEvent.type) {
@@ -227,11 +228,11 @@ AGSignal::AGSignal():mCaller(0)
 AGSignal::AGSignal(AGMessageObject *pCaller):mCaller(pCaller)
   {
   }
-*/
+ */
 AGSignal::AGSignal(AGMessageObject *pCaller,const AGString &pName):
   mName(pName),mCaller(pCaller)
-    {
-    }
+        {
+        }
 
 AGSignal::~AGSignal()
   {
@@ -317,10 +318,10 @@ bool AGSignal::signal(AGEvent *m)
   }
 
 bool AGSignal::operator()(AGEvent *m)
-  {
-    m->setName(mName);
-    return signal(m);
-  }
+      {
+        m->setName(mName);
+        return signal(m);
+      }
 
 // AGMessageObject
 
@@ -339,8 +340,8 @@ AGMessageObject::AGMessageObject():
   sigSysWM(this,"sigSysWM"),
   sigVideoResize(this,"sigVideoResize"),
   mCanReceiveMessages(true)
-    {
-    }
+        {
+        }
 
 AGMessageObject::~AGMessageObject()
   {
@@ -412,6 +413,15 @@ bool AGMessageObject::processEvent(AGEvent* agEvent)
           rc = false;
           break;
         }
+      }
+
+    if(rc)
+      {
+        AGWidget *w=dynamic_cast<AGWidget*>(this);
+        if(w)
+          cdebug(toString(&agEvent->get())<<" eaten up by "<<typeid(*this).name()<<" "<<w->getName());
+        else
+          cdebug(toString(&agEvent->get())<<" eaten up by "<<typeid(*this).name());//<<" "<<getName());
       }
 
     return rc;
@@ -515,7 +525,7 @@ SDL_keysym toKeysym(const AGString &s)
     return k;
   }
 
-AGString toString(SDL_Event *pEvent)
+AGString toString(const SDL_Event *pEvent)
   {
     AGStringStream os;
     if(pEvent)

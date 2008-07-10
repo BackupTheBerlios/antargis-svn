@@ -6,9 +6,10 @@ module TestModule
     puts "step end"
   end
   def eventFrame(t)
-    super
+    super(0.05)
     puts "FRAME - try Quit..."
     tryQuit
+    delay(20)
     true
   end
   def tryQuit

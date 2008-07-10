@@ -259,7 +259,7 @@ AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))
 }
 
 
-AGEXPORT AGString toString(SDL_Event *pEvent);
+AGEXPORT AGString toString(const SDL_Event *pEvent);
 AGEXPORT SDL_Event *toSDLEvent(const AGString &p);
 
 AGEXPORT bool eventOk(const SDL_Event &pEvent);

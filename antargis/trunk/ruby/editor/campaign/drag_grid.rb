@@ -38,11 +38,9 @@ module Arrows
       ]
   end
   def getArrowTriangles(from,to,width)
-    #puts "gettin tris"
     ps=createArrowPolies(from,to,width)
     ts=[ps[0][0..2],ps[0][1..3],ps[1]]
     r=ts.map{|t|AGTriangle2.new(t[0],t[1],t[2])}
-    #puts "gettin tris!"
     r
   end
 end
@@ -162,12 +160,6 @@ class DragTarget<AGHoverWidget
   end
 end
 
-class DragTrash<DragTarget
-  def draw(p)
-    p.fillRoundRect(getRect.origin,10,AGColor.new(0x33,0x33,0x33))
-  end
-end
-
 module DragObject
   def canFocus
     false
@@ -195,7 +187,7 @@ class DragBox<AGHoverWidget
     @@font||=AGFont.new("FreeSans.ttf",14)
   end
   
-  
+
   
   def draw(p)
     r=getRect.origin.shrink(2)
@@ -237,21 +229,20 @@ class DragBox<AGHoverWidget
     r=super
     sRect=getRect
     if sRect.contains(e.getRelMousePosition)
-      
-      getDragGrid.select(self) if getDragGrid
+      dragGrid=getDragGrid
       if sRect.shrink(BORDER_WIDTH).contains(e.getRelMousePosition)
         startDragging
-        return true
+        r=true
       elsif @lastCell
         startLine(e)
-        return true
+        r=true
       end
+      dragGrid.select(self) if dragGrid
     end
     r
   end
   
   def startLine(e)
-    puts "STARTLINE"
     env=getAncestor(DragGrid)
     env.addChild(line=DragLine.new(env,env.getRect,self))
     line.setButtonDown(true,e.getMousePosition) # enable dragging
@@ -286,10 +277,6 @@ class DragBox<AGHoverWidget
       hide
     end
     
-    if cell.is_a?(DragTrash)
-      pp cell
-      del 
-    end
     @dragging=false
     true
   end
@@ -358,7 +345,9 @@ class DragLine<AGWidget
    
     if @endObject and @startObject
       if @moving==false and (@endObject.visible==false or @startObject.visible==false)
-        hide
+        #hide
+        getParent.removeChild(self)
+        return
       end
     end
     white=AGColor.new(0xFF,0xFF,0xFF)
@@ -394,8 +383,6 @@ class DragLine<AGWidget
     end
     mp=e.getMousePosition-getScreenRect.getV0
     if getArrowTriangles(getPos(@startObject),p,10).select{|t|t.contains(mp)}.length>0
-      puts p,@pos,getPos(@startObject),mp
-      puts "HOVER"
       @hovered=true
       return true
     else
@@ -403,9 +390,9 @@ class DragLine<AGWidget
     end
     r
   end
+  
   def eventMouseButtonDown(e)
     r=super
-    
     if @endObject.nil?
       @moving=true
       @pos=e.getMousePosition+(getRect.getV0-getScreenRect.getV0)
@@ -433,7 +420,6 @@ class DragLine<AGWidget
         @endObject=ts[0]
       end
     end
-    
     r
   end
   def getDragEnvironment
@@ -476,10 +462,10 @@ class DragGrid<AGWidgetWithConfig
       @selected.selected=true
       checkEdit    
       @edit.setText(@selected.text)
-      @edit.gainFocus
-      getApp.getEffect("showEdit").run
+      getApp.startEffect("showEdit")
+      @edit.gainCompleteFocus
     else
-      getApp.getEffect("hideEdit").run
+      getApp.startEffect("hideEdit")
     end
   end
 
@@ -492,9 +478,9 @@ class DragGrid<AGWidgetWithConfig
     @lines.each{|l|p.drawLine(l.getV0,l.getV1,@borderColor)}
   end
   
-  def eventMouseButtonDown(e)
-    return super
-  end
+#  def eventMouseButtonDown(e)
+ #   return super
+  #end
   
   def addChild(c)
     super
@@ -589,121 +575,5 @@ class DragSource<AGHoverWidget
 end
 
 
-[DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,ToolEdit,ToolCombo,AppearEffect,HideEffect].each{|c|standardLayoutCreator(c)}
-
-
-
-
-class CampaignEditorApp<AGApplication
-  def initialize()
-    super
-    createSignal :sigFrame
-    layout=AGLayout.new(nil)
-    @layout=layout
-    file=File.join('data','gui','layout','editor','campaign','main.xml')
-    layout.loadXML( loadFile(file) )
-    setMainWidget(layout)
-    layout.setApp(self)
-    if layout.getChild("bigTable")
-      env=layout.getChild("dragEnvironment")
-      @grid=layout.getChild("dragGrid")
-      addHandler(env,:sigClick,:eventDeselect)
-    end
-    
-    addHandler(layout.getChild("edit"),:sigClick,:eventEdit)
-    addHandler(layout.getChild("quit"),:sigClick,:eventQuit)
-    
-    initSavingLoading
-  end
-  def eventQuit
-    tryQuit
-  end
-  def eventDeselect
-    @grid.select(nil) if @grid
-  end
-  def eventFrame(t)
-    sigFrame(t)
-    super
-  end
-  def getEffect(name)
-    @layout.getChild(name)
-  end
-  def eventEdit
-    widget=nil
-    case @grid.selected
-      when DragBoxStory
-        widget=StoryEditor.new(@layout,@layout.getRect,{})
-      when DragBoxLevel
-        # FIXME
-    end
-    
-    @layout.addChild(widget) if widget
-    true
-  end
-  
-  def initSavingLoading
-    addHandler(@layout.getChild("load"),:sigClick,:eventLoad)    
-    addHandler(@layout.getChild("save"),:sigClick,:eventSave)    
-  end
-  
-  def eventLoad
-    CampaignEditor::LoadDialog.new(@layout) {|filename|
-      campaign=Campaign::loadCampaign(filename)
-      viewData(campaign)
-    }
-    
-    true
-  end
-  def eventSave
-    CampaignEditor::SaveDialog.new(@layout) {|filename|
-      puts filename
-      exit
-    }
-    true
-  end
-  
-  
-  private
-  def viewData(campaign)
-    @grid.clear
-    
-    boxes={}
-    
-    campaign.nodes.each{|name,node|
-      x=node.x
-      y=node.y
-      c=getCell(x,y)
-      box=nil
-      case node
-        when Level
-          box=DragBoxLevel.new(@grid,c.rect.shrink(5),name,false)
-          box.filename=node.filename
-          @grid.addChild(box)
-        when Story
-          box=DragBoxStory.new(@grid,c.rect.shrink(5),name,false)
-          box.story=node.screens
-          @grid.addChild(box)
-      end
-      boxes[name]=box
-    }
-    
-    campaign.edges.each{|edge|
-      pp edge.from,edge.to
-      puts boxes[edge.from].getRect,boxes[edge.to].getRect
-      line=DragLine.new(@grid,@grid.getRect,boxes[edge.from])
-      line.endObject=boxes[edge.to]
-      @grid.addChild(line)
-    }
-    
-  end
-  
-  def getCell(x,y)
-    r=@grid.cells[0].rect
-    x+=0.5
-    y+=0.5
-    x*=r.width
-    y*=r.height
-    @grid.cells.select{|cell|cell.rect.contains(AGVector2.new(x,y))}[0]
-  end
-end
+[DragGrid,DragSource,DragEnvironment,ToolBar,ToolButton,ToolEdit,ToolCombo,AppearEffect,HideEffect].each{|c|standardLayoutCreator(c)}
 

@@ -15,10 +15,12 @@ require 'ruby/antargislib.rb'
   class Cross
     @@called={}
     @@backtrace={}
-    def initialize(target,function)
+    @@raiseException={}
+    def initialize(target,function,raiseException=false)
       @target=target
       @function=function
       @expected="#{target}.#{function}(.)"
+      @@raiseException[@expected]=raiseException
     end
     def matches?(proc)      
       @proc = proc
@@ -64,27 +66,30 @@ require 'ruby/antargislib.rb'
     def Cross.symCall(name)
       @@called[name]+=1
       @@backtrace[name]=caller
+      raise "Should never cross this" if @@raiseException[name]
       nil
     end
   end
   
-  def cross(target,function=nil)
+  def cross(target,function=nil,raiseException=false)
       if function.nil? and target.is_a?(Symbol)
         function=target
         target=kernel
       end
   
-    Cross.new(target,function)
+    Cross.new(target,function,raiseException)
   end
 #end
   
   
 class Observer
-  attr_accessor :ok
+  #attr_accessor :ok
+  attr_accessor :count
   def initialize(object,methodName)
     @methodName=methodName
     @object=object
-    @ok=false
+    #@ok=false
+    @count=0
   end
   def run
     method=@object.method(@methodName)
@@ -92,20 +97,32 @@ class Observer
     object=@object
     @object.class.send(:define_method,@methodName) {|*s|
       if self==object
-        this.ok=true
+        #this.ok=true
+        this.count+=1
         puts "MUH"
       end
       method.call(*s)
     } 
     yield
     @object.class.send(:define_method,@methodName,method)
-    @ok
+    #@ok
+    called?
   end
   def isNotCalled
-     @ok==false
+    @count==0
+    # @ok==false
   end
   def isCalled
-    @ok==true
+    @count>0
+    #@ok==true
+  end
+  def called?(count=0,sym=:times)
+    case sym
+      when :times
+        @count>count
+      else
+        raise "Unknown symbol"
+    end
   end
 end  
 
@@ -113,13 +130,23 @@ def observe(object,method,&block)
   observer=Observer.new(object,method)
   
   observer.run {block.call(observer)}
+  observer
+end
+
+class String
+  def camelCase
+    gsub(/(_[a-z])/) {|s|s[1..-1].upcase}
+  end
 end
 
 class Object
   def method_missing(name,*s)
     alt=name.to_s.gsub(/\?$/,"")
+    puts alt
     if respond_to?(alt) and alt!=name
       self.send(alt,*s)
+    elsif respond_to?(alt.camelCase) and alt!=name and alt.camelCase!=alt 
+      self.send(alt.camelCase,*s)
     else
       super
     end
