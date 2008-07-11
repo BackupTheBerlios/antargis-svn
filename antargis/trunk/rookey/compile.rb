@@ -134,17 +134,21 @@ module Rookey
     private
     def getCompiler(type)
        #FiXME
-       compiler= case type
+      compiler= case type
         when :cpp
-          "g++"
+          @config["CPP"]
         when :c
-          "gcc"
+          @config["CC"]
         else
           raise "Unknown compiler type #{type}"
       end
       ccache=@config["CCACHE"]
       compiler=ccache+" "+compiler if ccache
       compiler
+    end
+    
+    def findProgram(pattern)
+      
     end
     
     @@deps=nil

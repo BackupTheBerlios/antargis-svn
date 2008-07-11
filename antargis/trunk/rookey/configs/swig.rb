@@ -8,7 +8,8 @@ module Rookey
       if swigs.length==0
         puts "ERROR: no SWIG with version in #{VERSIONS.join(", ")} not found!"
         if firstrun
-	        buildSwig
+	        #buildSwig
+          install("swig")
 	        run(config,false)
         end
       else
@@ -25,9 +26,9 @@ module Rookey
       output=`#{run}`
       VERSIONS.select{|v|output=~/#{v}/}.length>0
     end
-    def buildSwig
-      ruby File.join(File.split(__FILE__)[0],"..","externals","swig","build.rb")
-    end
+    #def buildSwig
+    #  ruby File.join(File.split(__FILE__)[0],"..","externals","swig","build.rb")
+    #end
     
   end
 end

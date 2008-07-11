@@ -76,7 +76,9 @@ EOT
 	      getPath.map{|dir|
 	        
 	        p=File.join(dir,program)
+          list=Dir[p]
 	        p=nil unless File.exists?(p)
+          p||=list[0]
           p
 	      }
       }.flatten.uniq-[nil]
@@ -96,11 +98,16 @@ EOT
       compiler.compile(target,testSource)
       libadd="-l#{lib}"
       exeName=compiler.exeName("test")
-      compiler.linkEXE(exeName,[target,libadd])
-      `#{exeName}`
-      if $?
-        config.add("LDFLAGS",libadd)
+      begin
+        compiler.linkEXE(exeName,[target,libadd])
+        `#{exeName}`
+        if $?
+          config.add("LDFLAGS",libadd)
+        end
+      rescue RuntimeError => e
+        return false
       end
+      true
     end
     private
     def getPath
@@ -115,6 +122,11 @@ EOT
         p.split(":")
       end
     end
+    
+    def install(package)
+      #raise 1
+      ruby(File.join(File.split(__FILE__)[0],"externals","tools.rb"),package)
+    end    
   end
   
   Dir[File.join(File.split(__FILE__)[0],"configs","*.rb")].each{|file|
@@ -143,6 +155,7 @@ EOT
 	      unless run.member?(c)
 		      if c.needs.select{|s|not ok.member?(s)}.length == 0
 		        log "Running configurator #{c}"
+            #pp config
 		        c.new.run(config)
 		        ok+=c.provides
 		        ok.uniq!
