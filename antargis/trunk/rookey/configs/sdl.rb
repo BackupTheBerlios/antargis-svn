@@ -14,7 +14,7 @@ module Rookey
 	      config.add("INCLUDEDIRS",cflags.split(" ").select{|f|f=~/^-I/}.map{|f|f[2..-1]}.join(" "))
 	      config.add("LDFLAGS",`sdl-config --libs`.chomp)
       else
-        ["sdl","sdl_image","sdl_ttf"].each{|lib|install(lib)}
+        ["sdl","sdl_image","sdl_ttf","sdl_mixer"].each{|lib|install(lib)}
         
       end      
       

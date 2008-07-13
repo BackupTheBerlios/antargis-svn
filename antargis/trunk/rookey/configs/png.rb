@@ -8,7 +8,10 @@ module Rookey
     needs :z
         
     def run(config)
-      checkLibrary(config,"png","png_get_io_ptr")
+      unless checkLibrary(config,"png","png_get_io_ptr")
+        install("png")
+        checkLibrary(config,"png","png_get_io_ptr")
+      end
     end   
   end 
 end
