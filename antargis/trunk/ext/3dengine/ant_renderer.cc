@@ -89,7 +89,7 @@ Scene *Renderer::getCurrentScene()
 GLint Renderer::getShadowUnit()
   {
     assert(canMultitexture());
-    return 3;
+    return 1;
   }
 GLint Renderer::getNormalUnit()
   {
@@ -207,7 +207,10 @@ void Renderer::endShadowComputation()
 
 void Renderer::beginShadowDrawing()
   {
+    assertGL;
     glActiveTexture(getShadowUnit());
+    cdebug(getShadowUnit());
+    assertGL;
 
     glMatrixMode(GL_MODELVIEW);
     // draw a flat shadow over 

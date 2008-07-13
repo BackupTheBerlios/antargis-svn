@@ -177,6 +177,7 @@ AGTexture AGGLScreen::screenshot(bool frontBuffer)
       glReadBuffer(GL_BACK);
 
     assertGL;
+#ifdef __APPLE__
     glTexParameteri(glTexture->getTarget(), 
         GL_TEXTURE_STORAGE_HINT_APPLE, 
         GL_STORAGE_CACHED_APPLE); 
@@ -184,11 +185,10 @@ AGTexture AGGLScreen::screenshot(bool frontBuffer)
     glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE); 
     assertGL;
 
-
     glTexParameteri(glTexture->getTarget(),GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_SHARED_APPLE); 
     assertGL;
     glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE); 
-
+#endif
     assertGL;
     glReadBuffer(GL_FRONT_LEFT);
     glFinish();
