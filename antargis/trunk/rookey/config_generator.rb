@@ -69,6 +69,9 @@ EOT
     def installLibDir
       File.join(File.split(__FILE__)[0],"externals","build","lib")
     end
+    def installIncludeDir
+      File.join(File.split(__FILE__)[0],"externals","build","include")
+    end
     
     def searchProgram(program)
       searchPrograms(program)[0]
@@ -168,6 +171,7 @@ EOT
 	      end
 	    }
     end
+    pp config
     puts
     @@config=config
   end

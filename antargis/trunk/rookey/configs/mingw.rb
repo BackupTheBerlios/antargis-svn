@@ -24,6 +24,9 @@ module Rookey
         config.add("LDFLAGS","-L"+File.join(baseMingw,"lib"))
         config.add("LDFLAGS","-L"+installLibDir)
         config.add("INCLUDEDIRS",File.join(baseMingw,"include"))
+        config.add("INCLUDEDIRS",installIncludeDir)
+        
+        
         #pp config
         #exit
       end

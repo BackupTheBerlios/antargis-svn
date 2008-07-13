@@ -25,6 +25,8 @@ module Rookey
 	    
 	    options=[]
 	
+      pp @config
+      
 	    options << @config["CFLAGS"]
 	    
 	    includeDirs = @config["INCLUDEDIRS"].split(" ")

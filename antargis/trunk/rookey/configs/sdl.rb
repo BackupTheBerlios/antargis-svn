@@ -15,6 +15,7 @@ module Rookey
 	      config.add("LDFLAGS",`sdl-config --libs`.chomp)
       else
         ["sdl","sdl_image","sdl_ttf","sdl_mixer"].each{|lib|install(lib)}
+        config.add("INCLUDEDIRS",File.join(installIncludeDir,"SDL"))
         
       end      
       
