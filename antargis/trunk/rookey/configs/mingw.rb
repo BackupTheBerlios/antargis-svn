@@ -19,6 +19,13 @@ module Rookey
 	      {"CPP"=>"GPP_BASE","CC"=>"GCC_BASE"}.each{|name,base|      
 	        config[name]=searchProgram(config[base])
 	      }
+        base=config["CPP"].gsub(/bin\/[^\/]+/,"")
+        baseMingw=Dir[base+"i*mingw*"]
+        config.add("LDFLAGS","-L"+File.join(baseMingw,"lib"))
+        config.add("LDFLAGS","-L"+installLibDir)
+        config.add("INCLUDEDIRS",File.join(baseMingw,"include"))
+        #pp config
+        #exit
       end
     end
   end    

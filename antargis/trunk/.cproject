@@ -63,7 +63,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding=".deps|.build_darwin9.0|.build_darwin9.0/antargis_swig.cc|build/|.build_/|.settings/|antargis.xcodeproj/|coverage/|packages/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+<entry excluding=".build_win32|.deps/**|.build_darwin9.0|.build_darwin9.0/antargis_swig.cc|build/|.build_/|.settings/|antargis.xcodeproj/|coverage/|packages/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>

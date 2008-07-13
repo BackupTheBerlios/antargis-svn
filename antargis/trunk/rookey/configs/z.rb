@@ -9,6 +9,9 @@ module Rookey
     def run(config)
       unless checkLibrary(config,"z","compress")
         install("zlib")
+        puts "ARG"
+        config.add("LDFLAGS","-L"+installLibDir)
+        checkLibrary(config,"z","compress")
       end
     end   
   end 

@@ -66,6 +66,10 @@ EOT
     def run(config)
     end
     
+    def installLibDir
+      File.join(File.split(__FILE__)[0],"externals","build","lib")
+    end
+    
     def searchProgram(program)
       searchPrograms(program)[0]
     end

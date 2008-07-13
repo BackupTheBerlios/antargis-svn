@@ -32,7 +32,7 @@ def unzipTar(file)
   elsif file=~/tar.bz2$/
     system("tar xvfj #{file} >/dev/null")
   else
-    system("unzip #{file}")
+    system("unzip -o #{file}")
   end
   puts "Ready."
 end
