@@ -101,7 +101,8 @@ def externalPackages
     "zlib"=>BinPackage.new("http://prdownloads.sourceforge.net/gnuwin32/zlib-1.2.3-bin.zip","http://prdownloads.sourceforge.net/gnuwin32/zlib-1.2.3-lib.zip"),
     "sdl"=>BinPackage.new("http://libsdl.org/release/SDL-1.2.13-win32.zip","http://libsdl.org/release/SDL-devel-1.2.13-mingw32.tar.gz"),
     "sdl_image"=>BinPackage.new("http://www.libsdl.org/projects/SDL_image/release/SDL_image-1.2.6-win32.zip","http://www.libsdl.org/projects/SDL_image/release/SDL_image-devel-1.2.6-VC8.zip"),
-    "sdl_ttf"=>BinPackage.new("http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-2.0.9-win32.zip","http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-devel-2.0.9-VC8.zip")
+    "sdl_ttf"=>BinPackage.new("http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-2.0.9-win32.zip","http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-devel-2.0.9-VC8.zip"),
+    "sdl_mixer"=>BinPackage.new("http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.8-win32.zip","http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-devel-1.2.8-VC8.zip")
 	}
   # exclude other scripting langs for swig
   pkgs["swig"].configureOptions=["python","ocaml","php4","chicken","csharp","csharp",
