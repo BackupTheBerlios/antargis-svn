@@ -70,8 +70,13 @@ module AntMyEventHandler
 
   def eventPrepareFrame(t)
     if $enableLogging and not $demoMode
-      @@eventDebugging||=File.open("events.txt","w")
-      @@eventDebugging.puts "T: #{t}"
+      begin
+        @@eventDebugging||=File.open("events.txt","w")
+        @@eventDebugging.puts "T: #{t}"
+      rescue
+        puts "Cannot write events.txt - disabling loggin"
+        $enableLogging=false
+      end
       #puts "TIME #{t}"
     end
     return false

@@ -143,19 +143,22 @@ module Rookey
   def Rookey.ruby_ext(name,files,inits)
     headerFiles=files.select{|f|f=~/h$/}
     libs=files.select{|f|f=~/so$/ or f=~/bundle/}
-    swigInterfaces=libs.map{|f|f.sub(/\.[a-zA-Z]+$/,".i")}
-    swigInterfaces=files.select{|f|f=~/i$/}
-    swigInterface = Rookey::swig_interface(name=>headerFiles+swigInterfaces,:initializers=>inits)
+
     cppFiles=files.select{|f|f=~/c$/}
 
     sourceDirs=files.map{|file|File.split(file)[0]}.sort.uniq
-    
+
     config=Rookey::getConfig
     sourceDirs << "."
     config.add("INCLUDEDIRS",sourceDirs.join(" "))
     
     compiler=Rookey::Compiler.new(config)
-        
+            
+    #FIXME: check if swig is present
+    
+    swigInterfaces=libs.map{|f|f.sub(/\.[a-zA-Z]+$/,".i")}
+    swigInterfaces=files.select{|f|f=~/i$/}
+    swigInterface = Rookey::swig_interface(name=>headerFiles+swigInterfaces,:initializers=>inits)
     swigTarget = Rookey::swig({File.join(compiler.getPlainBuildDir,name+"_swig.cc")=>swigInterface},config)
     
     

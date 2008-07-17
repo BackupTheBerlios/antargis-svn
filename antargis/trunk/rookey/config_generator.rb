@@ -1,4 +1,6 @@
 
+require File.join(File.split(__FILE__)[0],'config_class.rb')
+
 class Class
   def provides(s=nil)
     @provides||=[]
@@ -14,39 +16,9 @@ end
 
 module Rookey
   
-  # Rookeys Config-hash. 
-  class Config
-    def initialize(hash={})
-      @hash=hash
-    end
-    def [](name)
-      @hash[name]||""
-    end
-    def []=(name,value)
-      @hash[name]=value
-    end
-    def add(name,value)
-      @hash[name]||=""
-      @hash[name]+=" "+value
-    end
-  end
   
   CONFIG_FILENAME="config_cache.rb"
   
-  @@config=nil
-  
-  def Rookey.getConfig
-    if @@config.nil?
-      if File.exists?(Rookey::CONFIG_FILENAME)
-        load Rookey::CONFIG_FILENAME
-	    else 
-	      runConfigure
-        hibe(@@config,Rookey::CONFIG_FILENAME)
-	    end
-      CLEAN << Rookey::CONFIG_FILENAME
-    end
-    @@config
-  end 
   
   # stores a dumpable ruby-object *what* into a file named *filename*
   def Rookey.hibe(what,filename)

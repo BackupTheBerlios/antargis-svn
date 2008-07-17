@@ -1,3 +1,4 @@
+#include "ag_gl.h"
 #include "ag_glsl.h"
 #include "ag_vdebug.h"
 #include "ag_main.h"

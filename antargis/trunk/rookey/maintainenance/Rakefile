@@ -1,0 +1,196 @@
+require 'ostruct'
+require 'ftools'
+
+alias :oldSystem :system
+def system(s)
+  puts s
+  oldSystem(s)
+end
+
+  
+
+class RookeyDist
+  def initialize(config)
+    @config=config
+
+    @baseDir=Dir.pwd
+    
+    @distDir=File.join(@baseDir,"packages")
+  end
+
+  def distDarwin
+    sDir=sourceDir
+    sDir=sDir[0..0].upcase+sDir[1..-1]
+    
+    mkdir(sDir)
+    
+    aDir=File.join(sDir,sDir+".app")
+
+    mkdir(aDir)
+    cDir=File.join(aDir,"Contents")
+    mkdir(cDir)
+    mDir=File.join(cDir,"MacOS")
+    mkdir(mDir)
+    rDir=File.join(cDir,"Resources")
+    mkdir(rDir)
+    
+    cp("../../antargis.bundle",mDir)
+    cp("../../antargis",mDir)
+    cp("../../data/gui/antargis.icns",rDir)
+    File.copy("../../data/gui/antargis.icns",File.join(sDir,".VolumeIcon.icns"))
+#    File.copy("/Volumes/Firefox/.VolumeIcon.icns",File.join(sDir,".VolumeIcon.icns"))
+    
+    f=File.open(File.join(cDir,"PkgInfo"),"w")
+    f.puts("APPL????")
+    f.close
+    
+    
+    f=File.open(File.join(cDir,"Info.plist"),"w")
+f.puts '<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+      <key>CFBundleDevelopmentRegion</key>
+      <string>English</string>
+      <key>CFBundleExecutable</key>
+      <string>antargis</string>
+      <key>CFBundleIdentifier</key>
+      <string>com.apple.rubycocoa.testRubyApp</string>
+      <key>CFBundleInfoDictionaryVersion</key>
+      <string>6.0</string>
+      <key>CFBundlePackageType</key>
+      <string>APPL</string>
+      <key>CFBundleShortVersionString</key>
+      <string>1.0</string>
+      <key>CFBundleSignature</key>
+      <string>????</string>
+      <key>CFBundleVersion</key>
+      <string>1.0</string>
+      <key>NSMainNibFile</key>
+      <string>MainMenu</string>
+      <key>NSPrincipalClass</key>
+      <string>NSApplication</string>
+      <key>CFBundleIconFile</key>
+      <string>antargis.icns</string>
+    </dict>
+    </plist>'
+f.close
+
+		system "cp -R ../../data "+mDir
+		system "cp -R ../../antargisStarter.rb "+mDir
+		system "cp -R ../../ruby "+mDir
+		system "find #{cDir} -name '*.svn'|xargs rm -rf"
+		
+    #FIXME GPL+authors+README, etc    
+		
+		system "hdiutil create -scrub -volname Antargis -srcfolder #{sDir} #{sDir}.dmg"
+    
+    system "rm -rf "+sDir
+  end
+    
+  def distSource
+    system("cd ../.. && ./configure && rake")
+    sDir=sourceDir
+    mkdir(sDir)
+    copyMainTo(sDir)
+    copySourcesTo(sDir)
+    ["Rakefile","configure"].each{|f|
+      cp("../../"+f,sDir)
+    }
+    
+    #system "tar cfz #{sDir}.tar.gz #{sDir}"
+    #system "tar cfj #{sDir}.tar.bz2 #{sDir}"
+    #system "zip -r #{sDir}.zip #{sDir}"
+    checkSource(sDir)
+  end
+  
+  def prepareDistribution
+  end
+  
+  private
+  
+  def checkSource(dir)
+    system "cd #{dir} && export PATH=/usr/bin && ./configure && rake && rake spec"
+    raise "Did not work" if $?!=0
+  end
+  
+  def cp(from,todir)
+    File.copy(from,File.join(todir,File.split(from)[1]))
+  end
+  
+  def copySourcesTo(dir)
+    copyDirTo("../../ext",File.join(dir,"ext"),["cc","h","Rakefile","c","i"])
+    copyDirTo("../../rookey",File.join(dir,"rookey"),["rb","h","Rakefile","c","i","cc"])
+    require '../config_class.rb'
+    require '../../config_cache.rb'
+    copy("../../.build_"+Rookey.getConfig["host_os"]+"/antargis_swig.cc",dir)
+    copy("../../.build_"+Rookey.getConfig["host_os"]+"/antargis_swig.h",dir)
+  end
+  
+  def copyMainTo(dir)
+    copyDirTo("../../data",File.join(dir,"data"),["png","xml","wav","mp3","ant2","ant4","anim","antlvl","rb","hmap"])
+    copyDirTo("../../ruby",File.join(dir,"ruby"),["rb"])
+    ["COPYING","ChangeLog","INSTALL","AUTHORS","README","TODO"].each{|file|
+      cp("../../"+file,dir)
+    }
+  end
+  
+  def copyDirTo(from,to,filetypes,exclude=['\..*'])
+    puts from
+    mkdir(to) unless File.directory?(to)
+    Dir[File.join(from,"*")].each{|entry|
+      entry=File.split(entry)[1]
+     #puts entry
+      fromPath=File.join(from,entry)
+      toPath=File.join(to,entry)
+      if File.directory?(fromPath)
+        if exclude.select{|regex|entry=~/#{regex}/}.length==0
+          mkdir(toPath)
+          copyDirTo(fromPath,toPath,filetypes)
+        end
+      else
+        if filetypes.member?(entry.gsub(/.*\./,""))
+          copy(fromPath,toPath)
+        end
+      end
+    }
+  end
+  
+  def mkdir(d)
+    return if File.directory?(d)
+    puts "MKDIR #{d}"
+    begin
+      Dir.mkdir(d)
+    rescue
+      if d=~/\//
+        mkdir(File.split(d)[0])
+        begin
+          Dir.mkdir(d)
+        rescue
+          puts "FAIELD MKDIR #{d}"
+        end
+      else
+        puts "FAILED MKDIR #{d}"
+      end
+    end
+  end
+  
+  def sourceDir
+    @config.name+"-"+@config.version
+  end
+end
+
+DistConfig=Struct.new(:name,:version)
+
+task :dist do
+  config=DistConfig.new("antargis","0.3")
+  d=RookeyDist.new(config)
+  #d.distDarwin
+  d.distSource
+  #dist(:win32)
+  #dist(:source)
+end
+
+task :clean do
+  system "rm -rf Antargis* antargis*"
+end

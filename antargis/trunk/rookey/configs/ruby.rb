@@ -19,6 +19,9 @@ module Rookey
 		      {"CPP"=>"GPP_BASE","CC"=>"GCC_BASE"}.each{|name,base|      
 		        config[name]=searchProgram(config[base])
 		      }
+          
+          config.add("CFLAGS","-pg") if ROOKEY_CONFIG[:profile]
+          config.add("LDFLAGS","-pg") if ROOKEY_CONFIG[:profile]
 	    end
 	    
 	  private
