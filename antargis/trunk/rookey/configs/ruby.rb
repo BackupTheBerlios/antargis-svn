@@ -20,8 +20,20 @@ module Rookey
 		        config[name]=searchProgram(config[base])
 		      }
           
-          config.add("CFLAGS","-pg") if ROOKEY_CONFIG[:profile]
-          config.add("LDFLAGS","-pg") if ROOKEY_CONFIG[:profile]
+          if config["host_os"]=~/darwin.*/ and false
+            pgc="-finstrument-functions"
+            pgl="-finstrument-functions -lSaturn"
+          else
+            pgc="-pg"
+            pgl="-pg"
+          end 
+          config.add("CFLAGS",pgc) if ROOKEY_CONFIG[:profile]
+          config.add("LDFLAGS",pgl) if ROOKEY_CONFIG[:profile]
+          
+          ["CFLAGS","CPPFLAGS","LDFLAGS"].each{|name|
+            config.add(name,ENV[name]) if ENV[name]
+          }
+          
 	    end
 	    
 	  private

@@ -1,3 +1,5 @@
+require 'ftools'
+
 module Rookey
   class Swig
     def initialize(config,target=:ruby,cpp=true)
@@ -8,8 +10,22 @@ module Rookey
     def swig(t,interface)
       options=[]
       program=@config["SWIG"]
-      program||="swig"
-      program="swig" if program==""
+      if program=="" or program.nil?
+        # check if a prepared file is in vicinity
+        puts t.name
+        filename=File.split(t.name)[1]
+        if File.exists?(filename)
+          File.copy(filename,t.name)
+          return
+        end
+        #exit
+        program="swig"
+      end
+      #program||="swig"
+      
+      #program="swig" if program==""
+      #if program
+      
       options << "-#{@target}"
       options << "-c++" if @cpp
       swigOptions = @config["SWIG_OPTIONS"].split(" ")

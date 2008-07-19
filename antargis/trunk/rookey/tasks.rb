@@ -140,7 +140,7 @@ module Rookey
   end 
 
   
-  def Rookey.ruby_ext(name,files,inits)
+  def Rookey.ruby_ext(name,files,inits,fallbackInterface=nil)
     headerFiles=files.select{|f|f=~/h$/}
     libs=files.select{|f|f=~/so$/ or f=~/bundle/}
 
@@ -148,6 +148,8 @@ module Rookey
 
     sourceDirs=files.map{|file|File.split(file)[0]}.sort.uniq
 
+    Rookey::checkConfig(SwigConfig)
+    
     config=Rookey::getConfig
     sourceDirs << "."
     config.add("INCLUDEDIRS",sourceDirs.join(" "))

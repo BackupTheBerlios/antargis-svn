@@ -18,7 +18,7 @@ module Rookey
   
   
   CONFIG_FILENAME="config_cache.rb"
-  
+  @@configured=[]
   
   # stores a dumpable ruby-object *what* into a file named *filename*
   def Rookey.hibe(what,filename)
@@ -124,6 +124,10 @@ EOT
   end
   
   
+  def self.checkConfig(pClass)
+    
+  end
+  
   def Rookey.runConfigure
     configurators=getDescendantsOfClass(Configurator)
     ok=[]
@@ -135,7 +139,12 @@ EOT
 		      if c.needs.select{|s|not ok.member?(s)}.length == 0
 		        log "Running configurator #{c}"
             #pp config
-		        c.new.run(config)
+            begin
+		          c.new.run(config)
+              @@configured << c
+            rescue
+              puts "Configuration of #{c} failed !"
+            end
 		        ok+=c.provides
 		        ok.uniq!
 		        run << c

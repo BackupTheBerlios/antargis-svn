@@ -110,7 +110,7 @@ f.close
   private
   
   def checkSource(dir)
-    system "cd #{dir} && export PATH=/usr/bin && ./configure && rake && rake spec"
+    system "cd #{dir} && export PATH=/usr/bin export LDFLAGS=-L/opt/local/lib && export CFLAGS='-I/opt/local/include -I/opt/local/include/SDL' && ./configure && rake --trace && rake spec"
     raise "Did not work" if $?!=0
   end
   
