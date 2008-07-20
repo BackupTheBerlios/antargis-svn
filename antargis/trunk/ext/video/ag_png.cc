@@ -212,7 +212,7 @@ std::string toPNG(const SDL_Surface *s)
 
     std::string ns(mem,nsize+1);
 
-    delete mem;
+    delete[]  mem;
     return ns;
   }
 

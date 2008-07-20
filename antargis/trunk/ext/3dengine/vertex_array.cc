@@ -34,6 +34,7 @@ static bool useVertexArrays()
 VertexArray::VertexArray(bool pDynamic):mDynamic(pDynamic),bbox(AGVector3(),AGVector3())
 {
   bColor=true;
+  GLeeInit();
   mBuffers=GLEE_ARB_vertex_buffer_object && useVBO();
   mArrays=GLEE_EXT_vertex_array && useVertexArrays();
 

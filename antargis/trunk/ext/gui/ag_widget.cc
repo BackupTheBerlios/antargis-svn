@@ -612,19 +612,21 @@ bool AGWidget::fixedHeight() const
 
 void AGWidget::setWidth(float w)
   {
-    if(mCache && width()!=w)
-      setCaching(true);
+    bool changed=(width()!=w);
     regChange();
     mRect.setWidth(w);
+    if(mCache && changed)
+      setCaching(true);
     regChange();
     queryRedraw();
   }
 void AGWidget::setHeight(float h)
   {
-    if(mCache && height()!=h)
-      setCaching(true);
+    bool changed=(height()!=h);
     regChange();
     mRect.setHeight(h);
+    if(mCache && changed)
+      setCaching(true);
     regChange();
     queryRedraw();
   }

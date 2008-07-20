@@ -253,6 +253,7 @@ bool AGVector2::operator!=(const AGVector2 &a) const
 AGString AGVector2::toString() const
 {
   std::ostringstream os;
+  os.str("");
   os<<"("<<v[0]<<","<<v[1]<<")";
   return AGString(os.str());
 }
