@@ -60,7 +60,7 @@ AGApplication::~AGApplication()
     CTRACE;
     if(mainWidget)
       mainWidget->setApp(0);
-    delete mCursor;
+    saveDelete(mCursor);
   }
 
 void AGApplication::setKeyRepeat(bool enable)
@@ -224,7 +224,7 @@ bool AGApplication::doEvent(const SDL_Event &event)
           processed=processEvent(message);
       }
 
-    delete message;
+    saveDelete( message);
     return processed;
   }
 
@@ -377,7 +377,7 @@ void AGApplication::draw()
 
         pLastDrawn=mainWidget;
 
-        delete p;
+        saveDelete( p);
       }
     else
       cdebug("no mainwidget");
@@ -485,7 +485,7 @@ void AGApplication::mark()
 /// this function sets the current tooltip, which is display above all widgets
 void AGApplication::setTooltip(AGTooltip *pTooltip)
   {
-    delete mTooltip;
+    saveDelete( mTooltip );
     mTooltip=pTooltip;
 
   }
@@ -496,7 +496,7 @@ void AGApplication::resetTooltip(AGTooltip *pTooltip)
   {
     if (pTooltip==mTooltip)
       {
-        delete mTooltip;
+        saveDelete(mTooltip);
         mTooltip=0;
       }
   }
@@ -531,7 +531,7 @@ void AGApplication::setCursor(const AGTexture &pTexture)
 void AGApplication::setNormalCursor()
   {
     SDL_ShowCursor(1);
-    delete mCursor;
+    saveDelete( mCursor );
     mCursor=0;
   }
 

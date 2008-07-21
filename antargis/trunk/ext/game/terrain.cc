@@ -303,9 +303,9 @@ void Terrain::init()
 void Terrain::mapChangedComplete()
   {
     for(Pieces::iterator i=pieces.begin();i!=pieces.end();i++)
-      delete *i;
+      saveDelete(*i);
     for(WPieces::iterator i=water.begin();i!=water.end();i++)
-      delete *i;
+      saveDelete(*i);
 
     pieces.clear();
     water.clear();

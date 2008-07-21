@@ -46,17 +46,6 @@ def msh(a)
   system a
 end
 
-def build(dir,configureOptions)
-  olddir=Dir.pwd
-
-  Dir.chdir(dir)
-  
-  msh "./configure --prefix=#{File.join(olddir,"build")} #{configureOptions}"
-  msh "make"
-  msh "make install"
-
-  Dir.chdir(olddir)
-end
 
 def buildExternal(name)
   Dir.chdir(File.split(__FILE__)[0])

@@ -112,7 +112,7 @@ void loadDefaultTheme()
 void setTheme(const AGTheme &t)
   {
     if(mTheme)
-      delete mTheme;
+      saveDelete(mTheme);
     mTheme=new AGTheme(t);
   }
 

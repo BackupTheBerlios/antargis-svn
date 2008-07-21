@@ -43,8 +43,8 @@ bool AGCheckBox::eventMouseClick(AGEvent *m)
 
 void AGCheckBox::setSurfaces(AGSurface pDisabledSurface,AGSurface pEnabledSurface)
   {
-    delete mSurfaces[0];
-    delete mSurfaces[1];
+    saveDelete(mSurfaces[0]);
+    saveDelete(mSurfaces[1]);
     mSurfaces[0]=new AGSurface(pDisabledSurface);
     mSurfaces[1]=new AGSurface(pEnabledSurface);
 

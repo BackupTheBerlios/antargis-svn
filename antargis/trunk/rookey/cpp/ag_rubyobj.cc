@@ -41,10 +41,20 @@ AGEXPORT bool rubyObjectExists(void *po)
 AGRubyObject::AGRubyObject()
   {
     //std::cerr<<"AGRubyObject::new:"<<this<<std::endl;
+    assert(mRubyObjects.find(this)==mRubyObjects.end());
     mRubyObjects.insert(this);
+    size_t oSize=mRemovedRubyObjects.size();
+
+    mRemovedRubyObjects.erase(this);
+    if(oSize!=mRemovedRubyObjects.size())
+      std::cerr<<"Collision - removed rubyobject's address is overwritten!"<<std::endl;
+    
+    std::cerr<<"current ruby#:"<<mRubyObjects.size()<<" removed:"<<mRemovedRubyObjects.size()<<std::endl;
   }
 AGRubyObject::~AGRubyObject()
   {
+    assert(mRubyObjects.find(this)!=mRubyObjects.end());
+    assert(mRemovedRubyObjects.find(this)==mRemovedRubyObjects.end());
     //std::cerr<<"AGRubyObject::Removed:"<<this<<std::endl;
     for(std::set<AGBaseObject*>::iterator i=mReferences.begin();i!=mReferences.end();i++)
       (*i)->baseClear();
@@ -71,9 +81,11 @@ void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
     VALUE v=convertCpp2Ruby(o);
     if(v!=Qnil)
       {
+        assert(DATA_PTR(v)==o);
         //std::cout<<"V:"<<v<<std::endl;
         // then mark it
         rb_gc_mark(v);
+        
       }
 
     assert(o);

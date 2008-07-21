@@ -20,7 +20,7 @@ MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
 
 MiniMap::~MiniMap()
   {
-    delete mTexture;
+    saveDelete(mTexture);
   }
 
 

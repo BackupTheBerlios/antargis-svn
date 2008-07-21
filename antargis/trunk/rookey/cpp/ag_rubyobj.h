@@ -47,12 +47,12 @@ class AGEXPORT AGBaseObject
 protected:
   AGRubyObject *mp;
 public:
-  AGBaseObject(AGRubyObject *p);
+  AGBaseObject(AGRubyObject *p) throw ();
 
-  ~AGBaseObject();
-  void baseClear();
+  ~AGBaseObject() throw ();
+  void baseClear() throw ();
 
-  bool valid()
+  bool valid() throw ()
     {
       return mp;
     }
@@ -97,15 +97,15 @@ public:
    */
   typedef unsigned long VALUE;
 
-  AGRubyObject();
-  virtual ~AGRubyObject();
+  AGRubyObject() throw();
+  virtual ~AGRubyObject() throw();
 
 protected:
 #ifndef SWIG
   // functions shouldn't be exported and NEVER be used in ruby!
-  virtual void clear();
-  virtual void mark();
-  void markObject(AGRubyObject *o,bool recursive=true);
+  virtual void clear() throw();
+  virtual void mark() throw();
+  void markObject(AGRubyObject *o,bool recursive=true) throw();
 
 #endif
 public:
