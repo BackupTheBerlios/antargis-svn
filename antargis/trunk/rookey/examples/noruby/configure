@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require File.join(File.split(__FILE__)[0],"..","..","lib","rookey_config.rb")
+
+config=Rookey::Configure.new
+config.run
+
+puts
+puts "Run 'rake clean' for changes to take effect on already built files!"
+puts

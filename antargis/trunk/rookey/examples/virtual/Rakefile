@@ -1,0 +1,5 @@
+require 'rookey.rb'
+
+extension=Rookey::ruby_ext('virtualExample',Dir["*.h"]+Dir["*.cc"])
+
+task :default=>extension doend

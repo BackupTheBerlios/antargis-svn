@@ -1,0 +1,61 @@
+== noruby
+contains an example for a plain C++ project, that you can build and deploy. 
+
+The Rakefile looks like this: First the rookey.rb base file is included.
+
+ require '../../rookey.rb'
+
+ objects=Rookey::compile(['main.cc'])
+ exe=Rookey::link_exe('test',objects)
+
+ task :default=>exe do
+ end
+
+After that you define a task for compilation of cc-files to objects. The name of the task is stored in 'objects'
+after that you can use these objects to create an executable with name base 'test'. On Unix-Systems the executable will
+be named 'test' - on Windows 'test.exe'. You can use 'objects' and 'exe' as tasks in definition like you can see in the
+definition of the default task. That's all you need for compilation. Just run 'rake' and it creates you executable.
+
+Note: Rookey does not use the typical rake-like syntax (task :xy=>:yz do ... end with symbols), because objects is an array
+of rule-targets that should not be included in the rake-tasklist. Apart from this you can compile objects using different
+configurations and link them into a single file.  
+
+When you have things to configure like creation of debug-symbol, you can add a configure script, that looks like this:
+ #!/usr/bin/env ruby
+
+ require File.join(File.split(__FILE__)[0],"..","..","lib","rookey_config.rb")
+
+ config=Rookey::Configure.new
+ config.run
+
+ puts
+ puts "Run 'rake clean' for changes to take effect on already built files!"
+ puts
+
+First you include the rookey_config.rb to get all the functionality. After that you start a configure-run.
+This can be shorten down to something like this:
+
+ require File.join(File.split(__FILE__)[0],"..","..","lib","rookey_config.rb")
+ Rookey::Configure.new.run
+ 
+If you want to configure your own options, have a look at optparse, which is used internally in rookey-configure.
+After that you can use it like this:
+
+ config=Rookey::Configure.new
+ config.run do |opts|
+
+   opts.on("--drmuser DRMUSER",
+     "set user for DRM") do |v|
+       config.set(:drmuser,v)
+   end
+  
+   opts.on("--drmpw DRMPASSWORD",
+     "set password for DRM") do |v|
+       config.set(:drmpass,v)
+   end  
+ end
+
+Rookey takes care of storing the settings to a rookey_configuration.rb file. There are no other configure files in
+the other examples, because they are not explicitly needed.
+
+ 

@@ -1,0 +1,6 @@
+require 'rookey.rb'
+
+objects=Rookey::compile(['main.cc'])
+exe=Rookey::link_exe('test',objects)
+
+task :default=>exe doend

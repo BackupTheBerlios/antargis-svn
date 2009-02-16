@@ -1,0 +1,24 @@
+require 'rookey.rb'
+
+extension=Rookey::ruby_ext('templates',Dir["*.h"]+Dir["*.cc"]+Dir["*.i"])
+
+task :build=>extension doend
+
+
+begin
+  require 'spec/rake/spectask'
+  
+  Spec::Rake::SpecTask.new(:spec=>:build) do |t|
+    t.spec_files = FileList['test.rb'].map{|f|File.expand_path(f)}
+    t.warning = true
+    path="spec_output.html"
+    t.spec_opts=["--format html:"+File.expand_path(path)]
+  end
+
+  task :default=>:spec do
+  end
+  
+rescue LoadError=>e
+  task :default=>:build do
+  end
+end

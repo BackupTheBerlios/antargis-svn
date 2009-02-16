@@ -1,0 +1,1 @@
+%template(ChildList) std::list<Child*>;
