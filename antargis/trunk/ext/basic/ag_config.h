@@ -23,8 +23,9 @@
 #ifndef AG_CONFIG_H
 #define AG_CONFIG_H
 
+#include <rk_string.h>
+
 #include <map>
-#include <ag_string.h>
 
 class AGEXPORT AGConfig
 {

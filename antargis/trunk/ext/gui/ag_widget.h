@@ -23,7 +23,7 @@
 #ifndef AG_WIDGET_H
 #define AG_WIDGET_H
 
-#include "ag_base.h"
+#include "rk_base.h"
 #include "ag_geometry.h"
 #include "ag_messageobject.h"
 #include "ag_projection.h"
@@ -37,7 +37,7 @@ class AGLayout;
 class AGClipping;
 class AGApplication;
 
-/** 
+/**
     \defgroup widgets Widgets
     \brief contains all the widgets
 
@@ -79,9 +79,9 @@ class AGEXPORT AGWidget:public AGMessageObject
 {
 public:
   typedef std::list<AGWidget*> Children;
-  
+
   AGWidget(AGWidget *pParent,const AGRect2 &r);
-  virtual ~AGWidget();
+  virtual ~AGWidget() throw();
 
   AGApplication *getApp();
   void setApp(AGApplication *pApp);
@@ -92,7 +92,7 @@ public:
   virtual void drawAfter(AGPainter &p);
   virtual void drawAll(AGPainter &p);
   virtual void drawChild(AGPainter &p,AGWidget *pWidget);
-  
+
   AGRect2 getRect() const;
   virtual AGRect2 getClientRect() const;
   virtual void setRect(const AGRect2 &pRect);
@@ -157,7 +157,7 @@ public:
   void hide();
   void close();
 
-  virtual void mark();
+  virtual void mark() throw();
 
   virtual void addChild(AGWidget *w);
   virtual void addChildBack(AGWidget *w);
@@ -180,10 +180,10 @@ public:
   // to prevent this, use this function to "use" them in each frame
   virtual void useTextures(); // when caching
   void useTexturesRecursive(); // when caching
-  
-  
-  
-  
+
+
+
+
   // geometry calculation
   AGRect2 innerToOuter(const AGRect2 &pRect) const;
   AGVector2 innerToOuter(const AGVector2 &pRect) const;
@@ -192,7 +192,7 @@ public:
 
 
   // clear children
-  void clear();
+  void clear() throw();
 
   AGRect2 getScreenRect() const;
   AGRect2 toScreen(const AGRect2&p) const;
@@ -202,9 +202,9 @@ public:
 
   AGProjection2D innerToOuter() const;
   AGProjection2D outerToInner() const;
-  
+
   AGVector2 getScreenPosition() const;
-  
+
 
   // focus
 
@@ -239,35 +239,35 @@ public:
   std::list<AGRect2> aquireChanges();
   void pushChangeRect(const AGRect2 &pRect);
   void clearChangeRects();
-  
+
   std::list<AGWidget*> getChildren();
-  
+
   bool hovered() const;
-  
+
   void setClient(const AGRect2 &pWorld,const AGProjection2D &pProj);
   AGProjection2D getClientProjection() const;
   AGRect2 getClientWorld() const;
-  
-  
+
+
   virtual bool eventMouseButtonDownClipped(AGEvent *pEvent,const AGVector2 &pPosition);
   virtual bool eventMouseButtonUpClipped(AGEvent *pEvent,const AGVector2 &pPosition);
   virtual bool eventMouseMotionClipped(AGEvent *pEvent,const AGVector2 &pPosition);
 
   void addChildRef(AGWidget *pWidget);
-  
-  void initEvents(); 
-  
+
+  void initEvents();
+
   virtual void eventInitEvents();
- 
-  
+
+
 protected:
   virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
 
 private:
-  
+
   AGRect2 getChildRect(const AGRect2 &pRect) const;
   bool containsPoint(AGWidget *pWidget,const AGVector2 &pVector) const;
-  
+
 
   AGApplication *mApp;
 
@@ -282,7 +282,7 @@ private:
   void gainFocusDown(AGWidget *pWidget);
 
   void checkFocus();
-  
+
   static bool valid(AGWidget *pWidget);
 
   std::list<AGWidget*> mToClear;
@@ -290,7 +290,7 @@ private:
   AGRect2 mRect,mClientWorld;
   AGProjection2D mClientProj;
   bool mUseClientRect;
-  
+
   AGWidget *mParent;
   bool mChildrenEventFirst;
   bool mChildrenDrawFirst;
@@ -316,12 +316,12 @@ private:
   AGTooltip *mTooltipWidget;
 
   std::set<AGWidget*> mRefChildren;
-  
+
   bool mEventsInited;
-  
+
 protected:
   std::list<AGWidget*> mChildren;
-  
+
 private:
   static std::set<AGWidget*> allWidgets;
 

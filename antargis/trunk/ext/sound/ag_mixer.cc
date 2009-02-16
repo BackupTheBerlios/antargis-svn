@@ -20,7 +20,7 @@
 
 #include "ag_mixer.h"
 #include "ag_kill.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_mutex.h"
 #include "ag_fs.h"
 #include "ag_config.h"
@@ -146,8 +146,8 @@ void closeSoundEngine()
   }
 
 
-AGSound::~AGSound()
-  { 
+AGSound::~AGSound() throw()
+  {
     if(getCollector())
       getCollector()->removeGlobal(this);
 
@@ -291,7 +291,7 @@ void AGSound::stopMp3()
         Mix_HaltMusic();
         Mix_FreeMusic(mMusic);
         mMusic=0;
-      }      
+      }
   }
 AGSound::AGSound():AGMessageObject(),sigMp3Finished(this,"sigMp3Finished")
 {

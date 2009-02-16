@@ -22,8 +22,7 @@
 #define AG_GLSL_H
 
 #include "ag_gl.h"
-//#include "renderer.h"
-#include "ag_tools.h"
+#include "rk_tools.h"
 #include "ag_geometry.h"
 
 #include <map>
@@ -62,7 +61,7 @@ class AGEXPORT AGFragProgram
 class AGEXPORT AGShaderParameter
 {
  public:
-  
+
 };
 
 class AGEXPORT AGShaderProgram
@@ -74,7 +73,7 @@ class AGEXPORT AGShaderProgram
   float *matrixBuf;
   bool on;
   std::string name;
- protected:  
+ protected:
   GLhandleARB p;
 
  public:

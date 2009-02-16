@@ -32,7 +32,7 @@ class AGEXPORT AGMenuItem:public AGTable
 {
  public:
   AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText);
-  virtual ~AGMenuItem();
+  virtual ~AGMenuItem() throw();
 
   void draw(AGPainter &p);
 
@@ -59,7 +59,7 @@ class AGEXPORT AGSubMenu:public AGMenuItem
 {
  public:
   AGSubMenu(AGWidget *pParent,const AGStringUtf8 &ptext);
-  virtual ~AGSubMenu();
+  virtual ~AGSubMenu() throw();
 
   AGMenu *getMenu();
 

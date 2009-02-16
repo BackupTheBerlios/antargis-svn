@@ -92,7 +92,7 @@ class AGEXPORT AnimMeshData:public AGRubyObject
 
  public:
   AnimMeshData(const AGString &xmlFilename);
-  ~AnimMeshData();
+  ~AnimMeshData() throw();
 
   AGBox3 bbox() const;
 

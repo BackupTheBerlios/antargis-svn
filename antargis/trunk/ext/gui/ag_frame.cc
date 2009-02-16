@@ -1,6 +1,7 @@
 #include "ag_frame.h"
 #include "ag_screen.h"
-#include "ag_debug.h"
+
+#include "rk_debug.h"
 
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,int pWidth,int pWidthH):AGWidget(pParent,pRect),
 mWidth(pWidth),mBorder(0),mWidthH(pWidthH<0?pWidth:pWidthH),mTexture((int)width(),(int)height())
@@ -17,7 +18,7 @@ mWidth(pBorder.getWidth()),mWidthH(pBorder.getWidth()),mBorder(new AGBorder(pBor
   mBg=0;
 }
 
-AGFrame::~AGFrame()
+AGFrame::~AGFrame() throw()
   {
     delete mBorder;
     delete mBg;

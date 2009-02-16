@@ -4,6 +4,7 @@
 # - init video-mode
 # - process config-file and parameter input
 #
+require 'rookey/lib/rookey/tools.rb'
 require 'pp'
 
 
@@ -101,8 +102,10 @@ begin
 rescue
   puts "Antargis-module not found - trying to load .so"
   begin
-    if File.exists?("ext/antargis.so")
-      require 'ext/antargis'
+    if File.exists?("antargis.so")
+      require 'antargis'
+    elsif File.exists?("antargis.dll")
+      require 'antargis.dll'
     elsif File.exists?("antargis.bundle")
       require 'antargis.bundle'
     else

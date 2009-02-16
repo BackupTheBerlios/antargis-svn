@@ -19,7 +19,7 @@
  */
 
 #include "ag_image.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
   AGWidget(pParent,r),
@@ -37,7 +37,7 @@ AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTil
 
 
 
-AGImage::~AGImage()
+AGImage::~AGImage() throw()
   {
   }
 

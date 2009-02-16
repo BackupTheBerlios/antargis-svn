@@ -21,7 +21,7 @@
 #include "ag_application.h"
 #include "ag_button.h"
 #include "ag_combo.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_edit.h"
 #include "ag_listbox.h"
 #include "ag_theme.h"
@@ -43,6 +43,9 @@ AGComboBox::AGComboBox(AGWidget *pParent,const AGRect2 &pRect):
 
     mButton->sigClick.connect(slot(this,&AGComboBox::eventButtonClicked));
   }
+
+AGComboBox::~AGComboBox() throw()
+  {}
 
 
 void AGComboBox::insertItem(const AGString &pID,const AGStringUtf8 &pContent)
@@ -121,7 +124,7 @@ void AGComboBox::setSelected(const AGString &pID)
     update();
   }
 
-void AGComboBox::clear()
+void AGComboBox::clear() throw()
   {
     ops.clear();
     mID="";

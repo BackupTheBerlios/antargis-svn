@@ -17,4 +17,4 @@ def standardLayoutCreator(pClass)
   getLayoutFactory.addCreator(name,creator)
 end
 
-requireRelative("effect.rb",__FILE__)
+require "./effect.rb"

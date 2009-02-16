@@ -34,7 +34,7 @@ Mesh::Mesh(Scene *pScene,MeshData &data,const AGVector4 &pPos,float pRot):
     mVisible=true;
   }
 
-Mesh::~Mesh()
+Mesh::~Mesh() throw()
   {
   }
 
@@ -142,7 +142,7 @@ bool Mesh::transparent()
   }
 
 
-void Mesh::mark()
+void Mesh::mark() throw()
   {
     markObject(getData());
   }

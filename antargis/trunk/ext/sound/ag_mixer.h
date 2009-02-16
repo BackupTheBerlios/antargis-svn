@@ -33,7 +33,7 @@ class AGEXPORT AGSound:public AGMessageObject
 {
  public:
   AGSound(); // NEVER use this! - it's only provided due to swig
-  ~AGSound();
+  ~AGSound() throw();
   bool playMp3(const std::string &pFilename);
   bool playMp3DRM(const std::string &pFilename,AGDecryptor &pDec);
 

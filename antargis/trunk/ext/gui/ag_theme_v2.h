@@ -23,7 +23,8 @@
 #ifndef AG_THEME_V2_H
 #define AG_THEME_V2_H
 
-#include "ag_base.h"
+#include "rk_base.h"
+
 #include "ag_font.h"
 #include "ag_surface.h"
 #include "ag_gradient.h"

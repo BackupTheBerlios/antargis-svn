@@ -1,6 +1,6 @@
 #include "boa_3d_wireframe.h"
 #include <ag_rendercontext.h>
-#include <ag_debug.h>
+#include <rk_debug.h>
 
 Boa3dWireframe::Boa3dWireframe(Scene *pScene,const AGVector4 &pColor,float pWidth):
   SceneNode(pScene,AGVector4(0,0,0,0),AGBox3(AGVector3(0,0,0),AGVector3(100,100,100))),
@@ -9,6 +9,9 @@ Boa3dWireframe::Boa3dWireframe(Scene *pScene,const AGVector4 &pColor,float pWidt
   mColor=pColor;
   mChanged=true;
 }
+
+Boa3dWireframe::~Boa3dWireframe() throw()
+  {}
 
 void Boa3dWireframe::draw()
 {
@@ -20,7 +23,7 @@ void Boa3dWireframe::draw()
       // update vertex array
     }
 
-  
+
   AGRenderContext c;
   glLineWidth(mWidth);
 
@@ -32,7 +35,7 @@ void Boa3dWireframe::draw()
   c.setColor(mColor);
   c.begin();
   glBegin(GL_LINES);
- 
+
   for(std::vector<Line>::iterator i=mLines.begin();i!=mLines.end();i++)
     {
       glVertex3fv((float*)a);
@@ -41,9 +44,9 @@ void Boa3dWireframe::draw()
       glVertex3fv((float*)i->b);
     }
   glEnd();
-  
 
-  
+
+
 
 }
 

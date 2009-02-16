@@ -62,15 +62,6 @@ ARTS
 [[Development]]
 ==========================================================
 
-[Segfaults]
-------------------------------------------------------
-None known.
-
-[AI]
-------------------------------------------------------
-[H] heuristic compression for path-finding
-[H] map-weighting based on min/max of surrounding
-
 
 [Gui/View - GUI-library]
 ------------------------------------------------------
@@ -156,10 +147,6 @@ None known.
 [VL] add females
 [VL] story-telling:
 	- browsing facility (scene=>number(person)=>text)
-
-[Artificial Intelligence]
-------------------------------------------------------
-[L] computer-player only attacks when stock is used up
 
 [Multiplayer]
 ------------------------------------------------------

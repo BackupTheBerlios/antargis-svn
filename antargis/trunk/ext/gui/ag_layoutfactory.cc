@@ -19,7 +19,7 @@
  */
 
 #include "ag_layoutfactory.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_kill.h"
 
 AGLayoutCreator::AGLayoutCreator():mWidget(0),mClient(0)
@@ -59,7 +59,7 @@ void AGLayoutCreator::clearResult()
     mClient=0;
   }
 
-void AGLayoutCreator::mark()
+void AGLayoutCreator::mark() throw()
   {
     if(mWidget)
       markObject(mWidget);

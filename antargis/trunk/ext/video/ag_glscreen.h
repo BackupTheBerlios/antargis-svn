@@ -23,14 +23,16 @@
 #ifndef __GUI_GLSURFACE_H
 #define __GUI_GLSURFACE_H
 
+#include <rk_base.h>
+
+#include <ag_geometry.h>
+#include "ag_screen.h"
+#include "ag_gl.h"
+
 #include <string>
 #include <map>
 #include <list>
 #include <SDL.h>
-#include <ag_base.h>
-#include <ag_geometry.h>
-#include "ag_screen.h"
-#include "ag_gl.h"
 
 #define NEW_TEXTURES
 
@@ -54,7 +56,7 @@ class AGEXPORT AGGLScreen:public AGScreen
  public:
   AGGLScreen(int W,int H,int VW=-1,int VH=-1);
 
-  virtual ~AGGLScreen();
+  virtual ~AGGLScreen() throw();
 
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
 

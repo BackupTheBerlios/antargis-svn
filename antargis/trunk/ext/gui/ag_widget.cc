@@ -18,8 +18,9 @@
  * License along with this program.
  */
 
+#include "rk_debug.h"
+
 #include "ag_widget.h"
-#include "ag_debug.h"
 #include "ag_screen.h"
 #include "ag_main.h"
 #include "ag_menu.h"
@@ -84,7 +85,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
       getMain()->getCollector()->insertGlobal(this);
     }
 
-AGWidget::~AGWidget()
+AGWidget::~AGWidget() throw()
   {
     allWidgets.erase(this);
     CTRACE;
@@ -177,7 +178,7 @@ void AGWidget::delObjects()
         std::list<AGWidget*>::iterator i=mToClear.begin();
         for(;i!=mToClear.end();i++)
           {
-            (*i)->setParent(0); // lets play it safe 
+            (*i)->setParent(0); // lets play it safe
             saveDelete(*i);
           }
         mToClear.clear();
@@ -493,7 +494,7 @@ void AGWidget::addChild(AGWidget *w)
     queryRedraw();
   }
 
-void AGWidget::clear()
+void AGWidget::clear() throw()
   {
     // delay it till be draw everything - so this doesn't kill widgets while processing events
     std::copy(mChildren.begin(),mChildren.end(),std::back_inserter(mToClear));
@@ -893,7 +894,7 @@ void AGWidget::checkFocus()
             std::list<AGWidget*>::iterator i;
 
             i=std::find(mChildren.begin(),mChildren.end(),mFocus);
-            // delete children and set to front 
+            // delete children and set to front
             mChildren.erase(i);
             mChildren.push_front(mFocus);
           }
@@ -997,7 +998,7 @@ void AGWidget::setModal(bool pModal)
     mModal=pModal;
   }
 
-void AGWidget::mark()
+void AGWidget::mark() throw()
   {
     for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
       {

@@ -1,8 +1,9 @@
 #ifndef ANT_GLSL_H
 #define ANT_GLSL_H
 
+#include "rk_tools.h"
+
 #include "ant_renderer.h"
-#include "ag_tools.h"
 #include "ag_geometry.h"
 #include "ag_glscreen.h"
 
@@ -42,7 +43,7 @@ class AGEXPORT AntFragProgram
 class AGEXPORT AntShaderParameter
 {
  public:
-  
+
 };
 
 class AGEXPORT AntShaderProgram:public AGGLObject
@@ -56,7 +57,7 @@ class AGEXPORT AntShaderProgram:public AGGLObject
   bool on;
   std::string name;
 
- protected:  
+ protected:
   GLhandleARB p;
 
  public:

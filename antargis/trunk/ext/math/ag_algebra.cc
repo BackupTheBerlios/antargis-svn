@@ -1,5 +1,7 @@
 #include "ag_algebra.h"
-#include "ag_debug.h"
+
+#include "rk_debug.h"
+
 #include "ag_gauss.h"
 #include "ag_stringstream.h"
 
@@ -268,7 +270,7 @@ AGMatrixN AGMatrixN::skipCol(size_t i) const
   assert(width()>1);
   assert(i<width());
   AGMatrixN n(width()-1,height());
- 
+
   for(size_t y=0;y<height();y++)
     {
       for(size_t x=0;x<i;x++)

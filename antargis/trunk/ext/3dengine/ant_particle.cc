@@ -45,7 +45,7 @@ AntParticle::AntParticle(Scene *pScene,float f):
     enabled=true;
   }
 
-AntParticle::~AntParticle()
+AntParticle::~AntParticle() throw()
   {
     for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
       delete *i;

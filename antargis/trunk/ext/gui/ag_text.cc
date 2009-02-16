@@ -20,7 +20,7 @@
 
 
 #include "ag_text.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_surface.h"
 #include "ag_fontengine.h"
 #include "ag_geometry.h"
@@ -43,6 +43,10 @@ AGText::AGText(AGWidget *pParent,const AGVector2 &p,const AGStringUtf8 &pText,co
   {
     mFixedSize=false;
   }
+
+AGText::~AGText() throw()
+  {}
+
 
 void AGText::draw(AGPainter &p)
   {

@@ -19,7 +19,7 @@
  */
 
 #include "ag_table.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 AGTable::AGTable(AGWidget *pWidget,const AGRect2 &pRect):
   AGWidget(pWidget,pRect),
@@ -27,7 +27,7 @@ AGTable::AGTable(AGWidget *pWidget,const AGRect2 &pRect):
   {
   }
 
-AGTable::~AGTable()
+AGTable::~AGTable() throw()
   {
   }
 
@@ -227,8 +227,8 @@ void AGTable::arrange()
           }
         mfx=std::max(mfx,fx);
       }
-    
-    // TODO: assign width's and heights for all fixed !!! 
+
+    // TODO: assign width's and heights for all fixed !!!
     for(mx=0;mx<w;mx++)
       for(my=0;my<h;my++)
         {
@@ -273,7 +273,7 @@ void AGTable::arrange()
         }
 
     // assign positions
-    // first x 
+    // first x
     float ax=0;
     for(mx=0;mx<w;mx++)
       {

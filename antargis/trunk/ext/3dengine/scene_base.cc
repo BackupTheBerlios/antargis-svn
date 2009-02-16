@@ -11,7 +11,7 @@ SceneBase::SceneBase(int w,int h):
   }
 
 
-SceneBase::~SceneBase()
+SceneBase::~SceneBase() throw()
   {
     // tell nodes, that I'm no longer there :-)
     for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
@@ -74,7 +74,7 @@ void SceneBase::removeNode(SceneNode *node)
       }
   }
 
-void SceneBase::clear()
+void SceneBase::clear() throw()
   {
     for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
       {
@@ -121,7 +121,7 @@ float SceneBase::height() const
   return mCamera.getHeight();
 }
 
-void SceneBase::mark()
+void SceneBase::mark() throw()
   {
     //  std::cout<<"SceneBase::mark()"<<std::endl;
     SceneBase::Nodes::iterator i=mNodes.begin();

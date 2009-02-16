@@ -1,6 +1,7 @@
 #include <ag_string_utf8.h>
-#include <ag_debug.h>
-#include <ag_utf8.h>
+#include <rk_string.h>
+#include <rk_debug.h>
+#include <rk_utf8.h>
 
 ///////////////////////////////////////////////////////////////////////////
 // Classes for UTF-8 support
@@ -399,7 +400,7 @@ Uint8 AGStringUtf8::toUint8() const
   is>>i;
   return i;
 }
-Sint16 AGStringUtf8::toSint16() const 
+Sint16 AGStringUtf8::toSint16() const
 {
   long i;
   std::istringstream is;

@@ -30,6 +30,7 @@ class AGEXPORT AGMenu:public AGTable
 {
  public:
   AGMenu(AGWidget *pParent,AGVector2 pWishPos,const AGStringUtf8 &pName);
+  virtual ~AGMenu() throw();
 
   void show(AGVector2 pWishPos);
 

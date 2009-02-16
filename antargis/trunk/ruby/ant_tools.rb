@@ -31,7 +31,7 @@ def displayError(error)
   dputs "ERROR:"+error.to_s
 end
 
-class Set<Array
+class AntSet<Array
   def push(x)
     super
     sort!

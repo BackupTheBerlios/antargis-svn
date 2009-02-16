@@ -19,10 +19,10 @@
  */
 
 
-// TODO: Is this still used ? 
+// TODO: Is this still used ?
 
 #include "ag_kill.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 AGInstanceKiller *mInstanceKiller=0;
 bool mIndirectInstance=false;

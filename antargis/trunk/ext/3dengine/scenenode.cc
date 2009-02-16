@@ -1,6 +1,6 @@
 #include "scenenode.h"
 #include "scene.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
   mPos(pPos),mBBox(b)
@@ -14,7 +14,7 @@ SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
     mScene->addNode(this);
 }
 
-SceneNode::~SceneNode()
+SceneNode::~SceneNode() throw()
 {
   if(mScene)
     mScene->removeNode(this);
@@ -35,7 +35,7 @@ void SceneNode::resetScene()
   mScene=0;
 }
 
-/// this function is deprecated. It was once used for drawing 
+/// this function is deprecated. It was once used for drawing
 /// shadow in a 3rd render-pass.
 void SceneNode::drawShadow()
 {
@@ -120,7 +120,7 @@ bool SceneNode::sceneValid() const
 }
 
 
-void SceneNode::clear()
+void SceneNode::clear() throw()
 {
   //  cdebug(typeid(*this).name());
   if(mScene)

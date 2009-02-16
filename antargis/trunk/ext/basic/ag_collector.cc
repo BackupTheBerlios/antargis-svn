@@ -1,6 +1,11 @@
 #include <ag_collector.h>
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_main.h>
+
+AGCollector::~AGCollector() throw()
+  {
+
+  }
 
 void AGCollector::insertGlobal(AGRubyObject *pObject)
   {
@@ -14,7 +19,7 @@ void AGCollector::removeGlobal(AGRubyObject *pObject)
     mGlobals.erase(pObject);
   }
 
-void AGCollector::mark()
+void AGCollector::mark() throw()
   {
     for(std::set<AGRubyObject*>::iterator i=mGlobals.begin();i!=mGlobals.end();i++)
       {

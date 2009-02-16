@@ -35,14 +35,14 @@ class AGEXPORT AGFontEngine:public AGSingleton
 {
  public:
   AGFontEngine();
-  ~AGFontEngine();
+  ~AGFontEngine() throw();
 
   AGTexture *renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &ParamIn);
 
   int getWidth(const AGFont &pFont,const AGStringUtf8 &pText);
   int getHeight(const AGFont &pFont,const AGStringUtf8 &pText);
 
-  void mark();
+  void mark() throw();
 
  private:
   std::map<std::pair<AGFont,AGStringUtf8>,AGTexture*> fontCache;

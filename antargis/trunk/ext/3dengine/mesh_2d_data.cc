@@ -5,7 +5,7 @@ Mesh2DData::Mesh2DData(AGTexture *pTexture):
 {
 }
   
-void Mesh2DData::mark()
+void Mesh2DData::mark() throw()
 {
   markObject(mTexture);
 }

@@ -22,7 +22,7 @@
 #define QUADTREE_H
 
 #include <ag_geometry.h>
-#include <ag_debug.h>
+#include <rk_debug.h>
 
 #include <set>
 

@@ -26,6 +26,10 @@ AGColorButton::AGColorButton(AGWidget *pParent,const AGRect2 &r,int x,int y):
   {
   }
 
+AGColorButton::~AGColorButton() throw()
+  {}
+
+
 void AGColorButton::draw(AGPainter &p)
   {
     AGWidget::draw(p);

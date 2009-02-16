@@ -3,13 +3,13 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <ag_rubyobj.h>
+#include <rk_rubyobj.h>
 
 class AGEXPORT AGSingleton:public AGRubyObject
 {
  public:
   AGSingleton();
-  ~AGSingleton();
+  virtual ~AGSingleton() throw ();
 };
 
 #endif

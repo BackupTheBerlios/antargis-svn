@@ -19,15 +19,14 @@
  */
 
 #include <ag_geometry.h>
-#include <ag_tools.h>
-#include <ag_debug.h>
+#include <rk_tools.h>
+#include <rk_debug.h>
+
 #include <assert.h>
 #include <cmath>
 #include <map>
 #include <list>
-#include <ag_tools.h>
 #include <ag_xml.h>
-#include <ag_debug.h>
 #include <ag_stringstream.h>
 #include <ag_gauss.h>
 
@@ -1460,19 +1459,19 @@ bool AGRect2::operator!=(const AGRect2 &r) const
 std::vector<AGRect2> AGRect2::tile(size_t x,size_t y) const
 {
   std::vector<AGRect2> l;
-  
+
   if(x==0 || y==0)
   return l;
-  
+
   float w=width()/x;
   float h=height()/y;
-  
+
   for(size_t i=0;i<x;i++)
     for(size_t j=0;j<y;j++)
       {
         l.push_back(AGRect2(x0()+w*i,y0()+h*j,w,h));
       }
-  
+
   return l;
 }
 
@@ -1770,7 +1769,7 @@ AGVector2 AGLine2::collisionPointNI(const AGLine2 &l) const
 
       if(m == lm)
         return AGVector2(0,0); // parallel
-      float x=(lb-b)/(m-lm); 
+      float x=(lb-b)/(m-lm);
       p=AGVector2(x,m*x+b);
     }
   return p;

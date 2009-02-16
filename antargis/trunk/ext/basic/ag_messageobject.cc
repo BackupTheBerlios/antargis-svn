@@ -19,7 +19,9 @@
  */
 
 #include "ag_messageobject.h"
-#include "ag_debug.h"
+
+#include "rk_debug.h"
+
 #include "ag_main.h"
 #include "ag_stringstream.h"
 #include "ag_widget.h"
@@ -32,7 +34,7 @@ mMousePosition(0),mRelMousePosition(0)
       {
         mClipped=false;
       }
-AGEvent::~AGEvent()
+AGEvent::~AGEvent() throw()
   {
     if(mMousePosition)
       delete mMousePosition;
@@ -48,7 +50,7 @@ bool AGEvent::isMouseEvent() const
 
 bool AGEvent::isClipped() const
 {
-  return mClipped; 
+  return mClipped;
 }
 void AGEvent::setClipped(bool f)
   {
@@ -199,7 +201,7 @@ AGListener::AGListener()
   {
   }
 
-AGListener::~AGListener()
+AGListener::~AGListener() throw()
   {
   }
 
@@ -343,7 +345,7 @@ AGMessageObject::AGMessageObject():
         {
         }
 
-AGMessageObject::~AGMessageObject()
+AGMessageObject::~AGMessageObject() throw()
   {
     std::set<AGSignal*> sigs=mSignals;
     std::set<AGSignal*>::iterator i=sigs.begin();
@@ -362,10 +364,10 @@ void AGMessageObject::popSignal(AGSignal *pSignal)
   }
 
 
-// 
+//
 // exchange with a processEvent(const AGEvent &event)
 
-bool AGMessageObject::processEvent(AGEvent* agEvent) 
+bool AGMessageObject::processEvent(AGEvent* agEvent)
   {
     bool rc=false;
 

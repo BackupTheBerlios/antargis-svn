@@ -1,3 +1,4 @@
+#include <ag_gl.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <stdexcept>
@@ -62,7 +63,6 @@ int main(int argc,char *argv[])
 
     glTexSubImage3D(GL_TEXTURE_3D,0,0,0,0,
         128,128,32,GL_RGBA,GL_UNSIGNED_BYTE,blue);
-
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

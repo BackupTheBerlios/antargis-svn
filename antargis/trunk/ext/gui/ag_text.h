@@ -33,7 +33,8 @@ class AGEXPORT AGText:public AGWidget
 #ifndef SWIG
   AGText(AGWidget *pParent,const AGVector2 &pPoint,const AGStringUtf8 &pText,const AGFont &pFont);
 #endif
-
+  virtual ~AGText() throw();
+  
   void setDeriveRect();
   virtual void draw(AGPainter &p);
 

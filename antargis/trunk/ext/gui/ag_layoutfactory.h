@@ -24,7 +24,7 @@
 #define AG_LAYOUTFACTORY_H
 
 #include <ag_singleton.h>
-#include <ag_utf8.h>
+#include <rk_utf8.h>
 #include <ag_widget.h>
 #include <ag_xml.h>
 #include <ag_layout.h>
@@ -42,11 +42,11 @@ class AGEXPORT AGLayoutCreator:public AGSingleton
 
   void clearResult();
 
-  void mark();
+  void mark() throw();
  private:
-   
+
   AGWidget *mWidget,*mClient;
-  
+
 
 };
 
@@ -62,9 +62,9 @@ class AGEXPORT AGLayoutFactory
   void removeCreator(const AGString &pName,AGLayoutCreator *creator);
 
   std::pair<AGWidget*,AGWidget*> create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
-  
+
   friend AGLayoutFactory *getLayoutFactory();
-  
+
   friend void AGLayout::loadXML(const std::string &pXMLData);
 
   AGLayout *getCurrentLayout();

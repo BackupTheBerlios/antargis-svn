@@ -13,7 +13,7 @@ GLApp::GLApp(int w,int h):scene(w,h)
   hx=hy=-1;
 }
 
-GLApp::~GLApp()
+GLApp::~GLApp() throw()
   {
     CTRACE;
   }
@@ -168,7 +168,7 @@ Scene &GLApp::getScene()
     return scene;
   }
 
-void GLApp::mark()
+void GLApp::mark() throw()
   {
     //CTRACE;
     markObject(&scene);

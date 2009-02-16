@@ -1,5 +1,6 @@
+/*
+
 #include "entptr.h"
-// AntEntityPtr
 AntEntityPtr::AntEntityPtr():p(0)
 {
 }
@@ -16,3 +17,5 @@ AntEntity *AntEntityPtr::get()
   assert(p);
   return p;
 }
+
+*/

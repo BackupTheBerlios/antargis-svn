@@ -12,7 +12,7 @@ class AGEXPORT Scene2D:public SceneBase
   typedef std::list<SceneNode*> NodeList;
 
   Scene2D(int w,int h);
-  virtual ~Scene2D();
+  virtual ~Scene2D() throw();
 
   void draw();
 

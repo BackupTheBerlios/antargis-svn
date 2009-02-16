@@ -19,7 +19,7 @@
  */
 
 #include "ag_rendercontext.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_vdebug.h"
 #include "ag_texture.h"
 #include "ag_surfacemanager.h"
@@ -330,7 +330,7 @@ void AGRenderContext::begin()
                     }
                 }
             }
-        }  
+        }
 
 
       ///////////////////////////////

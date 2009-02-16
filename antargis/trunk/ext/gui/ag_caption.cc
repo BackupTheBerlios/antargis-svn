@@ -19,7 +19,7 @@
  */
 
 #include "ag_caption.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_screen.h"
 
 AGCaption::AGCaption(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG):

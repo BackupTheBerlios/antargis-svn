@@ -2,7 +2,6 @@
 #include "ag_glsl.h"
 #include "ag_vdebug.h"
 #include "ag_main.h"
-//#include "scene.h"
 
 std::map<std::string,AGVertexProgram*> mVertexPrograms;
 std::map<std::string,AGFragProgram*> mFragPrograms;

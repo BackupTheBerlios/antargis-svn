@@ -23,6 +23,8 @@
 #ifndef __GUI_SURFACE_H
 #define __GUI_SURFACE_H
 
+#include "rk_exception.h"
+
 #include <string>
 #include <set>
 #include <list>
@@ -31,6 +33,7 @@
 #include "ag_geometry.h"
 #include "ag_painttarget.h"
 #include "ag_gltexture.h"
+#include "rk_exception.h"
 #include <ag_plugin.h>
 
 class AGColor;
@@ -74,24 +77,33 @@ class AGEXPORT AGDecryptor
     }
 };
 
+class AGSurfaceEmptyException:public AGException
+{
+public:
+  AGSurfaceEmptyException():AGException("Surface is used but empty!")
+  {
+  }
+
+};
+
 /// Generic classes - for OpenGL and "normal" SDL
 class AGEXPORT AGSurface:public AGPaintTarget
 {
- public:  
+ public:
   AGSurface();
   AGSurface(int w,int h);
   AGSurface(const AGSurface &p); // shallow copy only
 
-  virtual ~AGSurface();
+  virtual ~AGSurface() throw();
 
   AGSurface copy() const;
 
-  int width() const;
-  int height() const;
+  int width() const throw(AGSurfaceEmptyException);
+  int height() const throw(AGSurfaceEmptyException);
 
-  AGRect2 getRect() const;
+  AGRect2 getRect() const throw(AGSurfaceEmptyException);
 
-  AGSurface getSubSurface(const AGRect2 &r) const;
+  AGSurface getSubSurface(const AGRect2 &r) const throw(AGSurfaceEmptyException);
 
   bool valid() const;
 
@@ -101,11 +113,11 @@ class AGEXPORT AGSurface:public AGPaintTarget
   AGSurface &operator=(const AGSurface &p);
   bool operator==(const AGSurface &p) const;
 
-  virtual void blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor);
+  virtual void blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor) throw(AGSurfaceEmptyException);
 
-  void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  void drawBorder(const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2);
+  void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) throw(AGSurfaceEmptyException);
+  void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) throw(AGSurfaceEmptyException);
+  void drawBorder(const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2) throw(AGSurfaceEmptyException);
 
   virtual void putPixel(int x,int y,const AGColor &c);
   virtual AGColor getPixel(int x,int y) const;
@@ -126,15 +138,15 @@ class AGEXPORT AGSurface:public AGPaintTarget
   AGVector2 shrink2Fit(int alphaThresh=20);
 
   AGSurface(AGInternalSurface *i);
-  
+
   float similarity(const AGSurface &pSurface) const;
   bool similarTo(const AGSurface &pSurface,float threshold=0.1) const;
-  
-  
+
+
 
  private:
 
-  Uint32 color(const AGColor &c) const;
+  Uint32 color(const AGColor &c) const throw(AGSurfaceEmptyException);;
 
   AGInternalSurface *s;
 
@@ -143,7 +155,7 @@ class AGEXPORT AGSurface:public AGPaintTarget
   friend class AntTextureData;
   size_t mVersion;
 
-  static AGDecryptor *mDecryptor;  
+  static AGDecryptor *mDecryptor;
 };
 
 AGEXPORT void AGFreeSurface(SDL_Surface *s);

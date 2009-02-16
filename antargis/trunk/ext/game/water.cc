@@ -44,7 +44,7 @@ WaterPiece::WaterPiece(SceneBase *pScene,HeightMap &map,int x,int y,int w,int h,
   }
 
 
-WaterPiece::~WaterPiece()
+WaterPiece::~WaterPiece() throw()
   {
     if(sceneValid())
       getScene()->removeNode(this);

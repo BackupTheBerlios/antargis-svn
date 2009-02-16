@@ -102,7 +102,5 @@ class AGEXPORT BinaryStringOut:public BinaryOut
   std::ostringstream os;
 };
 
-AGEXPORT std::string binaryToHex(const std::string &s,bool separators=true);
-AGEXPORT std::string hexToBinary(const std::string &s);
 
 #endif

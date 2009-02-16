@@ -22,7 +22,7 @@
 #include "ag_gltexture.h"
 #include "ag_surfacemanager.h"
 #include "ag_rendercontext.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_vdebug.h"
 
 
@@ -249,8 +249,8 @@ AGSurface AGGLTexture::getSurface() const
   size_t bufSize=width()*height()*4;
   unsigned char *pixels=new unsigned char[bufSize];
 
-  glGetTexImage(mTarget,0,GL_RGBA, 
-      GL_UNSIGNED_INT_8_8_8_8_REV,pixels); 
+  glGetTexImage(mTarget,0,GL_RGBA,
+      GL_UNSIGNED_INT_8_8_8_8_REV,pixels);
 
   {
     // copy
@@ -265,7 +265,7 @@ AGSurface AGGLTexture::getSurface() const
         }
   }
 
-  return s;  
+  return s;
 }
 
 void AGGLTexture::initDMABuffer()
@@ -276,7 +276,7 @@ void AGGLTexture::initDMABuffer()
       {
         size_t texbufsize=1024*1024*64;
         dmaBuffer=new char[texbufsize];
-        glTextureRangeAPPLE(GL_TEXTURE_2D,texbufsize,dmaBuffer); 
+        glTextureRangeAPPLE(GL_TEXTURE_2D,texbufsize,dmaBuffer);
       }
       */
   }

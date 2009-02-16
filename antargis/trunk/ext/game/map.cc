@@ -24,7 +24,7 @@
 #include "entity.h"
 #include <vector>
 #include <math.h>
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include "mesh.h"
 #include "terrain.h"
 #include "quadtree.h"
@@ -53,7 +53,7 @@ AntMap::AntMap(SceneBase *pScene,int w,int h):
     myAntargisMap=this;
     maxID=0;
   }
-AntMap::~AntMap()
+AntMap::~AntMap() throw()
   {
     CTRACE;
     if(myAntargisMap==this)
@@ -117,7 +117,7 @@ bool AntMap::loadXML(const Node &node)
     std::list<AntEntity*>::iterator k=mEntities.begin();
     for(;k!=mEntities.end();k++)
       (*k)->eventMapChanged();
-    
+
     return seemsok;
   }
 
@@ -157,7 +157,7 @@ void AntMap::removeEntity(AntEntity *p)
 
 void AntMap::move(float pTime)
   {
-    STACKTRACE; 
+    STACKTRACE;
     //return;
     // first remove entities, which shall be deleted
     std::list<AntEntity*>::iterator d=mToDel.begin();
@@ -228,7 +228,7 @@ std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,
 
 
     EntityList::iterator i=mEntities.begin();
-    AGVector2 p=me->getPos2D(); 
+    AGVector2 p=me->getPos2D();
 
     for(;i!=mEntities.end();i++)
       {
@@ -370,7 +370,7 @@ void AntMap::saveMap(const AGString &pFilename)
     saveFile(pFilename,c);
   }
 
-void AntMap::clear()
+void AntMap::clear() throw()
   {
     //  getScene()->clear();
     CTRACE;
@@ -438,7 +438,7 @@ AntEntity *AntMap::getEntity(const Mesh2D &pMesh)
 
 //bool markingFinished=true;
 
-void AntMap::mark()
+void AntMap::mark() throw()
   {
     //  cout<<"AntMap::mark()"<<std::endl;
     CTRACE;

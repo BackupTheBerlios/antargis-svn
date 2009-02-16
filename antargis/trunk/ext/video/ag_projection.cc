@@ -1,5 +1,5 @@
 #include "ag_projection.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_algebra.h"
 
 AGProjection2D::AGProjection2D() :

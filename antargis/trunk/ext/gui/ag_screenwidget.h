@@ -30,7 +30,7 @@ class AGEXPORT AGScreenWidget:public AGWidget
 {
  public:
   AGScreenWidget();
-  virtual ~AGScreenWidget();
+  virtual ~AGScreenWidget() throw();
 
   virtual void draw(AGPainter &p);
  private:

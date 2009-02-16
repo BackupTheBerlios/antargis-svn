@@ -20,12 +20,12 @@
 
 #include <iostream>
 
-#include "ag_base.h"
-#include "ag_debug.h"
-#include "ag_tools.h"
+#include "rk_base.h"
+#include "rk_debug.h"
+#include "rk_tools.h"
+
 #include "ag_main.h"
 #include "ag_fs.h"
-#include "ag_debug.h"
 
 #include <ruby.h>
 
@@ -90,7 +90,7 @@ AGMain::AGMain():
     mVideo=0;
   }
 
-AGMain::~AGMain()
+AGMain::~AGMain() throw()
   {
     CTRACE;
     saveDelete(mVideo);
@@ -157,7 +157,7 @@ long AGMain::getTicks() const
 }
 
 
-void AGMain::mark()
+void AGMain::mark() throw()
   {
     markObject(getCollector());
     markObject(mRand);

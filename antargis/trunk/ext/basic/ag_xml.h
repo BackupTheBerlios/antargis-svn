@@ -23,14 +23,15 @@
 #ifndef __MY_SIMPLE_XML
 #define __MY_SIMPLE_XML
 
-#include <ag_tools.h>
-#include <ag_utf8.h>
+#include <rk_tools.h>
+#include <rk_utf8.h>
+#include "rk_debug.h"
+
 #include <vector>
 #include <map>
 #include <ag_stringstream.h>
 #include <sstream>
 
-#include "ag_debug.h"
 
 struct XMLParseError
   {
@@ -63,7 +64,7 @@ class AGEXPORT Node
     const Node *(operator->)() const;
 #endif
     NodeVector getChildren(const AGString &pName) const;
-    
+
     const AGString &getName() const;
 
     void setAttributes(const Attributes &pAttrs);
@@ -74,9 +75,11 @@ class AGEXPORT Node
     void removeChild(Node &n);
 
     iterator begin();
-    const_iterator begin() const;
     iterator end();
+#ifndef SWIG
+    const_iterator begin() const;
     const_iterator end() const;
+#endif
 
     void setContent(const AGString &s);
     AGString getContent() const;
@@ -91,15 +94,16 @@ class AGEXPORT Node
     // dumping functions
     void getStart(AGStringStream &s,bool complete=false) const;
     void getEnd(AGStringStream &s) const;
-      
+
     void indent(AGStringStream &s,int depth) const;
     void getContent(AGStringStream &s,int depth) const;
     AGString toString(bool indent=true) const;
-    
+
     bool isTextNode() const;
     AGString getText() const;
 
-    bool hasTextNode() const; // me or direct children is text node
+    /** me or direct children is text node */
+    bool hasTextNode() const; 
 
     size_t size() const;
 
@@ -202,6 +206,6 @@ class AGEXPORT DomParser:public Parser
 
   Document *parse(const AGString &pData,Document *d);
 };
-  
+
 
 #endif

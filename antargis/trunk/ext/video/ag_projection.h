@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <ag_base.h>
+#include <rk_base.h>
 #include <ag_geometry.h>
 
 
@@ -20,11 +20,11 @@ public:
   AGVector3 project(const AGVector3 &p) const;
   AGTriangle2 project(const AGTriangle2 &t) const;
   AGTriangle3 project(const AGTriangle3 &t) const;
-  
+
   AGProjection2D inverse() const throw (GeometryException);
 
   void pushProjection(const AGProjection2D &p);
-  
+
   AGMatrix3 getMatrix() const;
 private:
   bool mInited;

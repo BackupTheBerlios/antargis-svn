@@ -13,7 +13,7 @@ class AGEXPORT Mesh2D:public MeshBase
  public:
   Mesh2D(Scene2D *pScene);
   Mesh2D(Scene2D *pScene,Mesh2DData &data,const AGVector4 &pPos,float pRot);
-  virtual ~Mesh2D();
+  virtual ~Mesh2D() throw();
 
   void draw();
 
@@ -27,7 +27,7 @@ class AGEXPORT Mesh2D:public MeshBase
 
   Mesh2DData *getData();
 
-  void mark();
+  void mark() throw();
 
   bool hit(const AGVector2 &screenPos);
 

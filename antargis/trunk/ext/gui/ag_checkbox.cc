@@ -22,7 +22,7 @@
 #include "ag_image.h"
 #include "ag_text.h"
 #include "ag_theme.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_layoutfactory.h"
 #include "ag_local.h"
 

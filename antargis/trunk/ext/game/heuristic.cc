@@ -1,11 +1,11 @@
 #include "heuristic.h"
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_profiler.h>
 #include "ag_serial_vec.h"
 
 #include <set>
 
-HeuristicFunction::Output HeuristicFunction::operator()(const Input &input) 
+HeuristicFunction::Output HeuristicFunction::operator()(const Input &input)
 {
   return (input.second-input.first).length()*1.5;
 }

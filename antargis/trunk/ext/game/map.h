@@ -42,19 +42,20 @@ class AGEXPORT AntMap:public HeightMap
 {
  public:
   typedef std::list<AntEntity*> EntityList;
+  typedef AntEntity*PAntEntity;
 
   AntMap(SceneBase *pScene,int w,int h);
-  ~AntMap();
-  
+  ~AntMap() throw();
+
   virtual void insertEntity(AntEntity *e);
   virtual void removeEntity(AntEntity *p);
-  void clear();
+  void clear() throw();
 
   int getNewID();
   void useID(int id);
 
   void newMap(int w,int h);
-  
+
   EntityList getEntities(const AGRect2&r);
   std::list<AntEntity*> getAllEntities();
   std::vector<AntEntity*> getEntities(const AGString &pName);
@@ -83,9 +84,9 @@ class AGEXPORT AntMap:public HeightMap
 
   AGVector3 getPos(const AGVector2 &pPos) const;
 
-  virtual void mark();
+  virtual void mark() throw();
 
-  virtual void mapChanged();  
+  virtual void mapChanged();
 
  private:
   typedef std::map<size_t,AntEntity*> EntityMap;
@@ -95,7 +96,7 @@ class AGEXPORT AntMap:public HeightMap
   QuadTree<AntEntity> *mEntQuad;
 
   //  typedef std::map<AGString,std::set<AntEntity*> > EntityByType;
-  
+
   EntityList mToDel;
 
   //  EntityByType mByType;

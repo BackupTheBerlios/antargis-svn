@@ -1,7 +1,7 @@
 #ifndef MTWIST_H
 #define MTWIST_H
 
-#include <ag_base.h>
+#include <rk_base.h>
 
 /*
  * $Id: mtwist.h,v 1.15 2003/09/11 23:56:20 geoff Exp geoff $
@@ -198,7 +198,7 @@ extern "C"
   /* ..Not usually worth the cost.  */
 
 
-  // was extern                    
+  // was extern
 
   AGEXPORT void    mts_refresh(mt_state* state);
   /* Generate 624 more random values */
@@ -341,7 +341,7 @@ extern mt_state    mt_default_state;
 
 #ifdef __cplusplus
 //extern "C" {
-extern "C" 
+extern "C"
 #ifdef WIN32
 /*
 #ifdef MT_EXTERN
@@ -368,7 +368,7 @@ __declspec(dllimport)
 }
 #else
 #ifdef WIN32
-__declspec(dllexport) 
+__declspec(dllexport)
 #endif
 extern   double    mt_32_to_double;
 #endif*/

@@ -118,7 +118,7 @@ AnimMeshData::AnimMeshData(const AGString &xmlFilename):
     mName=AGString(xmlFilename);
   }
 
-AnimMeshData::~AnimMeshData()
+AnimMeshData::~AnimMeshData() throw()
   {
     CTRACE;
     cdebug(mName);

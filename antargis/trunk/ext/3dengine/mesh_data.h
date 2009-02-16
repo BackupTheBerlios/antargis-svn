@@ -30,7 +30,7 @@ class AGEXPORT MeshData:public AGRubyObject
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
   MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow=true);
-  ~MeshData();
+  ~MeshData() throw();
 
   void draw(const AGVector4 &pColor);
   void drawShadow();

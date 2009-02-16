@@ -27,7 +27,7 @@ class AGEXPORT Mesh:public MeshBase
  public:
   Mesh(Scene *pScene);
   Mesh(Scene *pScene,MeshData &data,const AGVector4 &pPos,float pRot);
-  virtual ~Mesh();
+  virtual ~Mesh()  throw();
 
   void draw();
   void drawDepth();
@@ -46,7 +46,7 @@ class AGEXPORT Mesh:public MeshBase
 
   MeshData *getData();
 
-  void mark();
+  void mark() throw();
 
   virtual bool transparent();
 

@@ -45,7 +45,7 @@ class AGEXPORT Scene:public SceneBase
   ////  typedef std::list<SceneNode*> NodeList;
 
   Scene(int w,int h);
-  virtual ~Scene();
+  virtual ~Scene() throw();
 
   void draw();
 

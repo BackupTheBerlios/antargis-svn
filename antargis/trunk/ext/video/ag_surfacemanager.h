@@ -21,7 +21,7 @@
 #ifndef AG_SURFACEMANAGER_H
 #define AG_SURFACEMANAGER_H
 
-#include <ag_base.h>
+#include <rk_base.h>
 #include <set>
 
 class AGRenderContext;

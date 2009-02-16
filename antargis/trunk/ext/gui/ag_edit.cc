@@ -19,13 +19,15 @@
  */
 
 #include "ag_edit.h"
+
+#include "rk_debug.h"
+#include "rk_tools.h"
+
 #include "ag_fontengine.h"
 #include "ag_theme.h"
-#include "ag_debug.h"
 #include "ag_menu.h"
 #include "ag_sgeexport.h"
 #include "ag_glscreen.h"
-#include "ag_tools.h"
 
 
 AGEditLine::AGEditLine(const AGStringUtf8 &pText,AGFont pFont,bool pHardEnd):
@@ -292,6 +294,10 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
       setTheme("edit");
     }
 
+AGEdit::~AGEdit()  throw()
+  {}
+
+
 void AGEdit::setMaxLength(int i)
   {
     mMaxLength=i;
@@ -481,7 +487,7 @@ bool AGEdit::processKey(SDLKey k,Uint16 unicode)
       {
         cdebug("RETUURN!");
         cdebug(mMultiLine);
-        if(mMultiLine) 
+        if(mMultiLine)
           {
             getActLine();
             AGEditLine l=actLine->split(mCx);
@@ -888,7 +894,7 @@ AGStringUtf8 AGEdit::getText() const
   return AGStringUtf8(os.str());
 }
 
-void AGEdit::clear()
+void AGEdit::clear() throw()
   {
     mLines.clear();
     mCx=mCy=0;

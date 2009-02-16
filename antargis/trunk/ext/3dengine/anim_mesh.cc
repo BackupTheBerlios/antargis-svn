@@ -88,7 +88,7 @@ AnimMesh::AnimMesh(Scene *pScene,AnimMeshData *data):
 
   }
 
-AnimMesh::~AnimMesh()
+AnimMesh::~AnimMesh() throw()
   {
     //  CTRACE;
   }
@@ -383,7 +383,7 @@ bool AnimMesh::setAnimation(const AGString &pName)
     return true;
   }
 
-void AnimMesh::mark()
+void AnimMesh::mark() throw()
   {
     markObject(mData);
   }

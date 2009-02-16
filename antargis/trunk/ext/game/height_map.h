@@ -24,7 +24,7 @@ class AGEXPORT HeightMap:public AGMessageObject
 {
  public:
   HeightMap(SceneBase *pScene,int w,int h);
-  virtual ~HeightMap();
+  virtual ~HeightMap() throw();
 
   // get status
 
@@ -86,7 +86,7 @@ class AGEXPORT HeightMap:public AGMessageObject
   /// override this function to include another terrain-mesh-type (like 2d-terrain)
   virtual void initTerrainMesh();
 
-  void mark();
+  void mark() throw();
 
   /// to be used by initTerrainMesh() - not otherwise !!!
   void setTerrain(TerrainBase *pTerrain);

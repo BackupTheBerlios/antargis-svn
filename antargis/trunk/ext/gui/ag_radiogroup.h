@@ -32,7 +32,7 @@ class AGEXPORT AGRadioGroup:public AGWidget
 {
  public:
   AGRadioGroup(AGWidget *pParent,const AGRect2 &pr);
-  virtual ~AGRadioGroup();
+  virtual ~AGRadioGroup() throw();
 
   virtual void eventChange(const AGString &p);
 

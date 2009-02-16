@@ -1,4 +1,5 @@
-def requireRelative(file,current)
+if false
+  def requireRelative(file,current)
   require File.join(File.split(current)[0],file)
 end
 
@@ -20,5 +21,7 @@ class TrueClass
     end
   end
 end
+end
+require "rookey/lib/tools.rb"
 
-requireRelative("ruby_layouts.rb",__FILE__)
+require "./ruby_layouts.rb"

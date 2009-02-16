@@ -19,12 +19,12 @@
  */
 
 #include "ag_local.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 
 AGLocalizer *gLocalizer=0;
 
-AGLocalizer::~AGLocalizer()
+AGLocalizer::~AGLocalizer() throw()
   {
     if(gLocalizer==this)
       gLocalizer=0;
@@ -38,7 +38,6 @@ AGStringUtf8 AGLocalizer::find(const AGString &p)
 
 void setLocalizer(AGLocalizer *p)
   {
-    cdebug("setLocal:"<<p);
     gLocalizer=p;
   }
 

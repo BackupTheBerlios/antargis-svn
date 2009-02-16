@@ -43,7 +43,7 @@ class AGEXPORT PathWeighter:public AGRubyObject
 {
  public:
   PathWeighter(bool pWaterPassable=false);
-  virtual ~PathWeighter();
+  virtual ~PathWeighter() throw();
   /// this function can be overridden - and will be
   virtual float weight(float h0,float h1);
 
@@ -175,7 +175,7 @@ class AGEXPORT SimpleGraph:public AGRubyObject
   void print();
   void printInfo();
 
-  ~SimpleGraph();
+  ~SimpleGraph() throw();
 
 
   void check();
@@ -232,7 +232,7 @@ class AGEXPORT DecimatedGraph:public SimpleGraph
  public:
   DecimatedGraph();
   DecimatedGraph(const SimpleGraph &g);
-  ~DecimatedGraph();
+  ~DecimatedGraph() throw();
   void decimate(float amount,MapPathWeighter *pWeighter);
  private:
   void tryRemove(Edge *e,MapPathWeighter *pWeighter);
@@ -289,7 +289,7 @@ class AGEXPORT Pathfinder:public AGRubyObject
 
   Pathfinder(SimpleGraph *pGraph,HeuristicFunction *pHeuristic,PathDebugging *pDebugger=0);
 
-  virtual void mark();
+  virtual void mark() throw();
 
   std::vector<AGVector2> computePath(const AGVector2 &from, const AGVector2 &to);
 

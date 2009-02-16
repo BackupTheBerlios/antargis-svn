@@ -23,7 +23,7 @@
 #ifndef AG_THEME_H
 #define AG_THEME_H
 
-#include "ag_base.h"
+#include "rk_base.h"
 #include "ag_font.h"
 #include "ag_surface.h"
 
@@ -34,40 +34,41 @@
 #include <map>
 
 
-class AGEXPORT AGLocalTheme
+class AGEXPORT AGLocalTheme:public AGRubyObject
   {
   public:
     AGLocalTheme(const AGString &pTheme);
-    
+    virtual ~AGLocalTheme() throw();
+
     AGFont getFont(const AGString &pName) const;
     AGColor getColor(const AGString &pName) const;
     int getInt(const AGString &pName) const;
     AGSurface getSurface(const AGString &pName) const;
     std::string getSurfaceName(const AGString &pName) const;
-    
+
     bool hasFont(const AGString &pName) const;
     bool hasColor(const AGString &pName) const;
     bool hasInt(const AGString &pName) const;
     bool hasSurface(const AGString &pName) const;
     bool hasSurfaceName(const AGString &pName) const;
-    
+
   private:
-    
+
     AGString getName(const AGString &pName) const;
-    
+
     AGString mTheme;
   };
 
-class AGEXPORT AGTheme
+class AGEXPORT AGTheme:public AGRubyObject
 {
  public:
   AGTheme();
-  virtual ~AGTheme();
+  virtual ~AGTheme() throw();
 
   AGFont getFont(const AGString &pName) const;
   bool hasFont(const AGString &pName) const;
   void setFont(const AGString &pName,AGFont pFont);
-  
+
   void setColor(const AGString &pName,AGColor pColor);
   AGColor getColor(const AGString &pName) const;
   bool hasColor(const AGString &pName) const;
@@ -84,17 +85,17 @@ class AGEXPORT AGTheme
   bool hasSurfaceName(const AGString &pName) const;
   void setSurfaceName(const AGString &pName,const std::string &pSurface);
 
-  
+
   AGLocalTheme getTheme(const AGString &pTheme) const;
-  
-  
-  
+
+
+
   // advanced functions
-  
+
   AGGradient getGradient(const AGString &pName) const;
   AGBackground getBackground(const AGString &pName) const;
   AGBorder getBorder(const AGString &pName) const;
-  
+
 
  private:
 
@@ -105,12 +106,12 @@ class AGEXPORT AGTheme
   std::map<AGString,AGSurface> mSurfaces;
   std::map<AGString,std::string> mSurfaceNames;
   std::map<AGString,int> mInts;
-  
-  
+
+
   std::map<AGString,AGGradient> mGradients;
   std::map<AGString,AGBackground> mBackgrounds;
   std::map<AGString,AGBorder> mBorders;
-  
+
 };
 
 AGEXPORT AGTheme *getTheme();

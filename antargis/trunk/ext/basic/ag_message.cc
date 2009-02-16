@@ -1,5 +1,5 @@
 #include "ag_message.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 AGMessageData::AGMessageData(size_t pID):
   mID(pID)
@@ -24,11 +24,12 @@ AGMessageTransceiver::AGMessageTransceiver(AGMessageQueue *pQueue):
     assert(mMessageQueue);
     mMessageQueue->insertTransceiver(this);
   }
-AGMessageTransceiver::~AGMessageTransceiver()
+AGMessageTransceiver::~AGMessageTransceiver() throw()
   {
     if(mMessageQueue)
       mMessageQueue->eraseTransceiver(this);
   }
+
 void AGMessageTransceiver::sendMessage(const AGString &pName,AGMessageData *pData)
   {
     assert(mMessageQueue);
@@ -72,7 +73,7 @@ size_t AGMessageTransceiver::getNewMessageID()
 
 AGMessageSource::AGMessageSource(AGMessageTransceiver *pSender,const AGString &pName):
   mSender(pSender),mName(pName)
-  {   
+  {
   }
 
 bool AGMessageSource::operator<(const AGMessageSource &pSource) const
@@ -125,7 +126,7 @@ AGMessageTransceiver *AGMessage::getSender()
 AGMessageQueue::AGMessageQueue():
   mMessageID(0)
   {
-    
+
   }
 
 

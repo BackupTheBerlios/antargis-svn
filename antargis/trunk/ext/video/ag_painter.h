@@ -23,13 +23,14 @@
 #ifndef __AG_PAINTER_H
 #define __AG_PAINTER_H
 
+#include <rk_base.h>
+
 #include <ag_color.h>
 #include <ag_surface.h>
 #include <ag_geometry.h>
 #include <ag_font.h>
 #include <ag_painttarget.h>
 #include <ag_clip.h>
-#include <ag_base.h>
 
 #include <list>
 
@@ -54,7 +55,7 @@ struct AGEXPORT AGPaintProjection
   AGRect2 clipRect(AGRect2 target) const;
 
   AGLine2 clipLine(AGLine2 l) const;
-  
+
   void transform(const AGMatrix3 &pMatrix);
 
   void translate(const AGVector2 &v);
@@ -68,14 +69,14 @@ struct AGEXPORT AGPaintProjection
 #define AGEXPORT
 #endif
 
-class AGEXPORT AGPainter
+class AGEXPORT AGPainter:public AGRubyObject
 {
  public:
   AGPainter();
   AGPainter(const AGPainter &p);
   AGPainter(AGPaintTarget &pTarget);
-  
-  ~AGPainter();
+
+  virtual ~AGPainter() throw();
 
   void putPixel(const AGVector2 &p,const AGColor &c);
   AGColor getPixel(int x,int y);
@@ -97,7 +98,7 @@ class AGEXPORT AGPainter
   void tile(const AGSurface &pSource);
   void tile(const AGSurface &pSource,const AGRect2 &pDest);
   void tile(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
-  
+
   void renderText(const AGStringUtf8 &pText,const AGVector2 &p,const AGFont &f);
 
   AGRect2 getRect() const;
@@ -108,12 +109,12 @@ class AGEXPORT AGPainter
   void fillRect(const AGRect2 &pRect,const AGColor &c);
   void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
   void drawPoint(const AGVector2 &p,const AGColor &c,float size);
-  
+
   void fillPoly(const std::vector<AGVector2> &pPoly,const AGColor &c);
   void drawPoly(const std::vector<AGVector2> &pPoly,const AGColor &c);
 
   void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
-  
+
   void setLineWidth(float w);
 
   void pushMatrix();
@@ -131,7 +132,7 @@ class AGEXPORT AGPainter
   bool pointOk(const AGVector2 &p) const;
 
   AGPaintTarget *getTarget();
-  
+
   void debugOutput();
 
  private:

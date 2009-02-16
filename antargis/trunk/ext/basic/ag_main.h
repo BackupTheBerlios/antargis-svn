@@ -24,7 +24,7 @@
 #define __AG_MAIN
 
 #include <string>
-#include <ag_rubyobj.h>
+#include <rk_rubyobj.h>
 #include <ag_collector.h>
 #include <ag_rand_base.h>
 #include <ag_video_base.h>
@@ -33,7 +33,7 @@
 /**
  * \defgroup AntargisGUI AntargisGUI
  * \brief the GUI-library of the game Battles of Antargis
- * 
+ *
  * This library consists of different mechanisms to make your life easier
  * with graphical user interfaces:
  * \see widgets
@@ -59,7 +59,7 @@ class AGEXPORT AGMain:public AGRubyObject
 {
  public:
   AGMain();
-  ~AGMain();
+  ~AGMain() throw ();
 
   long getTicks() const;
 
@@ -76,7 +76,7 @@ class AGEXPORT AGMain:public AGRubyObject
   void delay(int ms);
 
  protected:
-  virtual void mark();
+  virtual void mark() throw();
 
  private:
   AGVideoBase *mVideo;

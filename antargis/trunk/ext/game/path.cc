@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdexcept>
 #include <ag_profiler.h>
-#include <ag_debug.h>
+#include <rk_debug.h>
 //#include <SDL.h>
 #include <ag_surface.h>
 #include <ag_painter.h>
@@ -118,7 +118,7 @@ PathWeighter::PathWeighter(bool pWaterPassable):mWaterPassable(pWaterPassable)
 {
 }
 
-PathWeighter::~PathWeighter()
+PathWeighter::~PathWeighter() throw()
   {
   }
 float PathWeighter::weight(float h0,float h1)
@@ -214,7 +214,7 @@ float MapPathWeighter::weightHeight(float a,float b) const
       return (b-a)*f;
     }
   else
-    return -(b-a)*f*0.3; 
+    return -(b-a)*f*0.3;
 }
 
 bool MapPathWeighter::accessible(const AGVector2 &a)
@@ -467,7 +467,7 @@ void SimpleGraph::removeNode(Node *n)
 
 
 
-SimpleGraph::~SimpleGraph()
+SimpleGraph::~SimpleGraph() throw()
   {
     CTRACE;
     for(NodeSet::iterator i=mNodes.begin();i!=mNodes.end();i++)
@@ -566,7 +566,7 @@ DecimatedGraph::DecimatedGraph(const SimpleGraph &g):SimpleGraph(g)
   cdebug("old:"<<(&g));
 }
 
-DecimatedGraph::~DecimatedGraph()
+DecimatedGraph::~DecimatedGraph() throw()
   {
     CTRACE;
   }
@@ -1028,7 +1028,7 @@ Pathfinder::Pathfinder(SimpleGraph *pGraph,HeuristicFunction *pHeuristic,PathDeb
     cdebug("Simplegraph:"<<mGraph);
   }
 
-void Pathfinder::mark()
+void Pathfinder::mark() throw()
   {
     markObject(mGraph);
   }

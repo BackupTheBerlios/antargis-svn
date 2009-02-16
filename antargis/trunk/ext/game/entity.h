@@ -23,11 +23,12 @@
 #ifndef ANT_ENTITY_H
 #define ANT_ENTITY_H
 
+#include <rk_string.h>
+
 #include "scene.h"
 #include <ag_xml.h>
 #include <ag_geometry.h>
 #include <ag_color.h>
-#include <ag_string.h>
 
 #include <set>
 #include <vector>
@@ -72,7 +73,7 @@ class AGEXPORT AntEntity:public AGRubyObject
     /// current food in stomach
     float mFood;
     /// food needed per second
-    float mHunger; 
+    float mHunger;
     /// hunger impact on energy
     float mHungerHitEnergy;
     /// hunger impact on morale
@@ -96,7 +97,7 @@ class AGEXPORT AntEntity:public AGRubyObject
 
     float mStrength;
     float mMoraleStrength;
-    
+
     float mDefense;
 
     bool mDefeated;
@@ -111,7 +112,7 @@ class AGEXPORT AntEntity:public AGRubyObject
 
   public:
     AntEntity(AntMap *pMap);
-    virtual ~AntEntity();
+    virtual ~AntEntity() throw();
 
     bool defeated() const;
 
@@ -201,7 +202,7 @@ class AGEXPORT AntEntity:public AGRubyObject
 
     void setAggression(float agg);
     float getAggression() const;
-    
+
     virtual void eventDie(); // energy too low
     virtual void eventDefeated(); // morale too low
     virtual void eventHaveDefeated(AntEntity *e);
@@ -262,9 +263,9 @@ class AGEXPORT AntEntity:public AGRubyObject
     void eventMapChanged();
     void move(float pTime); // move entity FIXME: del move
 
-    void mark();
+    void mark() throw();
 
-    void clear();
+    void clear() throw();
     void clearMeshes();
 
     void setVisible(bool v);

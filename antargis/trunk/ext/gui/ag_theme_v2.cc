@@ -19,9 +19,11 @@
  */
 
 #include "ag_theme_v2.h"
-#include "ag_debug.h"
+
+#include "rk_debug.h"
+#include "rk_tools.h"
+
 #include "ag_xml.h"
-#include "ag_tools.h"
 #include "ag_config.h"
 
 #include <iostream>
@@ -285,6 +287,19 @@ AGThemeItem AGThemeV2::getItem(const AGString &pClass,const AGString &pState,con
 }
 
 
+bool AGThemeV2::hasSurface(const AGString &pName) const
+{
+  //FIXME
+  return true;
+}
+bool AGThemeV2::hasColor(const AGString &pName) const
+{
+
+  //FIXME
+  return true;
+}
+
+
 
 ////////////////////////////////////////////////////////
 // AGThemeItem
@@ -302,11 +317,11 @@ AGBorder AGThemeItem::getBorder() const
 }
 AGBackground AGThemeItem::getBackground() const
 {
-   
+
 }
 AGFont AGThemeItem::getFont() const
 {
-  
+
 }
 
 

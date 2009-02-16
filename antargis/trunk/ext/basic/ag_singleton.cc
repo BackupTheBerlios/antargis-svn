@@ -1,6 +1,6 @@
 #include "ag_singleton.h"
 #include "ag_main.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 
 AGSingleton::AGSingleton()
@@ -11,7 +11,7 @@ AGSingleton::AGSingleton()
 
   getMain()->getCollector()->insertGlobal(this);
 }
-AGSingleton::~AGSingleton()
+AGSingleton::~AGSingleton() throw()
 {
   if(!hasMain())
     return;

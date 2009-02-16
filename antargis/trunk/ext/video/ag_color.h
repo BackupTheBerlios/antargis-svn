@@ -1,4 +1,4 @@
-/*
+#/*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
  * ag_color.h
@@ -25,8 +25,8 @@
 
 #include <SDL.h>
 #include <iostream>
-#include <ag_base.h>
-#include <ag_string.h>
+#include <rk_base.h>
+#include <rk_string.h>
 
 class AGSurface;
 class AGVector4;
@@ -35,7 +35,7 @@ class AGEXPORT AGColor:public SDL_Color
 {
  public:
   AGColor(int pr,int pg,int pb,int pa=255);
-  
+
   AGColor(const AGColor &c);
   AGColor(const AGVector4 &v);
   AGColor(Uint32 c,const AGSurface &pSurface);
@@ -64,7 +64,7 @@ class AGEXPORT AGColor:public SDL_Color
   void light(Uint8 l);
 
   //  SDL_Color sdlColor() const;
-  
+
   bool operator==(const AGColor &c) const;
 
   //  Uint8 r,g,b;

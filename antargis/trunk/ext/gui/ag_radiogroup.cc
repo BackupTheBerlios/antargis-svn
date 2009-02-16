@@ -33,7 +33,7 @@ AGRadioGroup::AGRadioGroup(AGWidget *p,const AGRect2 &r):
   sigChanged(this,"sigChanged")
   {
   }
-AGRadioGroup::~AGRadioGroup()
+AGRadioGroup::~AGRadioGroup() throw()
   {
     std::set<AGRadio*>::iterator i=mChildren.begin();
 

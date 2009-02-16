@@ -3,8 +3,9 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
+#include <rk_rubyobj.h>
+
 #include <ag_geometry.h>
-#include <ag_rubyobj.h>
 
 class SceneBase;
 
@@ -25,7 +26,7 @@ class SceneBase;
    A scenenode is created for exactly one scene and it can't be
    assigned to any other scene, which shouldn't be necessary.
 
-   Scene and SceneNode give each other information about their 
+   Scene and SceneNode give each other information about their
    "destroy-state". That means the destructor notifies the other object.
 
 */
@@ -33,7 +34,7 @@ class AGEXPORT SceneNode:public AGRubyObject
 {
  public:
   SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &pBox);
-  virtual ~SceneNode();
+  virtual ~SceneNode() throw();
 
   /// reset my scene pointer - should not be called in "normal" code - only by the Scene-object
   virtual void resetScene();
@@ -68,7 +69,7 @@ class AGEXPORT SceneNode:public AGRubyObject
   AGBox3 bbox() const;
   AGRect2 getRect() const;
 
-  virtual void clear();
+  virtual void clear() throw();
 
   SceneBase *getScene();
   /// this checks, if the current object is inserted into a scene
@@ -80,7 +81,7 @@ class AGEXPORT SceneNode:public AGRubyObject
   /// there is a drawing order, used by the scene-manager, which priorized. look at Scene::drawScene for more info.
   void setOrder(int o);
   int getOrder() const;
-  
+
  private:
   void setScene(SceneBase *pScene);
 

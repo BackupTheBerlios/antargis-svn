@@ -23,7 +23,7 @@
 #include "ag_theme.h"
 #include "ag_image.h"
 #include "ag_text.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_button.h"
 #include "ag_caption.h"
 #include "ag_texturecache.h"
@@ -35,7 +35,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
 
   {
     CTRACE;
-    
+
     AGLocalTheme theme=getTheme()->getTheme(pTheme);
 
     AGString borderImage="window.border.image";
@@ -67,7 +67,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
         addFixedRow(bw); // upper border
         addFixedRow(titBarHeight); // titletext and button
         //      addFixedRow(bw); // lower border below titletext
-        addRow(1.0); 
+        addRow(1.0);
         addFixedRow(bw); // lower lower below window
         addFixedColumn(bw);
         addColumn(1.0);
@@ -128,6 +128,9 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
     arrange();
   }
 
+AGWindow::~AGWindow() throw()
+  {}
+
 AGWidget *AGWindow::getClient()
   {
     return mClient;
@@ -186,7 +189,7 @@ AGWidget *AGWindow::getTitleBar(int w,int h)
     closeButton->setSurface(closeSurface,false);
     title->setName("title"); // FIXME: maybe name getName()+".title"
 
-    //  AGListener 
+    //  AGListener
     closeButton->sigClick.connect(slot(this,&AGWindow::tryClose));
     //  t->arrange();
     return t;

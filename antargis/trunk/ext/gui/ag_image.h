@@ -31,7 +31,7 @@ class AGEXPORT AGImage:public AGWidget
  public:
   AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile);
   AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile);
-  virtual ~AGImage();
+  virtual ~AGImage() throw();
 
   virtual void draw(AGPainter &p);
 

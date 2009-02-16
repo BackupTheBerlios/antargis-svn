@@ -1,10 +1,12 @@
 #include <ag_main.h>
-#include <ag_debug.h>
+#include <rk_debug.h>
 
 #include <list>
 #include <string>
 #include <string>
 #include <map>
+
+#include <SDL.h>
 
 //#include "antargisexternalswig.h"
 

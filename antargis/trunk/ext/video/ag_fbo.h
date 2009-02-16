@@ -21,7 +21,7 @@
 #ifndef AG_FBO_H
 #define AG_FBO_H
 
-#include <ag_base.h>
+#include <rk_base.h>
 
 class AGGLTexture;
 
@@ -41,7 +41,7 @@ public:
   AGGLTexture *mTexture;
   GLuint mTextureID;
   size_t w,h;
-  
+
   unsigned int fb, depth_rb;
 
   bool mWithDepth;

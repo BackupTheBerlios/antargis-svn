@@ -1,3 +1,5 @@
+/*
+
 #ifndef ENTPTR_H
 #define ENTPTR_H
 
@@ -19,3 +21,6 @@ class AGEXPORT AntEntityPtr
 
 
 #endif
+
+
+*/

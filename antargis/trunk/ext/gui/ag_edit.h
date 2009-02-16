@@ -27,7 +27,7 @@
 #include "ag_font.h"
 #include "ag_surface.h"
 #include "ag_background.h"
-#include "ag_utf8.h"
+#include "rk_utf8.h"
 #include "ag_string_utf8.h"
 
 enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
@@ -44,7 +44,7 @@ class AGEXPORT AGEditLine
 
   virtual void draw(AGPainter &p,const AGVector2 &pPoint,const AGRect2 &pClip);
   virtual void drawCursor(AGPainter &p,int cx,const AGVector2 &pPoint,const AGRect2 &pClip,const AGColor &c);
-  
+
   int height() const;
   int width() const;
 
@@ -80,6 +80,7 @@ class AGEXPORT AGEdit:public AGWidget
 {
  public:
   AGEdit(AGWidget *pParent,const AGRect2 &pRect);
+  virtual ~AGEdit()  throw();
 
   virtual void draw(AGPainter &p);
   virtual void drawBackground(AGPainter &p);
@@ -95,7 +96,7 @@ class AGEXPORT AGEdit:public AGWidget
   void setText(const AGStringUtf8 &pText);
   void setFont(const AGFont &pFont);
 
-  void clear();
+  void clear() throw();
 
   void setMutable(bool pMutable);
 
@@ -121,7 +122,7 @@ class AGEXPORT AGEdit:public AGWidget
   void setInsert(bool pInsert);
 
   void setCursor(int p);
-  
+
   AGSignal sigModified;
 
  private:
@@ -134,10 +135,10 @@ class AGEXPORT AGEdit:public AGWidget
 
   std::list<AGEditLine> mLines;
   AGEditLine *actLine;
-  
+
   int mCx,mCy; // cursor position
   int mViewCy;
-  
+
   Uint32 mCursorTime;
   Uint32 mCursorLast;
   bool mShowCursor;

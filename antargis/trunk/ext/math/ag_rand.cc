@@ -18,7 +18,7 @@
  * License along with this program.
  */
 
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_main.h"
 #include "ag_profiler.h"
 #include "ag_rand.h"
@@ -57,7 +57,7 @@ AGRandomizer::AGRandomizer(const std::string &pSeed)
 
   }
 
-AGRandomizer::~AGRandomizer()
+AGRandomizer::~AGRandomizer() throw()
   {
     CTRACE;
   }

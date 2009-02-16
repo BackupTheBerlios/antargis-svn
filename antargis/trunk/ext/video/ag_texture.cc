@@ -20,7 +20,7 @@
 
 #include "ag_texture.h"
 #include "ag_glscreen.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_rendercontext.h"
 #include "ag_sgeexport.h"
 #include "ag_surfacemanager.h"
@@ -137,7 +137,7 @@ AGTexture::AGTexture(const AGSurface &pSurface, bool p3d)
   }
 
 
-AGTexture::~AGTexture()
+AGTexture::~AGTexture() throw()
   {
     if(getSurfaceManager())
       getSurfaceManager()->deregisterMe(this);

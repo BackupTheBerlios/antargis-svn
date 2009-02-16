@@ -3,8 +3,9 @@
 #ifndef AG_MESSAGE_H_
 #define AG_MESSAGE_H_
 
-#include <ag_string.h>
-#include <ag_rubyobj.h>
+#include <rk_string.h>
+#include <rk_rubyobj.h>
+
 #include <map>
 #include <set>
 #include <list>
@@ -22,7 +23,7 @@ class AGMessageData
 public:
   AGMessageData(size_t pID);
   virtual ~AGMessageData() {}
-  
+
   size_t getMessageID() const;
 private:
   size_t mID;
@@ -45,7 +46,7 @@ class AGMessageDataReceipt:public AGMessageData
 {
 public:
   AGMessageDataReceipt(size_t pID,size_t pSentID);
-  
+
   size_t getSentMessageID() const;
 private:
   size_t mSentID;
@@ -61,7 +62,7 @@ private:
 class AGMessageTransceiver : public AGRubyObject
 {
   AGMessageTransceiver(AGMessageQueue *pQueue);
-  virtual ~AGMessageTransceiver();
+  virtual ~AGMessageTransceiver() throw();
   void sendMessage(const AGString &pName,AGMessageData *pData=0);
 
   // generate an empty message data object
@@ -117,7 +118,7 @@ public:
   const AGMessageSource &getSource() const;
   AGMessageTransceiver *getSender();
 private:
-  AGMessage(const AGMessage&):mData(0) 
+  AGMessage(const AGMessage&):mData(0)
   {}
 };
 

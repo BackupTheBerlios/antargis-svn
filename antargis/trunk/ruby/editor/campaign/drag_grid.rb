@@ -1,13 +1,13 @@
 require 'ruby/antargislib.rb'
 require 'pp'
 
-require File.join(File.split(__FILE__)[0],"dialogs.rb")
-require File.join(File.split(__FILE__)[0],"toolbar.rb")
+require "./dialogs.rb"
+require "./toolbar.rb"
 
-require File.join(File.split(__FILE__)[0],'ruby_tools.rb')
-require File.join(File.split(__FILE__)[0],'story_editor.rb')
-requireRelative('ruby_signals.rb',__FILE__)
-require File.join(File.split(__FILE__)[0],"campaign_data.rb")
+require './ruby_tools.rb'
+require './story_editor.rb'
+require './ruby_signals.rb'
+require './campaign_data.rb'
 
 #setDebugLevel(0)
 

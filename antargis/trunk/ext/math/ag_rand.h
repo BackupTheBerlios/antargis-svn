@@ -39,7 +39,7 @@ class AGEXPORT AGRandomizer:public AGRandomizerBase
   // restore a randomizer from a state-string (pretty long)
   // for an initial seed - call with pSeed==""
   AGRandomizer(const std::string &pSeed);
-  ~AGRandomizer();
+  ~AGRandomizer() throw();
 #ifdef SWIG
   %rename(randFloat) operator()(float f);
   %rename(randInt) operator()(int i);

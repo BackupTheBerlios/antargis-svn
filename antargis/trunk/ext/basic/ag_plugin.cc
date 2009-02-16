@@ -5,7 +5,7 @@
 #   include <windows.h>
 #include <ag_debug.h>
 
-AGPlugin::~AGPlugin()
+AGPlugin::~AGPlugin() throw()
 {
   FreeLibrary((HINSTANCE__*)myptr);
 }
@@ -46,7 +46,7 @@ AGPlugin *loadPlugin(const std::string &pFile)
 
 #include <dlfcn.h>
 
-AGPlugin::~AGPlugin()
+AGPlugin::~AGPlugin() throw()
 {
   dlclose(myptr);
 }

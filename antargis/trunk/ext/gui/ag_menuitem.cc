@@ -19,7 +19,6 @@
  */
 
 #include "ag_menuitem.h"
-#include "ag_debug.h"
 #include "ag_draw.h"
 #include "ag_theme.h"
 #include "ag_image.h"
@@ -45,7 +44,7 @@ AGMenuItem::AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText):
     addChild(1,0,new AGText(this,getRect().origin(),pText,font));
 
   }
-AGMenuItem::~AGMenuItem()
+AGMenuItem::~AGMenuItem() throw()
   {
   }
 
@@ -119,7 +118,6 @@ void AGMenuItem::eventUnselect()
 
 bool AGMenuItem::eventMouseClick(AGEvent *m)
   {
-    cdebug("bool AGMenuItem::eventMouseClick(const AGEvent *m)");
     AGMenu *me=dynamic_cast<AGMenu*>(getParent());
     if(me)
       {
@@ -142,7 +140,7 @@ AGSubMenu::AGSubMenu(AGWidget *pParent,const AGStringUtf8 &pText):
     mSubMenu->hide();
   }
 
-AGSubMenu::~AGSubMenu()
+AGSubMenu::~AGSubMenu() throw()
   {
   }
 

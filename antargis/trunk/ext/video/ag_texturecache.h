@@ -23,8 +23,9 @@
 #ifndef __TEXTURE_CACHE_H__
 #define __TEXTURE_CACHE_H__
 
+#include "rk_debug.h"
+
 #include "ag_surface.h"
-#include "ag_debug.h"
 #include <ag_fs.h>
 
 #include <string>
@@ -42,7 +43,7 @@ class AGEXPORT AGTextureCache
     const AGTexture &get(const AGString &pTextureFilename,const AGRect2 &pSub) throw (FileNotFound);
   private:
     std::map<AGString,AGTexture*> mTextures;
-    
+
     friend AGTextureCache *getTextureCache();
   };
 

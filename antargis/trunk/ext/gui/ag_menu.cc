@@ -25,7 +25,7 @@
 #include "ag_surface.h"
 #include "ag_theme.h"
 
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 using namespace std;
 
@@ -42,6 +42,9 @@ AGMenu::AGMenu(AGWidget *pParent,AGVector2 pWishPos,const AGStringUtf8 &pName):
     mH=0;
   }
 
+AGMenu::~AGMenu()  throw()
+  {}
+
 void AGMenu::show(AGVector2 pWishPos)
   {
     AGWidget::show();
@@ -49,11 +52,6 @@ void AGMenu::show(AGVector2 pWishPos)
     AGVector2 p=fromScreen(mWishPos);
     setTop(p[1]);
     setLeft(p[0]);
-
-    std::list<AGWidget*>::iterator i=mChildren.begin();
-    for(;i!=mChildren.end();i++)
-      cdebug((*i)->getRect().toString());
-
   }
 
 void AGMenu::addItem(const AGStringUtf8 &pString)

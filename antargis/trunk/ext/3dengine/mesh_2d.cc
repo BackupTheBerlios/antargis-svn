@@ -1,5 +1,5 @@
 #include "mesh_2d.h"
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_painter.h>
 
 Mesh2D::Mesh2D(Scene2D *pScene):
@@ -11,7 +11,7 @@ Mesh2D::Mesh2D(Scene2D *pScene,Mesh2DData &data,const AGVector4 &pPos,float pRot
   mData(&data)
 {
 }
-Mesh2D::~Mesh2D()
+Mesh2D::~Mesh2D() throw()
 {
 }
 
@@ -74,7 +74,7 @@ Mesh2DData *Mesh2D::getData()
   return mData;
 }
 
-void Mesh2D::mark()
+void Mesh2D::mark() throw()
 {
   markObject(mData);
 }
@@ -87,7 +87,7 @@ bool Mesh2D::hit(const AGVector2 &screenPos)
       // check if texture is !=transparent there
       AGVector2 p=screenPos-dRect.getV0();
       return mData->getTexture()->getPixel(p[0],p[1]).a>10; // some threshold here
-      
+
     }
   return false;
 }

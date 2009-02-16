@@ -22,7 +22,7 @@
 #include "ag_draw.h"
 #include "ag_edit.h"
 #include "ag_theme.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_image.h"
 #include "ag_border.h"
 #include "ag_glscreen.h"
@@ -63,8 +63,12 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,i
 
     if(opengl())
       setCaching(true);
-      
+
   }
+AGButton::~AGButton() throw()
+  {}
+
+
 
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
   {
@@ -140,9 +144,9 @@ void AGButton::draw(AGPainter &p)
 
     if(mState==NORMAL || mState==LIGHTED)
       p.drawBorder(mr,borderWidth,bc1,bc2);
-    else 
+    else
       p.drawBorder(mr,borderWidth,bc2,bc1);
-      
+
   }
 
 
@@ -261,7 +265,7 @@ AGStringUtf8 AGButton::getCaption() const
 }
 
 /**
-   dis- or enables the button. disabled buttons are typically displayed greyed and are 
+   dis- or enables the button. disabled buttons are typically displayed greyed and are
    not hoverable or clckable
 
    \param pEnable true or false

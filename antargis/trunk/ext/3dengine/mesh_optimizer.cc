@@ -1,5 +1,5 @@
 #include "mesh_optimizer.h"
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_serial.h>
 
 //////////////////////////////////////////////////////////////////////
@@ -18,12 +18,12 @@ bool MeshVertex::operator<(const MeshVertex &p) const
     if(c[i]<p.c[i])
       return true;
 
-  for(i=0;i<3;i++) 
-    if(n[i]<p.n[i]) 
-      return true; 
+  for(i=0;i<3;i++)
+    if(n[i]<p.n[i])
+      return true;
 
   for(i=0;i<2;i++)
-    if(t[i]<p.t[i]) 
+    if(t[i]<p.t[i])
       return true;
 
   return false;
@@ -99,7 +99,7 @@ VertexArray MeshOptimizer::getArray()
     for(size_t i=0;i<mIndices.size();i+=3)
       {
         tris.push_back(MeshTriangle(mIndices[i],mIndices[i+1],mIndices[i+2]));
-      }  
+      }
     sort(tris.begin(),tris.end(),TriCompare(this,AGVector3(0,-10,10)));
 
     for(std::vector<MeshTriangle>::iterator i=tris.begin();i!=tris.end();i++)

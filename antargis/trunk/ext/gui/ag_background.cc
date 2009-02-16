@@ -21,7 +21,7 @@
 #include "ag_background.h"
 #include "ag_draw.h"
 #include "ag_theme.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_painter.h"
 #include "ag_texturecache.h"
 
@@ -70,7 +70,7 @@ AGBackground::AGBackground(const AGLocalTheme &pTheme,const AGString &pThemeName
 void AGBackground::loadFromTheme(const AGLocalTheme &pTheme,const AGString &pThemeName)
   {
     mColor=false;
-    
+
     if(pTheme.hasSurface(pThemeName+".image"))
       {
         cdebug(pThemeName+".image");
@@ -93,7 +93,7 @@ void AGBackground::loadFromTheme(const AGLocalTheme &pTheme,const AGString &pThe
         mColors[3]=pTheme.getColor(pThemeName+"."+"color");
       }
 
-    mBorder=pTheme.getInt(pThemeName+"."+"border");    
+    mBorder=pTheme.getInt(pThemeName+"."+"border");
   }
 
 

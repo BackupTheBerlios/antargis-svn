@@ -35,7 +35,7 @@ class AGEXPORT SceneBase:public AGRubyObject
   //
 
   SceneBase(int w,int h);
-  virtual ~SceneBase();
+  virtual ~SceneBase() throw();
 
 //  void draw();
 
@@ -46,7 +46,7 @@ class AGEXPORT SceneBase:public AGRubyObject
   void prepareUpdate(SceneNode *node);
   void updatePos(SceneNode *node);
 
-  void clear();
+  void clear() throw();
 
   // (mx,my,0)
   void setCamera(AGVector4 v);
@@ -69,7 +69,7 @@ class AGEXPORT SceneBase:public AGRubyObject
   float width() const;
   float height() const;
 
-  void mark();
+  void mark() throw();
 
 
   /** get currently visible nodes */

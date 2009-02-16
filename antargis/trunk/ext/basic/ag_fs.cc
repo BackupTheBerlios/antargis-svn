@@ -29,16 +29,16 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
+
 #ifdef WIN32
 #include <windows.h>
 #include <shlobj.h>
-//#include <strsafe.h>
-
 #endif
 
-#include "ag_debug.h"
+#include "rk_debug.h"
+#include "rk_tools.h"
+
 #include "ag_main.h"
-#include "ag_tools.h"
 #include "ag_serial.h"
 #include <zlib.h>
 
@@ -149,7 +149,7 @@ void checkDir(const std::string &s)
         {
         case EEXIST:
           return; // everything's fine - directory exists already;
-        case EACCES: 
+        case EACCES:
           return; // probably exists - we don't have access
         default:
           dbout(0,"could not create dir:"<<s);
@@ -611,6 +611,6 @@ std::vector<AGString> getLoadPaths()
   {
     std::vector<AGString> a;
     std::copy(gFilesystemPathes.begin(),gFilesystemPathes.end(),std::back_inserter(a));
-    
+
     return a;
   }

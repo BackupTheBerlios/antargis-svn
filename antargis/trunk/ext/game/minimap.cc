@@ -3,6 +3,7 @@
 #include <ag_screen.h>
 #include <ag_profiler.h>
 #include "ant_app.h"
+#include "entity.h"
 
 #define MAP_BORDER
 
@@ -18,7 +19,7 @@ MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
       setMap(mMap);
     }
 
-MiniMap::~MiniMap()
+MiniMap::~MiniMap() throw()
   {
     saveDelete(mTexture);
   }
@@ -93,7 +94,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 
     TerrainType t;
 
-    assert(mMap);  
+    assert(mMap);
 
     if(mMap)
       {

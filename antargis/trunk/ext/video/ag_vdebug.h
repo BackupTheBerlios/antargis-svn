@@ -1,7 +1,7 @@
 #ifndef AG_VDEBUG
 #define AG_VDEBUG
 
-#include <ag_debug.h>
+#include <rk_debug.h>
 
 AGEXPORT void agAssertGL(std::string s);
 AGEXPORT void checkGLReal(const std::string &pString);

@@ -39,7 +39,7 @@ class AGEXPORT AGTable:public AGWidget
 {
  public:
   AGTable(AGWidget *pWidget,const AGRect2 &pRect);
-  virtual ~AGTable();
+  virtual ~AGTable() throw();
 
   void addFixedColumn(float size);
   void addFixedRow(float size);

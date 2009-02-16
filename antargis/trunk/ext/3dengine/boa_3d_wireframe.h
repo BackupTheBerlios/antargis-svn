@@ -15,6 +15,7 @@ class AGEXPORT Boa3dWireframe:public SceneNode
 
  public:
   Boa3dWireframe(Scene *pScene,const AGVector4 &pColor,float pWidth);
+  virtual ~Boa3dWireframe() throw();
 
   void draw();
 

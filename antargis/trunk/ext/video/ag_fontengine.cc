@@ -19,8 +19,7 @@
  */
 
 #include "ag_fontengine.h"
-#include "ag_debug.h"
-#include "ag_kill.h"
+#include "rk_debug.h"
 #include "ag_texture.h"
 #include "ag_fs.h"
 #include "ag_sgeexport.h"
@@ -100,7 +99,7 @@ AGFontEngine::AGFontEngine()
     //  REGISTER_SINGLETON(this);
   }
 
-AGFontEngine::~AGFontEngine()
+AGFontEngine::~AGFontEngine() throw()
   {
     // TTF_Quit is called by atexit
     // font-deletion is ignored
@@ -376,7 +375,7 @@ int AGFontEngine::getHeight(const AGFont &pFont,const AGStringUtf8 &pText)
     return h;
   }
 
-void AGFontEngine::mark()
+void AGFontEngine::mark() throw()
   {
     for(std::map<std::pair<AGFont,AGStringUtf8>,AGTexture*>::iterator i=fontCache.begin();i!=fontCache.end();i++)
       markObject(i->second);

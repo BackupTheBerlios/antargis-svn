@@ -124,7 +124,7 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
   mPickable=true;
 }
 
-MeshData::~MeshData()
+MeshData::~MeshData() throw()
   {
     //  TRACE;
   }

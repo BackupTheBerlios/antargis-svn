@@ -24,7 +24,7 @@
 #include "ag_profiler.h"
 #include "ag_texture.h"
 #include "ag_rendercontext.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_vdebug.h"
 #include "ag_projection.h"
 
@@ -54,7 +54,7 @@ namespace AGGLPainter
           }
         glEnd();
 
-      } 
+      }
 
     void drawPoly(const std::vector<AGVector2> &pVecs,const AGColor &pColor,float pWidth)
       {
@@ -377,7 +377,7 @@ namespace AGGLPainter
         context.setDepthTest(true);
         context.setColor(AGColor(0xFF,0xFF,0xFF,0xFF));
         context.begin();
-        
+
         AGProjection2D p(const_cast<AGTexture&>(pSource).glTexture()->getRect(),AGRect2(0,0,1,1));
 
         glBegin(GL_TRIANGLES);
@@ -388,7 +388,7 @@ namespace AGGLPainter
             glVertex3fv(pDest[i]);
           }
 
-        glEnd();       
+        glEnd();
       }
 
 

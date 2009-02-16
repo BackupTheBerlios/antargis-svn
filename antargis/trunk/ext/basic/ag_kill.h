@@ -21,8 +21,9 @@
 #ifndef __ANT_KILL_H__
 #define __ANT_KILL_H__
 
+#include <rk_base.h>
+
 #include <set>
-#include <ag_base.h>
 
 class AGEXPORT AGInstanceBase
 {

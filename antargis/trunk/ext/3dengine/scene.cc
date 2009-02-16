@@ -2,10 +2,8 @@
 #include "scene.h"
 
 #include <SDL_opengl.h>
-//#include <GL/gl.h>
-//#include <GL/glu.h>
 
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_vdebug.h>
 #include <ag_video.h>
 #include <ag_rendercontext.h>
@@ -45,7 +43,7 @@ Scene::Scene(int w,int h):
   }
 
 
-Scene::~Scene()
+Scene::~Scene() throw()
   {
   }
 
@@ -254,7 +252,7 @@ void Scene::drawScene()
         glNewList(displayList,GL_COMPILE);
 #endif
 
-        STACKTRACE; 
+        STACKTRACE;
 
         // this is used for frustum cullin
         AntFrustum cFrustum=mCamera.getCameraProjection().getFrustum();
@@ -441,7 +439,7 @@ PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py)
 
     ptr = (GLuint *) buffer;
     minZ = 0xffffffff;
-    for (i = 0; i < (unsigned int)hits; i++) { 
+    for (i = 0; i < (unsigned int)hits; i++) {
       names = *ptr;
       ptr++;
       if (*ptr < minZ) {

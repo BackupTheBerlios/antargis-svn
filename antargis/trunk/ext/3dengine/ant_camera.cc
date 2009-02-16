@@ -23,7 +23,7 @@
 #include <SDL_opengl.h>
 #include <math.h>
 
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 AntCamera::AntCamera(int w,int h)
   {
@@ -100,7 +100,7 @@ void AntCamera::updateMatrices()
 
 
 
-        lp=AGVector4(-0.5,1.5,-0.5,1); // should be something like this 
+        lp=AGVector4(-0.5,1.5,-0.5,1); // should be something like this
         lp*=100;
 
 

@@ -12,7 +12,7 @@
  *    \see AntargisGUI
  *    \see Engine3d
  *    \see GameEngine
- * 
+ *
  *    For information about the overall-architecture please refer to the ruby-documentation at: ../ruby/index.html
  *
   */
@@ -24,7 +24,7 @@
 #include <iostream>
 #include <fstream>
 #include <ag_application.h>
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_main.h>
 #include <ag_geometry.h>
 
@@ -51,7 +51,7 @@ protected:
 
 public:
   GLApp(int w,int h);
-  ~GLApp();
+  ~GLApp() throw();
 
   virtual void draw();
   void drawGL();
@@ -72,7 +72,7 @@ public:
   virtual void setCamera(const AGVector2&p);
   AGVector2 getCamera() const;
 
-  void mark();
+  void mark() throw();
 };
 
 

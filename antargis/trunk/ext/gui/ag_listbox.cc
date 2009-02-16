@@ -18,7 +18,7 @@
  * License along with this program.
  */
 
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_edit.h"
 #include "ag_listbox.h"
 #include "ag_theme.h"
@@ -66,9 +66,13 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pR
   mHeight=count;
   mY=0;
   mSelected=-1;
-  
+
   setTheme("");
 }
+
+AGListBox::~AGListBox() throw()
+  {}
+
 
 void AGListBox::setTheme(const AGString &pTheme)
   {
@@ -77,7 +81,7 @@ void AGListBox::setTheme(const AGString &pTheme)
       themeName="listbox";
     else
       themeName+="listbox";
-    
+
     AGLocalTheme theme=getTheme()->getTheme(themeName);
     mBackground=AGBackground(theme,"background");
     mHilight=AGBackground(theme,"selected");
@@ -89,8 +93,8 @@ void AGListBox::setTheme(const AGString &pTheme)
       (*i)->setFont(f);
 
     rearrange();
-    
-    
+
+
   }
 
 void AGListBox::rearrange()

@@ -30,7 +30,7 @@ class AGEXPORT TerrainPiece:public SceneNode
 {
  public:
   TerrainPiece(SceneBase *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
-  virtual ~TerrainPiece();
+  virtual ~TerrainPiece() throw();
 
   void draw();
   void drawShadow();
@@ -62,7 +62,7 @@ class AGEXPORT TerrainBase:public AGRubyObject
 {
  public:
   TerrainBase(SceneBase *pScene,HeightMap &map);
-  virtual ~TerrainBase();
+  virtual ~TerrainBase() throw();
 
   HeightMap *getMap();
   SceneBase *getScene();
@@ -112,7 +112,7 @@ class AGEXPORT Terrain:public TerrainBase
 public:
   Terrain(SceneBase *pScene,HeightMap &map);
 
-  virtual ~Terrain();
+  virtual ~Terrain() throw();
 
   AGTexture *get3dTexture();
   AGTexture *getGrassTexture();
@@ -122,7 +122,7 @@ public:
   /// the whole map is changed - so better take care of this (texture-upload instead of repainting on GPU)
   virtual void mapChangedComplete();
 
-  void mark();
+  void mark() throw();
 
  private:
   void init();

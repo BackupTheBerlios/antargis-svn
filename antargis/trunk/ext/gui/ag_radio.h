@@ -31,7 +31,7 @@ class AGEXPORT AGRadio:public AGCheckBox
 {
  public:
   AGRadio(AGWidget *pParent,AGRect2 pRect);
-  virtual ~AGRadio();
+  virtual ~AGRadio() throw();
 
   void setGroup(AGRadioGroup *pGroup);
   bool eventMouseClick(AGEvent *m);

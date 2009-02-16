@@ -37,7 +37,7 @@ class AGEXPORT AnimMesh:public MeshBase
 
 public:
   AnimMesh(Scene *pScene,AnimMeshData *data);
-  virtual ~AnimMesh();
+  virtual ~AnimMesh() throw();
 
   void setTransform(const AGMatrix4 &m);
 
@@ -55,7 +55,7 @@ public:
   virtual void drawPick();
   virtual void advance(float time);
 
-  virtual void mark();
+  virtual void mark() throw();
 
   void setEntity(AntEntity *e);
 

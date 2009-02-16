@@ -2,6 +2,7 @@
 #include <ag_video.h>
 
 #include <SDL_opengl.h>
+#include <SDL_error.h>
 
 void checkGLReal(const std::string &pString)
   {

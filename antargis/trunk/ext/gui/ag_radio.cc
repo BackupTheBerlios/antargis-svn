@@ -46,7 +46,7 @@ AGRadio::AGRadio(AGWidget *pParent,AGRect2 pRect):
       mGroup->add(this);
   }
 
-AGRadio::~AGRadio()
+AGRadio::~AGRadio() throw()
   {
     if(mGroup)
       mGroup->erase(this);

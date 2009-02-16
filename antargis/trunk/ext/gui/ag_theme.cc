@@ -19,9 +19,11 @@
  */
 
 #include "ag_theme.h"
-#include "ag_debug.h"
+
+#include "rk_debug.h"
+#include "rk_tools.h"
+
 #include "ag_xml.h"
-#include "ag_tools.h"
 #include "ag_config.h"
 
 #include <iostream>
@@ -33,7 +35,7 @@ AGTheme::AGTheme()
   {
   }
 
-AGTheme::~AGTheme()
+AGTheme::~AGTheme() throw()
   {
   }
 
@@ -195,7 +197,7 @@ AGGradient AGTheme::getGradient(const AGString &pName) const
     }
   return i->second;
 }
- 
+
 AGBackground AGTheme::getBackground(const AGString &pName) const
 {
   std::map<AGString,AGBackground>::const_iterator i=mBackgrounds.find(pName);
@@ -226,6 +228,9 @@ AGBorder AGTheme::getBorder(const AGString &pName) const
 AGLocalTheme::AGLocalTheme(const AGString &pTheme):mTheme(pTheme)
       {
       }
+
+AGLocalTheme::~AGLocalTheme() throw()
+  {}
 
 AGFont AGLocalTheme::getFont(const AGString &pName) const
   {
@@ -272,7 +277,7 @@ bool AGLocalTheme::hasFont(const AGString &pName) const
 }
 bool AGLocalTheme::hasColor(const AGString &pName) const
 {
-  return getTheme()->hasColor(getName(pName));  
+  return getTheme()->hasColor(getName(pName));
 }
 bool AGLocalTheme::hasInt(const AGString &pName) const
 {

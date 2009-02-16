@@ -2,10 +2,23 @@
 
 # run intro - mainmenu will be called automatically
 
-Dir.chdir(File.split(__FILE__)[0])
+def puts(*s)
+  $debugFile||=File.open("antargisSt.log","w")
+  $debugFile.puts(*s)
+  $debugFile.flush
+end
+puts "MY LOG"
+puts "MY LOG2"
 
-require 'ruby/intro.rb'
+Dir.chdir(File.split(__FILE__)[0])
+puts "MY LOG2"
+puts Dir.pwd
+puts $:
+puts "--"
+require File.join('ruby','intro.rb')
+puts "MY LOG2"
 require 'ruby/mainmenu.rb'
+puts "MY LOG2"
 
 
 

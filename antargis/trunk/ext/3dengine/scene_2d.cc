@@ -3,14 +3,14 @@
 #include "scene_2d.h"
 #include "mesh_2d.h"
 #include "mesh_sort.h"
-#include <ag_debug.h>
+#include <rk_debug.h>
 
 Scene2D::Scene2D(int w,int h):
   SceneBase(w,h),mPainter(0)
   {
   }
 
-Scene2D::~Scene2D()
+Scene2D::~Scene2D() throw()
   {
   }
 

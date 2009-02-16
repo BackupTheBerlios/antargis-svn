@@ -21,7 +21,7 @@
 #include "GLee.h"
 #include "ag_color.h"
 #include "ag_geometry.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include <SDL.h>
 
 #include "ag_draw.h"
@@ -29,7 +29,7 @@
 
 namespace AGSDLPainter
 {
-  void drawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+  void drawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
     {
       AGRect2 rect=prect;
       Sint32 v00,v01,v02;
@@ -201,7 +201,7 @@ namespace AGSDLPainter
       }
     }
 
-  void drawGradientAlpha(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+  void drawGradientAlpha(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
     {
       AGRect2 rect=prect;
       Sint32 v00,v01,v02,v03;

@@ -23,13 +23,14 @@
 #include "ag_screen.h"
 #include "ag_glscreen.h"
 #include "ag_main.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_mixer.h"
 #include "ag_texturecache.h"
 #include "ag_profiler.h"
 #include "ag_clip_painttarget.h"
 #include "ag_video.h"
 #include "ag_vdebug.h"
+#include "ag_painter.h"
 
 #include <ruby.h>
 
@@ -55,7 +56,7 @@ AGApplication::AGApplication() :
     mDemoTime=-1;
   }
 
-AGApplication::~AGApplication()
+AGApplication::~AGApplication() throw()
   {
     CTRACE;
     if(mainWidget)
@@ -377,7 +378,7 @@ void AGApplication::draw()
 
         pLastDrawn=mainWidget;
 
-        saveDelete( p);
+        saveDelete(p);
       }
     else
       cdebug("no mainwidget");
@@ -389,10 +390,10 @@ void AGApplication::draw()
         changeList=mainWidget->aquireChanges();
         mainWidget->clearChangeRects();
       }
-    
-    
+
+
     sigFrameFinished(new AGEvent(this,"sigFrameFinished"));
-    
+
     if (opengl())// || true)
       getScreen().flip();
     else
@@ -473,7 +474,7 @@ void AGApplication::delay(int ms)
   }
 
 /// mark my mainWidget and my tooltip, as they can be ruby-objects
-void AGApplication::mark()
+void AGApplication::mark() throw()
   {
 //    CTRACE;
     if (mainWidget)

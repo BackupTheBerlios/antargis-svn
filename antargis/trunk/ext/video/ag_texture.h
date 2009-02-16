@@ -36,7 +36,7 @@ class AGEXPORT AGTexture:public AGPaintTarget
   AGTexture(const AGSurface &pSurface,bool p3d=false);
   AGTexture(const AGTexture &t);         // shallow copy, uses same tex-id or sdl-surface
   AGTexture(int W,int H);
-  ~AGTexture();
+  ~AGTexture() throw();
 
   AGTexture &operator=(const AGTexture &t);
 

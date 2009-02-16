@@ -8,7 +8,7 @@
 class AGEXPORT AGVideoBase:public AGSingleton
 {
  public:
-  virtual ~AGVideoBase();
+  virtual ~AGVideoBase() throw();
   virtual int width() const;
   virtual int height() const;
 

@@ -1,13 +1,14 @@
 #ifndef AG_PLUGIN_H
 #define AG_PLUGIN_H
 
+#include <rk_rubyobj.h>
+
 #include <string>
-#include <ag_rubyobj.h>
 
 class AGEXPORT AGPlugin:public AGRubyObject
 {
  public:
-  virtual ~AGPlugin();
+  virtual ~AGPlugin() throw();
 
  private:
   void *myptr;

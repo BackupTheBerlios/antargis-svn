@@ -23,9 +23,9 @@
 #ifndef __AG_FONT_H
 #define __AG_FONT_H
 
+#include <rk_base.h>
+#include <rk_utf8.h>
 #include <ag_color.h>
-#include <ag_base.h>
-#include <ag_utf8.h>
 
 #include <ag_string_utf8.h>
 

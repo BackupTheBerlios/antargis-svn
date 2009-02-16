@@ -79,7 +79,7 @@ class AGEXPORT AGApplication:public AGMessageObject
 {
  public:
   AGApplication();
-  virtual ~AGApplication();
+  virtual ~AGApplication() throw();
 
   bool run();
 
@@ -157,7 +157,7 @@ class AGEXPORT AGApplication:public AGMessageObject
   float mDemoTime;
   
  public:
-  void mark();
+  void mark() throw();
 };
 
 /**

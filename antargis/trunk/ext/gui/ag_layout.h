@@ -32,6 +32,7 @@ class AGEXPORT AGLayout:public AGWidget
 {
  public:
   AGLayout(AGWidget *pgParent);
+  virtual ~AGLayout() throw();
   
   virtual void loadXML(const std::string &pXMLData);
 
@@ -42,7 +43,7 @@ class AGEXPORT AGLayout:public AGWidget
 
   static void registerLayouts();
 
-  virtual void mark();
+  virtual void mark() throw();
  private:
   void insertTempWidget(AGWidget *pWidget);
    

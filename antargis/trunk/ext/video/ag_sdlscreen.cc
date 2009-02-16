@@ -20,7 +20,7 @@
 
 #include "ag_sdlscreen.h"
 #include "ag_texture.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_fs.h"
 #include "ag_draw.h"
 #include "ag_fontengine.h"

@@ -26,7 +26,7 @@ class AGEXPORT MiniMap:public AGWidget
 {
  public:
   MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap);
-  virtual ~MiniMap();
+  virtual ~MiniMap() throw();
   
   /// changes only part of the texture - shouldn't be called if the whole texture is changed, because this is SLOW!
   bool mapChanged(AGEvent *e);

@@ -20,7 +20,7 @@
 
 #include "entity.h"
 #include "map.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "jobs.h"
 #include "mesh.h"
 #include "anim_mesh.h"
@@ -79,7 +79,7 @@ void AntEntity::init()
   }
 
 
-AntEntity::~AntEntity()
+AntEntity::~AntEntity() throw()
   {
     CTRACE;
     //#error called several times
@@ -138,7 +138,7 @@ void AntEntity::loadXML(const Node &node)
     Node::const_iterator i=v.begin();
     for(;i!=v.end();i++)
       mPos.loadXML(**i);
-    
+
     AGString entID=node.get("entityID");
     if(entID.length()>0)
       mID=entID.toInt();
@@ -651,7 +651,7 @@ AGRect2 AntEntity::getRect() const
 
 
 
-void AntEntity::mark()
+void AntEntity::mark() throw()
   {
     AGRubyObject::mark();
     for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
@@ -674,7 +674,7 @@ void AntEntity::mark()
   }
 
 
-void AntEntity::clear()
+void AntEntity::clear() throw()
   {
     clearMeshes();
   }

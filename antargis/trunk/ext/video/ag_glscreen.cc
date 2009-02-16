@@ -20,7 +20,7 @@
 
 #include "ag_glscreen.h"
 #include "ag_color.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_vdebug.h"
 #include "ag_fontengine.h"
 #include "ag_surfacemanager.h"
@@ -157,8 +157,8 @@ AGGLScreen::AGGLScreen(int W,int H,int VW,int VH):
 
 
 
-AGGLScreen::~AGGLScreen()
-  { 
+AGGLScreen::~AGGLScreen() throw()
+  {
   }
 
 AGTexture AGGLScreen::screenshot(bool frontBuffer)
@@ -178,25 +178,25 @@ AGTexture AGGLScreen::screenshot(bool frontBuffer)
 
     assertGL;
 #ifdef __APPLE__
-    glTexParameteri(glTexture->getTarget(), 
-        GL_TEXTURE_STORAGE_HINT_APPLE, 
-        GL_STORAGE_CACHED_APPLE); 
+    glTexParameteri(glTexture->getTarget(),
+        GL_TEXTURE_STORAGE_HINT_APPLE,
+        GL_STORAGE_CACHED_APPLE);
     assertGL;
-    glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE); 
+    glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE);
     assertGL;
 
-    glTexParameteri(glTexture->getTarget(),GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_SHARED_APPLE); 
+    glTexParameteri(glTexture->getTarget(),GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_SHARED_APPLE);
     assertGL;
-    glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE); 
+    glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE);
 #endif
     assertGL;
     glReadBuffer(GL_FRONT_LEFT);
     glFinish();
     assertGL;
-    glCopyTexSubImage2D(glTexture->getTarget(), 
-        0,0,0,0,0,getWidth(),getHeight()); 
+    glCopyTexSubImage2D(glTexture->getTarget(),
+        0,0,0,0,0,getWidth(),getHeight());
     assertGL;
-    // Dootherworkprocessinghere,usingadoubleortriplebuffer 
+    // Dootherworkprocessinghere,usingadoubleortriplebuffer
     glReadBuffer(GL_BACK);
 
 

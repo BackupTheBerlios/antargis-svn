@@ -1,6 +1,6 @@
 #include <ag_video_base.h>
 
-AGVideoBase::~AGVideoBase()
+AGVideoBase::~AGVideoBase() throw()
 {
 }
 

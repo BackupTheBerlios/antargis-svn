@@ -23,7 +23,7 @@
 #include "ag_surface.h"
 #include "ag_texture.h"
 #include "ag_kill.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_config.h"
 #include "ag_glscreen.h"
 #include "ag_profiler.h"

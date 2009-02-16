@@ -20,7 +20,7 @@
 
 #include "ag_layout.h"
 #include "ag_xml.h"
-#include "ag_tools.h"
+#include "rk_tools.h"
 #include "ag_theme.h"
 #include "ag_listbox.h"
 #include "ag_combo.h"
@@ -45,13 +45,17 @@ AGLayout::AGLayout(AGWidget *pgParent):
     CTRACE;
   }
 
+AGLayout::~AGLayout() throw()
+  {}
+
+
 void AGLayout::loadXML(const std::string &pXMLData)
   {
     CTRACE;
     getLayoutFactory()->pushLayout(this);
 
     // disable GC here
-    // marking makes problems here - as the widgets are not inserted into the tree 
+    // marking makes problems here - as the widgets are not inserted into the tree
     // when _() is called, which itself is a ruby-dependent thingy
     Document p;
     p.parseMemory(pXMLData);
@@ -233,7 +237,7 @@ void AGLayout::insertTempWidget(AGWidget *pWidget)
   }
 
 
-void AGLayout::mark()
+void AGLayout::mark() throw()
   {
     AGWidget::mark();
     for(std::set<AGWidget*>::iterator i=mTempWidgets.begin();i!=mTempWidgets.end();i++)

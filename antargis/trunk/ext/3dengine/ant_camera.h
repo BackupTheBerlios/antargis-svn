@@ -23,10 +23,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
+#include <rk_rubyobj.h>
+
 #include "ag_gl.h"
 #include <ant_frustum.h>
 #include <ant_projection.h>
-#include <ag_rubyobj.h>
 
 /**
    \brief a camera object for moving over a height map
@@ -77,7 +78,7 @@ class AGEXPORT AntCamera
 
 
   /// this position is changed when moving around
-  AGVector4 scenePosition; 
+  AGVector4 scenePosition;
   /// camera and light position are fixed - to be understand as relative positions to scenePosition
   AGVector4 cameraPosition;
   AGVector4 lightPosition;
@@ -88,7 +89,7 @@ class AGEXPORT AntCamera
   AGMatrix4 cameraPick;
 
   /// use perspective shadow maps ?
-  bool mPSM; 
+  bool mPSM;
 
   int mWidth,mHeight;
 };

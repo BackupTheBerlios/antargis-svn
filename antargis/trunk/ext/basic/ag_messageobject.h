@@ -28,8 +28,8 @@
 #include <set>
 
 #include "ag_geometry.h"
-#include "ag_rubyobj.h"
-#include <ag_string.h>
+#include "rk_rubyobj.h"
+#include "rk_string.h"
 
 #if SDL_COMPILEDVERSION>1300
 #define MSDLMod Uint16
@@ -45,7 +45,7 @@ class AGSignal;
 
     AntargisGUI contains a small event handling mechanism for both ruby and C++.
     However they do work a little different.
-    
+
     Each object that wants to send or receive a message (or event) must be derived from
     AGMessageObject.
 
@@ -57,20 +57,20 @@ class AGSignal;
     You can however derive from it and pass it through a signal.
     But you shouldn't delete it for yourself.
  */
-class AGEXPORT AGEvent
+class AGEXPORT AGEvent:public AGRubyObject
 {
  public:
   AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &pEvent=NullEvent);
-  virtual ~AGEvent();
+  virtual ~AGEvent() throw();
 
   AGListener *getCaller() const;
-  
+
   void setCaller(AGListener *pCaller);
   AGString getName() const;
 
   void setRelMousePosition(const AGVector2 &p);
   AGVector2 getRelMousePosition() const;
-  
+
   AGVector2 getMousePosition() const;
   SDLKey getKey() const;
   MSDLMod getMod() const;
@@ -85,12 +85,12 @@ class AGEXPORT AGEvent
 
   void setVector(const AGVector2 &v);
   AGVector2 getVector() const;
-  
+
   bool isClipped() const;
   void setClipped(bool f);
 
   bool isMouseEvent() const;
-  
+
  private:
   AGListener *mCaller;
   AGString mName;
@@ -100,7 +100,7 @@ class AGEXPORT AGEvent
   AGVector2 mVector;
   AGVector2 *mMousePosition;
   AGVector2 *mRelMousePosition;
-  
+
   bool mClipped;
 
  protected:
@@ -118,9 +118,9 @@ class AGEXPORT AGListener:public AGRubyObject
 {
  public:
   AGListener();
-  virtual ~AGListener();
+  virtual ~AGListener() throw();
   virtual bool signal(AGEvent *m);
-  
+
 };
 
 /**
@@ -147,7 +147,7 @@ class AGEXPORT AGSlot0:public AGCPPListener
   typedef bool (T::*FKT)(AGEvent *m);
   T *base;
   FKT f;
-  
+
   AGSlot0(T *pBase,FKT pF):
     base(pBase),f(pF)
     {
@@ -164,7 +164,7 @@ class AGEXPORT AGSlot0:public AGCPPListener
 
 class AGMessageObject;
 
-/** AGSignal is a placeholder-class for a function which calls all the Slots, which 
+/** AGSignal is a placeholder-class for a function which calls all the Slots, which
     are connected to this signal.
     For instance a button named "close" holds a sigClick signal and a dialog box has a slotClose.
     You call sigClick(event) in the button and the connected slot is automatically called.
@@ -202,7 +202,7 @@ class AGEXPORT AGMessageObject:public AGListener
 {
  public:
   AGMessageObject();
-  virtual ~AGMessageObject();
+  virtual ~AGMessageObject() throw();
 
   bool processEvent(AGEvent *pEvent);
 
@@ -250,7 +250,7 @@ class AGEXPORT AGMessageObject:public AGListener
 AGEXPORT AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &s);
 
 /**
- */   
+ */
 
 template<class T>
 AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))

@@ -23,10 +23,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
+#include <rk_rubyobj.h>
+
 #include <ag_geometry.h>
 #include <ag_color.h>
 #include <ag_font.h>
-#include <ag_rubyobj.h>
 
 class AGSurface;
 class AGTexture;
@@ -36,7 +37,7 @@ class AGTexture;
 class AGEXPORT AGPaintTarget:public AGRubyObject
 {
  public:
-  virtual ~AGPaintTarget()
+  virtual ~AGPaintTarget() throw()
     {
     }
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest) MSTUB
@@ -49,10 +50,10 @@ class AGEXPORT AGPaintTarget:public AGRubyObject
   virtual void fillRect(const AGRect2 &pr,const AGColor &c) MSTUB
 
   virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pr) MSTUB
-  
+
   virtual void fillPoly(const std::vector<AGVector2>&pPoly,const AGColor &pColor) MSTUB
   virtual void drawPoly(const std::vector<AGVector2>&pPoly,const AGColor &pColor) MSTUB
-   
+
   virtual void blit(const AGTexture &pSource,const std::vector<std::pair<AGRect2,AGRect2> > &pSrcDestRects,const AGColor &pColor)
     MSTUB
 
@@ -60,14 +61,14 @@ class AGEXPORT AGPaintTarget:public AGRubyObject
   virtual void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) MSTUB
 
   virtual void setLineWidth(float w) MSTUB
-  
+
   virtual void tile(const AGTexture &pSource,const AGRect2 &pTarget, const AGColor &pColor) MSTUB
-   
+
   virtual AGRect2 getRect() const
   {
     return AGRect2(0,0,0,0);
   }
-  
+
 
   // modify single pixels - don't use this much!
 
@@ -78,7 +79,7 @@ class AGEXPORT AGPaintTarget:public AGRubyObject
 
   virtual void beginPaint()
   {}
-  
+
   virtual void endPaint()
   {}
 

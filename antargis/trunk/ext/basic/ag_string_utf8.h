@@ -3,10 +3,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
+#include <rk_base.h>
+
 #include <string>
 #include <vector>
 #include <SDL.h>
-#include <ag_base.h>
 
 class AGStringUtf8;
 class AGString;
@@ -29,7 +30,7 @@ class AGEXPORT AGCharUtf8
   bool operator!=(const AGCharUtf8 &c) const;
   bool operator!=(const char pChar) const;
 #endif
-  
+
 
   std::string getString() const;
 
@@ -43,7 +44,7 @@ class AGEXPORT AGCharUtf8
 
 class AGEXPORT AGStringUtf8Iterator
 {
-  
+
 };
 
 /** A string class that natively supports UTF-8 */
@@ -73,8 +74,8 @@ class AGEXPORT AGStringUtf8
 #endif
   AGStringUtf8(const char*c);
   AGStringUtf8(const char*c,size_t size);
-  
-  
+
+
 #ifdef SWIG
   %rename(set) operator=(const AGStringUtf8 &s);
   %rename(set) operator=(const AGCharUtf8 &s);
@@ -114,7 +115,7 @@ class AGEXPORT AGStringUtf8
   size_t find(const AGStringUtf8 &p,size_t pos=0) const;
 
   AGStringUtf8 replace(const AGStringUtf8 &what, const AGStringUtf8 &by) const;
-  
+
   AGStringUtf8 operator+(const AGStringUtf8 &s) const;
   AGStringUtf8 operator+(const AGString &s) const;
   AGStringUtf8 operator+(const char *s) const;

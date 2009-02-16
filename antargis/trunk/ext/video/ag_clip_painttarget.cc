@@ -1,10 +1,14 @@
 #include "ag_clip_painttarget.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 #include "ag_projection.h"
 
 AGClipPaintTarget::AGClipPaintTarget(AGPaintTarget *pTarget):mTarget(pTarget)
 {
 }
+
+AGClipPaintTarget::~AGClipPaintTarget() throw()
+  {}
+
 
 void AGClipPaintTarget::blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest)
   {

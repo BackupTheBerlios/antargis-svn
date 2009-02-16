@@ -1,5 +1,6 @@
+#include "rk_debug.h"
+
 #include "ag_glwidget.h"
-#include "ag_debug.h"
 #include "ag_screen.h"
 #include <GL/glu.h>
 
@@ -10,9 +11,9 @@ AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect2 &r):
 
 void AGGLWidget::drawGL()
 {
-  
+
 }
-  
+
 void AGGLWidget::drawAll(AGPainter &p)
 {
   beginGL();
@@ -48,9 +49,9 @@ void AGGLWidget::beginGL()
   glDepthMask(true);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
-  
-  
-  
+
+
+
 }
 
 float AGGLWidget::getRatio() const

@@ -1,6 +1,6 @@
 #include <ag_video.h>
 
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_vdebug.h>
 #include <ag_gltexture.h>
 #include <ag_glscreen.h>

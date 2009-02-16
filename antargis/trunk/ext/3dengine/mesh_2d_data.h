@@ -10,7 +10,7 @@ class AGEXPORT Mesh2DData:public AGRubyObject
  public:
   Mesh2DData(AGTexture *pTexture);
   
-  void mark();
+  void mark() throw();
 
   AGTexture *getTexture();
 

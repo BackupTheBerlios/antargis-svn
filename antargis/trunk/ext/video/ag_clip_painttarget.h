@@ -29,7 +29,9 @@ class AGEXPORT AGClipPaintTarget:public AGPaintTarget
 {
  public:
   AGClipPaintTarget(AGPaintTarget *pTarget);
-
+  ~AGClipPaintTarget() throw();
+  
+  
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
 
   virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor);

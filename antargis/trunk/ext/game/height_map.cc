@@ -4,7 +4,7 @@
 #include <ag_main.h>
 #include <ag_rand.h>
 
-#include <ag_rtools.h>
+#include <rk_rtools.h>
 
 //////////////////////////////////////////////////////////////////////////
 // HeightMap
@@ -39,11 +39,11 @@ HeightMap::HeightMap(SceneBase *pScene,int w,int h):
     setTerrainScale(FOREST,23/32.0);
     setTerrainScale(ROCK,31/32.0);
     setTerrainScale(ROCK2,31/32.0);
-    
+
     checkTerrain();
   }
 
-HeightMap::~HeightMap()
+HeightMap::~HeightMap() throw()
   {
     if(mTerrain)
       saveDelete(mTerrain);
@@ -631,7 +631,7 @@ AGVector2 HeightMap::getNextPlaceAbove(const AGVector2 &p,float height) const
   return found;
 }
 
-void HeightMap::mark()
+void HeightMap::mark() throw()
   {
     //  std::cout<<"HeightMap::mark tihs:"<<this<<" scene:"<<mScene<<std::endl;
     if(mScene)

@@ -22,8 +22,9 @@
 #include "ag_theme.h"
 #include "ag_screen.h"
 #include "ag_edit.h"
-#include "ag_debug.h"
-#include "ag_tools.h"
+
+#include "rk_debug.h"
+#include "rk_tools.h"
 
 AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
   AGWidget(0,pRect),
@@ -107,6 +108,11 @@ AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
     e->setBackground(false);
     addChild(e);
   }
+
+AGTooltip::~AGTooltip() throw()
+  {}
+
+
 
 void AGTooltip::draw(AGPainter &p)
   {

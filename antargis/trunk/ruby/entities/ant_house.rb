@@ -64,7 +64,7 @@ class AntHouse<AntBoss
     @type=3
     setProvide("house",true)
     @defeated=[]
-    @atHome=Set.new
+    @atHome=AntSet.new
     setMinimapColor(AGColor.new(0x55,0x55,0x55))
     setMinimapSize(5)
 

@@ -57,6 +57,7 @@ class AGEXPORT AGButton:public AGWidget
    };
 
   AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText="",int id=-1);
+  virtual ~AGButton() throw();
 
   void setSurface(AGSurface pSurface,bool pChangeSize=false);
   void setTexture(const AGTexture &pTexture);

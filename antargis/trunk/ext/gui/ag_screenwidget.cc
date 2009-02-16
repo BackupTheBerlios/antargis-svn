@@ -22,21 +22,17 @@
 #include "ag_screenwidget.h"
 #include "ag_surface.h"
 #include "ag_theme.h"
-#include "ag_debug.h"
 
 
 AGScreenWidget::AGScreenWidget():
   AGWidget(0,getScreen().getRect())
   {
-    //  mTexture=AGTexture(getTheme()->getSurface("screen.background.image"));
   }
-AGScreenWidget::~AGScreenWidget()
+AGScreenWidget::~AGScreenWidget() throw()
   {
   }
 
 void AGScreenWidget::draw(AGPainter &p)
   {
-    //  p.clip(AGRect2(10,10,50,50));
-    //p.tile(mTexture);
     p.fillRect(p.getRect().origin(),AGColor(0,0,0));
   }

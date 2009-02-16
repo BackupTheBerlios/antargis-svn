@@ -18,7 +18,7 @@
  * License along with this program.
  */
 
-#include <ag_debug.h>
+#include <rk_debug.h>
 #include <ag_draw.h>
 #include <ag_fontengine.h>
 #include <ag_glscreen.h>
@@ -236,7 +236,7 @@ AGPainter::AGPainter(AGPaintTarget &pTarget):mCurrent(pTarget.getRect()),mTarget
     }
 
 
-AGPainter::~AGPainter()
+AGPainter::~AGPainter() throw()
   {
     CTRACE;
     if(mTarget.valid())

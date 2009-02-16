@@ -33,6 +33,7 @@ class AGEXPORT AGComboBox:public AGWidget
 {
  public:
   AGComboBox(AGWidget *pParent,const AGRect2 &pRect);
+  virtual ~AGComboBox() throw();
 
   void insertItem(const AGString &pID,const AGStringUtf8 &pContent);
 
@@ -44,7 +45,7 @@ class AGEXPORT AGComboBox:public AGWidget
   AGString getSelected() const;
   void setSelected(const AGString &pID);
 
-  void clear();
+  void clear() throw();
   
   virtual void setWidth(float w);
   virtual void setHeight(float w);

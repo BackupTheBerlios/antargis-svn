@@ -1,5 +1,6 @@
 #include "ant_projection.h"
-#include <ag_debug.h>
+
+#include <rk_debug.h>
 
 #include <GL/glu.h>
 
@@ -20,7 +21,7 @@ AGVector3 AntProjection::project(const AGVector3 &p) const
 
   GLdouble mv[16],pr[16];
   for(int i=0;i<16;i++)
-    { 
+    {
       mv[i]=((const float*)modelview)[i];
       pr[i]=((const float*)projection)[i];
     }
@@ -35,7 +36,7 @@ AGVector3 AntProjection::unProject(const AGVector3 &p) const
 
   GLdouble mv[16],pr[16];
   for(int i=0;i<16;i++)
-    { 
+    {
       mv[i]=((const float*)modelview)[i];
       pr[i]=((const float*)projection)[i];
     }

@@ -23,7 +23,7 @@
 #include "ag_button.h"
 #include "ag_border.h"
 #include "ag_background.h"
-#include "ag_debug.h"
+#include "rk_debug.h"
 
 AGScroller::AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor):
   AGWidget(pParent,pRect),
@@ -91,7 +91,7 @@ AGScroller::AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor):
     setCaching(true);
   }
 
-AGScroller::~AGScroller()
+AGScroller::~AGScroller() throw()
   {
     delete mBorder;
     delete mBackground;

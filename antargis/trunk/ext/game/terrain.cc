@@ -37,7 +37,7 @@ TerrainPiece::TerrainPiece(SceneBase *pScene,Terrain *t,HeightMap &map,int xs,in
     setOrder(TERRAIN_Z);
   }
 
-TerrainPiece::~TerrainPiece()
+TerrainPiece::~TerrainPiece() throw()
   {
     if(sceneValid())
       getScene()->removeNode(this);
@@ -228,7 +228,7 @@ TerrainBase::TerrainBase(SceneBase *pScene,HeightMap &map):
     map.sigMapChangedComplete.connect(slot(this,&TerrainBase::slotMapChangedComplete));
   }
 
-TerrainBase::~TerrainBase()
+TerrainBase::~TerrainBase() throw()
   {
   }
 
@@ -316,7 +316,7 @@ void Terrain::mapChangedComplete()
   }
 
 
-Terrain::~Terrain()
+Terrain::~Terrain() throw()
   {
     for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
       saveDelete(*i);
@@ -344,7 +344,7 @@ AGTexture *Terrain::getGrassTexture()
     return &mGrass;
   }
 
-void Terrain::mark()
+void Terrain::mark() throw()
   {
     //  std::cout<<"Terrain::mark()"<<std::endl;
     for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
