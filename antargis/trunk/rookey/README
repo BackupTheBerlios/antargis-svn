@@ -1,6 +1,7 @@
 == Overview
 Rookey is a simplified build-system in the manner of the autotools based on rake.
-It should make things much easier for c++-developers wanting to create ruby-extensions.
+It should make things much easier for c/++-developers wanting to create ruby-extensions.
+But it can build your plain-C/C++ projects, too.
 
 It uses swig for creation of the wrapping-code, but tries to handle the complicated
 configuration itself, so you shouldn't have to care about it too much.
@@ -14,5 +15,10 @@ It handles the following things for you:
 * directors and dynamic_casts are created automatically for children of AGRubyObject
 * marking is simplified, so that you only have to override the "mark()"-method and call markObject(.) for each object that you want to mark (for all AGRubyObject-derived classes)
 * Rookey takes care of the class-hierarchy and includes header-files in the correct order
+* cross-platform compilation
+* bundling packages/installers for different platforms
+* (in future cross-compiler configuration)
 
 Rookey is handled by a rake-alike syntax. Module Rookey describes how to use it.
+
+link:files/examples/README.html contains several examples on how to use rookey. Apart from that have a look at the Antargis sources to get an impression of Rookey At Work.

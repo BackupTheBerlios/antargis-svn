@@ -23,7 +23,7 @@
    Normally you would mark any object that is a children of the current one.
 
    To make things easier AGRubyObject takes care of objects which are not handled by ruby. They get called
-   recursively anyways. So all you have to do is overriding the mark() function and then calling 
+   recursively anyways. So all you have to do is overriding the mark() function and then calling
    markObject(AGRubyObject *o) for any object you want to mark.
 
    If you need an explicit destructor-call at a specified time you must be content with a call to clear(), which
@@ -37,7 +37,7 @@
 
 #include <string>
 #include <set>
-#include <ag_base.h>
+#include <rk_base.h>
 #include <stdexcept>
 
 class AGRubyObject;
@@ -47,8 +47,10 @@ class AGEXPORT AGBaseObject
 protected:
   AGRubyObject *mp;
 public:
+  // AGBaseObject(.) should never throw an exception, because it may be called from ruby-functions not expection it to do so
   AGBaseObject(AGRubyObject *p) throw ();
 
+  // ~AGBaseObject should never throw an exception, because it may be called by ruby's garbage collector
   ~AGBaseObject() throw ();
   void baseClear() throw ();
 
@@ -63,7 +65,7 @@ public:
  * gc_ptr<T> is a managed ptr to a (possibly) garbage-collected object
  * it will be redirected to 0, if the targeted object is destroyed. So
  * you'll get a null-pointer exception when the object is not longer
- * present. This prevents you from accessing random memory. 
+ * present. This prevents you from accessing random memory.
  */
 template<class T>
 class AGEXPORT gc_ptr:public AGBaseObject
@@ -86,7 +88,7 @@ public:
 };
 
 /**
- * 
+ *
  * */
 class AGEXPORT AGRubyObject
 {

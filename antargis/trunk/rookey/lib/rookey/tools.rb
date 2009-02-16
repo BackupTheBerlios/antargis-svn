@@ -1,3 +1,5 @@
+require 'pp'
+
 class Array
   
   # *grep* goes through all files given by the filenames that should be contained in *self*
@@ -35,3 +37,40 @@ module Rookey
 	  end
 	end
 end
+
+
+alias :requireRookeyOld :require
+
+def require(file)
+  if file[0..0]=="."
+    rel=caller[0].gsub(/:[0-9]+/,"")
+    rel=File.expand_path(rel)
+    dir=File.split(rel)[0]
+    file=File.join(dir,file)
+    #pp file
+  end
+  requireRookeyOld(file)
+end
+def requireRelative(f)
+  require f
+end
+
+class FalseClass
+  def <=>(o)
+    if o==true
+      -1
+    else
+      0
+    end
+  end
+end
+class TrueClass
+  def <=>(o)
+    if o==false
+      1
+    else
+      0
+    end
+  end
+end
+

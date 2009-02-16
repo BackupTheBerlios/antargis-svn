@@ -1,6 +1,58 @@
 require 'rake/rdoctask.rb'
 require 'spec/rake/spectask'
-require 'rake/cleantask.rb'
+require 'rake/clean.rb'
+require 'rake/gempackagetask.rb'
+require 'pp'
+
+class MDir
+  def initialize(path)
+    @path=path
+    @files=[]
+    @dirs=[]
+  end
+  def file(f)
+    @files << f
+  end
+  def files(*f)
+    @files += f
+  end
+  def dir(name,&p)
+    dir = MDir.new(name)
+    dir.instance_eval(&p)
+    @dirs << dir
+  end
+  def dirs(*names,&p)
+    names.each{|name|
+      dir=MDir.new(name)
+      dir.instance_eval(&p)
+      @dirs << dir
+    }
+  end
+  def gather(base="")
+    a=[]
+    @files.each{|f|
+      a+=Dir[File.join(@path,f)]
+    }
+    @dirs.each{|dir|
+      a+=dir.gather(@path)
+    }
+    a
+  end
+end
+
+def dir(path,&p)
+  d=MDir.new(path)
+  d.instance_eval(&p)
+  d.gather
+end
+
+PKG_VERSION="0.1"
+PKG_FILES=dir(".") do
+  files "README","Rakefile"
+  dirs("spec","lib","maintenance","examples") do
+    files("**/*")  end 
+  dir("externals") do
+    files("ext_config.rb","tools.rb")  endend
 
 Rake::RDocTask.new do |rd|
 	 rd.main = "README"
@@ -8,10 +60,41 @@ Rake::RDocTask.new do |rd|
 	 #rd.options << "--diagram"
 	 rd.rdoc_dir="docs/ruby"
 	 a=Dir["**/README"]+Dir["**/*.rb"]
-	 a=a.select{|f|not (f=~/_test/ or f=~/spec/)}
+	 a=a.select{|f|not (f=~/_test/ or f=~/spec/ or f=~/externals/ or f=~/maintainenance/)}
 	 rd.rdoc_files.include(a)
+	 
+	 # TODO: run examples
 end
- 
+
+# TODO: create gem
+spec = Gem::Specification.new do |s|
+    s.platform = Gem::Platform::RUBY
+    s.summary = "Ruby based make-like utility."
+    s.name = 'rookey'
+    s.author='David Kamphausen'
+    s.email='david.kamphausen@web.de'
+    s.homepage='http://antargis.berlios.de'
+    s.version = PKG_VERSION
+    s.requirements << 'rake'
+    s.require_path = 'lib'
+    #s.autorequire = 'rake'
+    s.files = PKG_FILES
+    s.has_rdoc=true
+    s.description = <<EOF
+  Rookey is an autotools-like tool to help you build c/c++ programs and extensions for ruby.
+  It contains some extra features for dependencies and packaging.
+EOF
+end
+
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.need_zip = true
+  pkg.need_tar = true
+end
+
+
+
+# TODO: upload gem
+
 
 # rspec
 Spec::Rake::SpecTask.new(:spec) do |t|
@@ -23,5 +106,6 @@ end
 
 CLEAN << "spec_output.html"
 CLEAN << Dir["docs/ruby"]
+CLEAN << Dir["pkg"]
 
 task :default=>:spec

@@ -1,6 +1,7 @@
 ALLCLEAN=[]
 
-require File.join(File.split(__FILE__)[0],'tools.rb')
+require File.join(File.split(File.expand_path(__FILE__))[0],'rookey','tools.rb')
+require './rookey/tasks.rb'
 
 task :allclean=>:clean do
   ALLCLEAN.each{|f|

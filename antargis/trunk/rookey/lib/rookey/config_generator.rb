@@ -66,8 +66,11 @@ EOT
     end
     def checkProgram(program)      
     end
-    def checkLibrary(config,lib,funcname)
-      source="extern \"C\" void #{funcname}();int main(){return 0;}"
+    def checkLibrary(config,lib,funcname,includes=[])
+      includes+=config["NEEDED_INCLUDES"].split(" ")
+      includes=includes.map{|i|"#include <#{i}>"}.join("\n")
+      source="#{includes}\nextern \"C\" void #{funcname}();int main(int argc,char*argv[]){return 0;}"
+      pp source
       testSource="test.c"
       fd=File.open(testSource,"w")
       fd.puts source
@@ -113,7 +116,8 @@ EOT
   }
   
   def Rookey.log(*s)
-    puts(*s)
+    @@logFile||=File.open("rookey.log","w")
+    @@logFile.puts(*s)
   end
   
  
@@ -129,6 +133,7 @@ EOT
   end
   
   def Rookey.runConfigure
+    log caller
     configurators=getDescendantsOfClass(Configurator)
     ok=[]
     run=[]
@@ -141,9 +146,10 @@ EOT
             #pp config
             begin
 		          c.new.run(config)
+		          log config.inspect
               @@configured << c
             rescue
-              puts "Configuration of #{c} failed !"
+              log "Configuration of #{c} failed !"
             end
 		        ok+=c.provides
 		        ok.uniq!
@@ -152,8 +158,6 @@ EOT
 	      end
 	    }
     end
-    pp config
-    puts
     @@config=config
   end
 end

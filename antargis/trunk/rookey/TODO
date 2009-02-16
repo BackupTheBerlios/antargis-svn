@@ -1,0 +1,9 @@
+TODOs
+* document public methods
+* improve interface so that it's more like rake's
+* complete examples
+* create gem
+* publish
+* run configures only when needed
+* make output more readable, store debug-info in file
+* store configuration in .dotfiles

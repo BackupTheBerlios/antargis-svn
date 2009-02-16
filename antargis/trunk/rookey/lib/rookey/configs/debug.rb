@@ -4,7 +4,7 @@ module Rookey
     
     def run(config)
       pp ROOKEY_CONFIG
-      if ROOKEY_CONFIG[:debug]
+      if ROOKEY_CONFIG[:debug]=="true"
 	      config.add("CFLAGS","-O0 -g")
 	      config.add("LDFLAGS","-g")
       end

@@ -1,16 +1,16 @@
 require 'rake/clean.rb'
-require File.join(File.split(__FILE__)[0],'rookey.rb')
-require File.join(File.split(__FILE__)[0],'swig.rb')
-require File.join(File.split(__FILE__)[0],'compile.rb')
+#require '../rookey.rb'
+require './swig.rb'
+require './compile.rb'
 
 
-require File.join(File.split(__FILE__)[0],'rookey_config.rb')
+require './rookey_config.rb'
 Rookey::Configure.load
 Rookey::Configure.cleanTask
 
-require File.join(File.split(__FILE__)[0],'config_generator.rb')
-require File.join(File.split(__FILE__)[0],'cpp_hierarchy_parser.rb')
-require File.join(File.split(__FILE__)[0],'swig_interface_builder.rb')
+require './config_generator.rb'
+require './cpp_hierarchy_parser.rb'
+require './swig_interface_builder.rb'
 
 require 'rake/clean.rb'
 require 'pp'
@@ -25,7 +25,7 @@ require 'pp'
 module Rookey
 
   # call like this
-  # swig_interface "antargis_gui"=>Dir["ext/gui/*.h"]+additionalInterfaces,"initalizers"=>["func1","func2",...]
+  #  swig_interface "antargis_gui"=>Dir["ext/gui/*.h"]+additionalInterfaces,"initalizers"=>["func1","func2",...]
   # will generate an interface-file named "antargis_gui_interface.i" for module "antargis_gui"
   def Rookey.swig_interface(ops)
     target=""
@@ -42,7 +42,7 @@ module Rookey
     }
     file=target+"_interface.i"
     templates=[source].flatten.select{|f|f=~/i$/}
-    source=source.grep(/INCLUDE_SWIG/)+[getAGRubyObjectHeader]
+    source=source.grep(/INCLUDE_SWIG/)+getAGRubyObjectHeader
     
     rule file=>source do
 	    parser=CppHierarchyParser.new([source].flatten.select{|f|f=~/h$/})
@@ -77,13 +77,19 @@ module Rookey
 	    swigCompiler.swig(t,interface)
 	  end
 	  CLEAN << output << output.gsub(/\.cc?/,".h")
-	  [output,getAGRubyObjectSource]
+	  getRookeyCPPSources+[output] #getAGRubyObjectSource
 	end
+
+  def Rookey.getRookeyCPPSources
+    Dir[File.join(File.split(__FILE__)[0],"cpp","*.cc")].select{|f|not f=~/.*dummy.*/}
+
+  end
+
   def Rookey.getAGRubyObjectSource
-    File.join(File.split(__FILE__)[0],"cpp","ag_rubyobj.cc")
+    [File.join(File.split(__FILE__)[0],"cpp","rk_rubyobj.cc")]
   end
   def Rookey.getAGRubyObjectHeader
-    File.join(File.split(__FILE__)[0],"cpp","ag_rubyobj.h")
+    [File.join(File.split(__FILE__)[0],"cpp","rk_rubyobj.h")]
   end
 	
 	def Rookey.compile(files,config=nil)
@@ -102,6 +108,7 @@ module Rookey
 	  targets
 	end
 	
+	# links a DLL named *name* out of the given *files* 
 	def Rookey.link_dll(name,files)
     files.flatten!
     files.uniq!
@@ -120,10 +127,16 @@ module Rookey
     target
 	end
 
+	
+	# links an executable with name *name* out of the given *files*, you can give a config which should be of type RookeyConfig (or hash)
   def Rookey.link_exe(name,files,config=nil)
     files.flatten!
-    files << compile(File.join(File.split(__FILE__)[0],"cpp","ag_rubyobj.cc"),config)
-    files << compile(File.join(File.split(__FILE__)[0],"cpp","swig_dummy.cc"),config) if files.select{|f|f=~/swig/}.length==0
+    if files.select{|file|file=~/swig_.*/}.length>0
+      ["rk_rubyobj.cc","rk_string.cc"].each{|f|
+        files << compile(File.join(File.split(__FILE__)[0],"cpp",f),config)
+      }
+      files << compile(File.join(File.split(__FILE__)[0],"cpp","swig_dummy.cc"),config) if files.select{|f|f=~/swig/}.length==0
+    end
     files.uniq!
     config||=Rookey::getConfig
     
@@ -131,6 +144,7 @@ module Rookey
     
     target=linker.exeName(name)
     desc "Link EXE #{name}"
+    
     task target=>files do |t|
       linker.linkEXE(t.name,t.prerequisites)
     end
@@ -140,7 +154,10 @@ module Rookey
   end 
 
   
-  def Rookey.ruby_ext(name,files,inits,fallbackInterface=nil)
+  # simple creation of ruby-extensions following the principle of antargis structure
+  # * name is the name of the resulting extension
+  # * files are the .h, .c and .cc (or .cpp) source-files 
+  def Rookey.ruby_ext(name,files,inits=[],fallbackInterface=nil)
     headerFiles=files.select{|f|f=~/h$/}
     libs=files.select{|f|f=~/so$/ or f=~/bundle/}
 
@@ -170,6 +187,7 @@ module Rookey
     lib=Rookey::link_dll(name,targets+alllibs)
   end
   
+  # tries to require <name> and returns if this has succeeded
   def Rookey.checkedRequire(name)
     begin
     require name

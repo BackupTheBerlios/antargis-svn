@@ -16,12 +16,18 @@ module Rookey
       else
         ["sdl","sdl_image","sdl_ttf","sdl_mixer"].each{|lib|install(lib)}
         config.add("INCLUDEDIRS",File.join(installIncludeDir,"SDL"))
-        
+        sdlconfig=File.join(File.split(__FILE__)[0],"..","externals","build","bin","sdl-config")
+        config.add("LDFLAGS",`#{sdlconfig} --libs`.chomp)
+        config.add("CFLAGS",`#{sdlconfig} --cflags`.chomp)
+         
+        config.add("NEEDED_INCLUDES","SDL.h")
       end      
+      pp config
       
       checkLibrary(config,"SDL_image","IMG_Load")
       checkLibrary(config,"SDL_ttf","TTF_Quit")
       checkLibrary(config,"SDL_mixer","Mix_LoadMus")
+      pp config
     end
   end
 end

@@ -25,7 +25,7 @@ module Rookey
         config.add("LDFLAGS","-L"+installLibDir)
         config.add("INCLUDEDIRS",File.join(baseMingw,"include"))
         config.add("INCLUDEDIRS",installIncludeDir)
-        
+        config.add("CFLAGS","-mthreads")        
         
         #pp config
         #exit

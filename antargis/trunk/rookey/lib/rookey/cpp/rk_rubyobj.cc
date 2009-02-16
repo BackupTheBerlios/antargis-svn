@@ -1,5 +1,5 @@
-#include "ag_base.h"
-#include "ag_rubyobj.h"
+#include "rk_base.h"
+#include "rk_rubyobj.h"
 #include <assert.h>
 #include <typeinfo>
 #include <set>
@@ -38,7 +38,7 @@ AGEXPORT bool rubyObjectExists(void *po)
     return(v!=Qnil);
   }
 
-AGRubyObject::AGRubyObject()
+AGRubyObject::AGRubyObject() throw()
   {
     //std::cerr<<"AGRubyObject::new:"<<this<<std::endl;
     assert(mRubyObjects.find(this)==mRubyObjects.end());
@@ -48,10 +48,10 @@ AGRubyObject::AGRubyObject()
     mRemovedRubyObjects.erase(this);
     if(oSize!=mRemovedRubyObjects.size())
       std::cerr<<"Collision - removed rubyobject's address is overwritten!"<<std::endl;
-    
+
     std::cerr<<"current ruby#:"<<mRubyObjects.size()<<" removed:"<<mRemovedRubyObjects.size()<<std::endl;
   }
-AGRubyObject::~AGRubyObject()
+AGRubyObject::~AGRubyObject() throw()
   {
     assert(mRubyObjects.find(this)!=mRubyObjects.end());
     assert(mRemovedRubyObjects.find(this)==mRemovedRubyObjects.end());
@@ -64,14 +64,14 @@ AGRubyObject::~AGRubyObject()
 
 
 /// override this function to mark your children
-void AGRubyObject::mark()
+void AGRubyObject::mark() throw()
   {
   }
 
 
 // call this function with any object you want to mark.
 // recursive should be set true only in one direction, otherwise you'll generate endless-loops (!!)
-void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
+void AGRubyObject::markObject(AGRubyObject *o, bool recursive) throw()
   {
     //std::cerr<<"markObject:"<<o<<std::endl;
     // o must be a valid ruby-object
@@ -85,7 +85,7 @@ void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
         //std::cout<<"V:"<<v<<std::endl;
         // then mark it
         rb_gc_mark(v);
-        
+
       }
 
     assert(o);
@@ -94,7 +94,7 @@ void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
       o->mark(); // call this directly
   }
 
-void AGRubyObject::clear()
+void AGRubyObject::clear() throw()
   {
   }
 
@@ -157,32 +157,32 @@ bool saveDelete(AGRubyObject *o)
     // send object a message, that it will be deleted. This can help with detachin connections
     // between objects.
     o->clear();
-    
+
     VALUE v=convertCpp2Ruby(o);
     if(v!=Qnil)
       return false; // do not delete - it's under ruby's control!
-    
-    
+
+
     delete o;
     return true;
   }
 
 
 
-AGBaseObject::AGBaseObject(AGRubyObject *p)
+AGBaseObject::AGBaseObject(AGRubyObject *p) throw()
 :mp(p)
     {
       if(p)
         p->addRef(this);
     }
 
-AGBaseObject::~AGBaseObject()
+AGBaseObject::~AGBaseObject() throw()
   {
     if(mp)
       mp->deleteRef(this);
   }
 
-void AGBaseObject::baseClear()
+void AGBaseObject::baseClear() throw()
   {
     mp=0;
   }

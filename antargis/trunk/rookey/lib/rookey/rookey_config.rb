@@ -68,7 +68,13 @@ module Rookey
 	              "do not use fallback dirs for X11 and GL") do 
 	        @options[:use_fallbacks]=false
 	      end
-	
+
+        opts.on("--enable-malloc-debug",
+                "enable memory debugging") do 
+          @options[:malloc_debug]=true
+        end
+        
+        	
 	      opts.on("--prefix PREFIXDIR",
 	              "set prefix directory PREFIXDIR") do |dir|
 	        @options[:prefix]=dir

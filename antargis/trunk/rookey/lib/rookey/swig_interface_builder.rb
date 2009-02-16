@@ -116,10 +116,14 @@ EOT
 }
 */
 
+      %include <std_vector.i>
+      %include <std_list.i>
+      
 #{importInterfaces}
 
 #{stlIncludes}
 %{
+#include \"rk_string.h\"
 #{headerIncludes}
 %}
 
@@ -164,7 +168,8 @@ template <>
 
 
 #{dynamicCasts}
-
+%template(StringVector) std::vector<std::string>;
+%template(PStringVector) std::vector<std::string*>;
 #{templates}
 
 %feature(\"trackobjects\");

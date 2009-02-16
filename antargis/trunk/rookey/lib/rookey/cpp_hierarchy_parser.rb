@@ -2,6 +2,7 @@ require 'ostruct'
 
 module Rookey
   
+  # gather all classes that are derived from AGRubyObject 
   def Rookey.getRubyClasses(classes)
     cs=[classes.select{|c|c.name=="AGRubyObject"}[0]]
     begin
@@ -11,11 +12,12 @@ module Rookey
     cs
   end
   
+  
+  # sort cpp-header files in the correct order, so that swig will have the classes in the
+  # order that usage of classes comes after definition (as long as this is possible)
   def Rookey.getOrderedCppHeaders(classes)
     map={}
     order={}
-    
-    pp classes
     
     allClasses=classes.dup
     classes=getRubyClasses(classes)
@@ -41,7 +43,6 @@ module Rookey
         end
       }
     end while oneNotSet
-    #puts "MAX:",maxNumber
     cs=[]
     (0..maxNumber).each{|i|
       order.each{|k,v|
@@ -50,13 +51,10 @@ module Rookey
         end
       }
     }
-    pp order
     allFiles=allClasses.map{|c|c.header_file}.uniq
     result=classes.sort{|a,b|order[a.name]<=>order[b.name]}.map{|c|c.header_file}.uniq
     result=result+(allFiles-result)
-    pp result
     result
-    #cs.map{|c|c.header_file}.uniq
   end
   
   

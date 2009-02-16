@@ -98,16 +98,60 @@ f.close
       cp("../../"+f,sDir)
     }
     
-    #system "tar cfz #{sDir}.tar.gz #{sDir}"
-    #system "tar cfj #{sDir}.tar.bz2 #{sDir}"
-    #system "zip -r #{sDir}.zip #{sDir}"
+    system "tar cfz #{sDir}.tar.gz #{sDir}"
+    system "tar cfj #{sDir}.tar.bz2 #{sDir}"
+    system "zip -r #{sDir}.zip #{sDir}"
     checkSource(sDir)
   end
+  
+  def distWin32
+    system("cd ../.. && ./configure --ext-config=mingw32 && rake")
+    sDir=sourceDir
+    system("rm -rf #{sDir}")
+    copyMainTo(sDir)
+    cp("../../antargis.exe",sDir)
+    cp("../../antargis.dll",sDir)
+    puts "--"
+    Dir["../externals/build/bin/*.dll"].each{|dll|
+      puts dll
+      cp(dll,sDir)
+    }
+    puts "--"
+    Dir["../externals/build/**/*.dll"].each{|dll|
+      puts dll
+      cp(dll,sDir)
+    }
+    filename=updateISS
+    system("wine \"c:\\Programme\\Inno Setup 5\\ISCC.exe\" /O. #{filename}")
+    
+  end
+  
   
   def prepareDistribution
   end
   
   private
+  
+  def updateISS
+    content=File.open(File.join(File.split(__FILE__)[0],"antargis.iss")).read
+      
+    vars={
+      "APPNAME"=>"Antargis",
+        "URL"=>"antargis.berlios.de",
+        "VERSION"=>@config.version,
+        "PUBLISHER"=>"The Antargis-team",
+        "SOURCEDIR"=>sourceDir,
+        "PROGNAME"=>"antargis"
+    }
+    vars.each{|n,v|
+      content.gsub!("${#{n}}",v)
+    }
+    filename="tmp.iss"
+    f=File.open(filename,"w")
+    f.puts content
+    f.close
+    filename
+  end
   
   def checkSource(dir)
     system "cd #{dir} && export PATH=/usr/bin export LDFLAGS=-L/opt/local/lib && export CFLAGS='-I/opt/local/include -I/opt/local/include/SDL' && ./configure && rake --trace && rake spec"
@@ -182,15 +226,18 @@ end
 
 DistConfig=Struct.new(:name,:version)
 
+task :default=>:dist do
+  end
+
 task :dist do
   config=DistConfig.new("antargis","0.3")
   d=RookeyDist.new(config)
   #d.distDarwin
-  d.distSource
-  #dist(:win32)
+  #d.distSource
+  d.distWin32
   #dist(:source)
 end
 
 task :clean do
-  system "rm -rf Antargis* antargis*"
+  system "rm -rf Antargis* antargis-* tmp.iss"
 end

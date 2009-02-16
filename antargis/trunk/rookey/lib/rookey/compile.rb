@@ -18,14 +18,13 @@ module Rookey
 	  def compile(target,sources)
 	    source=makeSource(target)
 	    
-      # FIXME check for c/c++
       
 	    program=getCompiler(:cpp)
 
 	    
 	    options=[]
 	
-      pp @config
+      #pp @config
       
 	    options << @config["CFLAGS"]
 	    
@@ -37,8 +36,7 @@ module Rookey
       sourcepath=source
       sourcepath=expanded_path if File.exists?(expanded_path) and not File.exists?(source)
       sourcepath="/"+sourcepath if File.exists?("/"+sourcepath) and not File.exists?(sourcepath)
-      #pp sourcepath,source
-      #exit
+
 	    options << "-c "+sourcepath
 	    options << "-o "+target
       
@@ -74,8 +72,6 @@ module Rookey
 	    programcall=getCompiler(:cpp)+" " +@config["LDSHAREDFLAGS"]
       
       options=[]
-      pp t.methods.sort
-      pp t.prerequisites
       
       options << "-o "+t.name
       options += t.prerequisites
