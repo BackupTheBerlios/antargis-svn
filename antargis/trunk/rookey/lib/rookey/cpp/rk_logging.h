@@ -8,9 +8,18 @@
 #ifndef _RK_LOGGING_H
 #define	_RK_LOGGING_H
 
-class RKLogging:public RKSingleton
+#include "rk_singleton.h"
+
+class RKLogging:public RKSingleton<RKLogging>
 {
-    
+public:
+    virtual ~RKLogging();
+
+    void log(const std::string &s);
+protected:
+    RKLogging();
+
+private:
 };
 
 

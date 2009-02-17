@@ -1,0 +1,22 @@
+require 'rookey.rb'
+
+tests=Dir["*_spec.cc"]
+
+baseFiles=["../rk_singleton.cc"]
+
+test_exes=tests.map{|test|
+  name=test.sub(/_spec.cc/,"")
+  files=[test]+baseFiles
+  objs=Rookey::compile(files)
+  Rookey::link_exe(name, objs)
+}
+
+task :runTests=>test_exes do
+  pp test_exes
+
+end
+
+
+task :default=>:runTests do
+
+end

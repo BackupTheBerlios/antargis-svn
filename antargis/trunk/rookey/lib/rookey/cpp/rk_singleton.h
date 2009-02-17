@@ -8,14 +8,47 @@
 #ifndef _RKSINGLETON_H
 #define	_RKSINGLETON_H
 
-template<class Base>
-class RKSingleton {
-public:
-    virtual ~RKSingleton();
+#include <string>
+#include <map>
+#include <typeinfo>
 
-    RKSingleton *getInstance
+template<class Base>
+class RKSingleton;
+
+class RKSingletonBase
+{
+public:
 protected:
-    RKSingleton();
+    RKSingletonBase();
+    virtual ~RKSingletonBase()
+    {}
+
+    static std::map<std::string,RKSingletonBase*> mSingletons;
+
+private:
+    static RKSingletonBase* getInstance(const std::string &pName);
+
+    template<class Base>
+    friend class RKSingleton;
+};
+
+template<class Base>
+class RKSingleton:public RKSingletonBase {
+public:
+    virtual ~RKSingleton()
+    {}
+
+    static Base *getInstance()
+    {
+        std::string name=typeid(Base).name();
+        Base *b=dynamic_cast<Base*>(RKSingletonBase::getInstance(name));
+        if(b==0)
+            b=new Base();
+        return b;
+    }
+protected:
+    RKSingleton()
+            {}
 
 };
 

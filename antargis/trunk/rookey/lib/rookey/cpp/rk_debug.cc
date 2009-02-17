@@ -19,7 +19,6 @@
  */
 
 #include "rk_debug.h"
-#include "ag_main.h"
 
 #include <fstream>
 #include <iostream>

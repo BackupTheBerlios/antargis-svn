@@ -95,6 +95,13 @@ module Rookey
 	def Rookey.compile(files,config=nil)
 	  files=[files].flatten
 	  config||=Rookey::getConfig
+
+    files=files.select{|f|f=~/(c|cc|cpp)$/}
+
+    sourceDirs=files.map{|file|File.split(file)[0]}.sort.uniq
+
+    config.add("INCLUDEDIRS",sourceDirs.join(" "))
+
 	  compiler=Rookey::Compiler.new(config)
 	  files.each{|file|
 	    t=compiler.makeObject(file)
@@ -132,7 +139,7 @@ module Rookey
   def Rookey.link_exe(name,files,config=nil)
     files.flatten!
     if files.select{|file|file=~/swig_.*/}.length>0
-      ["rk_rubyobj.cc","rk_string.cc"].each{|f|
+      ["rk_rubyobj.cc","rk_string.cc","rk_rtools.cc"].each{|f|
         files << compile(File.join(File.split(__FILE__)[0],"cpp",f),config)
       }
       files << compile(File.join(File.split(__FILE__)[0],"cpp","swig_dummy.cc"),config) if files.select{|f|f=~/swig/}.length==0
