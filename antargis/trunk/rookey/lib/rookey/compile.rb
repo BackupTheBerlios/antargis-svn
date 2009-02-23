@@ -10,11 +10,16 @@ module Rookey
 	    parseDepsFiles
       
       return t unless @@deps
-      p=File.join(Compiler.getDepsDir,t)
+      #t=File.expand_path(t) if t=~/^../
+      p=makeDepsName(t)
 	    return @@deps[p] if @@deps[p]
       t
 	  end
-  
+
+    def Compiler.makeDepsName(inFile)
+      depfile=File.join(Compiler.getDepsDir,makePlainName(inFile))
+    end
+    
 	  def compile(target,sources)
 	    source=makeSource(target)
 	    
@@ -41,7 +46,7 @@ module Rookey
 	    options << "-o "+target
       
       
-      depfile=File.join(Compiler.getDepsDir,source)
+      depfile=Compiler.makeDepsName(source) #File.join(Compiler.getDepsDir,source)
       depdir=File.split(depfile)[0]
       Rookey.mkdir(depdir)
       
@@ -53,7 +58,6 @@ module Rookey
 	    call=program+" "+options.join(" ")
 	    sh call
       puts
-	  
 	  end
     
     def linkEXE(name,objects)
@@ -113,20 +117,35 @@ module Rookey
       end
       file
 	  end
+
+    def self.makePlainName(inName)
+      inName.gsub("/","=")
+    end
+    def self.makeRelName(inName)
+      inName.gsub("=","/")
+    end
 	  
 	  def makeSource(objectName)
 	    objectName.sub(/\.o$/,"").sub(/^#{getBuildDir}[\/\\]/,"")
 	  end
-	  
+
     def getPlainBuildDir
-      ".build_"+@config["host_os"]
+      "build_"+@config["host_os"]
+    end
+
+    def self.rookeyWorkingDir
+      File.join(Dir.pwd,".rookey")
+    end
+
+    def self.rookeyTestDir
+      File.join(rookeyWorkingDir,"test")
     end
     
 	  def getBuildDir
-	    File.join(Dir.pwd,getPlainBuildDir)
+	    File.join(Compiler::rookeyWorkingDir,getPlainBuildDir)
 	  end
-    def Compiler.getDepsDir
-      File.join(Dir.pwd,".deps")
+    def self.getDepsDir
+      File.join(rookeyWorkingDir,"deps")
     end
         
     private

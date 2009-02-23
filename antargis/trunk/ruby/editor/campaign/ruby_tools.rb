@@ -22,6 +22,6 @@ class TrueClass
   end
 end
 end
-require "rookey/lib/tools.rb"
+require "rookey/tools.rb"
 
 require "./ruby_layouts.rb"

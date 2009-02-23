@@ -23,7 +23,6 @@ class RKSingleton<Single>;
 int main(int argc,char *argv[])
 {
     assert(Single::getInstance()->bla()==1);
-    std::cout<<Single::getInstance()->bla()<<std::endl;
 
     return 0;
 }

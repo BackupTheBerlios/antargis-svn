@@ -17,12 +17,13 @@ end
 module Rookey
   
   
-  CONFIG_FILENAME="config_cache.rb"
+  CONFIG_FILENAME=File.join(Compiler.rookeyWorkingDir,"config_cache.rb")
   @@configured=[]
   
   # stores a dumpable ruby-object *what* into a file named *filename*
   def Rookey.hibe(what,filename)
     content=Marshal.dump(what).gsub("\"","\\\"")
+    mkdir(File.split(filename)[0])
     File.open(filename,"w") do |f|
       f.puts <<EOT
 module Rookey
@@ -71,7 +72,8 @@ EOT
       includes=includes.map{|i|"#include <#{i}>"}.join("\n")
       source="#{includes}\nextern \"C\" void #{funcname}();int main(int argc,char*argv[]){return 0;}"
       pp source
-      testSource="test.c"
+      Rookey::mkdir(Compiler.rookeyTestDir)
+      testSource=File.join(Compiler.rookeyTestDir,"test.c")
       fd=File.open(testSource,"w")
       fd.puts source
       fd.close
@@ -79,7 +81,7 @@ EOT
       target=compiler.makeObject(testSource)
       compiler.compile(target,testSource)
       libadd="-l#{lib}"
-      exeName=compiler.exeName("test")
+      exeName=File.join(Compiler.rookeyTestDir,compiler.exeName("test"))
       begin
         compiler.linkEXE(exeName,[target,libadd])
         `#{exeName}`
@@ -87,10 +89,13 @@ EOT
           config.add("LDFLAGS",libadd)
         end
       rescue RuntimeError => e
+        log e,e.backtrace
         return false
       end
       true
     end
+
+
     private
     def getPath
       # add paths in externals/build/*/bin
@@ -116,10 +121,15 @@ EOT
   }
   
   def Rookey.log(*s)
-    @@logFile||=File.open("rookey.log","w")
+    Rookey.mkdir(Compiler::rookeyWorkingDir)
+    @@logFile||=File.open(File.join(Compiler::rookeyWorkingDir,"rookey.log"),"w")
     @@logFile.puts(*s)
   end
-  
+
+  CLEAN << File.join(Compiler::rookeyWorkingDir,"rookey.log")
+  CLEAN += ["test.c","test.o","test","test.exe"].map{|f|File.join(Compiler.rookeyWorkingDir,"test",f)}
+  pp CLEAN
+
  
   def Rookey.getDescendantsOfClass(p)
     c=[]
@@ -148,8 +158,9 @@ EOT
 		          c.new.run(config)
 		          log config.inspect
               @@configured << c
-            rescue
+            rescue Object=>e
               log "Configuration of #{c} failed !"
+              log e,e.backtrace
             end
 		        ok+=c.provides
 		        ok.uniq!

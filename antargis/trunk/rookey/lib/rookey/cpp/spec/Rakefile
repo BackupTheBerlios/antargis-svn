@@ -2,7 +2,7 @@ require 'rookey.rb'
 
 tests=Dir["*_spec.cc"]
 
-baseFiles=["../rk_singleton.cc"]
+baseFiles=["../rk_singleton.cc","../rk_logging.cc"]
 
 test_exes=tests.map{|test|
   name=test.sub(/_spec.cc/,"")
@@ -12,9 +12,12 @@ test_exes=tests.map{|test|
 }
 
 task :runTests=>test_exes do
-  pp test_exes
-
+  test_exes.each{|exe|
+    sh "./"+exe
+  }
 end
+
+CLEAN << "rk_log.txt"
 
 
 task :default=>:runTests do

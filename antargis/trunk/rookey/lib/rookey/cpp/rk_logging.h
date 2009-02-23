@@ -10,16 +10,24 @@
 
 #include "rk_singleton.h"
 
+#include <fstream>
+
 class RKLogging:public RKSingleton<RKLogging>
 {
 public:
     virtual ~RKLogging();
 
     void log(const std::string &s);
+
+    std::string getLog();
+    void clear();
 protected:
     RKLogging();
 
 private:
+    std::ofstream output;
+    friend class RKSingleton<RKLogging>;
+
 };
 
 

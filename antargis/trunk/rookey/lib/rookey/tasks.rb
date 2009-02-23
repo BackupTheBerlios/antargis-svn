@@ -185,7 +185,7 @@ module Rookey
     swigInterfaces=libs.map{|f|f.sub(/\.[a-zA-Z]+$/,".i")}
     swigInterfaces=files.select{|f|f=~/i$/}
     swigInterface = Rookey::swig_interface(name=>headerFiles+swigInterfaces,:initializers=>inits)
-    swigTarget = Rookey::swig({File.join(compiler.getPlainBuildDir,name+"_swig.cc")=>swigInterface},config)
+    swigTarget = Rookey::swig({File.join(compiler.getBuildDir,name+"_swig.cc")=>swigInterface},config)
     
     
     targets = Rookey::compile(cppFiles+[swigTarget],config)

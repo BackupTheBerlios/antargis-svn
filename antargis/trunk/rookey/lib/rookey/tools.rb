@@ -38,18 +38,18 @@ module Rookey
 	end
 end
 
-
-alias :requireRookeyOld :require
-
-def require(file)
-  if file[0..0]=="."
-    rel=caller[0].gsub(/:[0-9]+/,"")
-    rel=File.expand_path(rel)
-    dir=File.split(rel)[0]
-    file=File.join(dir,file)
-    #pp file
+unless methods.member?("requireRookeyOld")
+  alias :requireRookeyOld :require
+  def require(file)
+    if file[0..0]=="."
+      rel=caller[0].gsub(/:[0-9]+/,"")
+      rel=File.expand_path(rel)
+      dir=File.split(rel)[0]
+      file=File.join(dir,file)
+      #pp file
+    end
+    requireRookeyOld(file)
   end
-  requireRookeyOld(file)
 end
 def requireRelative(f)
   require f
