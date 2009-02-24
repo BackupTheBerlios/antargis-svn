@@ -24,12 +24,10 @@
 #define AG_SOUND_H
 
 #include <string>
-#include <ag_widget.h>
-#include <ag_surface.h> // for decryptor
+#include "ag_messageobject.h"
+#include "ag_decryptor.h" // for decryptor
 
-// use widget, though this isn't one, because it provides useable functions
 class AGEXPORT AGSound:public AGMessageObject
-// #Widget
 {
  public:
   AGSound(); // NEVER use this! - it's only provided due to swig

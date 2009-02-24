@@ -35,6 +35,7 @@
 #include "ag_gltexture.h"
 #include "rk_exception.h"
 #include <ag_plugin.h>
+#include "ag_decryptor.h"
 
 class AGColor;
 class AGSurface;
@@ -60,22 +61,6 @@ struct AGEXPORT AGInternalSurface
 };
 
 
-/**
-   AGDecryptor provides functionaliy for DRM-plugged images and music-files.
-   You have to derive from this class and give an instance when loading a surface.
-   When you have done so saving is disabled afterwards.
- */
-class AGEXPORT AGDecryptor
-{
- public:
-  virtual ~AGDecryptor()
-    {
-    }
-  virtual std::string decrypt(const std::string &s,const std::string &n)
-    {
-      return s;
-    }
-};
 
 class AGSurfaceEmptyException:public AGException
 {
