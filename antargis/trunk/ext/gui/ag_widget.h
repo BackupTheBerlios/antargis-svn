@@ -71,7 +71,7 @@ class AGApplication;
    \ingroup widgets
 
    AGWidget is the base class for all widgets. It manages the hierarchy and memory of the widgets.
-   You should never delete an AGWidget for yourself if you don't know exactly what you're doing.
+   You should never deletee an AGWidget for yourself if you don't know exactly what you're doing.
    The widgets get deleted by their parents
  */
 

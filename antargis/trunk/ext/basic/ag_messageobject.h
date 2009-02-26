@@ -55,7 +55,7 @@ class AGSignal;
 
 /** AGEvent is the typical event which is passed when the user does anything.
     You can however derive from it and pass it through a signal.
-    But you shouldn't delete it for yourself.
+    But you shouldn't delet it for yourself.
  */
 class AGEXPORT AGEvent:public AGRubyObject
 {

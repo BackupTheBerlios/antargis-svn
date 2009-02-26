@@ -343,7 +343,8 @@ public:
       if(pNode.get("y").length())
         r.setY(pNode.get("y").toFloat());
 
-#warning "add subsurfaces"
+
+      // FIXME: add subsurfaces
 
 
       AGImage *w;

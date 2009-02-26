@@ -37,9 +37,9 @@ mMousePosition(0),mRelMousePosition(0)
 AGEvent::~AGEvent() throw()
   {
     if(mMousePosition)
-      delete mMousePosition;
+      checkedDelete(mMousePosition);
     if(mRelMousePosition)
-      delete mRelMousePosition;
+      checkedDelete(mRelMousePosition);
   }
 
 bool AGEvent::isMouseEvent() const

@@ -141,7 +141,7 @@ void closeSoundEngine()
           }
         //FIXME: readd this
         Mix_CloseAudio();
-        delete mSoundMutex;
+        checkedDelete(mSoundMutex);
       }
   }
 

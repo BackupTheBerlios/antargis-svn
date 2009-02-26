@@ -110,7 +110,7 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
     assertGL;
 
     if(buffer)
-      delete [] buffer;
+        checkedDeleteArray(buffer);
 
     assertGL;
     gUsedTexMemory+=w*h*4;

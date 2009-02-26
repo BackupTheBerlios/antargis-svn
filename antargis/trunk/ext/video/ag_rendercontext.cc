@@ -77,7 +77,7 @@ AGRenderContext &AGRenderContext::operator=(const AGRenderContext &c)
 
 AGRenderContext::~AGRenderContext()
   {
-    delete mColor;
+    checkedDelete(mColor);
     getSurfaceManager()->deregisterMe(this);
   }
 
@@ -359,12 +359,12 @@ void AGRenderContext::end()
 
 void AGRenderContext::setColor(const AGVector4 &pColor)
   {
-    delete mColor;
+    checkedDelete(mColor);
     mColor=new AGVector4(pColor);
   }
 void AGRenderContext::setColor(const AGColor &pColor)
   {
-    delete mColor;
+    checkedDelete(mColor);
     float f=1.0/255.0f;
     mColor=new AGVector4(pColor.r*f,
         pColor.g*f,

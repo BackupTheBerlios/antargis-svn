@@ -86,7 +86,7 @@ AntEntity::~AntEntity() throw()
     for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
       saveDelete(*i);
     mMeshes.clear();
-    delete mJob; // checked - no agrubyobject
+    checkedDelete(mJob);
     removeOldJobs();
   }
 
@@ -254,8 +254,6 @@ void AntEntity::setJob(Job *pJob)
               }
             else
               {
-                // FIXME: Priorities are ignored for now
-                //        throw int(); // FIXME: delete this, it's a test if priorities get handled correctly
                 mJobFinished.push_back(mJob);
               }
           }
@@ -292,7 +290,7 @@ void AntEntity::removeOldJobs()
   {
     std::list<Job*>::iterator i=mJobFinished.begin();
     for(;i!=mJobFinished.end();i++)
-      delete *i; // checked - no agrubyobject
+      checkedDelete(*i);
     mJobFinished.clear();
   }
 

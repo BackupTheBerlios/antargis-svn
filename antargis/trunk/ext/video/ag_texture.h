@@ -38,7 +38,9 @@ class AGEXPORT AGTexture:public AGPaintTarget
   AGTexture(int W,int H);
   ~AGTexture() throw();
 
+#ifndef SWIG
   AGTexture &operator=(const AGTexture &t);
+#endif
 
   AGTexture copy() const; // returns a real copy
 

@@ -22,6 +22,7 @@
 #include "ag_fs.h"
 
 #include "rk_debug.h"
+#include "rk_rubyobj.h"
 
 #include "ag_profiler.h"
 
@@ -58,7 +59,7 @@ Node::~Node()
   {
     NodeVector::iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
-      delete *i;
+      checkedDelete(*i);
     mNodes.clear();
   }
 
@@ -354,7 +355,7 @@ Document::Document(const AGString &pFilename)
 
 Document::~Document()
   {
-    delete mRoot;
+    checkedDelete(mRoot);
   }
 
 bool Document::parseFile(const AGString &filename)

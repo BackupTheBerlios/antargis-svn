@@ -1,6 +1,7 @@
 #include "ag_config.h"
 #include "ag_xml.h"
 #include "ag_fs.h"
+#include "rk_rubyobj.h"
 
 // TODO: AGConfig should switch to a ruby-based configuration (maybe YAML)
 // TODO: commenting should be possible !! (no overwriting)
@@ -97,7 +98,7 @@ AGConfig *getConfig()
 
 void updateConfig()
   {
-    delete gConfig;
+    checkedDelete(gConfig);
     gConfig=0;
     //  getConfig();
   }

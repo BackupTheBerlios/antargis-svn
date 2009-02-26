@@ -28,6 +28,7 @@
 #include <ag_texture.h>
 #include <math.h>
 #include <ag_geometry.h>
+#include "ag_video.h"
 
 #include <stdexcept>
 

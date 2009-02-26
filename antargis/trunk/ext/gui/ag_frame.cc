@@ -20,8 +20,8 @@ mWidth(pBorder.getWidth()),mWidthH(pBorder.getWidth()),mBorder(new AGBorder(pBor
 
 AGFrame::~AGFrame() throw()
   {
-    delete mBorder;
-    delete mBg;
+    checkedDelete(mBorder);
+    checkedDelete(mBg);
   }
 
 AGRect2 AGFrame::getClientRect() const

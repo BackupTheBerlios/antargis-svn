@@ -24,6 +24,8 @@
 #include <rk_base.h>
 #include <stdexcept>
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 class AGEXPORT AGException:public std::exception
 {
 public:

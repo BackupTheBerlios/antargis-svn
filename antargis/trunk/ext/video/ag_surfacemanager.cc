@@ -47,11 +47,11 @@ AGSurfaceManager::~AGSurfaceManager()
     for(std::set<AGInternalSurface*>::iterator i=mSDLSurfaces.begin();i!=mSDLSurfaces.end();++i)
       {
         AGFreeSurface((*i)->surface);
-        delete *i; // checked - no agrubyobject
+        checkedDelete(*i);
       }
     for(std::set<AGGLTexture*>::iterator i=mGLTextures.begin();i!=mGLTextures.end();++i)
       {
-        delete *i; // checked - no agrubyobject
+        checkedDelete(*i);
       }
 
     mSurfaceManagerDeleted=true;
@@ -216,7 +216,7 @@ void AGSurfaceManager::cleanup(bool force,bool nomem)
             std::map<AGGLTexture*,AGInternalSurface*>::iterator l=smap.find(*i);
             if(l!=smap.end())
               l->second->glTexture=0;
-            delete *i;
+            checkedDelete(*i);
             i=gls.erase(i);
             texFreed++;
           }

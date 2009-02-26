@@ -48,7 +48,7 @@ class AGEXPORT AGInstance:public AGInstanceBase
     }
   virtual void kill()
   {
-    delete instance;
+    checkedDelete(instance);
   }
 
   virtual void*ptr() const

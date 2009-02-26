@@ -1,4 +1,6 @@
 require 'pp'
+$:<<File.split(File.split(__FILE__)[0])[0]
+pp $:
 
 class Array
   
@@ -38,7 +40,8 @@ module Rookey
 	end
 end
 
-unless methods.member?("requireRookeyOld")
+unless eval("$require_exchanged")
+  $require_exchanged=true
   alias :requireRookeyOld :require
   def require(file)
     if file[0..0]=="."

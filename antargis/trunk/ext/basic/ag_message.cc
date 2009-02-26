@@ -107,7 +107,7 @@ AGMessage::AGMessage(const AGMessageSource &pSource,AGMessageData *pData):mSourc
 
 AGMessage::~AGMessage()
   {
-    delete mData;
+    checkedDelete(mData);
   }
 
 const AGMessageSource &AGMessage::getSource() const
@@ -143,7 +143,7 @@ void AGMessageQueue::distconnect(const AGMessageSource &pSource,
 
 /**
  * pMessage must be created outside of send, but its ownage
- * is transfered to AGMessageQueue. AGMessageQueue will delete it,
+ * is transfered to AGMessageQueue. AGMessageQueue will remove it,
  * when it's ok.
  */
 void AGMessageQueue::send(AGMessage *pMessage)

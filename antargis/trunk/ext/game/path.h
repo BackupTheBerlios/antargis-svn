@@ -91,6 +91,7 @@ class AGEXPORT SimpleGraph:public AGRubyObject
   typedef std::list<Edge*> Edges;
   typedef std::list<Node*> Nodes;
 
+#ifndef SWIG
   class NodePtrCompare
   {
   public:
@@ -156,7 +157,7 @@ class AGEXPORT SimpleGraph:public AGRubyObject
       return a->w0+a->w1;
     }
   };
-
+#endif
   SimpleGraph();
   SimpleGraph(const SimpleGraph &g);
   SimpleGraph(BinaryIn &pIn);
@@ -256,6 +257,8 @@ class AGEXPORT Heuristic
   float distance(const AGVector2&from);
 };
 
+#ifndef  SWIG
+
 struct AGEXPORT Path:public std::list<SimpleGraph::Node*>
 {
   float weight;
@@ -269,7 +272,7 @@ struct AGEXPORT Path:public std::list<SimpleGraph::Node*>
   void paint(const AGRect2 &r,AGPaintTarget &t,float scale);
   
 };
-
+#endif
 
 class AGEXPORT PathDebugging
 {

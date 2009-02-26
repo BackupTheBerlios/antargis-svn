@@ -18,8 +18,10 @@ class AGEXPORT AGMatrixN
   void set(size_t x,size_t y,float v);
   float get(size_t x,size_t y) const;
 
+#ifndef SWIG
   AGMatrixN &operator+=(const AGMatrixN &p);
   AGMatrixN &operator*=(const AGMatrixN &p);
+#endif
   AGMatrixN operator*(const AGMatrixN &p) const;
   AGMatrixN operator*(float f) const;
 

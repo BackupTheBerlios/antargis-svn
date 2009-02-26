@@ -83,7 +83,9 @@ class AGEXPORT AGFont
   bool embossed;
   bool inset;
 
+#ifndef SWIG
   friend bool operator<(const AGFont&f1,const AGFont &f2);
+#endif
 };
 
 AGEXPORT bool operator<(const AGFont&f1,const AGFont &f2);

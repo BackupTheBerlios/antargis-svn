@@ -26,6 +26,7 @@
 #include "ag_image.h"
 #include "ag_border.h"
 #include "ag_glscreen.h"
+#include "ag_video.h"
 
 using namespace std;
 

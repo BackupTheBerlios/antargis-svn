@@ -456,7 +456,6 @@ void SimpleGraph::removeEdge(Edge *e)
     e->b->edges.remove(e);
     //  cdebug("3");
 
-    //  delete e;
   }
 
 void SimpleGraph::removeNode(Node *n)
@@ -471,9 +470,9 @@ SimpleGraph::~SimpleGraph() throw()
   {
     CTRACE;
     for(NodeSet::iterator i=mNodes.begin();i!=mNodes.end();i++)
-      delete *i;
+      checkedDelete(*i);
     for(EdgeSet::iterator i=mEdges.begin();i!=mEdges.end();i++)
-      delete *i;
+      checkedDelete(*i);
   }
 
 SimpleGraph::Node *SimpleGraph::findNearest(const AGVector2 &p)
@@ -809,7 +808,7 @@ HeuristicFunction *computeHeuristic(SimpleGraph *g)
 
 
 
-    //?????????????????ß
+    //?????????????????ï¿½
 
     for(SimpleGraph::NodeSet::iterator i=g->mNodes.begin();i!=g->mNodes.end();i++)
       //for(SimpleGraph::NodeSet::iterator i=testSet.begin();i!=testSet.end();i++)

@@ -36,7 +36,7 @@ void newInstanceKiller()
 void deleteInstanceKiller()
   {
     assert(mInstanceKiller);
-    delete mInstanceKiller; // checked - no agrubyobject
+    checkedDelete(mInstanceKiller);
   }
 
 AGInstanceKiller *getInstanceKiller()
@@ -66,7 +66,7 @@ AGInstanceKiller::~AGInstanceKiller()
         if(rubyObject)
           saveDelete(rubyObject);
         else
-          delete *i; // checked - no agrubyobject
+          checkedDelete(*i);
       }
 
   }

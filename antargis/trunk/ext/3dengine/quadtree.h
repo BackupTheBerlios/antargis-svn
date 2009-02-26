@@ -35,7 +35,7 @@
  * any more ???
    The Rectangles are defined with AGRect2.
 
-   QuadTree doesn't own objects - you have to delete them yourself
+   QuadTree doesn't own objects - you have to deleete them yourself
 
  */
 template<class T>
@@ -55,7 +55,7 @@ class QuadTree
     ~Node()
       {
         for(typename std::list<Node*>::iterator i=children.begin();i!=children.end();++i)
-          delete *i;
+          checkedDelete(*i);
       }
 
     size_t size() const
@@ -107,7 +107,7 @@ class QuadTree
         for(;i!=children.end();i++)
           {
             (*i)->clear();
-            delete *i;
+            checkedDelete(*i);
           }
         children.clear();
 
@@ -171,7 +171,7 @@ public:
     }
   ~QuadTree()
     {
-      delete root;
+      checkedDelete(root);
     }
 
   /**

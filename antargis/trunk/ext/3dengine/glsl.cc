@@ -117,7 +117,7 @@ AntShaderProgram::~AntShaderProgram()
   {
     takeDown();
 
-    delete [] matrixBuf; // checked - no agrubyobject
+    checkedDeleteArray(matrixBuf);
   }
 
 void AntShaderProgram::onScreenUp()

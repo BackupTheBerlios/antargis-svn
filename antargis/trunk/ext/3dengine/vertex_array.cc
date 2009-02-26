@@ -548,13 +548,13 @@ VertexArrayShader::~VertexArrayShader()
     for(std::map<std::string,std::vector<float>*>::iterator i=as.begin();i!=as.end();++i)
       {
         if(i->second)
-          delete i->second;
+          checkedDelete(i->second);
       }
 
     for(std::map<std::string,std::vector<Uint16>*>::iterator i=elementAs.begin();i!=elementAs.end();++i)
       {
         if(i->second)
-          delete i->second;
+          checkedDelete(i->second);
       }
 
   }

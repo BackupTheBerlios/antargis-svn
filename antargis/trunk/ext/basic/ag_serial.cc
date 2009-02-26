@@ -1,6 +1,7 @@
 #include "ag_serial.h"
 #include <iostream>
 #include <rk_debug.h>
+#include "rk_rubyobj.h"
 
 // INTEL is little endian
 
@@ -111,7 +112,7 @@ BinaryIn &BinaryIn::operator>>(std::string &f)
 
 
     f=std::string(s,l);
-    delete s; // checked - no agrubyobject
+    checkedDelete(s); // checked - no agrubyobject
 
     return *this;
   }

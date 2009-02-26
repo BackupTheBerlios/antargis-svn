@@ -12,211 +12,188 @@
 #endif
 #include <ruby.h>
 
-bool mRubyQuitting=false;
+bool mRubyQuitting = false;
+bool mRubyObjectsExistant = false;
+
+class RubyObjects : public std::set<AGRubyObject*> {
+public:
+
+  RubyObjects() {
+    mRubyObjectsExistant = true;
+  }
+
+  virtual ~RubyObjects() {
+    mRubyObjectsExistant = false;
+  }
+};
 
 // this set keeps track of all valid instances of AGRubyObject
-std::set<AGRubyObject*> mRubyObjects;
+RubyObjects mRubyObjects;
 std::set<AGRubyObject*> mRemovedRubyObjects;
 
-void setQuitting()
-  {
-    mRubyQuitting=true;
-  }
+void setQuitting() {
+  mRubyQuitting = true;
+}
 
 // swig-function for handling "tracked" objects
 // BEWARE: this does not support multiple libraries yet (FIXME)
 VALUE convertCpp2Ruby(AGRubyObject *cObject);
 
-AGEXPORT void *getAddressOfRubyObject(AGRubyObject *o)
-  {
-    return o;
-  }
+AGEXPORT void *getAddressOfRubyObject(AGRubyObject *o) {
+  return o;
+}
 
-AGEXPORT bool rubyObjectExists(void *po)
-  {
-    VALUE v=convertCpp2Ruby((AGRubyObject*)po);
-    return(v!=Qnil);
-  }
+AGEXPORT bool rubyObjectExists(void *po) {
+  VALUE v = convertCpp2Ruby((AGRubyObject*) po);
+  return (v != Qnil);
+}
 
-AGRubyObject::AGRubyObject() throw()
-  {
-    //std::cerr<<"AGRubyObject::new:"<<this<<std::endl;
-    assert(mRubyObjects.find(this)==mRubyObjects.end());
-    mRubyObjects.insert(this);
-    size_t oSize=mRemovedRubyObjects.size();
+AGRubyObject::AGRubyObject() throw () {
+  //std::cerr<<"AGRubyObject::new:"<<this<<std::endl;
+  assert(mRubyObjects.find(this) == mRubyObjects.end());
+  mRubyObjects.insert(this);
+  size_t oSize = mRemovedRubyObjects.size();
 
-    mRemovedRubyObjects.erase(this);
-    if(oSize!=mRemovedRubyObjects.size())
-      std::cerr<<"Collision - removed rubyobject's address is overwritten!"<<std::endl;
+  mRemovedRubyObjects.erase(this);
+  if (oSize != mRemovedRubyObjects.size())
+    std::cerr << "Collision - removed rubyobject's address is overwritten!" << std::endl;
 
-    std::cerr<<"current ruby#:"<<mRubyObjects.size()<<" removed:"<<mRemovedRubyObjects.size()<<std::endl;
-  }
-AGRubyObject::~AGRubyObject() throw()
-  {
-    assert(mRubyObjects.find(this)!=mRubyObjects.end());
-    assert(mRemovedRubyObjects.find(this)==mRemovedRubyObjects.end());
-    //std::cerr<<"AGRubyObject::Removed:"<<this<<std::endl;
-    for(std::set<AGBaseObject*>::iterator i=mReferences.begin();i!=mReferences.end();i++)
-      (*i)->baseClear();
-    mRubyObjects.erase(this);
-    mRemovedRubyObjects.insert(this);
-  }
+  std::cerr << "current ruby#:" << mRubyObjects.size() << " removed:" << mRemovedRubyObjects.size() << std::endl;
+}
+
+AGRubyObject::~AGRubyObject() throw () {
+  assert(mRubyObjects.find(this) != mRubyObjects.end());
+  assert(mRemovedRubyObjects.find(this) == mRemovedRubyObjects.end());
+  //std::cerr<<"AGRubyObject::Removed:"<<this<<std::endl;
+  for (std::set<AGBaseObject*>::iterator i = mReferences.begin(); i != mReferences.end(); i++)
+    (*i)->baseClear();
+  mRubyObjects.erase(this);
+  mRemovedRubyObjects.insert(this);
+}
 
 
 /// override this function to mark your children
-void AGRubyObject::mark() throw()
-  {
-  }
+
+void AGRubyObject::mark() throw () {
+}
 
 
 // call this function with any object you want to mark.
 // recursive should be set true only in one direction, otherwise you'll generate endless-loops (!!)
-void AGRubyObject::markObject(AGRubyObject *o, bool recursive) throw()
-  {
-    //std::cerr<<"markObject:"<<o<<std::endl;
-    // o must be a valid ruby-object
-    assert(mRubyObjects.find(o)!=mRubyObjects.end());
 
-    // look up, if it's registered within ruby
-    VALUE v=convertCpp2Ruby(o);
-    if(v!=Qnil)
-      {
-        assert(DATA_PTR(v)==o);
-        //std::cout<<"V:"<<v<<std::endl;
-        // then mark it
-        rb_gc_mark(v);
+void AGRubyObject::markObject(AGRubyObject *o, bool recursive) throw () {
+  //std::cerr<<"markObject:"<<o<<std::endl;
+  // o must be a valid ruby-object
+  assert(mRubyObjects.find(o) != mRubyObjects.end());
 
-      }
+  // look up, if it's registered within ruby
+  VALUE v = convertCpp2Ruby(o);
+  if (v != Qnil) {
+    assert(DATA_PTR(v) == o);
+    //std::cout<<"V:"<<v<<std::endl;
+    // then mark it
+    rb_gc_mark(v);
 
-    assert(o);
-    // recurse through hierarchy
-    if(recursive)
-      o->mark(); // call this directly
   }
 
-void AGRubyObject::clear() throw()
-  {
-  }
+  assert(o);
+  // recurse through hierarchy
+  if (recursive)
+    o->mark(); // call this directly
+}
 
-void AGRubyObject::addRef(AGBaseObject *o)
-  {
-    mReferences.insert(o);
-  }
+void AGRubyObject::clear() throw () {
+}
 
-void AGRubyObject::deleteRef(AGBaseObject *o)
-  {
-    mReferences.erase(o);
-  }
+void AGRubyObject::addRef(AGBaseObject *o) {
+  mReferences.insert(o);
+}
+
+void AGRubyObject::deleteRef(AGBaseObject *o) {
+  mReferences.erase(o);
+}
 
 
 
 /// this is the marking function, that gets called by ruby
 /// it handles all the AGRubyObjects
-void general_markfunc(void *ptr)
-  {
-    if(!ptr)
-      {
-        std::cerr<<("WARNING: a ptr==0 was given in general_markfunc!")<<std::endl;
-        return; // ignore this !
-      }
-    assert(ptr);
-    // the given object must be a AGRubyObject and it must be valid (it's in mRubyObjects)
-    AGRubyObject *o=static_cast<AGRubyObject*>(ptr);
-    if(mRubyObjects.find(o)==mRubyObjects.end())
-      std::cerr<<"OLD RUBYOBJ:"<<(mRemovedRubyObjects.find(o)!=mRemovedRubyObjects.end())<<":"<<o<<std::endl;
-    assert(mRubyObjects.find(o)!=mRubyObjects.end());
+
+void general_markfunc(void *ptr) {
+  if (!ptr) {
+    std::cerr << ("WARNING: a ptr==0 was given in general_markfunc!") << std::endl;
+    return; // ignore this !
+  }
+  assert(ptr);
+  // the given object must be a AGRubyObject and it must be valid (it's in mRubyObjects)
+  AGRubyObject *o = static_cast<AGRubyObject*> (ptr);
+  if (mRubyObjects.find(o) == mRubyObjects.end())
+    std::cerr << "OLD RUBYOBJ:" << (mRemovedRubyObjects.find(o) != mRemovedRubyObjects.end()) << ":" << o << std::endl;
+  assert(mRubyObjects.find(o) != mRubyObjects.end());
 
 #ifdef GCDEBUG
-    printf("mark: 0x%lx\n",o->mRUBY);
+  printf("mark: 0x%lx\n", o->mRUBY);
 #endif
 
-    assert(o);
-    o->mark();
-  }
-
-/** checkedDelete deletes o, but checks before if o is a AGRubyObject
- **/
-
-bool checkedDelete(void *o)
-{
-  AGRubyObject *ro=(AGRubyObject*)o;
-  if(mRubyObjects.find(ro)==mRubyObjects.end())
-    {
-    // not found - it's safe to delete it
-    delete o;
-    return true;
-  }
-  std::cerr<<"Possible error in checkedDelete(.)"<<std::endl;
-
-  return false;
+  assert(o);
+  o->mark();
 }
 
-/** checkedDelete deletes o, but checks before if o is a AGRubyObject
- **/
+IsRubyObject isRubyObject(void *o) {
+  AGRubyObject *ro = (AGRubyObject*) o;
 
-bool checkedDeleteArray(void *o)
-{
-  AGRubyObject *ro=(AGRubyObject*)o;
-  if(mRubyObjects.find(ro)==mRubyObjects.end())
-    {
-    // not found - it's safe to delete it
-    delete [] o;
-    return true;
+  if (!mRubyObjectsExistant) {
+    std::cerr << "Could not check, because rubyObjects was discarded" << std::endl;
+    return RUBY_OBJECT_UNKNOWN;
   }
-  std::cerr<<"Possible error in checkedDeleteArray(.)"<<std::endl;
 
-  return false;
+  if (mRubyObjects.find(ro) == mRubyObjects.end())
+    return RUBY_OBJECT_NO;
+  else
+    return RUBY_OBJECT_YES;
+
 }
-
 
 /**
    saveDelete is used to delete AGRubyObjects savely.
  */
-bool saveDelete(AGRubyObject *o)
-  {
-    if(mRubyQuitting)
-      return false; // we are quitting - so memory is discarded anyway - hopefully ;-)
+bool saveDelete(AGRubyObject *o) {
+  if (mRubyQuitting)
+    return false; // we are quitting - so memory is discarded anyway - hopefully ;-)
 
-    // check, if this object is existant any longer
-    // in case we're quitting this the deletion order is not defined for ruby-objects !!
-    if(mRubyObjects.find(o)==mRubyObjects.end())
-      {
+  // check, if this object is existant any longer
+  // in case we're quitting this the deletion order is not defined for ruby-objects !!
+  if (mRubyObjects.find(o) == mRubyObjects.end()) {
 #ifdef GC_DEBUG
-        std::cerr<<"RubyObject "<<o<<" no longer existant - maybe we're quitting ?!"<<std::endl;
+    std::cerr << "RubyObject " << o << " no longer existant - maybe we're quitting ?!" << std::endl;
 #endif
-        return false;
-      }
-
-    assert(o);
-    // send object a message, that it will be deleted. This can help with detachin connections
-    // between objects.
-    o->clear();
-
-    VALUE v=convertCpp2Ruby(o);
-    if(v!=Qnil)
-      return false; // do not delete - it's under ruby's control!
-
-
-    delete o;
-    return true;
+    return false;
   }
 
+  assert(o);
+  // send object a message, that it will be deleted. This can help with detachin connections
+  // between objects.
+  o->clear();
+
+  VALUE v = convertCpp2Ruby(o);
+  if (v != Qnil)
+    return false; // do not delete - it's under ruby's control!
 
 
-AGBaseObject::AGBaseObject(AGRubyObject *p) throw()
-:mp(p)
-    {
-      if(p)
-        p->addRef(this);
-    }
+  delete o;
+  return true;
+}
 
-AGBaseObject::~AGBaseObject() throw()
-  {
-    if(mp)
-      mp->deleteRef(this);
-  }
+AGBaseObject::AGBaseObject(AGRubyObject *p) throw ()
+: mp(p) {
+  if (p)
+    p->addRef(this);
+}
 
-void AGBaseObject::baseClear() throw()
-  {
-    mp=0;
-  }
+AGBaseObject::~AGBaseObject() throw () {
+  if (mp)
+    mp->deleteRef(this);
+}
+
+void AGBaseObject::baseClear() throw () {
+  mp = 0;
+}

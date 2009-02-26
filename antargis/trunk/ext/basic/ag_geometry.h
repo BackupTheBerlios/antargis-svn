@@ -109,9 +109,11 @@ public:
     AGVector2 operator-() const;
     AGVector2 operator-(const AGVector2 &p) const;
     AGVector2 operator+(const AGVector2 &p) const;
+#ifndef SWIG
     AGVector2 & operator+=(const AGVector2 &p);
     AGVector2 & operator-=(const AGVector2 &p);
-
+#endif
+    
     float operator*(const AGVector2 &p) const;
     AGVector2 & operator*=(float f);
     AGVector2 & operator/=(float f);
@@ -133,7 +135,9 @@ public:
     %rename(__getitem__) operator[](int index) const;
 #endif
     float operator[](int index) const;
+#ifndef SWIG
     float &operator[](int index);
+#endif
 
     bool nonZero() const;
 
@@ -208,8 +212,13 @@ public:
 
     AGVector3 normal() const;
 
+#ifdef SWIG
+    %rename(__getitem__) operator[](int index) const;
+#endif
     float operator[](int index) const;
+#ifndef SWIG
     float &operator[](int index);
+#endif
 
     bool nonZero() const;
 
@@ -232,6 +241,7 @@ class AGEXPORT AGMatrix3 {
     float a[3][3];
 public:
 
+#ifndef SWIG
     struct Row {
         AGMatrix3 *matrix;
         int y;
@@ -244,7 +254,7 @@ public:
             return matrix->get(x, y);
         }
     };
-
+#endif
     AGMatrix3();
     AGMatrix3(const AGAngle &a); // rotate
     AGMatrix3(const AGVector3 &a); // transpose
@@ -264,6 +274,7 @@ public:
 
     AGMatrix3 inverted() const throw (GeometryException);
     AGMatrix3 transposed() const;
+
 
     Row operator[](size_t y);
     const Row operator[](size_t y) const;

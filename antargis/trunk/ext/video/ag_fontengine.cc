@@ -173,8 +173,8 @@ void border(AGSurface &s,AGColor bc)
 
         }
 
-    delete [] a; // checked - no agrubyobject
-    delete [] b; // checked - no agrubyobject
+    checkedDeleteArray(a);
+    checkedDeleteArray(b);
   }
 
 void embossSurface(AGSurface &s,float depth=1.0f)
@@ -266,8 +266,8 @@ void embossSurface(AGSurface &s,float depth=1.0f)
               s.putPixel(x,y,c);
             }
         }
-    delete [] a;
-    delete [] b;
+    checkedDeleteArray(a);
+    checkedDeleteArray(b);
 
     /*
   static int i=0;

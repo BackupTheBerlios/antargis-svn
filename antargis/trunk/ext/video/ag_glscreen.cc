@@ -272,7 +272,7 @@ AGSurface AGGLScreen::screenshotSurface(bool frontBuffer)
     }
 
     assertGL;
-    delete [] buffer;
+    checkedDeleteArray(buffer);
 
 
 

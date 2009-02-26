@@ -17,7 +17,7 @@ SceneBase::~SceneBase() throw()
     for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
       (*i)->resetScene(); 
 
-    delete mTree;
+    checkedDelete(mTree);
   }
 
 

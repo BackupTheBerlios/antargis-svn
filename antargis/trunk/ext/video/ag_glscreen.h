@@ -125,6 +125,4 @@ class AGEXPORT AGGLScreen:public AGScreen
   static std::set<AGGLObject*> msObjects;
 };
 
-AGEXPORT bool opengl();
-
 #endif

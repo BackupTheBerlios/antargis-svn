@@ -78,8 +78,9 @@ class AGEXPORT AGSurface:public AGPaintTarget
 
   AGSurface scale(int w,int h) const;
   AGSurface grayed() const;
-
+#ifndef SWIG
   AGSurface &operator=(const AGSurface &p);
+  #endif
   bool operator==(const AGSurface &p) const;
 
   virtual void blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor) throw(AGSurfaceEmptyException);
