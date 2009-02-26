@@ -40,27 +40,11 @@
 class AGColor;
 class AGSurface;
 class AGGLTexture;
+struct AGInternalSurface;
 
 AGEXPORT void beginRender();
 AGEXPORT void endRender();
 AGEXPORT bool isRendering();
-
-/**
-   AGInternalSurface links plain sdl-surfaces (in main-memory) and textures (both gl-textures and
-   sdl-screenlike-surfaces)
-*/
-struct AGEXPORT AGInternalSurface
-{
-  AGInternalSurface  *sdlTexture;
-  AGGLTexture *glTexture;
-  SDL_Surface *surface;
-  size_t version;
-
-  AGInternalSurface();
-  ~AGInternalSurface();
-};
-
-
 
 class AGSurfaceEmptyException:public AGException
 {

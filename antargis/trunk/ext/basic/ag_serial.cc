@@ -111,7 +111,7 @@ BinaryIn &BinaryIn::operator>>(std::string &f)
 
 
     f=std::string(s,l);
-    delete s;
+    delete s; // checked - no agrubyobject
 
     return *this;
   }

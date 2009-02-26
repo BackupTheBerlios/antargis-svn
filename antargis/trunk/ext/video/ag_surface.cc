@@ -31,6 +31,7 @@
 #include "ag_glscreen.h"
 #include "ag_sdlpainter.h"
 #include "ag_surfacemanager.h"
+#include "ag_surface_internal.h"
 
 #include <SDL_image.h>
 
@@ -105,24 +106,6 @@ AGInternalSurface *AGCreate32BitSurface(size_t width,size_t height)
 }
 
 
-
-///////////////////////////////////////////////////////////////////////
-// AGInternalSurface
-///////////////////////////////////////////////////////////////////////
-
-AGInternalSurface::AGInternalSurface()
-{
-  sdlTexture=0;
-  glTexture=0;
-  surface=0;
-  getSurfaceManager()->registerMe(this);
-  version=1;
-}
-
-AGInternalSurface::~AGInternalSurface()
-{
-  getSurfaceManager()->deregisterMe(this);
-}
 
 
 

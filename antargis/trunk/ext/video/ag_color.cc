@@ -21,6 +21,7 @@
 #include "ag_color.h"
 #include "ag_surface.h"
 #include "rk_tools.h"
+#include "ag_surface_internal.h"
 
 #include <sstream>
 

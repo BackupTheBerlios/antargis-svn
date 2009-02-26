@@ -1108,7 +1108,7 @@ void AGWidget::setCaching(bool pEnable)
     getConfig()->set("widgetTextureCache","true");
 
     mCaching=pEnable;
-    delete mCache;
+    saveDelete(mCache);
 
     mCache=0;
     mCacheTouched=false;

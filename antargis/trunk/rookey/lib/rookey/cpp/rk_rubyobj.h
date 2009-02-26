@@ -125,6 +125,8 @@ private:
 
 AGEXPORT void general_markfunc(void *ptr);
 AGEXPORT bool saveDelete(AGRubyObject *o);
+AGEXPORT bool checkedDelete(void *o);
+AGEXPORT bool checkedDeleteArray(void *o);
 
 AGEXPORT void *getAddressOfRubyObject(AGRubyObject *object);
 AGEXPORT bool rubyObjectExists(void *o);

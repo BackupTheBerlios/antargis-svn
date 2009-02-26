@@ -117,7 +117,7 @@ AntShaderProgram::~AntShaderProgram()
   {
     takeDown();
 
-    delete [] matrixBuf;
+    delete [] matrixBuf; // checked - no agrubyobject
   }
 
 void AntShaderProgram::onScreenUp()
@@ -161,8 +161,8 @@ void AntShaderProgram::takeDown()
     if(glslOk() && !hasQuit())
       glDeleteObjectARB(p);
     //  cdebug("name:"<<name);
-    delete vertex;
-    delete frag;
+    checkedDelete(vertex);
+    checkedDelete(frag); // checked - no agrubyobject
     locations.clear();
   }
 

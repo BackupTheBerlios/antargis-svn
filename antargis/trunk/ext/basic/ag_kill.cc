@@ -23,6 +23,7 @@
 
 #include "ag_kill.h"
 #include "rk_debug.h"
+#include "rk_rubyobj.h"
 
 AGInstanceKiller *mInstanceKiller=0;
 bool mIndirectInstance=false;
@@ -35,7 +36,7 @@ void newInstanceKiller()
 void deleteInstanceKiller()
   {
     assert(mInstanceKiller);
-    delete mInstanceKiller;
+    delete mInstanceKiller; // checked - no agrubyobject
   }
 
 AGInstanceKiller *getInstanceKiller()
@@ -60,7 +61,12 @@ AGInstanceKiller::~AGInstanceKiller()
     for(;i!=bs.end();i++)
       {
         (*i)->kill();
-        delete *i;
+        AGRubyObject *rubyObject=dynamic_cast<AGRubyObject*>(*i);
+
+        if(rubyObject)
+          saveDelete(rubyObject);
+        else
+          delete *i; // checked - no agrubyobject
       }
 
   }

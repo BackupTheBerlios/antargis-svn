@@ -374,5 +374,5 @@ void MeshData::makeInstances(const std::vector<AGMatrix4> &ts)
   {
     VertexArray *va=::makeInstances(mArray,ts);
     mArray=*va;
-    delete va;
+    delete va; // checked - no agrubyobject
   }

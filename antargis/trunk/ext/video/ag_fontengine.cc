@@ -25,6 +25,8 @@
 #include "ag_sgeexport.h"
 #include "ag_profiler.h"
 
+#include "ag_surface_internal.h"
+
 #include <SDL_ttf.h>
 
 #include <math.h>
@@ -171,8 +173,8 @@ void border(AGSurface &s,AGColor bc)
 
         }
 
-    delete [] a;
-    delete [] b;
+    delete [] a; // checked - no agrubyobject
+    delete [] b; // checked - no agrubyobject
   }
 
 void embossSurface(AGSurface &s,float depth=1.0f)
@@ -275,6 +277,7 @@ void embossSurface(AGSurface &s,float depth=1.0f)
   s.save(os.str());
      */
   }
+
 
 AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &pFont)
   {

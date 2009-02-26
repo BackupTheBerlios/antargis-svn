@@ -85,3 +85,13 @@ class Object
     end
   end
 end
+
+
+class File
+  def self.load(filename)
+    f=File.open(filename,"r")
+    c=f.read
+    f.close
+    c
+  end
+end

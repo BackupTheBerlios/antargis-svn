@@ -25,6 +25,8 @@
 #include "rk_debug.h"
 #include "ag_vdebug.h"
 
+#include "ag_surface_internal.h"
+
 
 //FIXME: this should be static
 size_t gUsedTexMemory=0;

@@ -31,6 +31,8 @@
 #include "ag_sdlpainter.h"
 #include "ag_video.h"
 
+#include "ag_surface_internal.h"
+
 #include <stdexcept>
 
 size_t nextpow2(size_t i)
@@ -141,7 +143,7 @@ AGTexture::~AGTexture() throw()
   {
     if(getSurfaceManager())
       getSurfaceManager()->deregisterMe(this);
-    delete mFBO;
+    delete mFBO; // checked - no agrubyobject
   }
 
 int AGTexture::width() const
@@ -174,7 +176,7 @@ bool AGTexture::hasTexture() const
 void AGTexture::clearTexture()
   {
     mTexture=0;
-    delete mFBO;
+    delete mFBO; // checked - no agrubyobject
     mFBO=0;
   }
 void AGTexture::clearTextureUsed()

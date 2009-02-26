@@ -51,7 +51,7 @@ Renderer::~Renderer()
     cdebug("gRenderer:"<<gRenderer);
     assert(gRenderer==this);
     gRenderer=0;
-    delete mFBO;
+    checkedDelete(mFBO); // checked - no agrubyobject
   }
 
 bool Renderer::canMultitexture()

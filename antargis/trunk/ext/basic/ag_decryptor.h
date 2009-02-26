@@ -6,7 +6,7 @@
  */
 
 #ifndef _AGDECRYPTOR_H
-#define	_AGDECRYPTOR_H
+#define _AGDECRYPTOR_H
 
 #include "rk_base.h"
 
@@ -19,15 +19,15 @@
  */
 class AGEXPORT AGDecryptor {
 public:
-    AGDecryptor();
-    AGDecryptor(const AGDecryptor& orig);
-    virtual ~AGDecryptor();
+  AGDecryptor();
+  AGDecryptor(const AGDecryptor& orig);
+  virtual ~AGDecryptor();
 
-    virtual std::string decrypt(const std::string &s, const std::string &n);
+  virtual std::string decrypt(const std::string &s, const std::string &n);
 
 private:
 
 };
 
-#endif	/* _AGDECRYPTOR_H */
+#endif /* _AGDECRYPTOR_H */
 

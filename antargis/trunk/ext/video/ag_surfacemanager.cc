@@ -28,6 +28,8 @@
 #include "ag_glscreen.h"
 #include "ag_profiler.h"
 
+#include "ag_surface_internal.h"
+
 #include <map>
 
 ////////////////////////////////////////////////////////////////////////
@@ -45,11 +47,11 @@ AGSurfaceManager::~AGSurfaceManager()
     for(std::set<AGInternalSurface*>::iterator i=mSDLSurfaces.begin();i!=mSDLSurfaces.end();++i)
       {
         AGFreeSurface((*i)->surface);
-        delete *i;
+        delete *i; // checked - no agrubyobject
       }
     for(std::set<AGGLTexture*>::iterator i=mGLTextures.begin();i!=mGLTextures.end();++i)
       {
-        delete *i;
+        delete *i; // checked - no agrubyobject
       }
 
     mSurfaceManagerDeleted=true;

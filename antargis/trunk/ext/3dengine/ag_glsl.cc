@@ -164,7 +164,7 @@ AGShaderProgram::~AGShaderProgram()
     if(glslOk() && !hasQuit())
       glDeleteObjectARB(p);
     cdebug("name:"<<name);
-    delete [] matrixBuf;
+    checkedDeletArray(matrixBuf); // checked - no agrubyobject
     cdebug("name:"<<name);
     assertGL;
 

@@ -153,12 +153,12 @@ void MiniMap::mapChangedP(bool forceFull=false)
             }
       }
 
-    delete p;
+    saveDelete(p);
     if(inmem)
       {
         //      mSurface.save("sicke.png");
         cdebug(mTexture);
-        delete mTexture;
+        saveDelete(mTexture);
         mTexture=new AGTexture(mSurface);
         cdebug(mTexture);
         CTRACE;

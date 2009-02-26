@@ -31,6 +31,8 @@
 
 #include "ag_sdlpainter.h"
 
+#include "ag_surface_internal.h"
+
 static bool gUseSDLclipping=true;
 
 SDL_Surface *AGCreate32BitSurface(size_t width,size_t height);
@@ -64,7 +66,7 @@ void AGSDLScreen::update(const std::list<AGRect2> &rs)
 
     SDL_UpdateRects(s,rs.size(),nrs);
 
-    delete [] nrs;
+    delete [] nrs; // checked - no agrubyobject
   }
 
 

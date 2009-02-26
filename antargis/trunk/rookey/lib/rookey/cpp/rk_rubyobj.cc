@@ -134,6 +134,40 @@ void general_markfunc(void *ptr)
     o->mark();
   }
 
+/** checkedDelete deletes o, but checks before if o is a AGRubyObject
+ **/
+
+bool checkedDelete(void *o)
+{
+  AGRubyObject *ro=(AGRubyObject*)o;
+  if(mRubyObjects.find(ro)==mRubyObjects.end())
+    {
+    // not found - it's safe to delete it
+    delete o;
+    return true;
+  }
+  std::cerr<<"Possible error in checkedDelete(.)"<<std::endl;
+
+  return false;
+}
+
+/** checkedDelete deletes o, but checks before if o is a AGRubyObject
+ **/
+
+bool checkedDeleteArray(void *o)
+{
+  AGRubyObject *ro=(AGRubyObject*)o;
+  if(mRubyObjects.find(ro)==mRubyObjects.end())
+    {
+    // not found - it's safe to delete it
+    delete [] o;
+    return true;
+  }
+  std::cerr<<"Possible error in checkedDeleteArray(.)"<<std::endl;
+
+  return false;
+}
+
 
 /**
    saveDelete is used to delete AGRubyObjects savely.

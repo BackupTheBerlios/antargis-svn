@@ -34,6 +34,8 @@
 #include "ag_sgeexport.h"
 #include "SDL_image.h"
 
+#include "ag_surface_internal.h"
+
 #include <ag_rendercontext.h>
 #include <SDL.h>
 
