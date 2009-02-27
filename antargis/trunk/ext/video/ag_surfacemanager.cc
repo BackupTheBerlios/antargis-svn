@@ -27,6 +27,7 @@
 #include "ag_config.h"
 #include "ag_glscreen.h"
 #include "ag_profiler.h"
+#include "ag_video.h"
 
 #include "ag_surface_internal.h"
 
