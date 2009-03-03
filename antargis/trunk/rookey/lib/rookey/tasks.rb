@@ -52,7 +52,7 @@ module Rookey
 	    interfaceBuilder=SwigInterfaceBuilder.new(file,target,classes,files,source.select{|f|f=~/i$/},inits,templates)
 	    interfaceBuilder.create(parser)
     end
-    CLEAN << file
+    ::CLEAN << file
     [file]
   end
   
@@ -76,7 +76,7 @@ module Rookey
 	  rule output=>Swig.getDeps(interface) do |t|
 	    swigCompiler.swig(t,interface)
 	  end
-	  CLEAN << output << output.gsub(/\.cc?/,".h")
+	  ::CLEAN << output << output.gsub(/\.cc?/,".h")
 	  getRookeyCPPSources+[output] #getAGRubyObjectSource
 	end
 
@@ -111,7 +111,7 @@ module Rookey
 	    end
 	  }
 	  targets=files.map{|file|compiler.makeObject(file)}
-	  CLEAN << targets << compiler.getBuildDir << Compiler.getDepsDir
+	  ::CLEAN << [targets, compiler.getBuildDir, Compiler.getDepsDir].flatten
 	  targets
 	end
 	
@@ -129,7 +129,7 @@ module Rookey
     task target=>files do |t|
       linker.linkDLL(t)
     end
-    CLEAN << target
+    ::CLEAN << target
     
     target
 	end
@@ -139,7 +139,7 @@ module Rookey
   def Rookey.link_exe(name,files,config=nil)
     files.flatten!
     if files.select{|file|file=~/swig_.*/}.length>0
-      ["rk_rubyobj.cc","rk_string.cc","rk_rtools.cc"].each{|f|
+      ["rk_rubyobj.cc","rk_string.cc","rk_rtools.cc","rk_logging.cc"].each{|f|
         files << compile(File.join(File.split(__FILE__)[0],"cpp",f),config)
       }
       files << compile(File.join(File.split(__FILE__)[0],"cpp","swig_dummy.cc"),config) if files.select{|f|f=~/swig/}.length==0
@@ -155,7 +155,7 @@ module Rookey
     task target=>files do |t|
       linker.linkEXE(t.name,t.prerequisites)
     end
-    CLEAN << target
+    ::CLEAN << target
     
     target    
   end 
@@ -165,7 +165,9 @@ module Rookey
   # * name is the name of the resulting extension
   # * files are the .h, .c and .cc (or .cpp) source-files 
   def Rookey.ruby_ext(name,files,inits=[],fallbackInterface=nil)
-    headerFiles=files.select{|f|f=~/h$/}
+    headerFiles=files.select{|f|f=~/h$/}+[File.expand_path("../cpp/rk_logging.h",__FILE__)]
+
+    
     libs=files.select{|f|f=~/so$/ or f=~/bundle/}
 
     cppFiles=files.select{|f|f=~/c$/}

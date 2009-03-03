@@ -11,44 +11,56 @@
 #include <string>
 #include <map>
 #include <typeinfo>
+#include <iostream>
 
 template<class Base>
 class RKSingleton;
 
-class RKSingletonBase
-{
+class RKSingletonBase {
 public:
 protected:
-    RKSingletonBase();
-    virtual ~RKSingletonBase()
-    {}
+  RKSingletonBase();
 
-    static std::map<std::string,RKSingletonBase*> mSingletons;
+  virtual ~RKSingletonBase() {
+  }
+
+  static std::map<std::string, RKSingletonBase*> mSingletons;
+
+  static bool allDestroyed();
 
 private:
-    static RKSingletonBase* getInstance(const std::string &pName);
+  static RKSingletonBase* getInstance(const std::string &pName);
+  void registerClass();
+  static void destroyAll();
 
-    template<class Base>
-    friend class RKSingleton;
+  template<class Base>
+  friend class RKSingleton;
+  friend void removeEverything();
+
 };
 
 template<class Base>
-class RKSingleton:public RKSingletonBase {
+class RKSingleton : public RKSingletonBase {
 public:
-    virtual ~RKSingleton()
-    {}
 
-    static Base *getInstance()
-    {
-        std::string name=typeid(Base).name();
-        Base *b=dynamic_cast<Base*>(RKSingletonBase::getInstance(name));
-        if(b==0)
-            b=new Base();
-        return b;
+  virtual ~RKSingleton() {
+  }
+
+  static Base *getInstance() {
+    if(allDestroyed())
+      return 0;
+    std::string name = typeid (Base).name();
+    Base *b = dynamic_cast<Base*> (RKSingletonBase::getInstance(name));
+    if (b == 0) {
+      b = new Base();
+      b->registerClass();
     }
+    return b;
+  }
 protected:
-    RKSingleton()
-            {}
+
+  RKSingleton() {
+  }
 
 };
 

@@ -46,6 +46,8 @@ public:
   AGString operator+(const char *s) const;
   AGString operator+(const std::string &s) const;
 
+  AGString operator*(size_t p) const;
+
   int toInt() const;
   long toLong() const;
   float toFloat() const;

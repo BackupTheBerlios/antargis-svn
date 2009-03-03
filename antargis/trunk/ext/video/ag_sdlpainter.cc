@@ -1,5 +1,5 @@
 #include "ag_sdlpainter.h"
-#include <math.h>
+#include <cmath>
 #include "ag_sgeexport.h"
 
 namespace AGSDLPainter

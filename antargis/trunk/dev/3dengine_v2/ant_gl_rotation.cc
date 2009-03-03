@@ -1,7 +1,7 @@
 #include "ant_gl_rotation.h"
 #include "ant_gl.h"
 #include "ag_debug.h"
-#include <math.h>
+#include <cmath>
 
 AntGLRotation::AntGLRotation(const AntQuaternion &pRotation)
   {

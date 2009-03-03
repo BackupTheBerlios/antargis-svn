@@ -27,7 +27,7 @@
 
 #include "SDL_image.h"
 #include "ag_sgeexport.h"
-#include <math.h>
+#include <cmath>
 
 #include "ag_sdlpainter.h"
 

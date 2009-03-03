@@ -1,6 +1,6 @@
 #include "ant_quaternion.h"
 
-#include <math.h>
+#include <cmath>
 
 // no rotation
 AntQuaternion::AntQuaternion()

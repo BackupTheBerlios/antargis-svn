@@ -26,7 +26,7 @@
 #include <ag_profiler.h>
 #include <ag_sdlsurface.h>
 #include <ag_texture.h>
-#include <math.h>
+#include <cmath>
 #include <ag_geometry.h>
 #include "ag_video.h"
 

@@ -50,9 +50,12 @@ PKG_VERSION="0.1"
 PKG_FILES=dir(".") do
   files "README","Rakefile"
   dirs("spec","lib","maintenance","examples") do
-    files("**/*")  end 
+    files("**/*")
+  end 
   dir("externals") do
-    files("ext_config.rb","tools.rb")  endend
+    files("ext_config.rb","tools.rb")
+  end
+end
 
 Rake::RDocTask.new do |rd|
 	 rd.main = "README"
@@ -109,3 +112,7 @@ CLEAN << Dir["docs/ruby"]
 CLEAN << Dir["pkg"]
 
 task :default=>:spec
+
+
+
+

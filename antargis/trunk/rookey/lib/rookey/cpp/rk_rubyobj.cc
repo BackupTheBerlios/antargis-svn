@@ -5,6 +5,7 @@
 #include <set>
 #include <map>
 #include <iostream>
+#include "rk_logging.h"
 
 
 #ifdef __WIN32__
@@ -56,9 +57,9 @@ AGRubyObject::AGRubyObject() throw () {
 
   mRemovedRubyObjects.erase(this);
   if (oSize != mRemovedRubyObjects.size())
-    std::cerr << "Collision - removed rubyobject's address is overwritten!" << std::endl;
+    logger::debug<< "Collision - removed rubyobject's address is overwritten!" << logger::endl;
 
-  std::cerr << "current ruby#:" << mRubyObjects.size() << " removed:" << mRemovedRubyObjects.size() << std::endl;
+  logger::debug << "current ruby#:" << mRubyObjects.size() << " removed:" << mRemovedRubyObjects.size() << logger::endl;
 }
 
 AGRubyObject::~AGRubyObject() throw () {
@@ -120,14 +121,14 @@ void AGRubyObject::deleteRef(AGBaseObject *o) {
 
 void general_markfunc(void *ptr) {
   if (!ptr) {
-    std::cerr << ("WARNING: a ptr==0 was given in general_markfunc!") << std::endl;
+    logger::err << ("WARNING: a ptr==0 was given in general_markfunc!") << logger::endl;
     return; // ignore this !
   }
   assert(ptr);
   // the given object must be a AGRubyObject and it must be valid (it's in mRubyObjects)
   AGRubyObject *o = static_cast<AGRubyObject*> (ptr);
   if (mRubyObjects.find(o) == mRubyObjects.end())
-    std::cerr << "OLD RUBYOBJ:" << (mRemovedRubyObjects.find(o) != mRemovedRubyObjects.end()) << ":" << o << std::endl;
+    logger::err << "OLD RUBYOBJ:" << (mRemovedRubyObjects.find(o) != mRemovedRubyObjects.end()) << ":" << o << logger::endl;
   assert(mRubyObjects.find(o) != mRubyObjects.end());
 
 #ifdef GCDEBUG
@@ -142,7 +143,7 @@ IsRubyObject isRubyObject(void *o) {
   AGRubyObject *ro = (AGRubyObject*) o;
 
   if (!mRubyObjectsExistant) {
-    std::cerr << "Could not check, because rubyObjects was discarded" << std::endl;
+    logger::err << "Could not check, because rubyObjects was discarded" << logger::endl;
     return RUBY_OBJECT_UNKNOWN;
   }
 

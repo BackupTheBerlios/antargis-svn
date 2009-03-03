@@ -127,9 +127,8 @@ EOT
   end
 
   CLEAN << File.join(Compiler::rookeyWorkingDir,"rookey.log")
-  CLEAN += ["test.c","test.o","test","test.exe"].map{|f|File.join(Compiler.rookeyWorkingDir,"test",f)}
-  pp CLEAN
-
+  CLEAN << ["test.c","test.o","test","test.exe"].map{|f|File.join(Compiler.rookeyWorkingDir,"test",f)}
+  CLEAN << File.join(Compiler.rookeyWorkingDir,"test")
  
   def Rookey.getDescendantsOfClass(p)
     c=[]

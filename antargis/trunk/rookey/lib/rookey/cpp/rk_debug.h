@@ -31,6 +31,7 @@
 #include "rk_exception.h"
 #include "rk_tools.h"
 #include "rk_base.h"
+#include "rk_logging.h"
 
 
 AGEXPORT void setQuiet();
@@ -47,22 +48,18 @@ AGEXPORT void setQuiet();
 
 #else
 
-std::ostream & AGEXPORT getDebug();
-
 #define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
 template<class T>
 inline void mydebug(std::string f,std::string l,const T&t)
 {
-  getDebug()<<"File "<<f<<" Line "<<l<<" : "<<t<<std::endl;
+  logger::debug<<"File "<<f<<" Line "<<l<<" : "<<t<<logger::endl;
 }
 
-using std::endl;
+#define debugout(x) logger::debug<<x
 
-#define debugout(x) getDebug()<<x
-
-#define cdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl)
-#define ccdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl)
+#define cdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<logger::endl)
+#define ccdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<logger::endl)
 
 AGEXPORT size_t getDebugIndex();
 AGEXPORT size_t getDebugLevel();

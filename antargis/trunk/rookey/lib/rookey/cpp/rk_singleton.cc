@@ -9,22 +9,59 @@
 #include <set>
 #include <typeinfo>
 
-std::map<std::string,RKSingletonBase*> RKSingletonBase::mSingletons;
+std::map<std::string, RKSingletonBase*> RKSingletonBase::mSingletons;
 
-RKSingletonBase::RKSingletonBase()
-{
-    std::string name(typeid(this).name());
-    mSingletons.insert(std::make_pair(name,this));
+static bool firstUse = true;
+static bool everythingDestroyed=false;
+
+void removeEverything();
+
+RKSingletonBase::RKSingletonBase() {
+  if (firstUse) {
+    firstUse = false;
+    atexit(&removeEverything);
+  }
 }
 
-RKSingletonBase* RKSingletonBase::getInstance(const std::string &pName)
+
+bool RKSingletonBase::allDestroyed()
 {
-    std::map<std::string,RKSingletonBase*>::iterator i=mSingletons.find(pName);
-    if(i==mSingletons.end())
-        return NULL;
-    return i->second;
+  return everythingDestroyed;
+}
+
+void RKSingletonBase::destroyAll()
+{
+  std::cout<<"destroyAll"<<std::endl;
+  everythingDestroyed=true;
+  for(std::map<std::string, RKSingletonBase*>::iterator i = mSingletons.begin();i!=mSingletons.end();i++)
+    delete i->second;
+}
+
+void RKSingletonBase::registerClass() {
+  if(everythingDestroyed)
+    return;
+  std::string name(typeid (*this).name());
+  mSingletons.insert(std::make_pair(name, this));
+}
+
+RKSingletonBase* RKSingletonBase::getInstance(const std::string &pName) {
+  if(everythingDestroyed)
+    return 0;
+
+  std::map<std::string, RKSingletonBase*>::iterator i = mSingletons.find(pName);
+
+  if (i == mSingletons.end()) {
+    return NULL;
+  }
+  return i->second;
 
 }
+
+void removeEverything() {
+  std::cout << "RMOVE ALL" << std::endl;
+  RKSingletonBase::destroyAll();
+}
+
 
 
 /*
@@ -44,4 +81,4 @@ static Base *RKSingleton<Base>::getInstance() {
         b=new Base();
     return b;
 }
-*/
+ */

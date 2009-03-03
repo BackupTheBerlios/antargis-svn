@@ -2,7 +2,7 @@
 
 #include <map>
 #include <vector>
-#include <math.h>
+#include <cmath>
 #include <ag_vdebug.h>
 #include <ag_texturecache.h>
 #include <ag_profiler.h>

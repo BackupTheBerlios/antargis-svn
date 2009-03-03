@@ -9,7 +9,7 @@
 #include <ag_rendercontext.h>
 #include <algorithm>
 
-#include <math.h>
+#include <cmath>
 
 #include "quadtree.h"
 #include "ag_profiler.h"

@@ -1,8 +1,8 @@
-require 'rookey.rb'
+require File.expand_path('../../../../rookey.rb',__FILE__)
 
 tests=Dir["*_spec.cc"]
 
-baseFiles=["../rk_singleton.cc","../rk_logging.cc"]
+baseFiles=["../rk_singleton.cc","../rk_logging.cc","../rk_time.cc","../rk_logging.cc"]
 
 test_exes=tests.map{|test|
   name=test.sub(/_spec.cc/,"")
@@ -10,6 +10,14 @@ test_exes=tests.map{|test|
   objs=Rookey::compile(files)
   Rookey::link_exe(name, objs)
 }
+
+
+files=[]
+basicLib=Rookey::ruby_ext("basiclib",files)
+
+task :libTest=>basicLib do
+  ruby "./libtest.rb"
+end
 
 task :runTests=>test_exes do
   test_exes.each{|exe|
@@ -19,7 +27,6 @@ end
 
 CLEAN << "rk_log.txt"
 
-
-task :default=>:runTests do
+task :default=>[:libTest,:runTests] do
 
 end

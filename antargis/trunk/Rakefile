@@ -18,10 +18,8 @@ inits=[
   "game"
       ].map{|f|"AG_Init_libantargis"+f}
 lib=Rookey::ruby_ext("antargis",Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]+Dir["ext/*/*.h"]+Dir["ext/*/templates.i"],inits)
-
 ts=Rookey::compile(Dir["main/starter.cc"])
 main=Rookey::link_exe("antargis",ts)
-
 
 task :default=>[lib,main] do
   puts "Done."
@@ -95,3 +93,5 @@ Rake::RDocTask.new do |rd|
    a=a.select{|f|not (f=~/_test/ or f=~/spec/)}
    rd.rdoc_files.include(a)
 end
+
+

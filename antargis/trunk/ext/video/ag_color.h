@@ -71,11 +71,13 @@ class AGEXPORT AGColor:public SDL_Color
   Uint8 a;
 };
 
+#ifndef SWIG
 bool operator<(const AGColor &c1,const AGColor &c2);
 bool operator==(const AGColor &c1,const AGColor &c2);
 bool operator!=(const AGColor &c1,const AGColor &c2);
 
 std::ostream &operator<<(std::ostream &o,const AGColor &c);
+#endif
 
 inline int toInt(Uint8 u)
 {

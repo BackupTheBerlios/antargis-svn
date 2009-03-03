@@ -36,7 +36,7 @@
 #include <SDL_image.h>
 
 #include <sstream>
-#include <math.h>
+#include <cmath>
 
 #include <ag_fs.h>
 

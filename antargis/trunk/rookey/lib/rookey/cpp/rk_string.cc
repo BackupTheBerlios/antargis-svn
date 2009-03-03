@@ -218,6 +218,15 @@ bool AGString::toBool() const
   return false;
 }
 
+AGString AGString::operator*(size_t p) const
+{
+  std::ostringstream os;
+  for(size_t i=0;i<p;i++)
+    os<<(*this);
+  return AGString(os.str());
+}
+
+
 
 bool AGString::matches(const std::string &regex) const
 {

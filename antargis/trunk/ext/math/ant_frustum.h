@@ -32,7 +32,7 @@ class AGEXPORT AntPlane
 
   bool inside(const AGVector3 &v) const;
 
-  friend std::ostream &operator<<(std::ostream &o,const AntPlane &p);
+  AGString toString() const;
  private:
   AGVector3 mDir;
   float mOffset;
@@ -50,7 +50,7 @@ class AGEXPORT AntFrustum
   bool inside(const AGVector3 &v) const;
   bool collides(const AGBox3 &v) const;
 
-  friend std::ostream &operator<<(std::ostream &o,const AntFrustum &p);
+  AGString toString() const;
  private:
   std::vector<AntPlane> mPlanes;
 };

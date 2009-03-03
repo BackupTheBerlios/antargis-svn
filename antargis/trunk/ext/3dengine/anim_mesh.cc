@@ -10,7 +10,7 @@
 #include "ag_profiler.h"
 #include "entity.h"
 
-#include <math.h>
+#include <cmath>
 
 bool useShaderAnimation(); // imported from anim_mesh_data.cc
 

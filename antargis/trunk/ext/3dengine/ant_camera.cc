@@ -21,7 +21,7 @@
 #include "ant_camera.h"
 #include "ant_renderer.h"
 #include <SDL_opengl.h>
-#include <math.h>
+#include <cmath>
 
 #include "rk_debug.h"
 

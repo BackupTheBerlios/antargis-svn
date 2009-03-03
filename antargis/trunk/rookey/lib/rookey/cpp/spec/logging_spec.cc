@@ -1,9 +1,24 @@
 #include "rk_logging.h"
 
-int main(int argc, char *argv[]) {
-    RKLogging::getInstance()->clear();
-    RKLogging::getInstance()->log("muh");
+void testClear() {
+  RKLogging::getInstance()->clear();
+  RKLogging::getInstance()->logDirect("muh");
 
-    assert(RKLogging::getInstance()->getLog() == "muh");
-    return 0;
+  assert(RKLogging::getInstance()->getLog() == "muh");
+
+}
+
+void testEasyLog()
+{
+  logger::err<<"myMUH"<<logger::endl;
+
+  
+}
+
+int main(int argc, char *argv[]) {
+  testClear();
+
+  testEasyLog();
+
+  return 0;
 }
