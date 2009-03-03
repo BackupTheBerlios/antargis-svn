@@ -150,10 +150,14 @@ namespace logger {
   Channel &Channel::operator<<(const Special &s) {
     if (s.getType() == Special::ENDL)
       flush();
+    return *this;
   }
 
   Channel &Channel::operator<<(const std::string &s) {
-    RKLogging::getInstance()->log(s, getType(mType));
+    RKLogging *clogger=RKLogging::getInstance();
+    if(clogger)
+      clogger->log(s, getType(mType));
+    return *this;
   }
 
   std::string Channel::getType(const Type &pType) {
