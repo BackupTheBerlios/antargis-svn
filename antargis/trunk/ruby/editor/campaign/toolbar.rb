@@ -33,9 +33,7 @@ class ToolBar<AGWidgetWithConfig
     @children.each{|child|
       many=1
       many=child.boxWidth if child.respond_to?(:boxWidth)
-      pp count,many
       r=getChildRect(count,many)
-      p r
       child.setRect(r)
       count+=many
       child.queryRedraw

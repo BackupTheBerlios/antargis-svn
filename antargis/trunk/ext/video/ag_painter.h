@@ -135,6 +135,8 @@ class AGEXPORT AGPainter:public AGRubyObject
 
   void debugOutput();
 
+  AGPaintProjection getCurrentProjection() const;
+
  private:
   std::list<AGPaintProjection> ps;
 

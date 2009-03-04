@@ -1,4 +1,5 @@
 require "ruby/ant_sound.rb"
+require 'ruby/tools/logging.rb'
 
 def getMeshData(file,zoom,texture="",shadow=true)
   id=file+":"+texture
@@ -51,9 +52,9 @@ class Class
   end
 end
 
-def trace
-  puts "TRACE #{caller[0]}"
-end
+#def trace
+#  puts "TRACE #{caller[0]}"
+#end
 
 class AntargisException<Exception
   attr_accessor :text

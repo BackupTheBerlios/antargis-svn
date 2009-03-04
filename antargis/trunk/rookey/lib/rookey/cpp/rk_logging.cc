@@ -41,6 +41,8 @@ RKLogging::~RKLogging() {
 void RKLogging::log(const std::string &s, const std::string &pLevel) {
 
   // FIXME: do not start a new line each time !!
+  if(allDestroyed())
+    return;
 
   if(mLastLevel!=pLevel)
     startLine(pLevel);
@@ -112,10 +114,12 @@ std::string RKLogging::getLog() {
 
 namespace logger {
 
-  Channel out(Channel::OUT);
-  Channel debug(Channel::DEBUG);
-  Channel warn(Channel::WARN);
-  Channel err(Channel::ERR);
+  Channel out(Channel::T_OUT);
+  Channel debug(Channel::T_DEBUG);
+  Channel warn(Channel::T_WARN);
+  Channel err(Channel::T_ERR);
+  Channel trace(Channel::T_TRACE);
+  Channel info(Channel::T_INFO);
 
   Special endl(Special::ENDL);
 
@@ -162,10 +166,12 @@ namespace logger {
 
   std::string Channel::getType(const Type &pType) {
     switch (pType) {
-      case OUT:return "out  ";
-      case ERR:return "error";
-      case DEBUG:return "debug";
-      case WARN:return "warn ";
+      case T_OUT:return "out  ";
+      case T_ERR:return "error";
+      case T_DEBUG:return "debug";
+      case T_WARN:return "warn ";
+      case T_TRACE:return "trace";
+      case T_INFO:return "info ";
       default: return "CRITICAL";
     }
   }

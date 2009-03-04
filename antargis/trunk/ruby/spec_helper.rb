@@ -99,7 +99,6 @@ class Observer
       if self==object
         #this.ok=true
         this.count+=1
-        puts "MUH"
       end
       method.call(*s)
     } 

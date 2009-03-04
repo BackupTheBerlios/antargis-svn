@@ -1,6 +1,6 @@
 require File.join(File.split(__FILE__)[0],"..","..","spec_helper.rb")
-require File.join(File.split(__FILE__)[0],"..","..","gui","testing.rb")
-require File.join(File.split(__FILE__)[0],"app.rb")
+require File.expand_path("../../../gui/testing.rb",__FILE__)
+require File.expand_path("../app.rb",__FILE__)
 
 describe "Campaign editor" do
   include GuiTest
@@ -14,6 +14,19 @@ describe "Campaign editor" do
     level.should be_a_kind_of(DragBoxLevel)
     level.getParent.should_not be_nil
   end
+
+  it "should be possible to move nodes and they should be visible at all times" do
+    level=grid.getChildren[0]
+    sr=level.getScreenRect
+    dr=sr+AGVector2.new(100,0)
+
+    drag(sr.getMiddle,dr.getMiddle,10) {|event|
+      level.should be_visible
+      level.should be_focused if event==:mouseMotion
+    }
+    drag(dr.getMiddle,sr.getMiddle,10)
+  end
+
   #if false
   it "should be possible to move the grid" do
     level=grid.getChildren[0]
@@ -51,6 +64,7 @@ describe "Campaign editor" do
       observe(@app.getEffect("showEdit"),:run) {
         observe(grid.widget,:select) {
           mouseDown(pos)
+          mouseUp(pos)
         }.should be_called
       }.should be_called
     }.should_not be_called
@@ -90,6 +104,7 @@ describe "Campaign editor" do
     block.call(:mouseUp) if block
     #@app.step while true
   end
+
   
   def getSourceMiddle(name)
     getWidget(name).getScreenRect.getMiddle

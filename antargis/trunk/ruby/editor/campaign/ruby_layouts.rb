@@ -5,7 +5,6 @@ class GenericLayoutCreator<AGLayoutCreator
   end
   def create(p,r,node)
     options=node.getAttributes
-    pp @c
     setResult @c.new(p,r,options)
   end
 end

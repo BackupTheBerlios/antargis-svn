@@ -299,20 +299,9 @@ class AGStringUtf8
   end
 end
 
-class Logger
-  filename=File.join(getWriteDir,"log.txt")
-  @@log=File.open(filename,"w")
-  def self.log(*s)
-    @@log.print("[")
-    @@log.print(Time.new)
-    @@log.print("] ")
-    @@log.puts(*s)
-  end
-end
 
-def log(*s)
-  Logger.log(*s)
-end
+require 'ruby/tools/logging.rb'
+
 
 class AntApplication<AGApplication
   include AntMyEventHandler

@@ -6,7 +6,6 @@ class ImageList2D<AGWidget
     createSignal :sigSelected
     dir="data/gui/campaign"
     files=getDirectory(dir).select{|f|f=~/\.png$/}.uniq
-    pp files
     #exit
     @images=files.map{|file|[file,AGTexture.new(AGSurface::load(File.join(dir,file)))]}*3
     assert{@images.length>0}

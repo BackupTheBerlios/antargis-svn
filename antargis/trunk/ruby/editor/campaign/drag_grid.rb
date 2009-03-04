@@ -109,7 +109,6 @@ module Antargis
       getChildren.map{|child|[child]+child.getAllDescendants}.flatten
     end
     def moveToContext(to)
-      pp "moveToContext"
       o=getScreenRect
       p=getParent
       p.removeChild(self)
@@ -118,6 +117,17 @@ module Antargis
     end
     def getChildByType(type)
       getAllDescendants.select{|c|c.is_a?(type)}[0]
+    end
+
+    def getWidgetTree
+      [self,getChildren.map{|c|c.getWidgetTree}]
+    end
+    def focused?
+      if getParent
+        getParent.hasFocus(self)
+      else
+        true
+      end
     end
   end
 end
@@ -237,7 +247,8 @@ class DragBox<AGHoverWidget
         startLine(e)
         r=true
       end
-      dragGrid.select(self) if dragGrid
+      
+      #dragGrid.select(self) if dragGrid
     end
     r
   end
@@ -276,7 +287,8 @@ class DragBox<AGHoverWidget
     else
       hide
     end
-    
+      dragGrid=getDragGrid
+    dragGrid.select(self) if dragGrid
     @dragging=false
     true
   end
@@ -289,7 +301,6 @@ class DragBox<AGHoverWidget
     @lastCell=cell
     
     moveToContext(getDragGrid)
-    pp cell
     setRect(cell.rect.shrink(5))
   end
   def centerObject
@@ -516,7 +527,6 @@ private
       edit=getRoot.getAllDescendants.select{|w|w.getName==@edit}[0]
       unless edit.nil?
         @edit=edit
-        pp @edit
         addHandler(@edit,:sigModified,:textModified)
       end
     end

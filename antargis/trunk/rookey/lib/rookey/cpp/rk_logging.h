@@ -63,7 +63,7 @@ namespace logger {
   public:
 
     enum Type {
-      OUT, ERR, DEBUG, WARN
+      T_OUT, T_ERR, T_DEBUG, T_WARN, T_TRACE, T_INFO
     };
 
     Channel(const Type &pType);
@@ -95,6 +95,8 @@ namespace logger {
   extern AGEXPORT Channel debug;
   extern AGEXPORT Channel warn;
   extern AGEXPORT Channel err;
+  extern AGEXPORT Channel trace;
+  extern AGEXPORT Channel info;
 
   extern AGEXPORT Special endl;
 }

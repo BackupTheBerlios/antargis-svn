@@ -19,7 +19,6 @@ class Effect<AGWidget
     if @running
       @time+=t
       @running=false if @time>=@duration
-      pp @running
       @time=@duration if @time>@duration 
       step(@time/@duration)
     end
@@ -28,7 +27,7 @@ class Effect<AGWidget
     @running=false
   end
   def step(per)
-    pp per
+    pp "PER",per
     exit
   end
   private
@@ -50,7 +49,6 @@ class AppearEffect<Effect
     
   end
   def step(amount)
-    pp "AMOUNT:",amount
     table=getApp.getMainWidget.getChild(@target)
     table.modifyRow(@row,amount*@size)
   end
@@ -66,7 +64,6 @@ class HideEffect<Effect
     @size=nil
   end
   def step(amount)
-    pp "AMOUNT HIDE:",amount
     @size||=table.getRow(@row)
     table.modifyRow(@row,(1-amount)*@size)
   end

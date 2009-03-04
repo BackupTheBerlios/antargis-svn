@@ -117,8 +117,6 @@ class CampaignEditorApp<AGApplication
     }
     
     campaign.edges.each{|edge|
-      pp edge.from,edge.to
-      puts boxes[edge.from].getRect,boxes[edge.to].getRect
       line=DragLine.new(@grid,@grid.getRect,boxes[edge.from])
       line.endObject=boxes[edge.to]
       @grid.addChild(line)

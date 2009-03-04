@@ -3,7 +3,6 @@ class ImageList<AGWidget
     super(p,r)
     dir="data/gui/campaign"
     files=getDirectory(dir).select{|f|f=~/\.png$/}.uniq
-    pp files
     #exit
     @images=files.map{|file|[file,AGTexture.new(AGSurface::load(File.join(dir,file)))]}
     assert{@images.length>0}
@@ -12,14 +11,8 @@ class ImageList<AGWidget
     @pos=0
   end
   
-  def eventMouseButtonDown(e)
-    pp e.getButton
-    super
-  end
-  
   def eventMouseMotion(e)
     @pos=1-e.getMousePosition.x/width
-    pp @pos
     super
   end
   
@@ -32,7 +25,6 @@ class ImageList<AGWidget
       r=rs[i]+getScreenRect.getV0
       f=t.getRect
       pos=i.to_f/(rs.length)*0.5+@pos-1
-      #pp pos
       trisFrom=makeTriangles(f,AGTriangle2)
       #trisTo=makeTriangles(r,AGTriangle3)
       trisTo=makeTriangle(getScreenRect,pos,f)
@@ -62,7 +54,6 @@ class ImageList<AGWidget
     
     d1=[0,[y1,-height*(pos)*f].min].max
     d0=[0,[y0,height*(pos)*f].min].max
-    pp d0,d1
     
     y1-=d1
     y0-=d0
