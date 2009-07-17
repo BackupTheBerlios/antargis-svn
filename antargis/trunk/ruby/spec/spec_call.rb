@@ -53,7 +53,6 @@ end
 
 class Test
   def initialize
-    puts "new Test"
   end
   def Test.test2
     :test_2

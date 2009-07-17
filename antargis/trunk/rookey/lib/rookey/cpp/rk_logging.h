@@ -63,7 +63,7 @@ namespace logger {
   public:
 
     enum Type {
-      T_OUT, T_ERR, T_DEBUG, T_WARN, T_TRACE, T_INFO
+      T_OUT, T_ERR, T_DEBUG, T_WARN, T_TRACE, T_INFO, T_GC
     };
 
     Channel(const Type &pType);
@@ -87,13 +87,18 @@ namespace logger {
 
     static std::string getType(const Type &pType);
   private:
+    void check();
+
     Type mType;
+    bool mEnabled;
+    bool mChecked;
   };
 
 
   extern AGEXPORT Channel out;
   extern AGEXPORT Channel debug;
   extern AGEXPORT Channel warn;
+  extern AGEXPORT Channel gc;
   extern AGEXPORT Channel err;
   extern AGEXPORT Channel trace;
   extern AGEXPORT Channel info;

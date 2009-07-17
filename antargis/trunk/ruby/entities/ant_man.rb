@@ -40,6 +40,8 @@ class AntMan<AntRubyEntity
     super
 
     @hlJobMode={}
+    @meshState=nil
+    @target=nil
 
     setProvide("man",true)
     @signed=false
@@ -103,7 +105,6 @@ class AntMan<AntRubyEntity
         end
         @boss=boss
       end
-      puts "BOSS:#{@boss}"
     end
     if @boss and not @signed then
       @boss.signUp(self)
@@ -243,7 +244,7 @@ class AntMan<AntRubyEntity
           getFirstMesh.setAnimation("walk")
         else
           #  raise 1
-          puts "name:#{name}"
+#          puts "name:#{name}"
           assert{["dagger","shield","sword","bow"].member?(getWeapon)}
           setMesh("fight_"+getWeapon)
         end

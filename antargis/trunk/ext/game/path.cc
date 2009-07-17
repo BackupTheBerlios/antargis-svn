@@ -1102,7 +1102,6 @@ std::vector<AGVector2> Pathfinder::computePath(const AGVector2 &pFrom, const AGV
                  */
                 oldi=*i;
               }
-            std::cout<<std::endl;
           }
 
           pathSet.erase(pathSet.begin());
@@ -1110,7 +1109,6 @@ std::vector<AGVector2> Pathfinder::computePath(const AGVector2 &pFrom, const AGV
           if(last==to)
             {
               Uint32 t1=SDL_GetTicks();
-              std::cout<<"TIME:"<<t1-t0<<std::endl;
               cdebug("time:"<<t1-t0);
               cdebug("len:"<<path.size());
               cdebug("tries:"<<tries);

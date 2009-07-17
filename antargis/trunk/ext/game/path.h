@@ -292,12 +292,15 @@ class AGEXPORT Pathfinder:public AGRubyObject
 
   Pathfinder(SimpleGraph *pGraph,HeuristicFunction *pHeuristic,PathDebugging *pDebugger=0);
 
-  virtual void mark() throw();
 
   std::vector<AGVector2> computePath(const AGVector2 &from, const AGVector2 &to);
 
   std::vector<AGVector2> refinePath(const std::vector<AGVector2> &p,MapPathWeighter *pWeighter);
-
+ protected:
+#ifndef SWIG
+  virtual void mark() throw();
+#endif
+  
  private:
   SimpleGraph *mGraph;
   HeuristicFunction *mHeuristic;

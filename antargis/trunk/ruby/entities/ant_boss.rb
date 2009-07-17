@@ -33,6 +33,7 @@ class AntBoss<AntRubyEntity
     @men=[]
     @hlJobMode={}
     @job=nil
+    @player=nil
     @createMen=0
     @selected=@hovered=false
     @formation=nil
@@ -123,10 +124,9 @@ class AntBoss<AntRubyEntity
   end
   
   def newHLDefendJob(target)
-    puts "DEFEND!!! #{self.getName} from #{target.getName}"
     if @job
       if @job.is_a?(AntHeroFightJob)
-        puts "I'm alread fighting!"
+        Log.debug "I'm alread fighting!"
         return false # already fighting
       end
     end
@@ -190,7 +190,6 @@ class AntBoss<AntRubyEntity
   end
   
   def eventManDefeated(man)
-    dputs "AntBoss:eventManDefeated: #{man} #{man.getName}"
     if @job and @job.class==AntHeroFightJob
       @job.defeated(man)
     end
@@ -267,7 +266,6 @@ class AntBoss<AntRubyEntity
 
 
   def eventHLJobFinished(job)
-    puts "eventHLJobFinished(job) #{self}"
     getMap.eventHLJobFinished(self,job)
     doEvent(:eventHLJobFinished)
   end
@@ -308,7 +306,6 @@ class AntBoss<AntRubyEntity
       eventNoJob
       return
     end
-    puts "#{getName} has defeated #{e.getName}"
     if @job.is_a?(AntHeroFightJob)
       @job.haveDefeated(e)
     end

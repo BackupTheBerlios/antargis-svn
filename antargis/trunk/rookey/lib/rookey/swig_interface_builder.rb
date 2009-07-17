@@ -72,6 +72,11 @@ VALUE convertCpp2Ruby(AGRubyObject *cObject)
 {
   return SWIG_RubyInstanceFor(cObject);
 }
+
+void deleteCppReference(AGRubyObject *cObject)
+{
+  SWIG_RubyUnlinkObjects(cObject);
+}
   
 EOT
       
@@ -108,7 +113,25 @@ EOT
     def generate
 
 "%module(directors=\"1\") #{@moduleName}
+%include \"typemaps.i\"
 %feature(\"autodoc\",\"1\");
+
+%{
+template<class T>
+T *createDup(const T &t)
+{
+  return new T(t);
+}
+
+%}
+
+
+%typemap(directorin,noblock=1) SWIGTYPE const & {
+  $1_ltype tmp_$1_name = createDup($1_name);
+  $input = SWIG_NewPointerObj(%as_voidptr(tmp_$1_name), $descriptor, SWIG_POINTER_OWN); //%newpointer_flags);
+  
+}
+
 
 /*
 %feature(\"director:except\") {

@@ -157,7 +157,11 @@ public:
   void hide();
   void close();
 
+protected:
+  #ifndef SWIG
   virtual void mark() throw();
+  #endif
+public:
 
   virtual void addChild(AGWidget *w);
   virtual void addChildBack(AGWidget *w);

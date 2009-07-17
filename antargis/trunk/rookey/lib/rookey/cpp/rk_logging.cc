@@ -1,17 +1,18 @@
 
 #include "rk_logging.h"
 #include "rk_time.h"
+#include "rk_config.h"
+#include "rk_string.h"
 
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 
-
-std::string operator*(const std::string &s,size_t i)
-{
+std::string operator*(const std::string &s, size_t i) {
   std::ostringstream os;
 
-  for(size_t k=0;k<i;k++)
-    os<<s;
+  for (size_t k = 0; k < i; k++)
+    os << s;
 
   return os.str();
 }
@@ -41,10 +42,10 @@ RKLogging::~RKLogging() {
 void RKLogging::log(const std::string &s, const std::string &pLevel) {
 
   // FIXME: do not start a new line each time !!
-  if(allDestroyed())
+  if (allDestroyed())
     return;
 
-  if(mLastLevel!=pLevel)
+  if (mLastLevel != pLevel)
     startLine(pLevel);
 
   size_t last = 0, i;
@@ -62,7 +63,7 @@ void RKLogging::log(const std::string &s, const std::string &pLevel) {
     logLine(sub, pLevel);
   else
     logDirect(sub);
-  mLastLevel=pLevel;
+  mLastLevel = pLevel;
 }
 
 void RKLogging::startLine(const std::string &pLevel) {
@@ -120,6 +121,7 @@ namespace logger {
   Channel err(Channel::T_ERR);
   Channel trace(Channel::T_TRACE);
   Channel info(Channel::T_INFO);
+  Channel gc(Channel::T_GC);
 
   Special endl(Special::ENDL);
 
@@ -131,8 +133,7 @@ namespace logger {
     return mType;
   }
 
-  Channel::Channel(const Type &pType) : mType(pType) {
-
+  Channel::Channel(const Type &pType) : mType(pType), mEnabled(true), mChecked(false) {
   }
 
   Channel::~Channel() {
@@ -141,8 +142,8 @@ namespace logger {
   }
 
   void Channel::flush() {
-    RKLogging *instance=RKLogging::getInstance();
-    if(instance)
+    RKLogging *instance = RKLogging::getInstance();
+    if (instance)
       instance->flush();
 
   }
@@ -152,15 +153,32 @@ namespace logger {
   }
 
   Channel &Channel::operator<<(const Special &s) {
-    if (s.getType() == Special::ENDL)
-      flush();
+    check();
+    if(mEnabled) {
+      if (s.getType() == Special::ENDL)
+        flush();
+    }
     return *this;
   }
 
+  void Channel::check() {
+    if (!mChecked) {
+      mChecked = true;
+      AGString levels = RKConfig::getInstance()->get("logLevels");
+      std::vector<AGString> ls = levels.split(",");
+      if (std::find(ls.begin(), ls.end(), getType(getType())) == ls.end())
+        mEnabled = false;
+    }
+  }
+
   Channel &Channel::operator<<(const std::string &s) {
-    RKLogging *clogger=RKLogging::getInstance();
-    if(clogger)
-      clogger->log(s, getType(mType));
+    check();
+
+    if(mEnabled) {
+      RKLogging *clogger = RKLogging::getInstance();
+      if (clogger)
+        clogger->log(s, getType(mType));
+    }
     return *this;
   }
 
@@ -172,6 +190,7 @@ namespace logger {
       case T_WARN:return "warn ";
       case T_TRACE:return "trace";
       case T_INFO:return "info ";
+      case T_GC: return "gc   ";
       default: return "CRITICAL";
     }
   }

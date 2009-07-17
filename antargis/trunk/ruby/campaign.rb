@@ -174,6 +174,7 @@ class CutScene
   #attr_reader :finished
   def initialize(node)
     @screens=[]
+    @image=@text=nil
     node.getChildren("screen").each{|s|
       screen={}
       screen[:text]=""

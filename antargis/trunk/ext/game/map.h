@@ -37,6 +37,7 @@ class QuadTree;
 
 class AnimMesh;
 class Mesh2D;
+class MeshBase;
 
 class AGEXPORT AntMap:public HeightMap
 {
@@ -60,9 +61,13 @@ class AGEXPORT AntMap:public HeightMap
   std::list<AntEntity*> getAllEntities();
   std::vector<AntEntity*> getEntities(const AGString &pName);
 
+
+  //AntEntity *getEntity(const MeshBase &pMesh);
+  
   AntEntity *getEntity(const Mesh &pMesh);
   AntEntity *getEntity(const AnimMesh &pMesh);
   AntEntity *getEntity(const Mesh2D &pMesh);
+   
   AntEntity *getEntity(int id) const;
   AntEntity *getByName(const AGString &pName);
 
@@ -84,10 +89,13 @@ class AGEXPORT AntMap:public HeightMap
 
   AGVector3 getPos(const AGVector2 &pPos) const;
 
-  virtual void mark() throw();
 
   virtual void mapChanged();
 
+ protected:
+#ifndef SWIG
+  virtual void mark() throw();
+#endif
  private:
   typedef std::map<size_t,AntEntity*> EntityMap;
 
@@ -95,11 +103,7 @@ class AGEXPORT AntMap:public HeightMap
   EntityMap mEntityMap;
   QuadTree<AntEntity> *mEntQuad;
 
-  //  typedef std::map<AGString,std::set<AntEntity*> > EntityByType;
-
   EntityList mToDel;
-
-  //  EntityByType mByType;
 
   int maxID;
 
@@ -107,8 +111,6 @@ class AGEXPORT AntMap:public HeightMap
 
 
 };
-
-//AGEXPORT AntMap *getMap();
 
 
 #endif

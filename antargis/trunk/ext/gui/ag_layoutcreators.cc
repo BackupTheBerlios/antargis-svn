@@ -547,7 +547,6 @@ IMPLEMENT_COMPONENT_FACTORY(ScrollingWidget);
 
 void AGLayout::registerLayouts()
   {
-    TRACE;
     getLayoutFactory()->addCreator("checkBox",new AGCheckBoxLayoutCreator);
     getLayoutFactory()->addCreator("colorButton",new AGColorButtonLayoutCreator);
     getLayoutFactory()->addCreator("table",new AGTableLayoutCreator);

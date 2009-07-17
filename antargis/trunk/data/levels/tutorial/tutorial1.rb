@@ -56,7 +56,7 @@ class Level1<AntLevelScript
 					endLevel
 				end
 		end
-		puts "TRIGGER"
+		Log.debug "TRIGGER"
 		return false #ignore
 	end
 	def wonLevel

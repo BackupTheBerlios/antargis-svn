@@ -584,7 +584,6 @@ bool AGEdit::eventKeyDown(AGEvent *m)
         bool result=processKey(k,unicode);
         if(result)
           {
-            std::cout<<"MODIFIED"<<std::endl;
             sigModified(m);
           }
 

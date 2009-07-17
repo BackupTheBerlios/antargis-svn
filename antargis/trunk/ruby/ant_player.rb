@@ -90,7 +90,7 @@ end
 
 class AntHumanPlayer<AntPlayer
   def eventJobFinished(who,what)
-    puts who.to_s+" is ready with is job:"+what.to_s
+    Log.debug who.to_s+" is ready with is job:"+what.to_s
   end
   def xmlName
     return "humanPlayer"
@@ -110,7 +110,7 @@ class AntComputerPlayer<AntPlayer
     return "computerPlayer"
   end
   def eventJobFinished(who,what)
-    puts who.to_s+" is ready with is job:"+what.to_s
+    Log.debug who.to_s+" is ready with is job:"+what.to_s
   end
   def assignJob(hero)
     if enoughFood(hero)

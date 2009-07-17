@@ -2,6 +2,5 @@
 
 AGEXPORT void AG_Init_libantargis3dengine()
 {
-  TRACE;
 }
 

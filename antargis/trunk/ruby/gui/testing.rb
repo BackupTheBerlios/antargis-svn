@@ -125,7 +125,6 @@ protected
     d=pos-@@oldPos
     dx=d[0].to_i
     dy=d[1].to_i
-    p x,y,dx,dy
     @app.doEvent(toSDLEvent("SDL_MOUSEMOTION:0:1:#{x.to_i}:#{y.to_i}:#{dx}:#{dy}"))
   end
   
@@ -143,10 +142,6 @@ protected
   def key(pkey)
     sym=pkey[0]
     s1="SDL_KEYDOWN:0:1:0:#{sym}:0:#{sym}"
-    puts s1
-    #exit
-    puts @app
-    pp @app.methods.sort
     @app.doEvent(toSDLEvent(s1))
     @app.doEvent(toSDLEvent("SDL_KEYUP:0:0:0:#{sym}:0:#{sym}"))
   end

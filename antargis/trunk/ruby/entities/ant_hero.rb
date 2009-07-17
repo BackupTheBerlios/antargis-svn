@@ -31,6 +31,9 @@ class AntHero<AntBoss
   attr_reader :meshState, :dead
   def initialize(map)
     super
+    @fire=nil
+    @fireSound=nil
+
     @men.push(self)
     setProvide("hero",true)
     @appearance="hero"
@@ -74,18 +77,11 @@ class AntHero<AntBoss
   
   def startFireSound
     if not @fireSound
-      #dputs "STARTING FIRE"
       @fireSound=AntSound.playLoopSoundGlobal(self,"fire",getPos2D,0.4)
-      #dputs @fireSound
     end
   end  
   def stopFireSound
     if @fireSound
-      #dputs "STOPPED"
-      #dputs @job
-      if @job.class==AntHeroRestJob
-        #raise "bla"
-      end
       AntSound.stopLoopSound(self)
       #getSoundManager.stopChannel(@fireSound)
       @fireSound=nil
@@ -172,7 +168,6 @@ class AntHero<AntBoss
       end
     end
     
-    puts "POSHL:#{pos} #{pos.class}"
     if pos.is_a?(AGVector2) or pos.is_a?(AGVector3)
       assert{pos.is_a?(AGVector2) or pos.is_a?(AGVector3)}
       target=AntBuildingSite.new(getMap)
@@ -235,7 +230,6 @@ class AntHero<AntBoss
   
   
   def setFire(flag)
-    #puts "setFire #{flag}"
     if flag
       if getPos3D.z>0 # won't start fire in water!!
         if not @fire
@@ -256,19 +250,15 @@ class AntHero<AntBoss
   end
 
   def eventAttacked(by)
-    #puts "eventAttacked #{by}"
     super
   end
   
   def assignJob2All
     super
-    #puts "ASSIGN JOB 2 All #{self}"
-    #puts "---"
     if @job.class!=AntHeroRestJob
       setFire(false)
     end
     doEvent(:newJobAssigned)
-    #puts "ASSIGN JOB ready."
   end
 
   def setMeshState(name)

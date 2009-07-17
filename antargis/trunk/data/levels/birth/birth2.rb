@@ -52,7 +52,6 @@ class Level2<AntLevelScript
 				#raise 1
 				rowen.newHLMoveJob(0,getMap.getTarget("near_tower").pos,0)
 				rowen.addHandler(:eventHLJobFinished){
-					puts "DIST::::::#{rowen.getPos2D} #{getMap.getTarget("near_tower").pos}"
 					if (rowen.getPos2D-getMap.getTarget("near_tower").pos).length<1
 						sendMarcus
 					else
@@ -65,9 +64,7 @@ class Level2<AntLevelScript
 	def sendRowen
 	end
 	def sendMarcus
-		puts "SENDING MARCUS"
 		marcus=getMap.getByName("Marcus")
-		puts marcus
 		marcus.newMoveJob(0,getMap.getByName("Rowen").getPos2D,2)
 		$app.hidePanel
 		marcus.addHandler(:eventJobFinished){

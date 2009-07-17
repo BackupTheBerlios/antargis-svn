@@ -26,6 +26,7 @@ class AntRubyEntity<AntEntity
     @xmlProps={}
     @birthday=getMap.getTime
     @mode=""
+    @dead=false
     @handlers={}
     self.learnAmount=0.05
   

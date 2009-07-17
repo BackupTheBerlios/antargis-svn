@@ -3,7 +3,7 @@ module Rookey
     needs :compiler
     
     def run(config)
-      pp ROOKEY_CONFIG
+      #pp ROOKEY_CONFIG
       if ROOKEY_CONFIG[:debug]=="true"
 	      config.add("CFLAGS","-O0 -g")
 	      config.add("LDFLAGS","-g")

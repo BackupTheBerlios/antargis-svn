@@ -27,7 +27,6 @@ class Level1<AntLevelScript
 				start.push(t,"Congratulations! You have finally reached the continent!")
 				tellStory(start)
 		end
-		puts "TRIGGER"
 		return false #ignore
 	end
 private

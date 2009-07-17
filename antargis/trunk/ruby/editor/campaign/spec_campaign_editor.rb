@@ -1,6 +1,6 @@
-require File.join(File.split(__FILE__)[0],"..","..","spec_helper.rb")
-require File.expand_path("../../../gui/testing.rb",__FILE__)
-require File.expand_path("../app.rb",__FILE__)
+#require File.join(File.split(__FILE__)[0],"..","..","spec_helper.rb")
+#require File.expand_path("../../../gui/testing.rb",__FILE__)
+#require File.expand_path("../app.rb",__FILE__)
 
 describe "Campaign editor" do
   include GuiTest
@@ -9,7 +9,7 @@ describe "Campaign editor" do
   end
   it "should be possible to place levels on the grid" do
     drag(getSourceMiddle("levelSource"),getGridPos(1,1),10)
-    grid.getAllDescendants.select{|c|c.is_a?(DragBox)}.length.should == 1
+    (grid.getAllDescendants.select{|c|c.is_a?(DragBox)}.length).should == 1
     level=grid.getChildren[0]
     level.should be_a_kind_of(DragBoxLevel)
     level.getParent.should_not be_nil
@@ -89,8 +89,6 @@ describe "Campaign editor" do
   
   private
   def drag(from,to,frames,&block)
-    p from,to
-    #exit
     @app.setCursor(getTextureCache.get("blue_cursor.png"))
     mouseMotion(from)
     mouseDown(from)

@@ -70,9 +70,9 @@ class AntNewHLJob<BaseMachine
   end
 
   def delete(man)
-    puts "IGNORING AntNewHLJob::delete(#{man})"
+    Log.warn "IGNORING AntNewHLJob::delete(#{man})"
     if man==@hero
-      puts "STOPPING JOB - because hero died"
+      Log.warn "STOPPING JOB - because hero died"
       @finished=true
       @state=nil
     end

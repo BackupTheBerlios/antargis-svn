@@ -42,7 +42,6 @@ class AntEntListWidget<AGWidget
       x=i%cells
       y=i/cells
       n=c.to_s
-      puts "#{i} #{x} #{y} #{n}"
       w=AGRadio.new(table,AGRect2.new(0,0,40,40))
       @wptrs[c]=w
       w.setName(n)
@@ -87,7 +86,6 @@ class AntEntListCreator<AGLayoutCreator
   def create(parent,rect,node)
     e=AntEntListWidget.new(parent,rect)
     e.setName(node.get("name"))
-    puts node.get("name")
     setResult e
   end
 end

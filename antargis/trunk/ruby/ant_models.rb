@@ -231,7 +231,6 @@ module AntModels
     scenenode=nil
     if mesh
       if mesh.is_a?(Array)
-        pp mesh
         ant2name=mesh[0]
         scale=mesh[1]
         pngname=mesh[2]

@@ -187,7 +187,6 @@ private
     @list.clearList
     @players={}
     @map.players.each{|p|
-      puts "initPlayNames:#{p}:#{p.class}:#{p.name}:#{p.name.class}"
       @list.insertItem(p.name.to_s,p.name)
       @players[p.name]=p
     }

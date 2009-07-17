@@ -16,6 +16,9 @@
 bool mRubyQuitting = false;
 bool mRubyObjectsExistant = false;
 
+void deleteCppReference(AGRubyObject *cObject);
+
+
 class RubyObjects : public std::set<AGRubyObject*> {
 public:
 
@@ -50,19 +53,21 @@ AGEXPORT bool rubyObjectExists(void *po) {
 }
 
 AGRubyObject::AGRubyObject() throw () {
-  //std::cerr<<"AGRubyObject::new:"<<this<<std::endl;
-  assert(mRubyObjects.find(this) == mRubyObjects.end());
+  logger::gc << "new AGRubyObject:" << this << logger::endl;
+  if(mRubyObjects.find(this) != mRubyObjects.end())
+    logger::err<< "RubyObject does already exist ????"<<logger::endl;
+  // assert(mRubyObjects.find(this) == mRubyObjects.end());
   mRubyObjects.insert(this);
   size_t oSize = mRemovedRubyObjects.size();
 
   mRemovedRubyObjects.erase(this);
   if (oSize != mRemovedRubyObjects.size())
-    logger::debug<< "Collision - removed rubyobject's address is overwritten!" << logger::endl;
-
-  logger::debug << "current ruby#:" << mRubyObjects.size() << " removed:" << mRemovedRubyObjects.size() << logger::endl;
+    logger::gc<< "Collision - removed rubyobject's address is overwritten!" << logger::endl;
+  logger::gc << "current ruby#:" << mRubyObjects.size() << " removed:" << mRemovedRubyObjects.size() << logger::endl;
 }
 
 AGRubyObject::~AGRubyObject() throw () {
+  logger::gc << "removed AGRubyObject:" << this << logger::endl;
   assert(mRubyObjects.find(this) != mRubyObjects.end());
   assert(mRemovedRubyObjects.find(this) == mRemovedRubyObjects.end());
   //std::cerr<<"AGRubyObject::Removed:"<<this<<std::endl;
@@ -70,6 +75,7 @@ AGRubyObject::~AGRubyObject() throw () {
     (*i)->baseClear();
   mRubyObjects.erase(this);
   mRemovedRubyObjects.insert(this);
+  //deleteCppReference(this);
 }
 
 
@@ -86,6 +92,8 @@ void AGRubyObject::markObject(AGRubyObject *o, bool recursive) throw () {
   //std::cerr<<"markObject:"<<o<<std::endl;
   // o must be a valid ruby-object
   assert(mRubyObjects.find(o) != mRubyObjects.end());
+
+  logger::gc << "AGRubyObject " << o << " marked by "<<this<<logger::endl;
 
   // look up, if it's registered within ruby
   VALUE v = convertCpp2Ruby(o);
@@ -128,7 +136,15 @@ void general_markfunc(void *ptr) {
   // the given object must be a AGRubyObject and it must be valid (it's in mRubyObjects)
   AGRubyObject *o = static_cast<AGRubyObject*> (ptr);
   if (mRubyObjects.find(o) == mRubyObjects.end())
-    logger::err << "OLD RUBYOBJ:" << (mRemovedRubyObjects.find(o) != mRemovedRubyObjects.end()) << ":" << o << logger::endl;
+    {
+      logger::err << "OLD RUBYOBJ:" << (mRemovedRubyObjects.find(o) != mRemovedRubyObjects.end()) << ":" << o << logger::endl;
+
+      VALUE v=convertCpp2Ruby(o);
+      rb_gv_set("antargis_buggy_object",v);
+      //rb_eval_string("puts $antargis_buggy_object");
+      return;
+      rb_raise(rb_eFatal, "A C++ object is still under surveilance of ruby, but is already deleted!");
+    }
   assert(mRubyObjects.find(o) != mRubyObjects.end());
 
 #ifdef GCDEBUG
@@ -136,6 +152,9 @@ void general_markfunc(void *ptr) {
 #endif
 
   assert(o);
+
+
+  logger::gc << "mark called for "<<o<< "("<<typeid(*o).name()<<logger::endl;
   o->mark();
 }
 

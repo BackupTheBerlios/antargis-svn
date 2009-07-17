@@ -37,7 +37,6 @@ class AntNewHLJob
       goToNextState
       break if @state.nil? or @finished
     end
-    puts "FINISHED: #{@finished}"
   end
 
   # override this one
@@ -67,10 +66,8 @@ class AntNewHLJob
     print "CALL #{hero.getName} #{state} #{event} #{m}  #{getTime} -- "
     if self.class.method_defined?(m)
       v=send(m)
-      puts v
       return v
     else
-      puts "UNKNOWN"
       true
     end
   end
@@ -80,13 +77,12 @@ class AntNewHLJob
 
   def call2(state,event,man)
     m=methodName(state,event)
-    print "CALL2 #{hero.getName} #{state} #{event} #{m} #{man} #{getTime} -- "
+    #print "CALL2 #{hero.getName} #{state} #{event} #{m} #{man} #{getTime} -- "
     if self.class.method_defined?(m)
       v=send(m,man)
-      puts v
       return v
     else
-      puts "UNKNOWN"
+     # puts "UNKNOWN"
       true
     end
   end

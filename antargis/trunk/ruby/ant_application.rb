@@ -82,6 +82,9 @@ class AntGameApp <AntRubyView
     super(w,h)
 
     @speed=1
+    @inspect=nil
+    @infobox=nil
+    @story=nil
 
     # the result of the level - won or lost or canceled
     @result=GameResult.new

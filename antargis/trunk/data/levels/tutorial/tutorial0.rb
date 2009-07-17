@@ -40,7 +40,6 @@ class Level1<AntLevelScript
 					endLevel
 				end
 		end
-		puts "TRIGGER"
 		return false #ignore
 	end
 	def eventHeroDied(ent)
@@ -71,7 +70,7 @@ class Level1<AntLevelScript
 		@interface.lostLevel
 	end
 	def wonLevel
-		puts "INTERFACE:",@interface,self
+		Log.debug "INTERFACE:",@interface,self
 		@interface.wonLevel
 		@won=true
 		start=StoryFlow.new("recruit")

@@ -10,7 +10,6 @@ class Module
     ts="*s"
     ts="s" if methodName=~/.*=$/
     s="def #{methodName}(#{ts})\n#{objectName}.#{objectMethodName}(#{ts})\nend\n"
-    #puts s
     module_eval s
   end
 end
@@ -52,8 +51,6 @@ class HLJob_FormatWalk<HLJob_BaseState
   FORMAT_MAX_TIME=5
 
   def enter
-    puts "#{self}:enter"
-    trace
     hero.formation=AntFormationBlock.new(hero,formatDir)
     heroPos=hero.getPos2D
     allMen.each{|man|
@@ -113,7 +110,6 @@ class HLJob_FormatSit<HLJob_BaseState
   end
 
   def ready
-    puts "#{self}:ready"
     if getTime-@formatStart>FORMAT_MAX_TIME
       # FIXME:rest deserts
       return true
@@ -138,7 +134,6 @@ class HLJob_MoveToNextWayPoint<HLJob_BaseState
   end
 
   def enter
-    puts "#{self}:enter"
     hero.formation=AntFormationBlock.new(hero,formatDir)
     allMen.each{|man|
       pos=hero.getFormation(man,targetPos)
@@ -181,14 +176,12 @@ class HLJob_MoveComplete<BaseState
   def enter
     @near=machine.near
     @near||=0
-    puts "#{self}:enter"
     if @waypoints.nil?
       initWaypoints
     end
   end
 
   def stillHasWaypoints
-    puts state
     if @waypoints.length>0
       self.targetPos=@waypoints.shift
 
@@ -247,9 +240,6 @@ class HLJob_MoveComplete<BaseState
     @completeTargetPos=targetPos
     self.targetPos=@waypoints.shift
     self.targetPos=checkPosNear(self.targetPos)
-     #puts "--"
-     #pp self.targetPos,hero.getPos2D,@near,(hero.getPos2D-self.targetPos).length
-     #raise 1
   end
 
   def checkPosNear(to)
@@ -329,33 +319,25 @@ end
 class HLJob_FetchStart<HLJob_BaseState
   # needed a target-entity
   def enter
-    trace
     fetchPoint=machine.target.getPos2D
-    puts "fetchPoint:#{fetchPoint}  heroPos:#{hero.getPos2D}"
     allMen.each{|man|
       man.walkTo(fetchPoint)
       man.hlJobMode[:fetching]=true
-      puts "set to fetching: #{man}"
     }
     
   end
 
   def assign(man)
-    trace
     man.standStill
     man.hlJobMode.delete(:fetching)
   end
 
   def ready
-    trace
     allMen.each{|man|
-      puts "fetchStart_ready check: #{man} : #{man.hlJobMode[:fetching]}"
       if man.hlJobMode[:fetching]
         return false
       end
-      puts "false"
     }
-    puts "return true ??"
     return true
   end
 end
@@ -435,7 +417,6 @@ class HLJob_SpreadThings<HLJob_BaseState
   
   def doSpreading
     # FIXME: maybe this can be done more easily ???
-    trace
   
     all={}
     RESOURCES_TO_SPREAD.each{|r|  
@@ -570,13 +551,11 @@ class HLJob_FightData<HLJob_BaseState
   end
 
   def reshuffle
-    trace
     # reinit and assign
 
     menGroup={}
     leave=false
     @parties.each{|type,jobs|
-      puts "parties: #{type}:#{jobs}"
       menGroup[type]=jobs.collect{|job|job.undefeatedMen}.flatten.uniq
       menGroup[type].each{|man|man.delJob}
       if menGroup[type].length==0
@@ -635,17 +614,13 @@ class HLJob_Fight<HLJob_BaseState
 
   def enter
     @oldHeroPosition=hero.getPos2D
-    trace
 
     targetHadFightData=target.hlJobMode[:fightData].nil?
     
-    puts "fightData: #{target.hlJobMode[:fightData]}"
     checkForFightData
     if targetHadFightData
-      puts "NOT YET INITED #{self} hero:#{hero} target:#{target}"
       target.newHLDefendJob(hero)
     end
-    trace
     assignAllJobs
   end
 
@@ -677,7 +652,6 @@ class HLJob_Fight<HLJob_BaseState
       man.hlJobMode[:defeated]=true
       man.hlJobMode.delete(:fighting)
     else
-      puts ".canFight:#{man.canFight} #{man.getEnergy} #{man.getMorale}"
       assert{man.canFight}
 
       opponent=@fightData.getNewOpponent(man,self)
@@ -736,25 +710,19 @@ class HLJob_Fight<HLJob_BaseState
   private
   # return true if fightData already exists
   def checkForFightData
-    trace
-    puts "TARGET #{target}"
     if target.hlJobMode[:fightData]
-      trace
       @fightData=target.hlJobMode[:fightData]
       @fightData.add(self)
       @fightType=@fightData.getFightType(self)
       return true
     else
-      trace
       @fightData=HLJob_FightData.new(self)
       @fightType=:attacker
     end
-    puts "assigned fightData!"
     hero.hlJobMode[:fightData]=@fightData # store so that it's avaiable above
   end
   def assignAllJobs
     # FIXME:assign a fight-job to every member (undefeatedMen)
-    trace
 
     undefeatedMen.each{|man|
       if man.hlJobMode[:fightTarget]
@@ -765,7 +733,7 @@ class HLJob_Fight<HLJob_BaseState
         man.hlJobMode[:fighting]=true
       else
         # this the case, when an already defeated party is attacked
-        puts "POSSIBLE ERROR: #{man} has no opponent ?"
+        Log.error "POSSIBLE ERROR: #{man} has no opponent ?"
       end
     }
   end
@@ -801,7 +769,6 @@ class HLJob_Recruit<HLJob_BaseState
   end
 
   def assign(man)
-    puts "MAN:#{man}"
     if hasAtLeastOneFollower # has more than the hero himself
       if man.is_a?(AntHero)
         #man.newRestJob(10)
@@ -849,16 +816,13 @@ class HLJob_Recruit<HLJob_BaseState
 
   def returnToStart(man)
     pos=hero.getFormation(man,@myPos)
-    puts "RETURN to start: mypos:#{@myPos} diffHero:#{@myPos-hero.getPos2D} manpos:#{man.getPos2D} tposman:#{pos} diff:#{pos-man.getPos2D}"
     
     
     if (man.getPos2D-pos).length<MAX_DIST
       man.lookTo(@myPos)
       man.standStillShort # FIXME: really short ?
-      puts "standStill #{man} #{pos}==#{man.getPos2D}  ---#{@myPos} "
     else
       man.walkTo(pos)
-      puts "walkTo #{pos} #{man}"
     end
   end
   
@@ -1250,13 +1214,11 @@ class HLJob_Build<HLJob_CreationBase
   # :section: Producing
 
   def goBuilding(man)
-    puts "goBuilding #{man}"
     man.walkTo(target)
     man.hlJobMode[:task]=:build
   end
 
   def build(man)
-    puts "build #{man}"
     man.hlJobMode[:task]=:endBuild
     man.newRestJob(3,true)
     man.setMeshState("pick")
@@ -1269,8 +1231,6 @@ class HLJob_Build<HLJob_CreationBase
 
   def whatToDo(man)
     res=whatToDo2(man)
-    print "whatToDo:"
-    pp res
     res
   end
 
@@ -1304,7 +1264,7 @@ class HLJob_Build<HLJob_CreationBase
 
   def enoughResourceLeft
     alreadyBuilding=hero.getMen.select{|man|[:build,:goBuilding].member?(man.hlJobMode[:task])}.length+1
-    puts "alreadyBuilding:#{alreadyBuilding}"
+    Log.warn "alreadyBuilding:#{alreadyBuilding}"
     #return true if alreadyBuilding==0
     neededResources=target.building.buildResources
     ok=true
@@ -1312,7 +1272,6 @@ class HLJob_Build<HLJob_CreationBase
 
       ok=false if target.resource.get(k)<v*alreadyBuilding
     }
-    puts "ok: #{ok}"
     ok
   end
 
@@ -1358,15 +1317,13 @@ class HLJob_Build<HLJob_CreationBase
   end
 
   def buildIncrease
-    puts "buildIncrease"
-    #return if flattenLand
 
     building=target.building
     neededResources=building.buildResources
   
     neededResources.each{|k,v|
       if target.resource.get(k)<v
-        puts "NOT FOUDN: #{k}:#{v}"
+        Log.error "NOT FOUDN: #{k}:#{v}"
         return # oooooh
       end
     }
@@ -1374,12 +1331,10 @@ class HLJob_Build<HLJob_CreationBase
       target.resource.sub(k,v)
     }
 
-    puts "inc:",target.building.buildSteps
-    puts "stepcount:",target.getStepCount
     target.incProgress(target.building.buildSteps)
     
     if target.ready
-      puts "READY"
+      Log.debug "READY buildIncrease"
       # delete buildingsite and replace with building
       getMap.removeEntity(target)
       house=building.new(getMap)

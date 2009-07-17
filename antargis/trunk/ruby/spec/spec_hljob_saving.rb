@@ -15,10 +15,8 @@ describe "Saving and loading of" do
     end
     it "should be possible to save normal resting" do
       saveText=save(SAVEGAME)
-      puts saveText
       load(SAVEGAME)
       newText=save(SAVEGAME2)
-      puts newText
       (newText==saveText).should be_true
       #exit
       #advance
@@ -58,7 +56,6 @@ describe "Saving and loading of" do
   
   def getSaveText(file)
     file="savegames/"+file+".antlvl"
-    pp file
     loadFile(file)
   end
 end

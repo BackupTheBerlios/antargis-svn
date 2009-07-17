@@ -123,7 +123,7 @@ void MoveJob::move(AntEntity *e,float ptime)
         mTarget=mTargetEntity->getPos2D();
         mTarget3=mTargetEntity->getPos3D();
       }
-#warning FIXME: move this ?
+
     mTarget=e->getMap()->truncPos(mTarget);
 
 #ifdef ENABLE_RUNNING  

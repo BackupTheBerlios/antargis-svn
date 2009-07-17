@@ -55,11 +55,14 @@ public:
   virtual void drawPick();
   virtual void advance(float time);
 
-  virtual void mark() throw();
 
   void setEntity(AntEntity *e);
 
   virtual size_t getTriangles() const;
+protected:
+#ifndef SWIG
+  virtual void mark() throw();
+#endif
 
 private:
 

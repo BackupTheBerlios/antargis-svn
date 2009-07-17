@@ -1,10 +1,9 @@
 #if false
 
-Dir.chdir(File.split(__FILE__)[0])
+#Dir.chdir(File.split(__FILE__)[0])
 
-require '../spec_helper.rb'
-require 'ruby/gui/testing.rb'
-require 'ruby/mainmenu.rb'
+#require 'ruby/gui/testing.rb'
+#require 'ruby/mainmenu.rb'
 
 describe 'Main-Menu' do
   include GuiTest

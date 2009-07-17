@@ -40,7 +40,7 @@ module Rookey
 		      source=v
       end
     }
-    file=target+"_interface.i"
+    file=File.join(Compiler.rookeyWorkingDir,target+"_interface.i")
     templates=[source].flatten.select{|f|f=~/i$/}
     source=source.grep(/INCLUDE_SWIG/)+getAGRubyObjectHeader
     

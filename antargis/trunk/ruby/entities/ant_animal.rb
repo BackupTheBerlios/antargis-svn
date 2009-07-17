@@ -19,14 +19,12 @@ protected
       fishList=getMap.getAllByType(self.class)
       return if fishList.length>50
       # make child
-      #puts "A FISH IS BORN"
       fish=self.class.new(getMap)
       fish.setPos(getPos2D)
       getMap.insertEntity(fish)
       getMap.endChange
       newRestJob(2)
       @lastBirth=-getRand()*10
-      puts "GIVE BIRTH"
       return true
     end
     false

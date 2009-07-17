@@ -1,6 +1,5 @@
 require 'pp'
 $:<<File.split(File.split(__FILE__)[0])[0]
-pp $:
 
 class Array
   

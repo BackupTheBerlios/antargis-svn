@@ -73,7 +73,7 @@ class AntAttackAI<AntBasicAI
   def eventHeroWithoutJob(hero)
     @rules.each{|r|
       if r.value(hero)>0
-        puts "GO"
+        Log.debug "AntAttackAI: GO"
         r.execute(hero)
         return
       end
@@ -97,7 +97,7 @@ class AntFuzzyAI<AntBasicAI
   end
 
   def eventHeroWithoutJob(hero)
-    puts "eventHeroWithoutJob(hero) #{hero.getName}"
+    Log.debug "AntFuzzyAI eventHeroWithoutJob(hero) #{hero.getName}"
     process(hero)
   end
 

@@ -443,6 +443,10 @@ end
 
 Cell=Struct.new(:screenRect,:rect,:node)
 class Cell
+  def initialize(*args)
+    @node=nil
+    super
+  end
   def free
     @node.nil?
   end

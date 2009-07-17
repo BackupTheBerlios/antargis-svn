@@ -144,9 +144,6 @@ class AGEXPORT AntEntity:public AGRubyObject
     AGString getName() const;
     void setName(const AGString &pName);
 
-    //    AGString getType() const;
-    //    void setType(const AGString &pType);
-
     void setProvide(const AGString &pName,bool flag);
     bool provides(const AGString &pName) const;
 
@@ -224,12 +221,12 @@ class AGEXPORT AntEntity:public AGRubyObject
     bool canFight() const;
     bool isFighting() const;
 
-    // appearance
 
-    // FIXME: this shouldn't be virtual, because it gets called too often!
-    //    virtual AGString getTexture() const;
+    virtual void experienceFull();
 
-    // anything below shouldn't be used by ruby-functions
+
+    // anything below shouldn't be used by ruby-functions,
+    // thus they're not wrapped
 
     void setMesh(SceneNode *pMesh);
     Meshes getMesh();
@@ -245,9 +242,6 @@ class AGEXPORT AntEntity:public AGRubyObject
     void incMorale(float pTime);
 
     void incExperience(float amount);
-
-
-    virtual void experienceFull();
 
     float getFood() const;
     void incFood(float v);

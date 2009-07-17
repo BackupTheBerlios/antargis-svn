@@ -24,6 +24,7 @@ class AntFormation
     @cache={}
     @sorted=nil
     @inited=false
+    @men=[]
     calcFormation
   end
   def calcFormation
@@ -47,9 +48,6 @@ class AntFormation
       r=getPositionReal(man)
       if r.nil?
         if not @boss.getMen.member?(man)
-          puts "/// #{man} #{@boss}"
-          puts "MAN:",man.uid," BOSS:",@boss.uid
-          puts "MEN:",@boss.getMen.collect{|m|m.uid.to_s}.join(" ")
           raise "Man #{man} is not member of #{@boss}'s men!"
         end
         raise "Problem in AntFormation!"
@@ -57,7 +55,6 @@ class AntFormation
     end
     @cache[man]=r
     ret= r+pos
-    puts "RET:#{ret}=#{r}+#{pos}"
     ret
   end
   def getSortedMen
@@ -95,11 +92,9 @@ end
 class AntFormationRest<AntFormation
   def initialize(boss)
     super(boss)
-    puts "new formation"
   end
 
   def calcFormation
-    puts "calcFormation"
     @rpos={} # real positions as map from man to AGVector2
     vpos={}  # virtual positions as map from man to pair of [row,line (circle)]
 
@@ -124,18 +119,12 @@ class AntFormationRest<AntFormation
       row,line=vpos[m]
       radius=line*1.2
       angle=row.to_f/linesizes[line]*Math::PI*2
-      puts "#{m} #{row} #{line} #{angle} #{radius} #{linesizes[line]}"
       @rpos[m]=AGVector2.new(Math::cos(angle)*radius,Math::sin(angle)*radius)
-      #puts "SET:#{m}"
     }
     @rpos[@boss]=AGVector2.new(0,0)
     if @men.length>0
       @inited=true
     end
-    
-    @rpos.keys.each{|key|
-      puts "FORMAT #{key} : #{@rpos[key]}"
-    }
     
   end
   def getPositionReal(man)

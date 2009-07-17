@@ -25,20 +25,43 @@ task :default=>[lib,main] do
   puts "Done."
 end
 
+$specDebugging=false
+
+def callWithGdb(call)
+  args=call.split(" ")
+  c,*as=args
+  c="gdb #{c}"
+  cs=[
+    "set args #{as.join(" ")}",
+    "r",
+    "bt"
+  ]
+  f=IO.popen(c,"w")
+  cs.each{|cm|
+    puts cm
+    f.puts cm}
+  f.close
+end
+
 
 alias :oldSystem :system
 def system(cmd)
   #puts Dir.pwd
-  if cmd=~/ruby .*/
-    cmd=cmd.gsub(/^ruby/,"./antargis")
+  pathRe="[0-9A-Za-z\.\/]*ruby"
+  if cmd=~/#{pathRe} .*spec/
+    antExe=File.expand_path('../antargis',__FILE__)
+    p antExe
+    cmd=cmd.gsub(/^#{pathRe}/,antExe)
+    return callWithGdb(cmd) if $specDebugging==true
+    puts "CMD:",cmd
   end
-  #puts cmd
   oldSystem(cmd)
 end
 
-if $rspec 
-  # rspec
-  Spec::Rake::SpecTask.new(:spec=>:default) do |t|
+if $rspec
+
+  def speccing(t)
+    $specDebugging=false #if t.name.keys[0]!=:spec
     t.spec_files = FileList['ruby/**/spec_*.rb'].map{|f|File.expand_path(f)}
     t.warning = true
     t.rcov = true
@@ -46,7 +69,15 @@ if $rspec
     if ENV['CC_BUILD_ARTIFACTS']
       path=File.join(ENV['CC_BUILD_ARTIFACTS'],path)
     end
-    t.spec_opts=["--format html:"+File.expand_path(path)]
+
+    t.spec_opts<<"--format html:"+File.expand_path(path)
+    t.spec_opts<<"-r"+File.expand_path('../ruby/spec_helper.rb',__FILE__)
+  end
+
+
+  # rspec
+  Spec::Rake::SpecTask.new(:spec=>:default) do |t|
+    speccing(t)
   end
 end
 

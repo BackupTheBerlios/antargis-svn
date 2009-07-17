@@ -60,6 +60,8 @@ class AntMenuApp <AntApplication
 
     # add handler for music finished, simply restart music
     addHandler(getSoundManager,:sigMp3Finished,:eventMusicEnd)
+
+    @myScreen=nil
   end
 
 

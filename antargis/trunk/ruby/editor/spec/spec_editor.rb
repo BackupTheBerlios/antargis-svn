@@ -1,9 +1,6 @@
-#if false
-Dir.chdir(File.split(File.split(File.split(File.split(File.expand_path(__FILE__))[0])[0])[0])[0])
-puts Dir.pwd
+Dir.chdir(File.expand_path('../../../..',__FILE__))
 
 require 'ruby/gui/testing.rb'
-
 require 'ruby/editor_app.rb'
 
 

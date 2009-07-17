@@ -1,4 +1,4 @@
-require File.join(File.split(__FILE__)[0],'drag_grid.rb')
+require 'drag_grid.rb'
 
 
 # This is the main application-class of the campaign-editor.

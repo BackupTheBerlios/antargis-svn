@@ -1,10 +1,10 @@
 class AntTower<AntHouse
   def initialize(map)
+    @flag=nil
     super
     setProvide("tower",true)
     setMinimapColor(AGColor.new(0x22,0x22,0x22))
     setMinimapSize(6)
-
     @storeGood=["food","tool","corn","stone","wood"]
   end
   

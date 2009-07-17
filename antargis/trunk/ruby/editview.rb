@@ -28,6 +28,8 @@ class AntRubyEditView<GLApp
     #$map=map
     @map=map
     @size=3
+    @appearance=nil
+    @newDialog=nil
     $scene=getScene
   
     @layout=AGLayout.new(nil)
@@ -67,7 +69,6 @@ class AntRubyEditView<GLApp
     @layout.getChild("editHeight").setChecked(true)
     @layout.getChild("entitiesTab").entType=AntHero
     setTab("terrain")
-    puts "EditView inizalizing ready."
   end
   
   def eventNewMap
@@ -134,17 +135,11 @@ class AntRubyEditView<GLApp
   end
     
   def eventClick(list,button)
-    puts "eventClick"
-    puts "------------------"
-    puts "list-size:"+(list.length.to_s)
     if list.length>0
       if @modifier
-        puts @modifier
         send(@modifier,list,button)
       end
     end
-    puts "back from eventClick"
-    #super(list)
     return true
   end
   def editHeight(list,button)
@@ -153,9 +148,6 @@ class AntRubyEditView<GLApp
   
     list.each{|c|
       if isTerrain(c.node)
-        puts "TERRAIN:"
-        puts c.node
-        puts @terrain
         x=c.pos.x.to_i
         y=c.pos.y.to_i
         middle=@map.get(x,y)
@@ -176,9 +168,7 @@ class AntRubyEditView<GLApp
             end
           end
         end
-        puts "MAP CHANGED..."
         @map.mapChanged
-        puts "MAP CHANGED!"
       end
     }
   end
@@ -186,9 +176,6 @@ class AntRubyEditView<GLApp
   def editGrass(list,button)
     list.each{|c|
       if isTerrain(c.node)
-        puts "TERRAIN:"
-        puts c.node
-        puts @terrain
         x=c.pos.x.to_i
         y=c.pos.y.to_i
         middle=@map.getGrass(x,y)
@@ -225,13 +212,10 @@ class AntRubyEditView<GLApp
             if dx>=0 and dx<=@map.getW and dy>=0 and dy<=@map.getH
               d=Math::sqrt((dx-x)**2+(dy-y)**2)
               v=1-(d/(@size))
-              puts v,v.class
               v=[[0,v].max,1].min
-              dputs dx,dx.class,dy,dy.class,tt,tt.class
               ov=@map.getTerrain(dx,dy,tt)
               cv=[ov+v*h,1].min
               @map.setTerrain(dx,dy,tt,cv)
-              printf "EDIT:%d,%d,%d,%f\n",dx,dy,tt,cv
             end
           end
         end
@@ -293,7 +277,6 @@ class AntRubyEditView<GLApp
   def addEntity(list,button)
     pos=nil
     list.each{|c|
-      puts "LIST #{c} #{c.node}"
       if isTerrain(c.node)
         pos=c.pos
       end
@@ -301,7 +284,6 @@ class AntRubyEditView<GLApp
     if not pos
       return
     end
-    puts "ADDENTITY"
     entity=nil
     dorand=true
     if @type==AntDeco
@@ -315,7 +297,6 @@ class AntRubyEditView<GLApp
     else
       entity=@type.new(@map)
     end
-    puts "SETPOS #{pos.x} #{pos.y}"
     entity.setPos(AGVector2.new(pos.x,pos.y))
     getMap.insertEntity(entity)
   end
@@ -326,8 +307,6 @@ class AntRubyEditView<GLApp
   def edit(meshes,button)
     meshes.each{|res|
       node=res.node
-      puts "NODE:"
-      puts node
       if node.is_a?(MeshBase)
         ent=getMap.getEntity(node)
         if ent
@@ -351,7 +330,6 @@ class AntRubyEditView<GLApp
   end
   
   def doRubber(list,button)
-    puts "DOING RUBBER"
     list.each{|res|
       mesh=res.node
       if mesh.is_a?(MeshBase)
@@ -359,7 +337,7 @@ class AntRubyEditView<GLApp
         if ent
           getMap.removeEntity(ent)
         else
-          puts "NOT FOUND!"
+          Log.debug "NOT FOUND!"
         end
         break
       end

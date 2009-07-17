@@ -103,6 +103,7 @@ class AntStoryTalk<AntDialog
     addHandler(getChild("back"),:sigClick,:eventBack)
     addHandler(getChild("forward"),:sigClick,:eventClose)
     addSignal("sigStoryFinished")
+    @flow=nil
   end
   def setFlow(flow)
     if @flow.nil?
@@ -254,7 +255,6 @@ class AntSaveDialog<AntDialog
   end
   def eventOk(e)
     filename=getChild("Filename").getText
-    #puts "FILENAME:"+filename.to_s
     if not filename =~ /.*\.antlvl/ then
       filename=filename.to_s+".antlvl"
     end
@@ -280,7 +280,6 @@ class AntSaveCampaignDialog<AntDialog
   end
   def eventOk(e)
     filename=getChild("Filename").getText.to_s
-    puts "FILENAME:"+filename.to_s
     if not filename =~ /.*\.antcmp/ then
       filename=filename+".antcmp"
     end
@@ -304,10 +303,8 @@ class AntLoadDialog<AntDialog
     super(parent,"data/gui/layout/loaddialog.xml")
     d=getDirectory(getSavePath)
     @lb=getChild("Files")
-    puts d
     d.each { |x|
       if x =~ /.*\.antlvl/ then
-        puts "FILE:"+x
         value=x.gsub(".antlvl","")
         @lb.insertItem(x,AGStringUtf8.new(value))
       end
@@ -623,7 +620,6 @@ class AntBuildDialog<AGLayout
     if false
       # direct placement
       house=@map[e.getCaller.getName].new
-      puts "POS:#{@pos}"
       house.setPos(@pos)
       getApp.getMap.insertEntity(house)
       house.setPlayer(getApp.getMap.getPlayer)

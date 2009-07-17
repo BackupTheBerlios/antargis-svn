@@ -85,7 +85,6 @@ void initSoundEngine()
   {
     if(!mMusicInited)
       {
-        TRACE;
         mSoundMutex=new AGMutex;
 
         size_t chunkSize=1024;

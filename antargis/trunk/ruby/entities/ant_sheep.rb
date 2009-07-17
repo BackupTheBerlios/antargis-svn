@@ -26,6 +26,7 @@ class AntSheep<AntAnimal
     setProvide("sheep",true)
     setSpeed 0.4
     @foodAdd=0
+    @dead=false
     
     setMesh
 

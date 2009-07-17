@@ -92,6 +92,8 @@ class AntRubyMap<AntMap
 
     @filename="dummy"  # a dummy filename - used for level scripting
     @uidstart=0
+    @playerTypeMap=nil
+    @script=nil
   end
 
   def disableScript
@@ -110,7 +112,7 @@ class AntRubyMap<AntMap
     @uidstart=[i,@uidstart].max
   end
   def getByUID(id)
-    puts "WARNING: THIS function is slow!"
+    Log.warn "WARNING: THIS function is slow!"
     ents=getAllEntities
     id=id.to_i
     ents.each{|e|
@@ -119,8 +121,6 @@ class AntRubyMap<AntMap
         return r
       end
     }
-    puts id
-    puts id.class
     raise "UID not found #{id}"
     nil
   end
@@ -274,11 +274,9 @@ class AntRubyMap<AntMap
   end
   
   def loadXML(n)
-    puts "loadXML(n)"
     @loadedEntsNum=1
     @loadedEntities=[]
     super(n)
-    puts "loadXML(n) -1 "
     @loadedEntities.each{|pair|
       node,entity=pair
       insertEntity(entity)
@@ -330,33 +328,6 @@ class AntRubyMap<AntMap
     super
   end
 
-  def saveXMLTRest(n)
-    puts self
-    pp n
-    super(n)
-    @players.each{|player|
-      c=n.addChild(player.xmlName)
-      player.saveXML(c)
-    }
-    @targets.each{|name,t|
-      c=n.addChild(t.xmlName)
-      t.saveXML(c)
-    }
-    @triggers.each{|t|
-      c=n.addChild(t.xmlName)
-      t.saveXML(c)
-    }
-    if @scriptClass
-      n.set("scriptclass",@scriptClass)
-    end
-    if @scriptFile
-      n.set("scriptfile",@scriptFile)
-    end
-    if @script
-      c=n.addChild("scriptdata")
-      @script.saveXML(c)
-    end
-  end
 
   ######################################
   # modify the world
@@ -469,11 +440,11 @@ private
 
 
   def createPathfinder
-    puts "createPathfinder"
+    Log.debug "createPathfinder"
     @path=CombinedPathFinder.new(self)
     @path.scene=getScene
     @path.displayPathfindingGraph(self,getScene)
-    puts "createPathfinder ready"
+    Log.debug "createPathfinder ready"
   end
 
   # returns a map of possible xmlNames to their classes like {"antMan"=>AntMan}

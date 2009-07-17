@@ -30,8 +30,6 @@
 
 AGRandomizer::AGRandomizer(const std::string &pSeed)
   {
-    CTRACE;
-
     std::istringstream is;
     is.str(pSeed);
 

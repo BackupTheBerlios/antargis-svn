@@ -56,7 +56,6 @@ describe "Determinant" do
     m.set(1,2,1)
     m.set(2,2,2)
     result=determinantAGMatrix3(m)
-    p result
     result.should>0
   end
 end
@@ -68,7 +67,6 @@ describe "Gauss should work correctly" do
     str.gsub("(","").gsub(")","").split(",").each{|a|
       x=0
       a.split(";").each{|v|
-        puts "#{x},#{y}:#{v}"
         m.set(x,y,v.to_f)
         x+=1
       }
@@ -80,10 +78,7 @@ describe "Gauss should work correctly" do
   def self.check(s)
     it "should work on #{s}" do
       m=makeMatrix(s)
-      pp s
-      pp m.toString
       i=m.inverted
-      pp i.toString
       (m*i).should==singleMatrix
     end
   end

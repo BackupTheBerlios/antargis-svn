@@ -49,9 +49,7 @@ describe 'SitFormation' do
       }
       formation=AntFormationRest.new(hero)
       poss=hero.getMen.collect{|man|
-        pos=formation.getPosition(man,hero.getPos2D)
-        puts pos
-        pos
+        formation.getPosition(man,hero.getPos2D)
       }
       sum=poss.inject(null){|a,b|a+b}
       (sum/poss.length-middle).length.should < 1

@@ -62,7 +62,6 @@ EOT
           p
 	      }
       }.flatten.uniq-[nil]
-      pp result
       result
     end
     def checkProgram(program)      
@@ -71,7 +70,6 @@ EOT
       includes+=config["NEEDED_INCLUDES"].split(" ")
       includes=includes.map{|i|"#include <#{i}>"}.join("\n")
       source="#{includes}\nextern \"C\" void #{funcname}();int main(int argc,char*argv[]){return 0;}"
-      pp source
       Rookey::mkdir(Compiler.rookeyTestDir)
       testSource=File.join(Compiler.rookeyTestDir,"test.c")
       fd=File.open(testSource,"w")

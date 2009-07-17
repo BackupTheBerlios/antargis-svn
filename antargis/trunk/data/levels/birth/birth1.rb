@@ -76,8 +76,6 @@ class Level1<AntLevelScript
 					@smith=2
 				end
 			when "keep"
-				dputs "TRIGGER:",hero,getHero("Rowen"),hero.getName,getHero("Rowen").getName,@flee
-				#raise "keep"
 
 				if hero==getHero("Rowen") and @flee==false
 					# let bantor flee

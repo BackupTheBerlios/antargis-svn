@@ -176,7 +176,6 @@ module AntManBase
         setOnWater(false)
       end
       if isOnOpenWater and haveBoat
-        puts "onOpenWater"
         setOnWater(true)
         name="row"
       end

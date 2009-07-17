@@ -4,8 +4,6 @@
 
 AGEXPORT void AG_Init_libantargisgame()
   {
-    TRACE;
-
     registerMinimapCreator();
   }
 

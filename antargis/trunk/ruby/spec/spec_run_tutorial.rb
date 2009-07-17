@@ -171,7 +171,6 @@ describe 'Tutorial campaign' do
         enemy.hasHLJob.should be_false
         trials=300
         while hero.hasHLJob
-          puts hero.getJob
           advance
           break if storyIsDisplayed
           trials.should > 0

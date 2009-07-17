@@ -45,6 +45,7 @@ Scene::Scene(int w,int h):
 
 Scene::~Scene() throw()
   {
+  //throw int();
   }
 
 size_t Scene::getDrawnMeshes() const

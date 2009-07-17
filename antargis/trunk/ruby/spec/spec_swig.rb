@@ -7,7 +7,7 @@ describe "swig-mapping" do
     getTestApp(:tutorial0)
 #    map=AntRubyMap.new
     tower=AntTower.new(map)
-    puts "::GETMESH"
+    Log.debug "testing swig-mapping"
     l=tower.getMesh
     l.should be_an_instance_of(Array)
     l.length.should == 3
@@ -16,5 +16,6 @@ describe "swig-mapping" do
       node.should_not be_an_instance_of(SceneNode)
       node.should be_a_kind_of(SceneNode)
     }
+    Log.debug "testing swig-mapping ready"
   end
 end

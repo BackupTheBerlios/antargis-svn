@@ -52,6 +52,7 @@ class AntHeroRestJob<AntNewHLJob
 
   def initialize(hero,time)
     super(hero)
+    @spreadTime=0
     @restTime=time
     @startTime=getTime
   end

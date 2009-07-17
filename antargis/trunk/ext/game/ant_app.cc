@@ -2,7 +2,7 @@
 #include "ag_vdebug.h"
 #include "ag_profiler.h"
 
-GLApp::GLApp(int w,int h):scene(w,h)
+GLApp::GLApp(int w,int h):scene(new Scene(w,h))
 {
   CTRACE;
   shadow=true;
@@ -16,6 +16,7 @@ GLApp::GLApp(int w,int h):scene(w,h)
 GLApp::~GLApp() throw()
   {
     CTRACE;
+    saveDelete(scene);
   }
 
 
@@ -33,7 +34,7 @@ void GLApp::drawGL()
     glDepthMask(true);
 
     assertGL;
-    scene.draw();
+    scene->draw();
     assertGL;
   }
 
@@ -42,7 +43,7 @@ bool GLApp::eventFrame(float t)
     if(hx>=0)
       {
         // check hovering
-        PickResult nodes=scene.pick(hx,hy,1,1);
+        PickResult nodes=scene->pick(hx,hy,1,1);
 
         if(nodes.size())
           eventHover(nodes,hb);
@@ -88,7 +89,7 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
                 STACKTRACE;
                 AGVector2 p=e->getMousePosition();
                 cdebug("p:"<<p);
-                PickResult nodes=scene.pick(p[0],p[1],1,1);
+                PickResult nodes=scene->pick(p[0],p[1],1,1);
 
                 eventClick(nodes,e->getButton());
               }
@@ -115,13 +116,13 @@ bool GLApp::eventMouseMotion(AGEvent *e)
     if(e->isSDLEvent() && omx>=0)
       {
         AGVector2 p=e->getMousePosition();
-        //      AGVector4 cam=scene.getCamera();
+        //      AGVector4 cam=scene->getCamera();
         mx=p[0]-omx;
         my=p[1]-omy;
 
         setCamera(getCamera()+AGVector2(-mx*0.03,my*0.03));
         //      camera=cam+AGVector4(-mx*0.03,my*0.03,0);
-        //      scene.setCamera(camera);
+        //      scene->setCamera(camera);
 
         omx=p[0];
         omy=p[1];
@@ -141,12 +142,12 @@ bool GLApp::eventMouseMotion(AGEvent *e)
 
 AGVector2 GLApp::getCamera() const
 {
-  return scene.getCamera().dim2();
+  return scene->getCamera().dim2();
 }
 
 void GLApp::setCamera(const AGVector2 &p)
   {
-    scene.setCamera(AGVector4(p[0],p[1],getCameraHeight(p)));
+    scene->setCamera(AGVector4(p[0],p[1],getCameraHeight(p)));
   }
 
 bool GLApp::eventKeyDown(AGEvent *e)
@@ -155,8 +156,7 @@ bool GLApp::eventKeyDown(AGEvent *e)
       {
         if(e->getKey()==SDLK_s)
           {
-            //      shadow=!shadow;
-            scene.setShadow((scene.getShadow()+1)%3);
+            scene->setShadow((scene->getShadow()+1)%3);
           }
       }
     return AGApplication::eventKeyDown(e);
@@ -164,14 +164,14 @@ bool GLApp::eventKeyDown(AGEvent *e)
 
 Scene &GLApp::getScene()
   {
-    assert(&scene);
-    return scene;
+    assert(scene);
+    return *scene;
   }
 
 void GLApp::mark() throw()
   {
     //CTRACE;
-    markObject(&scene);
+    markObject(scene);
     AGApplication::mark();
   }
 

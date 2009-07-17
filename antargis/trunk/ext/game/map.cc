@@ -396,13 +396,28 @@ void AntMap::mapChanged()
       (*i)->setPos((*i)->getPos2D());
   }
 
+/*
+AntEntity *AntMap::getEntity(const MeshBase &pMesh)
+  {
+    //FIXME: this is a rather poor implementation
+
+    for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
+      {
+        AntEntity::Meshes meshes=(*i)->getMesh();
+        if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
+          return *i;
+      }
+    return 0;
+  }
+
+*/
+
 AntEntity *AntMap::getEntity(const Mesh &pMesh)
   {
     for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
       {
         AntEntity::Meshes meshes=(*i)->getMesh();
         if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
-          //      if((*i)->getMesh()==&pMesh)
           return *i;
       }
     return 0;
@@ -425,18 +440,11 @@ AntEntity *AntMap::getEntity(const Mesh2D &pMesh)
       {
         AntEntity::Meshes meshes=(*i)->getMesh();
         if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
-          //      if((*i)->getMesh()==&pMesh)
           return *i;
       }
     return 0;
   }
 
-
-
-
-
-
-//bool markingFinished=true;
 
 void AntMap::mark() throw()
   {

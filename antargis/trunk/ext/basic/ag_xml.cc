@@ -27,12 +27,15 @@
 #include "ag_profiler.h"
 
 /**
-   Node
-   @todo finish documentation
+   Node is used for xml-tags, but not for attributes (as in dom)
  */
 Node::Node()
   {
   }
+
+/**
+ *
+ */
 Node::Node(const AGString &name):mName(name)
 {
 }

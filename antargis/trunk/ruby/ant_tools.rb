@@ -1,30 +1,37 @@
 require "ruby/ant_sound.rb"
 require 'ruby/tools/logging.rb'
 
-def getMeshData(file,zoom,texture="",shadow=true)
-  id=file+":"+texture
-  if not $meshes
-    $meshes={}
+class Meshes
+  @@meshes={}
+  def self.getMeshData(file,zoom,texture="",shadow=true)
+    id=file+":"+texture
+    if not @@meshes[id]
+      raise "Texture-file not found!" unless (fileExists(texture) or texture=="")
+      @@meshes[id]=MeshData.new(file,zoom,texture,shadow)
+    end
+    return @@meshes[id]
   end
-  if not $meshes[id]
-    pp file,zoom,texture,shadow
-    raise "Texture-file not found!" unless (fileExists(texture) or texture=="")
-    $meshes[id]=MeshData.new(file,zoom,texture,shadow)
+
+  def self.getAnimMeshData(file)
+    if not @@meshes[file]
+      @@meshes[file]=AnimMeshData.new(file)
+      @@meshes[file].setTransform(AGMatrix4.new(Math::PI,
+          AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
+
+    end
+    return @@meshes[file]
   end
-  return $meshes[id]
+
 end
 
-def getAnimMeshData(file)
-  if not $meshes
-    $meshes={}
-  end
-  if not $meshes[file]
-    $meshes[file]=AnimMeshData.new(file)
-    $meshes[file].setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
 
-  end
-  return $meshes[file]
+def getMeshData(*args)
+  Meshes.getMeshData(*args)
 end
+def getAnimMeshData(*args)
+  Meshes.getAnimMeshData(*args)
+end
+
 
 def displayError(error)
   getSoundManager.playWave(["data","sound","error.wav"].join("/"))

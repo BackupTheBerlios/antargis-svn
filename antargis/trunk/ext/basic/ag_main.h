@@ -76,7 +76,9 @@ class AGEXPORT AGMain:public AGRubyObject
   void delay(int ms);
 
  protected:
+#ifndef SWIG
   virtual void mark() throw();
+#endif
 
  private:
   AGVideoBase *mVideo;

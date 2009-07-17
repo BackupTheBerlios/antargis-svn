@@ -1,9 +1,9 @@
 class Level1<AntLevelScript
 	def eventLevelStarted
-		puts "Level inited"
+		Log.debug "Level inited"
 	end
 	def eventTrigger(hero,t)
-		puts "TRIGGER"
+    Log.debug "TRIGGER"
 		return false #ignore
 	end
 	def eventOwnerChanged(ent)

@@ -4,7 +4,6 @@
 
 void AGEXPORT AG_Init_libantargisvideo()
   {
-    TRACE;
     AGVideoManager *video=new AGVideoManager;
     getMain()->setVideo(video);
   }

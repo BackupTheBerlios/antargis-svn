@@ -109,19 +109,23 @@ public:
   AGVector2 operator-() const;
   AGVector2 operator-(const AGVector2 &p) const;
   AGVector2 operator+(const AGVector2 &p) const;
-#ifndef SWIG
-  AGVector2 & operator+=(const AGVector2 &p);
-  AGVector2 & operator-=(const AGVector2 &p);
-#endif
-
   float operator*(const AGVector2 &p) const;
-  AGVector2 & operator*=(float f);
-  AGVector2 & operator/=(float f);
   AGVector2 operator*(float f) const;
   AGVector2 operator/(float f) const;
 
   bool operator==(const AGVector2 &a) const;
+
+#ifndef SWIG
+  AGVector2 & operator+=(const AGVector2 &p);
+  AGVector2 & operator-=(const AGVector2 &p);
+
+  AGVector2 & operator*=(float f);
+  AGVector2 & operator/=(float f);
+
   bool operator!=(const AGVector2 &a) const;
+#endif
+
+
 
   float length() const;
   float length2() const;
@@ -195,15 +199,19 @@ public:
   AGVector3 & operator-=(const AGVector3 &p);
 
   float operator*(const AGVector3 &p) const;
+#ifndef SWIG
   AGVector3 & operator*=(float f);
   AGVector3 & operator/=(float f);
+#endif
   AGVector3 operator*(float f) const;
   AGVector3 operator/(float f) const;
   AGVector3 operator%(const AGVector3 &a) const;
 
   bool operator==(const AGVector3 &a) const;
+#ifndef SWIG
   bool operator!=(const AGVector3 &a) const;
-
+#endif
+  
   float length() const;
   float length2() const;
 
@@ -266,10 +274,11 @@ public:
   float &get(size_t x, size_t y);
 
   AGMatrix3 operator*(const AGMatrix3 &m) const;
+#ifndef SWIG
   AGMatrix3 & operator*=(const AGMatrix3 &m);
+#endif
 
   AGVector3 operator*(const AGVector3 &v) const;
-  //  AGVector2 operator*(const AGVector2 &v) const;
 
   AGMatrix3 operator-() const;
 
@@ -318,8 +327,13 @@ public:
 
   float distance(const AGVector2 &v) const;
 
+#ifndef SWIG
   AGVector2 & operator[](size_t i);
-  AGVector2 operator[](size_t i) const;
+#endif
+#ifdef SWIG
+  %rename(__getitem__) operator[](size_t index) const;
+#endif
+AGVector2 operator[](size_t i) const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -369,6 +383,9 @@ public:
   AGTriangle2();
   AGTriangle2(const AGVector2 &v0, const AGVector2 &v1, const AGVector2 &v2);
 
+#ifdef SWIG
+  %rename(__getitem__) operator[](int index) const;
+#endif
   AGVector2 operator[](int index) const;
 
   AGVector2 get(int index) const;
@@ -437,6 +454,9 @@ public:
 
   AGString toString() const;
 
+#ifdef SWIG
+  %rename(__getitem__) operator[](int index) const;
+#endif
   AGVector3 operator[](int index) const;
 
   void flip();
@@ -457,19 +477,26 @@ public:
 
   AGRect2 operator+(const AGVector2 &v) const;
   AGRect2 operator-(const AGVector2 &v) const;
+#ifndef SWIG
   AGRect2 & operator+=(const AGVector2 &v);
   AGRect2 & operator-=(const AGVector2 &v);
 
   AGRect2 & operator+=(const AGRect2 &r);
+#endif
 
   bool contains(const AGVector2 &v) const;
   bool contains(const AGRect2 &v) const;
 
   std::list<AGRect2> split() const;
 
-  AGVector2 operator[](size_t i) const;
-  AGVector2 & operator[](size_t i);
+#ifdef SWIG
+  %rename(__getitem__) operator[](size_t i) const;
+#endif
 
+  AGVector2 operator[](size_t i) const;
+#ifndef SWIG
+  AGVector2 & operator[](size_t i);
+#endif
   AGVector2 getV0() const;
   AGVector2 getV1() const;
   AGVector2 getV01() const;
@@ -572,8 +599,10 @@ public:
   AGVector4 & operator-=(const AGVector4 &p);
 
   float operator*(const AGVector4 &p) const;
+#ifndef SWIG
   AGVector4 & operator*=(float f);
   AGVector4 & operator/=(float f);
+#endif
   AGVector4 operator*(float f) const;
   AGVector4 operator/(float f) const;
   AGVector4 operator-() const;
@@ -596,10 +625,15 @@ public:
   AGVector4 normalized3() const;
   void normalize3();
 
+#ifdef SWIG
+  %rename(__getitem__) operator[](int index) const;
+#endif
 
   float operator[](int index) const;
+#ifndef SWIG
   float &operator[](int index);
-
+#endif
+  
   bool nonZero() const;
 
   // vector-cross-product
@@ -664,6 +698,9 @@ public:
   AGMatrix4 inverted() const;
   AGMatrix4 transposed() const;
 
+#ifdef SWIG
+  %rename(__getitem__) operator[](size_t index) const;
+#endif
   MRow operator[](size_t y);
   //  const Row operator[](size_t y) const;
 

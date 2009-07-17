@@ -110,37 +110,22 @@ describe "AGScrollingWidget" do
       @app=makeTestAppClass(MyTestApp).new
     end
     it "should translate" do
-      puts "_____"
-      puts @app.sWidget
       s=@app.sWidget
-      puts 1
       
       p0=AGVector2.new(10,20)
-      puts 2
       p1=AGVector2.new(10,10)
-      puts 3
       old=s.getVector
-      puts 4
       mouseMotion(p0)
       mouseDown(p0)
-      puts 5
       s.getVector.should == old
-      puts 6
       #@app.step while true
       mouseMotion(p1)
-      puts 7
       s.getVector.should_not == old
-      puts 8
       mouseMotion(p0)
-      puts 9
       s.getVector.should == old
-      puts 10
       mouseUp(p0)
-      puts 11
       s.getVector.should == old
-      puts 12
       mouseMotion(p1)
-      puts 13
       s.getVector.should == old
     end
   end

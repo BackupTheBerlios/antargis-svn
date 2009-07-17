@@ -6,6 +6,7 @@ class AntInventory<AGWidget
   def initialize(p,rect)
     super(p,rect)
     @@inventory=self
+    @inspect=false
     @resTypes=["wood","stone","men","food","tool","gold","boat","shield","sword","bow","coal","ore","steel","rod","fruit","corn","flour"] #,"bread"]
     setCaching(true)
     @invinited=false

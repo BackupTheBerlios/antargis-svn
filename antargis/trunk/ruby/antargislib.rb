@@ -7,6 +7,8 @@
 require 'rookey/lib/rookey/tools.rb'
 require 'pp'
 
+require File.expand_path('../ant_logging.rb',__FILE__)
+
 
 module MyAntargisLib
   @@antargislibinited||=false
@@ -98,9 +100,9 @@ end
 
 begin
   include Antargis
-  puts "Antargis-module included"
+  Log.debug "Antargis-module included"
 rescue
-  puts "Antargis-module not found - trying to load .so"
+  #Log.warn("Antargis-module not found - trying to load .so")
   begin
     if File.exists?("antargis.so")
       require 'antargis'
@@ -128,8 +130,6 @@ rescue
   
   end
 end
-puts "extension loaded"
-
   
 require 'ruby/gui/ag_tools.rb'
 require 'ant_tools'
@@ -142,6 +142,21 @@ addPath(@basePath)
 addPath(File.join(@basePath,"data"))
 addPath(File.join(@basePath,"data","fonts"))
 
+
+alias :oldputs :puts
+#def puts(*x)
+#  pp caller
+#  raise 1
+#end
+#def p(*x)
+#  pp caller
+#  raise 1
+#end
+#alias :oldpp :pp
+#def pp(*x)
+#  oldpp caller
+#  raise 1
+#end
     
 module MyAntargislib
   @@antargislibinited||=false
@@ -247,9 +262,9 @@ module MyAntargislib
 
     @@noVideo||=nil  
     if @@noVideo.nil?
-      puts "initVideo..."
+      Log.debug "initVideo..."
       getVideo.initVideo(xres,yres,32,@@fullscreen,@@opengl,1024,768)
-      puts "initVideo ok"
+      Log.debug "initVideo ok"
     
       getConfig.set("xRes",xres.to_s)
       getConfig.set("yRes",yres.to_s)

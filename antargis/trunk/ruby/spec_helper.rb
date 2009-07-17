@@ -1,15 +1,29 @@
 Dir.chdir(File.split(File.split(File.expand_path(__FILE__))[0])[0])
 
+$antargis_buggy_object=nil
+
+
 require 'pp'
 require 'ruby/antargislib.rb'
 
 #setDebugLevel(0)
 
 #if Object.respond_to?(:define_cmethod)
+
+Thread.new {
+  while true
+    if $antargis_buggy_object
+      pp $antargis_buggy_object 
+      raise "Buggy Object found !!!!"
+    end
+    sleep 0.2
+  end
+}
   
   
   $MY_KERNEL=self
-  def kernel
+  pp caller
+  def my_kernel
     $MY_KERNEL
   end
   class Cross
@@ -19,6 +33,8 @@ require 'ruby/antargislib.rb'
     def initialize(target,function,raiseException=false)
       @target=target
       @function=function
+      @proc=nil
+      @callName=nil
       @expected="#{target}.#{function}(.)"
       @@raiseException[@expected]=raiseException
     end
@@ -60,7 +76,7 @@ require 'ruby/antargislib.rb'
     def negative_failure_message
       bt=""
       bt=@@backtrace[@callName].join("\n") if @@backtrace[@callName] 
-      printStacktrace
+      #printStacktrace
       "expected #{@proc.inspect} not to call #{@expected} BT:#{bt}"
     end
     def Cross.symCall(name)
@@ -74,7 +90,7 @@ require 'ruby/antargislib.rb'
   def cross(target,function=nil,raiseException=false)
       if function.nil? and target.is_a?(Symbol)
         function=target
-        target=kernel
+        target=my_kernel
       end
   
     Cross.new(target,function,raiseException)
@@ -141,7 +157,7 @@ end
 class Object
   def method_missing(name,*s)
     alt=name.to_s.gsub(/\?$/,"")
-    puts alt
+    pp "it may be that #{name} is missing on #{self}"
     if respond_to?(alt) and alt!=name
       self.send(alt,*s)
     elsif respond_to?(alt.camelCase) and alt!=name and alt.camelCase!=alt 
@@ -152,6 +168,12 @@ class Object
     
   end
 end
+
+require 'ruby/gui/testing.rb'
+require 'ruby/mainmenu.rb'
+$:<<'ruby/editor/campaign'
+require 'ruby/editor/campaign/app.rb'
+
 
 #class A
 #  def b

@@ -59,7 +59,13 @@ module Rookey
       options=options[0..2]+["-o "+depsfile,"-M"]+options[3..-1]
       call=program+" "+options.join(" ")
       sh call
-      
+
+      #ensure that no ::mark string is within generated file
+      if File.read(t.name)=~/::mark/
+        puts "Some mark() member is not protected!!"
+        exit 1
+      end
+
       puts    
     end
     
